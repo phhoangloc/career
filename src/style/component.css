@@ -1,0 +1,18 @@
+.text-ellipsis {
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.inputFocusOutlineNone:focus {
+    outline: none;
+
+}
+
+.hover-opacity-1:hover {
+    opacity: 1 !important;
+}
+
+.hover-color-main:hover {
+    color: var(--main);
+}

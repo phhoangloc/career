@@ -1,0 +1,310 @@
+.grid_box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .grid_child {
+        margin: 10px;
+    }
+}
+
+.xs0 {
+    width: 0%;
+    overflow: hidden;
+    margin: 0;
+
+}
+
+.xs2 {
+    width: calc((100% / 6) - 20px);
+}
+
+.xs3 {
+    width: calc(25% - 20px);
+}
+
+.xs4 {
+
+    width: calc((100% / 3) - 20px);
+}
+
+.xs6 {
+    width: calc(50% - 20px);
+}
+
+.xs8 {
+    width: calc((200%/3) - 20px);
+}
+
+.xs9 {
+    width: calc(75% - 20px);
+}
+
+.xs12 {
+    width: calc(100% - 20px);
+}
+
+.sm1 {
+    @media (min-width:575px) {
+        width: calc((100%/12) - 20px);
+    }
+}
+
+.sm2 {
+    @media (min-width:575px) {
+        width: calc((100%/6) - 20px);
+    }
+}
+
+.sm3 {
+    @media (min-width:575px) {
+        width: calc(25% - 20px);
+    }
+}
+
+.sm4 {
+    @media (min-width:575px) {
+        width: calc((100% / 3) - 20px);
+    }
+}
+
+.sm5 {
+    @media (min-width:575px) {
+        width: calc((100% * 5/ 12) - 20px);
+    }
+}
+
+.sm6 {
+    @media (min-width:575px) {
+        width: calc(50% - 20px);
+    }
+}
+
+.sm7 {
+    @media (min-width:575px) {
+        width: calc((100% * 7/ 12) - 20px);
+    }
+}
+
+.sm8 {
+    @media (min-width:575px) {
+        width: calc((200%/3) - 20px);
+    }
+}
+
+.sm9 {
+    @media (min-width:575px) {
+        width: calc(75% - 20px);
+    }
+}
+
+.sm10 {
+    @media (min-width:575px) {
+        width: calc((100% * 7/ 12) - 20px);
+    }
+}
+
+.sm11 {
+    @media (min-width:575px) {
+        width: calc((100% * 11/ 12) - 20px);
+    }
+}
+
+.md1 {
+    @media (min-width:768px) {
+        width: calc((100%/12) - 20px);
+    }
+}
+
+.md2 {
+    @media (min-width:768px) {
+        width: calc((100%/6) - 20px);
+    }
+}
+
+.md3 {
+    @media (min-width:768px) {
+        width: calc(25% - 20px);
+    }
+}
+
+.md4 {
+    @media (min-width:768px) {
+        width: calc((100% / 3) - 20px);
+    }
+}
+
+.md5 {
+    @media (min-width:768px) {
+        width: calc((100% * 5 / 12) - 20px);
+    }
+}
+
+.md6 {
+    @media (min-width:768px) {
+        width: calc(50% - 20px);
+    }
+}
+
+.md7 {
+    @media (min-width:768px) {
+        width: calc((100% * 7/ 12) - 20px);
+    }
+}
+
+.md8 {
+    @media (min-width:768px) {
+        width: calc((200%/3) - 20px);
+    }
+}
+
+.md9 {
+    @media (min-width:768px) {
+        width: calc(75% - 20px);
+    }
+}
+
+.md10 {
+    @media (min-width:768px) {
+        width: calc((100% * 10/ 12) - 20px);
+    }
+}
+
+.md11 {
+    @media (min-width:768px) {
+        width: calc((100% * 11/ 12) - 20px);
+    }
+}
+
+.lg1 {
+    @media (min-width:992px) {
+        width: calc((100%/12) - 20px);
+    }
+}
+
+.lg2 {
+    @media (min-width:992px) {
+        width: calc((100%/6) - 20px);
+    }
+}
+
+.lg3 {
+    @media (min-width:992px) {
+        width: calc(25% - 20px);
+    }
+}
+
+.lg4 {
+    @media (min-width:992px) {
+        width: calc((100% / 3) - 20px);
+    }
+}
+
+.lg5 {
+    @media (min-width:992px) {
+        width: calc((100% * 5 / 3) - 20px);
+    }
+}
+
+.lg6 {
+    @media (min-width:992px) {
+        width: calc(50% - 20px);
+    }
+}
+
+.lg7 {
+    @media (min-width:992px) {
+        width: calc((100% * 7/ 12) - 20px);
+    }
+}
+
+.lg8 {
+    @media (min-width:992px) {
+        width: calc((200%/3) - 20px);
+    }
+}
+
+.lg9 {
+    @media (min-width:992px) {
+        width: calc(75% - 20px);
+    }
+}
+
+.lg10 {
+    @media (min-width:992px) {
+        width: calc((100% * 10/ 12) - 20px);
+    }
+}
+
+.lg11 {
+    @media (min-width:992px) {
+        width: calc((100% * 11/ 12) - 20px);
+    }
+}
+
+
+.xl1 {
+    @media (min-width:1200px) {
+        width: calc((100%/12) - 20px);
+    }
+}
+
+.xl2 {
+    @media (min-width:1200px) {
+        width: calc((100%/6) - 20px);
+    }
+}
+
+.xl3 {
+    @media (min-width:1200px) {
+        width: calc(25% - 20px);
+    }
+}
+
+.xl4 {
+    @media (min-width:1200px) {
+        width: calc((100% / 3) - 20px);
+    }
+}
+
+.xl5 {
+    @media (min-width:1200px) {
+        width: calc((100% * 5 / 3) - 20px);
+    }
+}
+
+.xl6 {
+    @media (min-width:1200px) {
+        width: calc(50% - 20px);
+    }
+}
+
+.xl7 {
+    @media (min-width:1200px) {
+        width: calc((100% * 7/ 12) - 20px);
+    }
+}
+
+.xl8 {
+    @media (min-width:1200px) {
+        width: calc((200%/3) - 20px);
+    }
+}
+
+.xl9 {
+    @media (min-width:1200px) {
+        width: calc(75% - 20px);
+    }
+}
+
+.xl10 {
+    @media (min-width:1200px) {
+        width: calc((100% * 10/ 12) - 20px);
+    }
+}
+
+.xl11 {
+    @media (min-width:1200px) {
+        width: calc((100% * 11/ 12) - 20px);
+    }
+}

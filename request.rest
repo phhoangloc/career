@@ -1,0 +1,44 @@
+
+GET  http://localhost:3000/api/user/post
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDFjNWEyOTVjOTkwMTMwNDliNzY4MCIsImlhdCI6MTcxNTY1NTcyNiwiZXhwIjoxNzE1NzQyMTI2fQ.-oJ1yioq51aGOtZHjBc0CoFD2AxEGdV_WAKsnMev5KM
+
+###
+GET  http://localhost:3000/api/auth
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcwOTYyMDIwNiwiZXhwIjoxNzA5NzA2NjA2fQ.oHUljgVSSC7wQXD7mHVN6ZrAzqCqzSWcsANhfQTDLKg
+
+###
+POST  http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+    "username":"locpham",
+    "password":"123456"
+}
+
+
+###
+GET  http://localhost:3000/api/auth/comment
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcxMTQxNzA5NSwiZXhwIjoxNzExNTAzNDk1fQ.nTUF2KJ0wKhcHQtfj8DYJZn_d3DMhEAq4-qO5Qt-2YI
+###
+
+POST  http://localhost:3000/api/auth/product
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcxMTQxNzA5NSwiZXhwIjoxNzExNTAzNDk1fQ.nTUF2KJ0wKhcHQtfj8DYJZn_d3DMhEAq4-qO5Qt-2YI
+
+{
+    "name":"元気鶏 五目炊きこみごはんの素 210g",
+    "category":"常温食品",
+    "producer":"ヒロツク ",
+    "price":298,
+    "content":"産直産地でおなじみマルイ農協さんの「元気鶏」と、5種類の具材（ごぼう・にんじん・たけのこ・油あげ・きくらげ）を使用した、うす味の炊きこみご飯の素。液ごと入れて炊き込むだけで、簡単に炊き込みごはんが作れます。3合用ですが、袋には2合用の調理方法も記載しています。",
+    "cover":"https://www.palcoop.or.jp/osusume/development/images/main24.png",
+    "avata":"https://www.palcoop.or.jp/osusume/development/images/package24.png"
+}
+###
+
+DELETE  http://localhost:3000/api/auth/product?id=6602288a1c0e374913aa10c1
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWNkODc3YjRjYjAxZWY5MTdkZGFjZCIsImlhdCI6MTcxMTQxNzA5NSwiZXhwIjoxNzExNTAzNDk1fQ.nTUF2KJ0wKhcHQtfj8DYJZn_d3DMhEAq4-qO5Qt-2YI
