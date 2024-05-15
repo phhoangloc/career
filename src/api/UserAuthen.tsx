@@ -16,22 +16,22 @@ const uploadFile = async (p: string, file: File, type: string) => {
     const formData = new FormData()
     formData.append("file", file)
     if (type === "pic") {
-        const fileUpload = await axios.post(process.env.server_url + p + "/upload", formData, {
+        const fileUpload = await axios.post("/api/" + p + "/image", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': localStorage.token,
             },
         })
-        return fileUpload.data
+        return fileUpload
     }
     if (type === "file") {
-        const fileUpload = await axios.post(process.env.server_url + p + "/uploadFile", formData, {
+        const fileUpload = await axios.post("/api/" + p + "/image", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': localStorage.token,
             },
         })
-        return fileUpload.data
+        return fileUpload
     }
 }
 const getPic = async (p: string, u: string) => {

@@ -19,7 +19,9 @@ export default function RootLayout({
   return (
     <div className={inter.className}>
       <Header />
-      {children}
+      <main style={{ maxWidth: "1600px", margin: "0 auto" }}>
+        {children}
+      </main>
       <Footer />
     </div>
   );

@@ -11,8 +11,6 @@
 }
 
 body {
-    max-width: 1600px;
-    margin: auto;
     background-color: var(--background);
 }
 
@@ -157,7 +155,6 @@ div {
 
 .header {
     height: 100px;
-    overflow: hidden;
     background-color: white;
 
     .menu {
@@ -175,11 +172,36 @@ div {
         justify-content: center;
         z-index: 1;
 
+        .item {
+            position: relative;
+
+            .children {
+                height: 0;
+                overflow: hidden;
+                transition: all 0.5s;
+                top: 0;
+                left: 0;
+                z-index: 2;
+
+            }
+
+            .children_on {
+                height: calc(5 * 36px);
+            }
+
+        }
+
         p {
             cursor: pointer;
             line-height: 50px;
             height: 36px;
             text-align: center;
+
+            svg {
+                width: 25px;
+                height: 25px;
+                margin: -5px 5px;
+            }
         }
 
         p:hover {
@@ -189,6 +211,7 @@ div {
         .header_input {
             display: flex;
             width: max-content;
+            height: max-content;
             margin: 5px auto;
 
             input {
@@ -230,11 +253,38 @@ div {
             margin: 0 0 0 auto;
 
             p {
-                width: 125px;
+                width: 135px;
+                display: flex;
+                padding: 5px;
+                font-size: 0.95rem;
+
+                svg {
+                    margin: 7.5px 2.5px;
+                }
             }
 
             .header_input {
                 margin: 0;
+            }
+
+            .item {
+                width: 135px;
+
+                .children {
+                    p {
+                        width: 100%;
+                    }
+
+                    top: 0;
+                    left: 0;
+                    z-index: 2;
+                    position: absolute;
+                    background-color: var(--background);
+                }
+
+                .children_on {
+                    height: calc(6 * 46px);
+                }
             }
         }
 
@@ -304,13 +354,30 @@ div {
                         text-wrap: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
-                        font-size: 80%;
+                        color: var(--main);
+
+                        span {
+                            font-weight: normal;
+                            font-size: 75%;
+                        }
                     }
 
                     p {
-                        font-size: 0.9rem;
-                        font-size: 75%;
+                        font-size: 85%;
+                        font-weight: bold;
+                        opacity: 0.75;
 
+                        span {
+                            font-weight: normal;
+                            font-size: 75%;
+                        }
+                    }
+
+                    .content_text {
+                        margin: 10px 0;
+                        font-weight: normal;
+                        opacity: 1;
+                        line-height: 1.75;
                     }
                 }
             }

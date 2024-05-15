@@ -317,8 +317,6 @@
 }
 
 body {
-  max-width: 1600px;
-  margin: auto;
   background-color: var(--background);
 }
 
@@ -464,7 +462,6 @@ div {
 
 .header {
   height: 100px;
-  overflow: hidden;
   background-color: white;
 }
 
@@ -484,11 +481,34 @@ div {
   z-index: 1;
 }
 
+.header .menu .item {
+  position: relative;
+}
+
+.header .menu .item .children {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.header .menu .item .children_on {
+  height: calc(5 * 36px);
+}
+
 .header .menu p {
   cursor: pointer;
   line-height: 50px;
   height: 36px;
   text-align: center;
+}
+
+.header .menu p svg {
+  width: 25px;
+  height: 25px;
+  margin: -5px 5px;
 }
 
 .header .menu p:hover {
@@ -498,6 +518,7 @@ div {
 .header .menu .header_input {
   display: flex;
   width: max-content;
+  height: max-content;
   margin: 5px auto;
 }
 
@@ -538,10 +559,32 @@ div {
     margin: 0 0 0 auto;
   }
   .header .menu p {
-    width: 125px;
+    width: 135px;
+    display: flex;
+    padding: 5px;
+    font-size: 0.95rem;
+  }
+  .header .menu p svg {
+    margin: 7.5px 2.5px;
   }
   .header .menu .header_input {
     margin: 0;
+  }
+  .header .menu .item {
+    width: 135px;
+  }
+  .header .menu .item .children {
+    top: 0;
+    left: 0;
+    z-index: 2;
+    position: absolute;
+    background-color: var(--background);
+  }
+  .header .menu .item .children p {
+    width: 100%;
+  }
+  .header .menu .item .children_on {
+    height: calc(6 * 46px);
   }
   .header .buttonOff {
     display: none;
@@ -606,12 +649,30 @@ div {
   text-wrap: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 80%;
+  color: var(--main);
+}
+
+.contain .containRight .items .item .text h4 span {
+  font-weight: normal;
+  font-size: 75%;
 }
 
 .contain .containRight .items .item .text p {
-  font-size: 0.9rem;
+  font-size: 85%;
+  font-weight: bold;
+  opacity: 0.75;
+}
+
+.contain .containRight .items .item .text p span {
+  font-weight: normal;
   font-size: 75%;
+}
+
+.contain .containRight .items .item .text .content_text {
+  margin: 10px 0;
+  font-weight: normal;
+  opacity: 1;
+  line-height: 1.75;
 }
 
 @media (min-width: 768px) {
