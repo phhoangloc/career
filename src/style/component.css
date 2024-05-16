@@ -13,6 +13,26 @@
     opacity: 1 !important;
 }
 
+.hover-opacity-80p:hover {
+    opacity: 0.8 !important;
+}
+
 .hover-color-main:hover {
     color: var(--main);
+}
+
+.hover-color-second:hover {
+    color: var(--second);
+}
+
+.hover-background-color-dark-10p:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.hover-background-color-128-15p:hover {
+    background-color: rgba(128, 128, 128, 0.15);
+}
+
+.hover-boder-radius-5px:hover {
+    border-radius: 5px;
 }

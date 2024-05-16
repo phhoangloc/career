@@ -25,7 +25,7 @@ const Page = ({ params }: Props) => {
     })
 
     const [id, setId] = useState<string>("")
-    const [title, setTitle] = useState<string>("")
+    const [name, setName] = useState<string>("")
     const [slug, setSlug] = useState<string>("")
     const [workplace, setWorkplace] = useState<string>("")
     const [worktype, setWorktype] = useState<string>("")
@@ -38,7 +38,7 @@ const Page = ({ params }: Props) => {
 
     const toPage = useRouter()
     const body = {
-        title,
+        name,
         slug,
         workplace,
         worktype,
@@ -53,7 +53,7 @@ const Page = ({ params }: Props) => {
         if (result.success) {
 
             setId(result.data[0]._id)
-            setTitle(result.data[0].title)
+            setName(result.data[0].name)
             setSlug(result.data[0].slug)
             setWorkplace(result.data[0].workplace)
             setWorktype(result.data[0].worktype)
@@ -64,17 +64,17 @@ const Page = ({ params }: Props) => {
         }
     }
     useEffect(() => {
-        currentUser.position && params.slug !== "new" && getOnePost(currentUser.position, "post", params.slug)
+        currentUser.position && params.slug !== "new" && getOnePost(currentUser.position, "interview", params.slug)
     }, [currentUser.position, params.slug])
 
     const createPost = async (slug: string, body: any) => {
-        const result = await UserAuthen.createItem(currentUser.position, "post", body)
+        const result = await UserAuthen.createItem(currentUser.position, "interview", body)
         if (result.success) {
             toPage.push("./" + body.slug)
         }
     }
     const UpdatePost = async (body: any) => {
-        const result = await UserAuthen.updateItem(currentUser.position, "post", id, body)
+        const result = await UserAuthen.updateItem(currentUser.position, "interview", id, body)
         if (result.success) {
             toPage.push("./" + body.slug)
         }
@@ -108,13 +108,13 @@ const Page = ({ params }: Props) => {
                     </div>
                     <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
-                        <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
+                        <Input name="名前" onChange={(e) => setName(e)} value={name} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
                         <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
                         <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
                         <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                         <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                        <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
+                        <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail} />
                         <Button name='create' onClick={() => createPost(params.slug, body)} />
                     </div>
                     <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id) }} />
@@ -134,13 +134,13 @@ const Page = ({ params }: Props) => {
             </div>
             <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
-                <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
+                <Input name="名前" onChange={(e) => setName(e)} value={name} />
                 <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
                 <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
                 <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
                 <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                 <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                <TextAreaTool name='detail' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
+                <TextAreaTool name='内容' onChange={(e) => setNewDetail(e)} value={detail} />
                 <Button name='save' onClick={() => UpdatePost(body)} />
 
             </div>

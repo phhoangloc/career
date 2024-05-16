@@ -4,6 +4,7 @@ import { Noto_Sans_Javanese } from "next/font/google";
 import Provider from "@/redux/component/provider";
 import LayoutRow from "@/component/layout/layoutRow";
 import NaviLeft from "@/component/asset/naviLeft";
+import Authen from "@/component/tool/Authen";
 const inter = Noto_Sans_Javanese({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -24,6 +25,12 @@ export default function RootLayout({
           naviLef={
             <NaviLeft data={[
               {
+                name: "メディア",
+                child: [
+                  { name: "メディア一覧", link: "/admin/media", }
+                ]
+              },
+              {
                 name: "ポスト",
                 child: [
                   { name: "ポスト一覧", link: "/admin/post", },
@@ -31,20 +38,31 @@ export default function RootLayout({
                 ]
               },
               {
-                name: "メディア",
+                position: "admin",
+                name: "インタビュー",
                 child: [
-                  { name: "メディア一覧", link: "/admin/media", }
+                  { name: "インタビュー一覧", link: "/admin/interview", },
+                  { name: "新規インタビュー", link: "/admin/interview/new", }
                 ]
-              }
+              },
+              {
+                position: "admin",
+                name: "ニュース",
+                child: [
+                  { name: "ニュース一覧", link: "/admin/news", },
+                  { name: "新規ニュース", link: "/admin/news/new", }
+                ]
+              },
             ]}
               naviLeftWitdh='200px' />
           }
         >
           <div className='width-100p' style={{ minHeight: "calc(100vh - 60px)" }}>
-            {children}
+            <Authen>
+              {children}
+            </Authen>
           </div>
         </LayoutRow >
-
       </Provider>
     </div>
   );

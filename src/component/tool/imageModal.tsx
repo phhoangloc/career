@@ -6,8 +6,13 @@ import store from '@/redux/store'
 import { UserAuthen } from '@/api/UserAuthen'
 import Image from 'next/image'
 import DeleteIcon from '@mui/icons-material/Delete';
+type Props = {
+    modalOpen?: boolean
+    onCanel?: () => void
+    onSubmit?: (id: string) => void
+}
 
-const Page = () => {
+const ImageModal = ({ modalOpen, onCanel, onSubmit }: Props) => {
 
     const [loading, setLoading] = useState<boolean>(false)
 
@@ -59,10 +64,11 @@ const Page = () => {
         }
     }
 
+    const [selectImageId, setSelectImageId] = useState<string>("")
 
     return (
-        <div style={{ minHeight: "calc(100vh - 70px)", width: "100%", margin: "auto 10px" }}>
-            <div style={{ width: "max-content", margin: "0 10px" }}>
+        <div style={{ display: modalOpen ? "block" : "none", position: "fixed", height: "calc(100vh - 10px)", width: "calc(100vw - 10px)", background: "white", zIndex: 2, top: "0px", left: "0px", margin: "5px" }}>
+            <div style={{ width: "max-content", margin: "10px" }}>
                 {loading ?
                     <UploadButton
                         icon={<Button name='。。。' onClick={() => { }} />}
@@ -77,11 +83,26 @@ const Page = () => {
                 {
                     data.map((item, index) =>
                         <div key={index} className='xs6 sm4 md3 lg2 grid_child' >
-                            <div style={{ width: "100%", aspectRatio: 1, position: "relative", borderRadius: "5px", overflow: "hidden", opacity: loading ? "0.25" : 1 }}>
-                                <Image quality={100} src={process.env.FTP_URL + "upload/" + item.name} fill alt="" style={{ objectFit: "cover" }} />
+                            <div style={{
+                                width: "100%",
+                                aspectRatio: 1,
+                                position: "relative",
+                                borderRadius: "5px",
+                                overflow: "hidden",
+                                opacity: loading ? "0.25" : 1,
+                                boxShadow: selectImageId.toString() === item._id.toString() ? "0px 0px 10px #888" : "0px 0px 1px  #888",
+                                cursor: "pointer",
+                            }}>
+                                <Image quality={100} src={process.env.FTP_URL + "upload/" + item.name} fill alt=""
+                                    style={{
+                                        objectFit: "cover",
+                                        transition: "all 0.25s",
+                                        transform: selectImageId.toString() === item._id.toString() ? "scale(1.025)" : "scale(1)",
+
+                                    }} onClick={() => setSelectImageId(i => i.toString() !== item._id.toString() ? item._id : "")} />
                                 <DeleteIcon
                                     onClick={() => { deleteImage(currentUser.position, "image", item._id) }}
-                                    style={{ position: "absolute", zIndex: 1, background: "white", borderRadius: "5px", top: "5px", left: "5px", padding: "1px", color: "#006699" }} />
+                                    style={{ position: "absolute", zIndex: 1, background: "white", borderRadius: "5px", top: "5px", left: "5px", padding: "1px" }} />
                             </div>
                             <div style={{ width: "100%", textWrap: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                                 {item.name}
@@ -90,10 +111,17 @@ const Page = () => {
                     )
                 }
             </div>
-        </div>
+            <div className='grid_box' style={{ width: "max-content", margin: "0" }} >
+                <div style={{ width: "max-content", margin: "auto 5px" }}>
+                    <Button name='キャンセル' onClick={() => onCanel && onCanel()} />
+                </div>
+                <div style={{ width: "max-content", margin: "auto 5px" }}>
+                    <Button name='確認' onClick={() => onSubmit && onSubmit(selectImageId)} />
+
+                </div>
+            </div>
+        </div >
     )
-
-
 }
 
-export default Page
+export default ImageModal

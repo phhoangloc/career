@@ -21,7 +21,6 @@ const NaviLeft = ({ data, naviLeftWitdh }: Props) => {
         update()
     })
 
-    const [index, setIndex] = useState<number>(0)
 
     const toPage = useRouter()
     return (

@@ -137,7 +137,7 @@ const TextAreaTool = ({ onChange, name, value }: Props) => {
             <p style={focus || value ? nameStyleFocus : nameStyle} className={`name ${focus || inputRef.current?.innerHTML || value ? "name_focus" : ""}`} >{name}</p>
             <div ref={inputRef}
                 style={focus ? inputBoxFocus : inputBox}
-                className="dangerousBox inputFocusOutlineNone scroll"
+                className="dangerousBox inputFocusOutlineNone scroll scrollbar"
                 contentEditable={true}
                 onInput={(e) => onChange(e.currentTarget.innerHTML)}
                 onFocus={() => setFocus(true)}

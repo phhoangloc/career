@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const postSchema = new Schema({
+const interviewSchema = new Schema({
     host: {
         type: Schema.Types.ObjectId,
         ref: "user"
@@ -10,7 +10,7 @@ const postSchema = new Schema({
         type: String,
         default: "post"
     },
-    title: {
+    name: {
         type: String,
     },
     slug: {
@@ -21,10 +21,6 @@ const postSchema = new Schema({
     },
     worktype: {
         type: String,
-    },
-    workstatus: {
-        type: String,
-        default: "正社員"
     },
     location: {
         type: String,
@@ -57,4 +53,4 @@ const postSchema = new Schema({
     },
 })
 
-export const postModel = mongoose.models.post || mongoose.model('post', postSchema)
+export const interviewModel = mongoose.models.interview || mongoose.model('interview', interviewSchema)

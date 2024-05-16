@@ -28,7 +28,7 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
     })
 
     const [modalOpen, setModalOpen] = useState<boolean>(false)
-    const [search, setSearch] = useState<string>("")
+
     return (
         <div className='overflow-hidden border-radius-5' style={{ margin: "0px", minHeight: "calc(100vh - 10px)" }}>
             <div className='display-flex position-relative width-max-content' >

@@ -114,3 +114,13 @@ svg:hover {
 .scrollbar-none::-webkit-scrollbar {
     display: none;
 }
+
+.scrollbar::-webkit-scrollbar {
+    width: 2px;
+    background-color: whitesmoke;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--main);
+    border-radius: 1px;
+}

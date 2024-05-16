@@ -29,7 +29,6 @@ const image = async (
             result.success = true
             result.data = data
             res.json(result)
-
         })
 }
 

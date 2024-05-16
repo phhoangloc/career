@@ -30,9 +30,8 @@ const Login = ({ archive }: Props) => {
     const [password, setPassword] = useState<string>("")
 
     const login = async (data: { username: string, password: string }) => {
-        console.log(data)
         const result = await NoUserAuthen.login(data)
-        console.log(result)
+
         if (result.success) {
             // store.dispatch(setNotice({ success: result.success, msg: result.message, open: true }))
             // setTimeout(() => {

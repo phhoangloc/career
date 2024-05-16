@@ -34,8 +34,8 @@ const uploadFile = async (p: string, file: File, type: string) => {
         return fileUpload
     }
 }
-const getPic = async (p: string, u: string) => {
-    const result = await axios.get(process.env.server_url + p + "/pic?username=" + u,
+const getPicById = async (p: string, u: string) => {
+    const result = await axios.get("/api/" + p + "/image?id=" + u,
         {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -77,7 +77,7 @@ const getOneItembySlug = async (p: string, a: string, s: string) => {
     return result.data
 }
 const getOneUserbyId = async (p: string, a: string, s: string) => {
-    const result = await axios.get(`/${p}/${a}?id=${s}`, {
+    const result = await axios.get(`/api/${p}/${a}?id=${s}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage && localStorage.token
@@ -157,7 +157,7 @@ export const UserAuthen = {
     getItem,
     getOneItembySlug,
     getOneUserbyId,
-    getPic,
+    getPicById,
     deleteFile,
     updateItem,
     deleteItem,
