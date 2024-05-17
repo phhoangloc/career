@@ -30,15 +30,13 @@ const Page = ({ params }: Props) => {
         const result = await NoUserAuthen.getPicById(id)
         console.log(result)
         if (result.success) {
-            setImagePreview(result.data.name)
+            setImagePreview(result.data[0].name)
         }
     }
 
     useEffect(() => {
         image && GetPicturePreview(image)
     }, [image])
-
-    console.log(newData)
 
     return (
         <div className='detailPage'>

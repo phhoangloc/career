@@ -22,8 +22,8 @@ const getOneItem = async (archive: string, slug: string) => {
     return result.data
 }
 
-const getNews = async (genre: string, slug: string) => {
-    const result = await axios.get(process.env.server_url + genre + `?rss=${slug}`)
+const getInterview = async () => {
+    const result = await axios.get(`/api/interview`)
     return result.data
 }
 const getPicById = async (id: string) => {
@@ -36,6 +36,6 @@ export const NoUserAuthen = {
     signup,
     getItem,
     getOneItem,
-    getNews,
+    getInterview,
     getPicById
 }

@@ -1,6 +1,6 @@
 :root {
   --background: #e6f7ff;
-  --main: #006699;
+  --main: #2D66D3;
   --second: #33bbff;
 }
 
@@ -562,7 +562,7 @@ div {
     width: 135px;
     display: flex;
     padding: 5px;
-    font-size: 0.95rem;
+    font-size: 0.90rem;
   }
   .header .menu p svg {
     margin: 7.5px 2.5px;
@@ -671,8 +671,15 @@ div {
 .contain .containRight .items .item .text .content_text {
   margin: 10px 0;
   font-weight: normal;
+  height: 150px;
+  overflow: hidden;
   opacity: 1;
   line-height: 1.75;
+  letter-spacing: 0.5px;
+}
+
+.contain .containRight .items .item .text .content_text h1 {
+  font-size: 1.1rem;
 }
 
 @media (min-width: 768px) {

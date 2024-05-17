@@ -14,7 +14,7 @@ const image = async (
     const query = req.query
     const result: isDataType = { success: false }
     ImageModel
-        .findOne(query.id ? { "_id": query.id } : {})
+        .find(query.id ? { "_id": query.id } : {})
         .catch((error: Error) => {
             result.success = false
             result.message = error.message
