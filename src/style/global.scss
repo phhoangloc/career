@@ -251,12 +251,12 @@ div {
             background: inherit;
             flex-direction: inherit;
             justify-content: inherit;
-            margin: 0 0 0 auto;
+            margin: -5px 0 0 auto;
 
             p {
-                width: 135px;
+                width: max-content;
                 display: flex;
-                padding: 5px;
+                padding: 5px 10px;
                 font-size: 0.90rem;
 
                 svg {
@@ -265,11 +265,11 @@ div {
             }
 
             .header_input {
-                margin: 0;
+                margin: 5px;
             }
 
             .item {
-                width: 135px;
+                width: 130px;
 
                 .children {
                     p {

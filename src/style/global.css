@@ -556,22 +556,22 @@ div {
     background: inherit;
     flex-direction: inherit;
     justify-content: inherit;
-    margin: 0 0 0 auto;
+    margin: -5px 0 0 auto;
   }
   .header .menu p {
-    width: 135px;
+    width: max-content;
     display: flex;
-    padding: 5px;
+    padding: 5px 10px;
     font-size: 0.90rem;
   }
   .header .menu p svg {
     margin: 7.5px 2.5px;
   }
   .header .menu .header_input {
-    margin: 0;
+    margin: 5px;
   }
   .header .menu .item {
-    width: 135px;
+    width: 130px;
   }
   .header .menu .item .children {
     top: 0;
