@@ -8,8 +8,6 @@ import { useState, useEffect } from "react";
 
 export default function Home() {
 
-  // const data = Interview.slice(0, 4);
-
   const [data, setdata] = useState<any[]>([])
   const getItem = async () => {
     await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
@@ -27,8 +25,6 @@ export default function Home() {
 
   const toPage = useRouter()
 
-  console.log(data)
-
   return (
     <div className="contain">
       <div className="containRight">
@@ -40,8 +36,8 @@ export default function Home() {
         </div>
         <div className="grid_box items">
           {
-            data.slice(0, 4).map((item, index) =>
-              <div key={index} className="grid_child xs6 xl3 item" onClick={() => toPage.push("/home/" + item.archive + "/" + item.slug)}>
+            data.slice(0, 3).map((item, index) =>
+              <div key={index} className="grid_child xs12 sm4 md12 lg4 item" onClick={() => toPage.push("/home/" + item.archive + "/" + item.slug)}>
                 <div className="cover" style={{ position: "relative" }}>
                   <Image src={process.env.FTP_URL + "upload/" + item.image.name} fill
                     style={{

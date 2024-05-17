@@ -15,7 +15,7 @@ export default async function handler(
 
         case "GET":
             await userModel
-                .find(query.nickname ? { "username": query.nickname } : {})
+                .find(query.username ? { "username": query.username } : {})
                 .find(query.email ? { "email": query.email } : {})
                 .catch((error: Error) => {
                     res.json(false)
