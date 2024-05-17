@@ -1,5 +1,5 @@
 
-GET  http://localhost:3000/api/user/image
+GET http://localhost:3000/api/post?search=&wp=&wt=&ws=アルバイト・バイト&lo=&skip=&limit=10
 Content-Type: application/json
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDFjNWEyOTVjOTkwMTMwNDliNzY4MCIsImlhdCI6MTcxNTc0MzY4MywiZXhwIjoxNzE1ODMwMDgzfQ.kCz7Q2eZe99tzp7A0m33P0hw0IsnVVDC2XUg0Pqg0ag
 

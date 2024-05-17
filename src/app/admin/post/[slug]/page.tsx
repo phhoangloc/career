@@ -29,6 +29,7 @@ const Page = ({ params }: Props) => {
     const [slug, setSlug] = useState<string>("")
     const [workplace, setWorkplace] = useState<string>("")
     const [worktype, setWorktype] = useState<string>("")
+    const [workstatus, setWorkstatus] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し仕事内容をシェアしてください。")
@@ -42,6 +43,7 @@ const Page = ({ params }: Props) => {
         slug,
         workplace,
         worktype,
+        workstatus,
         location,
         contenttitle,
         image,
@@ -57,6 +59,7 @@ const Page = ({ params }: Props) => {
             setSlug(result.data[0].slug)
             setWorkplace(result.data[0].workplace)
             setWorktype(result.data[0].worktype)
+            setWorkstatus(result.data[0].workstatus)
             setLocation(result.data[0].location)
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
@@ -112,6 +115,7 @@ const Page = ({ params }: Props) => {
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
                         <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
                         <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
+                        <Input name="雇用形態" onChange={(e) => setWorkstatus(e)} value={workstatus} />
                         <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                         <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
                         <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
@@ -138,6 +142,7 @@ const Page = ({ params }: Props) => {
                 <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
                 <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
                 <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
+                <Input name="雇用形態" onChange={(e) => setWorkstatus(e)} value={workstatus} />
                 <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                 <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
                 <TextAreaTool name='detail' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />

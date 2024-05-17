@@ -15,12 +15,14 @@ const post = async (
     const result: isDataType = { success: false }
     postModel.find()
         .find(query.id ? { "_id": query.id } : {})
-        .find(query.slug ? { "_id": query.slug } : {})
+        .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
+        .find(query.wp ? { "workplace": query.wp } : {})
+        .find(query.wt ? { "worktype": query.wt } : {})
+        .find(query.ws ? { "workstatus": query.ws } : {})
+        .find(query.lo ? { "location": query.lo } : {})
         .sort({ "createDate": -1 })
         .skip(query.skip)
-        .limit(query.limit ? query.limit : {})
-        .populate("nicknameId", "nickname")
         .sort(query.sort ? query.sort : {})
         .limit(query.limit ? query.limit : {})
         .catch((error: Error) => {
