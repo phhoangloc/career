@@ -158,6 +158,16 @@ div {
     height: 100px;
     background-color: white;
 
+    .title {
+        width: max-content;
+        border-bottom: 1px solid;
+        padding: 15px 15px 0 15px;
+        margin: 0 5px;
+        line-height: 1.25;
+        cursor: pointer;
+        color: var(--main);
+    }
+
     .menu {
         position: fixed;
         width: 100vw;
@@ -534,11 +544,18 @@ div {
 
         .search_tool_div {
             width: 365px;
+            position: relative;
         }
 
         .result_div {
             width: calc(100vw);
             overflow: hidden;
+            position: relative;
+
+            .button_Search {
+                width: max-content;
+                margin: 0px auto 25px;
+            }
         }
     }
 
@@ -551,6 +568,10 @@ div {
         .searchPage_max {
             transform: translateX(0);
             width: 100%;
+
+            .button_Search {
+                display: none;
+            }
 
             .result_div {
                 width: calc(100% - 365px);

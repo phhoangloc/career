@@ -471,6 +471,16 @@ div {
   background-color: white;
 }
 
+.header .title {
+  width: max-content;
+  border-bottom: 1px solid;
+  padding: 15px 15px 0 15px;
+  margin: 0 5px;
+  line-height: 1.25;
+  cursor: pointer;
+  color: var(--main);
+}
+
 .header .menu {
   position: fixed;
   width: 100vw;
@@ -845,11 +855,18 @@ div {
 
 .searchPage .searchPage_max .search_tool_div {
   width: 365px;
+  position: relative;
 }
 
 .searchPage .searchPage_max .result_div {
   width: calc(100vw);
   overflow: hidden;
+  position: relative;
+}
+
+.searchPage .searchPage_max .result_div .button_Search {
+  width: max-content;
+  margin: 0px auto 25px;
 }
 
 .searchPage .searchPage_max_open {
@@ -860,6 +877,9 @@ div {
   .searchPage .searchPage_max {
     transform: translateX(0);
     width: 100%;
+  }
+  .searchPage .searchPage_max .button_Search {
+    display: none;
   }
   .searchPage .searchPage_max .result_div {
     width: calc(100% - 365px);

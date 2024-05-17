@@ -4,14 +4,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useRouter } from 'next/navigation';
 const Header = () => {
 
     const [menu, setMenu] = useState<boolean>(false)
     const [itemModal, setItemModal] = useState<boolean>(false)
 
+    const toPage = useRouter()
     return (
         <div className='header'>
-            <div style={{ height: "60px" }}></div>
+            <div style={{ height: "60px" }}>
+                <div className='title' onClick={() => toPage.push("/home")}>
+                    <h1>仕事を探す</h1>
+                </div>
+            </div>
 
             <div className='buttonOff'>
                 <MenuIcon style={{ position: "absolute", top: "75px", right: "5px" }} onClick={() => setMenu(true)} />

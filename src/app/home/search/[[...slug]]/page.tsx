@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import SearchTool from '@/component/searchTool'
 import SearchIcon from '@mui/icons-material/Search';
+import CloseIcon from '@mui/icons-material/Close';
 import Button from '@/component/input/button'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
 type Props = {
@@ -59,12 +60,15 @@ const Page = ({ params }: Props) => {
             <div className={`searchPage_max ${searchModal ? "searchPage_max_open" : ""}`}>
                 <div className='search_tool_div'>
                     <SearchTool />
+                    <div className='button_Search'>
+                        <CloseIcon onClick={() => setSearchModal(false)} style={{ position: "absolute", top: "5px", right: "5px" }} />
+                    </div>
                 </div>
                 <div className='result_div'>
                     <div className='title'>
                         <h1>検索結果</h1>
-                        <div style={{ width: "max-content", margin: "0px auto 10px" }}>
-                            <Button name='検索' onClick={() => setSearchModal(!searchModal)} />
+                        <div className='button_Search'>
+                            <SearchIcon onClick={() => setSearchModal(true)} />
                         </div>
                     </div>
                     {newData.length ?
@@ -73,11 +77,11 @@ const Page = ({ params }: Props) => {
                                 <div className='image' style={{
                                     position: "relative",
                                 }}>
-                                    {/* <Image src={process.env.FTP_URL+item.image} fill
+                                    <Image src={process.env.FTP_URL + "upload/" + item.image.name} fill
                                         style={{
                                             objectFit: 'cover',
                                         }}
-                                        alt="cover" /> */}
+                                        alt="cover" />
                                 </div>
                                 <div className='content'>
                                     <h4>{item.title}・{item.location}</h4>

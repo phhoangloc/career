@@ -21,6 +21,7 @@ const post = async (
         .find(query.wt ? { "worktype": query.wt } : {})
         .find(query.ws ? { "workstatus": query.ws } : {})
         .find(query.lo ? { "location": query.lo } : {})
+        .populate("image")
         .sort({ "createDate": -1 })
         .skip(query.skip)
         .sort(query.sort ? query.sort : {})
