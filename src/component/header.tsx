@@ -14,9 +14,9 @@ const Header = () => {
     return (
         <div className='header'>
             <div style={{ height: "60px" }}>
-                <div className='title' onClick={() => toPage.push("/home")}>
+                {/* <div className='title' onClick={() => toPage.push("/home")}>
                     <h1>仕事を探す</h1>
-                </div>
+                </div> */}
             </div>
 
             <div className='buttonOff'>
