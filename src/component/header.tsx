@@ -36,7 +36,7 @@ const Header = () => {
                         <p>職種で探す</p>
                         <p>雇用形態で探す</p>
                         <p>エリアで探す</p>
-                        <p>人気タグでで探す</p>
+                        <p>人気タグで探す</p>
                     </div>
                 </div>
                 <p>業界を知る <KeyboardArrowDownIcon /></p>

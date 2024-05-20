@@ -30,7 +30,7 @@ const SearchTool = (props: Props) => {
             name: "企画・管理",
         },
         {
-            name: "事務・アシスタ",
+            name: "事務・アシスト",
         },
     ]
     const workstatus = [
@@ -182,7 +182,7 @@ const SearchTool = (props: Props) => {
             </div>
             <button onClick={() => onSearch(wp, wt, loString, stt)}>検索</button>
             <div className='selectbox'>
-                <li>人気タグでで探す</li>
+                <li>人気タグで探す</li>
                 <div className='flexbox flexWrap-wrap'>
                     {workplaces.map((item, index) =>
                         <p key={index}>#{item.name}</p>
