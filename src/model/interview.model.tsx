@@ -8,7 +8,7 @@ const interviewSchema = new Schema({
     },
     archive: {
         type: String,
-        default: "post"
+        default: "interview"
     },
     name: {
         type: String,

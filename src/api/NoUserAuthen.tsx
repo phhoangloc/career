@@ -13,7 +13,7 @@ const signup = async (body: { username: string, password: string, email: string 
 }
 
 const getItem = async (archive: string, search: string, wp: string, wt: string, ws: string, lo: string, skip: number | undefined, limit: number | undefined) => {
-    const result = await axios.get("/api/" + archive + `?search=${search ? search : ""}&wp=${wp ? wp : ""}&wt=${wt ? wt : ""}&ws=${ws ? ws : ""}&lo=${lo ? lo : ""}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}`)
+    const result = await axios.get("/api/" + archive + `?archive=${archive}&search=${search ? search : ""}&wp=${wp ? wp : ""}&wt=${wt ? wt : ""}&ws=${ws ? ws : ""}&lo=${lo ? lo : ""}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}`)
     return result.data
 }
 

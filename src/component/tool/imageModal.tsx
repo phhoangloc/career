@@ -52,7 +52,7 @@ const ImageModal = ({ modalOpen, onCanel, onSubmit }: Props) => {
     }
 
     useEffect(() => {
-        currentUser.position && getMedia(currentUser.position, "image", "", undefined, undefined)
+        currentUser.position && getMedia(currentUser.position, "pic", "", undefined, undefined)
     }, [currentUser.position, refresh])
 
     const deleteImage = async (p: string, a: string, id: string) => {

@@ -36,3 +36,11 @@
 .hover-boder-radius-5px:hover {
     border-radius: 5px;
 }
+
+.dangerousBox img {
+    width: 100%;
+}
+
+.dangerousBox a {
+    text-decoration: underline;
+}

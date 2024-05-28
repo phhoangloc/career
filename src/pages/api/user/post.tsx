@@ -31,6 +31,7 @@ const Post =
                     await postModel.find()
                         .find({ "host": id })
                         .find(query.id ? { "_id": query.id } : {})
+                        .find(query.archive ? { "archive": query.archive } : {})
                         .find(query.slug ? { "slug": query.slug } : {})
                         .skip(query.skip)
                         .sort(query.sort ? query.sort : {})

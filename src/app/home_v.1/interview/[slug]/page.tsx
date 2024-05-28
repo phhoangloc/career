@@ -13,6 +13,8 @@ const Page = ({ params }: Props) => {
     const demo = params.slug[1]
 
     const getItem = async (a: string, s: string,) => {
+        console.log(a, s)
+
         const result = await NoUserAuthen.getOneItem(a, s)
         if (result.success) {
             setNewData(result.data[0])
@@ -20,7 +22,7 @@ const Page = ({ params }: Props) => {
     }
 
     useEffect(() => {
-        getItem("post", params.slug)
+        getItem("interview", params.slug)
     }, [])
 
     return (

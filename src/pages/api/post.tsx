@@ -15,6 +15,7 @@ const post = async (
     const result: isDataType = { success: false }
     postModel.find()
         .find(query.id ? { "_id": query.id } : {})
+        .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
         .find(query.wp ? { "workplace": query.wp } : {})

@@ -116,86 +116,74 @@ const SearchTool = (props: Props) => {
     return (
         <div className='searchTool'>
             <div className='title'>
+                <h2> look for a job</h2>
                 <h1>仕事を探す</h1>
             </div>
-            <div className='selectbox'>
-                <li>施設で探す</li>
-                <select onChange={(e) => setwp(e.target.value)}>
-                    <option value={undefined}>事業所</option>
-                    {workplaces.map((item, index) =>
-                        <option key={index} value={item.name}>{item.name}</option>
-                    )}
-                </select>
-            </div>
-            <div className='selectbox'>
-                <li>職種で探す</li>
-                <select onChange={(e) => setwt(e.target.value)}>
-                    <option value={undefined}>職種</option>
-                    {worktypes.map((item, index) =>
-                        <option key={index} value={item.name}>{item.name}</option>
-                    )}
-                </select>
-            </div>
-            <div className='selectbox'>
-                <li>雇用形態で探す</li>
-                <select onChange={(e) => setstt(e.target.value)}>
-                    <option value={undefined}>雇用形態</option>
-                    {workstatus.map((item, index) =>
-                        <option key={index} value={item.name}>{item.name}</option>
-                    )}
-                </select>
-            </div>
-            <div className='selectbox'>
-                <li>エリアで探す</li>
-                {areaModal ?
-                    <>
-                        <select onClick={() => setAreaModal(false)}>
-                            <option value={undefined}>エリア</option>
-                        </select>
-                        {lo.map((item, index) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "5px" }} key={index}>{item}</li>)}
-                    </>
-                    : null}
-                <div className={`area ${areaModal ? "area_none" : ""}`}>
-                    <div className='flexbox' style={{ background: "white", padding: "4px" }}><h3>エリアで探す</h3> <CancelOutlinedIcon onClick={() => { setAreaModal(true), setlo([]) }} /></div>
-                    <div className='flexbox'>
-                        <div className='area_titles'>
-                            {locations.map((item, index) =>
-                                <div className={`area_title ${index === area ? "area_title_select" : ""}`} key={index} onClick={() => setArea(index)}>
-                                    {item.name}
-                                </div>
-                            )}
+            <div className='grid_box'>
+                <div className='selectbox xs12 md6 lg4'>
+                    <select onChange={(e) => setwp(e.target.value)}>
+                        <option value={undefined}>施設</option>
+                        {workplaces.map((item, index) =>
+                            <option key={index} value={item.name}>{item.name}</option>
+                        )}
+                    </select>
+                </div>
+                <div className='selectbox xs12 md6 lg4'>
+                    <select onChange={(e) => setwt(e.target.value)}>
+                        <option value={undefined}>職種</option>
+                        {worktypes.map((item, index) =>
+                            <option key={index} value={item.name}>{item.name}</option>
+                        )}
+                    </select>
+                </div>
+                <div className='selectbox xs12 md6 lg4'>
+                    <select onChange={(e) => setstt(e.target.value)}>
+                        <option value={undefined}>雇用形態</option>
+                        {workstatus.map((item, index) =>
+                            <option key={index} value={item.name}>{item.name}</option>
+                        )}
+                    </select>
+                </div>
+                <div className='selectbox xs12 md8'>
+                    {areaModal ?
+                        <>
+                            <select onClick={() => setAreaModal(false)}>
+                                <option value={undefined}>エリア</option>
+                            </select>
+                            {lo.map((item, index) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "10px" }} key={index}>{item}</li>)}
+                        </>
+                        : null}
+                    <div className={`area ${areaModal ? "area_none" : ""}`}>
+                        <div className='flexbox' style={{ background: "white", height: "60px" }}>
+                            <h3 style={{ height: "100%", lineHeight: "70px", padding: "0 5px" }}>エリア</h3>
+                            <CancelOutlinedIcon onClick={() => { setAreaModal(true), setlo([]) }} />
                         </div>
-                        <div className='area_children'>
-                            <h4 style={{ textAlign: "center" }}>{locations[area]?.name}</h4>
-                            <div className='area_title' >
-                                {locations[area]?.child.map((item, index) =>
-                                    <p key={index}>{lo.includes(item) ?
-                                        <CheckBoxOutlinedIcon onClick={() => setlo(p => p.filter(i => i !== item))} /> :
-                                        <CheckBoxOutlineBlankOutlinedIcon onClick={() => setlo(p => [...p, item])} />}
-                                        {item}</p>
+                        <div className='flexbox'>
+                            <div className='area_titles'>
+                                {locations.map((item, index) =>
+                                    <div className={`area_title ${index === area ? "area_title_select" : ""}`} key={index} onClick={() => setArea(index)}>
+                                        {item.name}
+                                    </div>
                                 )}
                             </div>
-                            <div style={{ position: "absolute", bottom: "5px", right: "5px", width: "max-content", height: "max-content" }}><Button name="検索" onClick={() => { setAreaModal(true) }} /></div>
+                            <div className='area_children'>
+                                <h4 style={{ textAlign: "center", height: "30px", lineHeight: "40px" }}>{locations[area]?.name}</h4>
+                                <div className='area_title' >
+                                    {locations[area]?.child.map((item, index) =>
+                                        <p key={index}>{lo.includes(item) ?
+                                            <CheckBoxOutlinedIcon onClick={() => setlo(p => p.filter(i => i !== item))} /> :
+                                            <CheckBoxOutlineBlankOutlinedIcon onClick={() => setlo(p => [...p, item])} />}
+                                            {item}</p>
+                                    )}
+                                </div>
+                                <div style={{ position: "absolute", bottom: "5px", right: "5px", width: "max-content", height: "max-content" }}><Button name="検索" onClick={() => { setAreaModal(true) }} /></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <button onClick={() => onSearch(wp, wt, loString, stt)}>検索</button>
-            <div className='selectbox'>
-                <li>人気タグで探す</li>
-                <div className='flexbox flexWrap-wrap'>
-                    {workplaces.map((item, index) =>
-                        <p key={index}>#{item.name}</p>
-                    )}
+                <div className='button_search xs12 md4 '>
+                    <Button onClick={() => onSearch(wp, wt, loString, stt)} name='検索' />
                 </div>
-            </div>
-            <div className='title'>
-                <h1>業界を知る</h1>
-            </div>
-            <div className='inforbox'>
-                <li>インタビュー</li>
-                <li>コンテンツ</li>
-                <li>コンテンツ</li>
             </div>
         </div>
     )

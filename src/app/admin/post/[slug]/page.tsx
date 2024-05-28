@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { UserAuthen } from '@/api/UserAuthen';
 import store from '@/redux/store';
 import ImageModal from '@/component/tool/imageModal';
+import Link from 'next/link';
 type Props = {
     params: { slug: string }
 }
@@ -23,6 +24,8 @@ const Page = ({ params }: Props) => {
     useEffect(() => {
         update()
     })
+
+    const [saving, setSaving] = useState<boolean>(false)
 
     const [id, setId] = useState<string>("")
     const [title, setTitle] = useState<string>("")
@@ -52,6 +55,7 @@ const Page = ({ params }: Props) => {
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
 
+        console.log(result)
         if (result.success) {
 
             setId(result.data[0]._id)
@@ -70,16 +74,30 @@ const Page = ({ params }: Props) => {
         currentUser.position && params.slug !== "new" && getOnePost(currentUser.position, "post", params.slug)
     }, [currentUser.position, params.slug])
 
-    const createPost = async (slug: string, body: any) => {
+    const createPost = async (body: any) => {
+        setSaving(true)
         const result = await UserAuthen.createItem(currentUser.position, "post", body)
+
         if (result.success) {
+            setSaving(false)
             toPage.push("./" + body.slug)
         }
     }
     const UpdatePost = async (body: any) => {
+        setSaving(true)
         const result = await UserAuthen.updateItem(currentUser.position, "post", id, body)
         if (result.success) {
-            toPage.push("./" + body.slug)
+            setTimeout(() => {
+                setSaving(false)
+                toPage.push("./" + body.slug)
+            }, 1000);
+        }
+    }
+    const UpdatePostDemo = async (body: any) => {
+        body.slug = body.slug + "_demo"
+        const result = await UserAuthen.updateItem(currentUser.position, "post", "664eb0c390ea82cc9da49e9f", body)
+        if (result) {
+            window.open('/home/post/' + body.slug, '_blank');
         }
     }
 
@@ -110,7 +128,7 @@ const Page = ({ params }: Props) => {
                         />
                     </div>
                     <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
-                        <Button name="戻る" onClick={() => toPage.back()} />
+                        <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                         <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
                         <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
@@ -119,7 +137,10 @@ const Page = ({ params }: Props) => {
                         <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                         <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
                         <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
-                        <Button name='create' onClick={() => createPost(params.slug, body)} />
+                        <div style={{ display: "flex", margin: "10px 0" }}>
+                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(body)} />}
+                            <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                        </div>
                     </div>
                     <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id) }} />
                 </div>
@@ -137,7 +158,7 @@ const Page = ({ params }: Props) => {
                 />
             </div>
             <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
-                <Button name="戻る" onClick={() => toPage.back()} />
+                <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                 <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
                 <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
                 <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
@@ -145,9 +166,11 @@ const Page = ({ params }: Props) => {
                 <Input name="雇用形態" onChange={(e) => setWorkstatus(e)} value={workstatus} />
                 <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                 <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                <TextAreaTool name='detail' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
-                <Button name='save' onClick={() => UpdatePost(body)} />
-
+                <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
+                <div style={{ display: "flex", margin: "10px 0" }}>
+                    {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' onClick={() => UpdatePost(body)} />}
+                    <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                </div>
             </div>
             <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id) }} />
         </div>

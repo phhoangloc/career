@@ -6,10 +6,13 @@ import store from '@/redux/store'
 import { UserAuthen } from '@/api/UserAuthen'
 import Image from 'next/image'
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import CheckIcon from '@mui/icons-material/Check';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const Page = () => {
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [copy, setCopy] = useState<boolean>(false)
+    const [i, setI] = useState<number>(-1)
 
     const [currentUser, setCurrentUser] = useState<any>(store.getState().user)
     const [refresh, setRefresh] = useState<number>(0)
@@ -47,7 +50,7 @@ const Page = () => {
     }
 
     useEffect(() => {
-        currentUser.position && getMedia(currentUser.position, "image", "", undefined, undefined)
+        currentUser.position && getMedia(currentUser.position, "pic", "", undefined, undefined)
     }, [currentUser.position, refresh])
 
     const deleteImage = async (p: string, a: string, id: string) => {
@@ -83,8 +86,10 @@ const Page = () => {
                                     onClick={() => { deleteImage(currentUser.position, "image", item._id) }}
                                     style={{ position: "absolute", zIndex: 1, background: "white", borderRadius: "5px", top: "5px", left: "5px", padding: "1px", color: "#006699" }} />
                             </div>
-                            <div style={{ width: "100%", textWrap: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                                {item.name}
+                            <div style={{ display: "flex", fontSize: "0.8rem" }}>
+                                {copy && i === index ? <CheckIcon /> :
+                                    <ContentCopyIcon onClick={() => { setCopy(true), setI(index), navigator.clipboard.writeText(process.env.FTP_URL + "upload/" + item.name) }} />}
+                                <p style={{ textOverflow: "ellipsis", overflow: 'hidden', lineHeight: "32px" }}>{process.env.FTP_URL + "upload/" + item.name}</p>
                             </div>
                         </div>
                     )

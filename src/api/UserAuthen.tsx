@@ -16,7 +16,7 @@ const uploadFile = async (p: string, file: File, type: string) => {
     const formData = new FormData()
     formData.append("file", file)
     if (type === "pic") {
-        const fileUpload = await axios.post("/api/" + p + "/image", formData, {
+        const fileUpload = await axios.post("/api/" + p + "/pic", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': localStorage.token,
@@ -25,7 +25,7 @@ const uploadFile = async (p: string, file: File, type: string) => {
         return fileUpload
     }
     if (type === "file") {
-        const fileUpload = await axios.post("/api/" + p + "/image", formData, {
+        const fileUpload = await axios.post("/api/" + p + "/file", formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'Authorization': localStorage.token,
@@ -35,7 +35,7 @@ const uploadFile = async (p: string, file: File, type: string) => {
     }
 }
 const getPicById = async (p: string, u: string) => {
-    const result = await axios.get("/api/" + p + "/image?id=" + u,
+    const result = await axios.get("/api/" + p + "/pic?id=" + u,
         {
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -59,7 +59,7 @@ const deleteFile = async (p: string, genre: string, name: string, id: string) =>
 
 //Item
 const getItem = async (p: string, a: string, search: string, skip: number | undefined, limit: number | undefined) => {
-    const result = await axios.get(`/api/${p}/${a}?search=${search}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}`, {
+    const result = await axios.get(`/api/${p}/${a}?archive=${a}&search=${search}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage && localStorage.token

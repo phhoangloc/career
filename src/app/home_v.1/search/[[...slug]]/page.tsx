@@ -57,10 +57,13 @@ const Page = ({ params }: Props) => {
 
     return (
         <div className='searchPage'>
-            <div className="div_items div_items_bg_blue">
-                <SearchTool />
-            </div>
             <div className={`searchPage_max ${searchModal ? "searchPage_max_open" : ""}`}>
+                <div className='search_tool_div'>
+                    <SearchTool />
+                    <div className='button_Search'>
+                        <CloseIcon onClick={() => setSearchModal(false)} style={{ position: "absolute", top: "5px", right: "5px" }} />
+                    </div>
+                </div>
                 <div className='result_div'>
                     <div className='title'>
                         <h1>検索結果</h1>

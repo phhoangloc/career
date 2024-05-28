@@ -32,6 +32,7 @@ const Post =
                     case "GET":
                         await interviewModel.find()
                             .find({ "host": id })
+                            .find(query.archive ? { "archive": query.archive } : {})
                             .find(query.id ? { "_id": query.id } : {})
                             .find(query.slug ? { "slug": query.slug } : {})
                             .skip(query.skip)
