@@ -24,6 +24,7 @@ export default function Home() {
     }
   }
   const getAllInterview = async (a: string) => {
+    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
     if (result.success) {
       setdata(result.data)
