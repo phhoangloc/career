@@ -16,6 +16,7 @@ export default function Home() {
 
 
   const getOneInterview = async (a: string, s: string) => {
+    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getOneItem(a, s)
     if (result.success) {
       setCoverInterview(result.data[0])
@@ -24,7 +25,6 @@ export default function Home() {
     }
   }
   const getAllInterview = async (a: string) => {
-    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
     if (result.success) {
       setdata(result.data)
