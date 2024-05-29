@@ -458,8 +458,10 @@ div {
 
 .searchTool .grid_box .selectbox .area svg {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  width: 30px;
+  height: 30px;
+  top: 15px;
+  right: 5px;
 }
 
 .searchTool .grid_box .selectbox .area_none {
@@ -842,8 +844,8 @@ div {
 }
 
 .contain_V2 .div_items {
-  min-height: 100vh;
-  padding: 10% 0;
+  min-height: 105vh;
+  padding: 5% 0;
 }
 
 .contain_V2 .div_items .title {
