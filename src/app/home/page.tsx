@@ -2,7 +2,7 @@
 import { NoUserAuthen } from "@/api/NoUserAuthen";
 import ButtonWeb from "@/component/tool/button";
 import { useRouter } from "next/navigation"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Image from "next/image";
 import SearchTool from "@/component/searchTool";
@@ -42,26 +42,30 @@ export default function Home() {
   const onHandleHover = () => {
     setHover(true)
   }
+  const sloganRef: any = useRef()
 
   return (
     <div className="contain_V2 scrollbar">
       <div className="cover" onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
-        <div className={`cover_left ${hover ? coverItem === 2 ? "cover_dark_hover" : "cover_hover" : ""}`}
+        <div className={`cover_left ${hover ? "cover_hover" : ""}`}
           onClick={() => { onHandleHover(), setCovetItem(1) }}
           onMouseEnter={() => { onHandleHover(), setCovetItem(1) }}>
         </div>
-        <div className={`cover_right ${hover ? coverItem === 1 ? "cover_dark_hover" : "cover_hover" : ""}`}
+        <div className={`cover_right ${hover ? "cover_hover" : ""}`}
           onClick={() => { setCovetItem(2) }}
           onMouseEnter={() => { setCovetItem(2) }}>
         </div>
-        <div className={`cover_title ${hover && coverItem === 2 ? "cover_title_hover" : ""} `}>
+        <div className={`cover_title ${hover && coverItem === 2 ? "cover_title_hover" : ""} `}
+          onClick={() => toPage.push("/home/interview/" + coverInterview.slug)}>
           <h3>{coverInterview.contenttitle}</h3>
           <h4>{coverInterview.name}/2024年 採用/{coverInterview.location}/{coverInterview.workplace}</h4>
         </div>
       </div>
-      <div className={`slogan ${hover ? "slogan_hover" : ""}`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
-        <h2>手話をつかって</h2>
-        <h2>働くということ。</h2>
+      <div ref={sloganRef} className={`slogan`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
+        <div className="slogan_box">
+          <h2>手話をつかって</h2>
+          <h2>働くということ。</h2>
+        </div>
       </div>
       <div className="about">
         <p>
@@ -72,16 +76,16 @@ export default function Home() {
           しませんか?
         </p>
         <div className="buttons">
-          <ButtonWeb name="業界を知る" bg="#fdefcc" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} />
-          <ButtonWeb name="仕事を探す" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} />
+          <ButtonWeb name="業界を知る" bg="#fdefcc" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
+          <ButtonWeb name="仕事を探す" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#i")} />
         </div>
       </div>
-      <div className="div_items">
+      <div className="div_items" id="f">
         <div className="title">
           <h2> Facility introduction</h2>
           <h1>施設紹介</h1>
         </div>
-        <div className="items">
+        <div className="items" >
           <div className="item">
             <div className="cover"><Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
             <div className="item_title">
@@ -112,10 +116,10 @@ export default function Home() {
       <div className="div_items div_items_bg_none">
         <div className="title">
           <h2>Interview</h2>
-          <h1>| 先輩たちの声 </h1>
+          <h1>先輩たちの声 </h1>
           <div className="title_button">
             <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px auto" }} />}
-              onClick={() => toPage.push("/home/inteview")} /></div>
+              onClick={() => toPage.push("/home/interview")} /></div>
         </div>
         <div className="items">
           <div className="item">
@@ -143,7 +147,7 @@ export default function Home() {
         </div>
 
       </div>
-      <div className="div_items div_items_bg_blue">
+      <div className="div_items div_items_bg_blue" id="i">
         <SearchTool />
       </div>
     </div>

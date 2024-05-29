@@ -1,14 +1,14 @@
 import Header from "@/component/header";
 import SearchTool from "@/component/searchTool";
 import type { Metadata } from "next";
-import { Noto_Sans_Javanese } from "next/font/google";
+import { Zen_Kaku_Gothic_New } from "next/font/google";
 import "../style/global.css"
 import '../style/global_copy.css'
 import '../style/component.css'
 import '../style/theme.css'
 import Footer from "@/component/footer";
 
-const inter = Noto_Sans_Javanese({ subsets: ["latin"] });
+const inter = Zen_Kaku_Gothic_New({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
 
 export const metadata: Metadata = {
   title: "Build your career",

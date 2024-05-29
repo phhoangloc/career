@@ -1,10 +1,6 @@
 import Header from "@/component/header";
-import SearchTool from "@/component/searchTool";
 import type { Metadata } from "next";
-import { Noto_Sans_Javanese } from "next/font/google";
 import Footer from "@/component/footer";
-
-const inter = Noto_Sans_Javanese({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Build your career",
@@ -17,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={inter.className}>
+    <div>
       <Header />
       <main style={{ maxWidth: "1600px", margin: "0 auto" }}>
         {children}
