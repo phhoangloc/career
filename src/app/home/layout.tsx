@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <div>
       <Header />
-      <main style={{ maxWidth: "1600px", margin: "0 auto" }}>
+      <main>
         {children}
       </main>
       <Footer />

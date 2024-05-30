@@ -452,6 +452,7 @@ div {
     .cover {
         display: flex;
         height: calc(100vh - 100px);
+        max-height: 700px;
         overflow: hidden;
         position: relative;
 
@@ -518,8 +519,8 @@ div {
         top: 50vh;
         width: 100%;
         max-width: 1600px;
-        height: 90vh;
-        max-height: 800px;
+        height: 100vh;
+        max-height: 600px;
         text-shadow: 1px 1px 3px #444;
         color: #f1f5f7;
 
@@ -537,6 +538,11 @@ div {
 
         @media (min-width:1200px) {
             font-size: 40px;
+        }
+
+        @media (min-width:1600px) {
+            width: max-content;
+            left: calc(50vw - 280px);
         }
     }
 
@@ -563,8 +569,9 @@ div {
     }
 
     .div_items {
-        min-height: 105vh;
+        height: 105vh;
         padding: 5% 0 0;
+        max-height: 700px;
 
         .title {
             width: 90%;
