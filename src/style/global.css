@@ -805,12 +805,12 @@ div {
 }
 
 .contain_V2 .slogan {
-  font-size: calc(3vw + 10px);
+  font-size: 20px;
   text-align: center;
   position: absolute;
   top: 0px;
-  width: 100%;
-  max-width: 1600px;
+  left: calc(50vw - 160px);
+  width: max-content;
   height: 140vh;
   max-height: 1100px;
   text-shadow: 1px 1px 3px #444;
@@ -828,15 +828,30 @@ div {
   line-height: 1.5;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 575px) {
   .contain_V2 .slogan {
-    font-size: 40px;
+    font-size: 25px;
+    left: calc(50vw - 190px);
   }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 768px) {
   .contain_V2 .slogan {
-    width: max-content;
+    font-size: 30px;
+    left: calc(50vw - 220px);
+  }
+}
+
+@media (min-width: 992px) {
+  .contain_V2 .slogan {
+    font-size: 35px;
+    left: calc(50vw - 250px);
+  }
+}
+
+@media (min-width: 1200px) {
+  .contain_V2 .slogan {
+    font-size: 40px;
     left: calc(50vw - 280px);
   }
 }
