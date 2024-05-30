@@ -47,10 +47,10 @@ export default function RootLayout({
               },
               {
                 position: "admin",
-                name: "ニュース",
+                name: "施設",
                 child: [
-                  { name: "ニュース一覧", link: "/admin/news", },
-                  { name: "新規ニュース", link: "/admin/news/new", }
+                  { name: "施設一覧", link: "/admin/facility", },
+                  { name: "新規施設", link: "/admin/facility/new", }
                 ]
               },
             ]}

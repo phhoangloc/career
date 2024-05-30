@@ -9,21 +9,12 @@ import SearchTool from "@/component/searchTool";
 export default function Home() {
 
   const [data, setdata] = useState<any[]>([])
-  const [coverInterview, setCoverInterview] = useState<any>({})
+  const [facility, setFacility] = useState<any[]>([])
 
   const [hover, setHover] = useState<boolean>(false)
   const [coverItem, setCovetItem] = useState<number>(0)
 
 
-  const getOneInterview = async (a: string, s: string) => {
-    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
-    const result = await NoUserAuthen.getOneItem(a, s)
-    if (result.success) {
-      setCoverInterview(result.data[0])
-    } else {
-      setCoverInterview({})
-    }
-  }
   const getAllInterview = async (a: string) => {
     await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
@@ -33,9 +24,18 @@ export default function Home() {
       setdata([])
     }
   }
+  const getFacility = async (a: string) => {
+    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
+    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
+    if (result.success) {
+      setFacility(result.data)
+    } else {
+      setFacility([])
+    }
+  }
   useEffect(() => {
-    getOneInterview("interview", "0001")
     getAllInterview("interview")
+    getFacility("facility")
   }, [])
 
   const toPage = useRouter()
@@ -46,19 +46,28 @@ export default function Home() {
 
   return (
     <div className="contain_V2 scrollbar">
-      <div className="cover" onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
+      <div className="cover">
         <div className={`cover_left ${hover ? "cover_hover" : ""}`}
           onClick={() => { onHandleHover(), setCovetItem(1) }}
-          onMouseEnter={() => { onHandleHover(), setCovetItem(1) }}>
+          onMouseEnter={() => { onHandleHover(), setCovetItem(1) }}
+          onMouseLeave={() => { setCovetItem(0) }}
+        >
         </div>
         <div className={`cover_right ${hover ? "cover_hover" : ""}`}
-          onClick={() => { setCovetItem(2) }}
-          onMouseEnter={() => { setCovetItem(2) }}>
+          onClick={() => { onHandleHover(), setCovetItem(2) }}
+          onMouseEnter={() => { onHandleHover(), setCovetItem(2) }}
+          onMouseLeave={() => { setCovetItem(0) }}>
+
         </div>
-        <div className={`cover_title ${hover && coverItem === 2 ? "cover_title_hover" : ""} `}
-          onClick={() => toPage.push("/home/interview/" + coverInterview.slug)}>
-          <h3>{coverInterview.contenttitle}</h3>
-          <h4>{coverInterview.name}/2024年 採用/{coverInterview.location}/{coverInterview.workplace}</h4>
+        <div className={`cover_title ${hover && coverItem === 1 && "cover_title_hover_left"} `}
+          onClick={() => toPage.push("/home/interview/" + data[0]?.slug)}>
+          <h3>{data[0]?.contenttitle}</h3>
+          <h4>{data[0]?.name}/2024年 採用/{data[0]?.location}/{data[0]?.workplace}</h4>
+        </div>
+        <div className={`cover_title cover_title_right ${hover && coverItem === 2 && "cover_title_hover"} `}
+          onClick={() => toPage.push("/home/interview/" + data[1]?.slug)}>
+          <h3>{data[1]?.contenttitle}</h3>
+          <h4>{data[1]?.name}/2024年 採用/{data[1]?.location}/{data[1]?.workplace}</h4>
         </div>
       </div>
       <div ref={sloganRef} className={`slogan`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
@@ -86,32 +95,23 @@ export default function Home() {
           <h1>施設紹介</h1>
         </div>
         <div className="items" >
-          <div className="item">
-            <div className="cover"><Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
-            <div className="item_title">
-              <h3>⼿話に関する研究‧研修‧試験等をおこなっています</h3>
-              <h4>社会福祉法⼈全国⼿話研修センター</h4>
-              <div className="tag">
-                <p>事業所</p>
-                <p>京都府</p>
-                <KeyboardArrowRightIcon />
-              </div>
-            </div>
-          </div>
-          <div className="item">
-            <div className="cover"><Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
-            <div className="item_title">
-              <h3>⼿話に関する研究‧研修‧試験等をおこなっています</h3>
-              <h4>社会福祉法⼈全国⼿話研修センター</h4>
-              <div className="tag">
-                <p>事業所</p>
-                <p>京都府</p>
-                <KeyboardArrowRightIcon />
-              </div>
-            </div>
-          </div>
-        </div>
+          {
+            facility ? facility.map((f, index) =>
 
+              <div className="item" key={index}>
+                <div className="cover"><Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
+                <div className="item_title">
+                  <h3>{f.contenttitle}</h3>
+                  <h4>{f.name}</h4>
+                  <div className="tag">
+                    <p>{f.worktype}</p>
+                    <p>{f.location}</p>
+                    <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + f.slug)} />
+                  </div>
+                </div>
+              </div>
+            ) : null}
+        </div>
       </div>
       <div className="div_items div_items_bg_none">
         <div className="title">

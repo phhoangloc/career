@@ -780,7 +780,6 @@ div {
   bottom: 0;
   width: 49vw;
   max-width: max-content;
-  right: 0;
   height: max-content;
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -800,8 +799,20 @@ div {
   opacity: 0.9;
 }
 
+.contain_V2 .cover .cover_title_right {
+  right: 0;
+}
+
 .contain_V2 .cover .cover_title_hover {
   transform: translateY(0%);
+  left: auto;
+  right: 0;
+}
+
+.contain_V2 .cover .cover_title_hover_left {
+  transform: translateY(0%);
+  left: 0;
+  right: auto;
 }
 
 .contain_V2 .slogan {
@@ -879,7 +890,7 @@ div {
 }
 
 .contain_V2 .div_items {
-  height: 105vh;
+  height: 130vh;
   padding: 5% 0 0;
   max-height: 700px;
 }
@@ -1009,6 +1020,7 @@ div {
 .searchPage,
 .detailPage {
   min-height: calc(100vh - 100px);
+  padding: 50px 0;
 }
 
 .searchPage .title,
@@ -1064,48 +1076,100 @@ div {
 
 .searchPage .detail,
 .detailPage .detail {
-  width: 100%;
+  width: 90%;
   max-width: 768px;
   margin: auto;
   background-color: white;
   border-radius: 5px;
   overflow: hidden;
-  padding: 1%;
+  padding: 10px;
   line-height: 1.5;
 }
 
-.searchPage .detail .image,
-.detailPage .detail .image {
-  width: 90%;
-  margin: 20px auto;
+.searchPage .detail h2,
+.detailPage .detail h2 {
+  font-size: 1.15rem;
 }
 
-.searchPage .detail .content,
-.detailPage .detail .content {
-  width: 90%;
-  margin: 20px auto;
+.searchPage .detail h3,
+.detailPage .detail h3 {
+  font-size: 0.9rem;
+  color: darkcyan;
 }
 
-.searchPage .detail .content li,
-.detailPage .detail .content li {
+.searchPage .detail h3 span,
+.detailPage .detail h3 span {
   opacity: 0.75;
 }
 
-.searchPage .detail .content .text,
-.detailPage .detail .content .text {
-  margin: 15px 0;
-  text-align: left;
+.searchPage .detail h4,
+.detailPage .detail h4 {
+  font-size: 1rem;
+  color: var(--main);
 }
 
-.searchPage .detail .content .text h1,
-.detailPage .detail .content .text h1 {
-  font-size: 100%;
+.searchPage .detail .content .content_title,
+.detailPage .detail .content .content_title {
+  margin-bottom: 20px;
 }
 
-.searchPage .detail .content .text div,
-.detailPage .detail .content .text div {
-  opacity: 0.9;
-  margin: 10px 0;
+@media (min-width: 575px) {
+  .searchPage .detail h2,
+  .detailPage .detail h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .searchPage .detail h3,
+  .detailPage .detail h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .searchPage .detail,
+  .detailPage .detail {
+    padding: 50px;
+  }
+  .searchPage .detail h4,
+  .detailPage .detail h4 {
+    font-size: 1rem;
+  }
+  .searchPage .detail .content,
+  .detailPage .detail .content {
+    display: flex;
+  }
+  .searchPage .detail .content .image,
+  .detailPage .detail .content .image {
+    width: 50%;
+  }
+  .searchPage .detail .content .content_title,
+  .detailPage .detail .content .content_title {
+    width: 50%;
+  }
+}
+
+.facilityPage {
+  background-color: var(--second);
+}
+
+.facilityPage .title_facility {
+  width: 90%;
+  margin: auto;
+  max-width: 768px;
+}
+
+.facilityPage .title_facility p {
+  height: 40px;
+  width: 125px;
+  line-height: 40px;
+  margin: 0 10px;
+  background-color: var(--main);
+  color: white;
+  text-align: center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .searchPage {
