@@ -1183,6 +1183,11 @@ div {
   }
 }
 
+.searchPage .apply h4,
+.detailPage .apply h4 {
+  width: 75px;
+}
+
 .searchPage .apply p,
 .detailPage .apply p {
   margin: 0 5px;
