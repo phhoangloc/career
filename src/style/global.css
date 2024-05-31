@@ -1113,6 +1113,21 @@ div {
   margin-bottom: 20px;
 }
 
+.searchPage .detail .content .content_title .social_icon,
+.detailPage .detail .content .content_title .social_icon {
+  width: max-content;
+  margin: 5px 5px 5px auto;
+}
+
+.searchPage .detail .content .content_title .social_icon svg,
+.searchPage .detail .content .content_title .social_icon img,
+.detailPage .detail .content .content_title .social_icon svg,
+.detailPage .detail .content .content_title .social_icon img {
+  width: 25px;
+  height: 25px;
+  margin: 10px 5px;
+}
+
 @media (min-width: 575px) {
   .searchPage .detail h2,
   .detailPage .detail h2 {

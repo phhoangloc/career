@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Data from '@/data/data'
 import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
+import HomeIcon from '@mui/icons-material/Home';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 type Props = {
     params: { slug: string }
 }
@@ -35,8 +38,15 @@ const Page = ({ params }: Props) => {
                         <div className='content_title'>
                             <h2>{newData.name}</h2>
                             <h3><span>〒{newData.postno}</span> <br></br>{newData.address}</h3>
+                            <div className='social_icon'>
+                                <HomeIcon />
+                                <Image src={"/img/twitterx-50.png"} width={30} height={30} alt='x' />
+                                <InstagramIcon />
+                                <YouTubeIcon />
+                            </div>
                         </div>
                         <div className='image'>
+                            <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                             <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                         </div>
                     </div>
