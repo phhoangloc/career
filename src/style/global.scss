@@ -888,7 +888,8 @@ div {
 
     .apply {
         h4 {
-            width: 75px
+            width: 75px;
+            line-height: 24px
         }
 
         p {
@@ -896,7 +897,7 @@ div {
         }
 
         .button {
-            width: 375px;
+            width: 250px;
             height: 40px;
             line-height: 40px;
             border-radius: 5px;
