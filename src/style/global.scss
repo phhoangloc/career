@@ -816,17 +816,20 @@ div {
 
                 .social_icon {
                     width: max-content;
-                    margin: 5px 5px 5px auto;
 
                     svg,
                     img {
                         width: 25px;
                         height: 25px;
-                        margin: 10px 5px;
+                        margin: 10px 5px 10px 0;
                     }
 
+                    svg:hover {
+                        color: inherit;
+                    }
                 }
             }
+
 
         }
 
@@ -852,8 +855,26 @@ div {
             .content {
                 display: flex;
 
-                .image {
+                .image_box {
                     width: 50%;
+
+                    .image {
+                        width: 100%;
+                        position: relative;
+
+                    }
+
+                    svg {
+                        top: 0;
+                        left: 0;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        padding: 25%;
+                        box-sizing: border-box;
+                        backdrop-filter: brightness(0.9);
+                    }
+
                 }
 
                 .content_title {

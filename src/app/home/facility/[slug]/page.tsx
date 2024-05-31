@@ -6,6 +6,7 @@ import { NoUserAuthen } from '@/api/NoUserAuthen'
 import HomeIcon from '@mui/icons-material/Home';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 type Props = {
     params: { slug: string }
 }
@@ -15,7 +16,7 @@ const Page = ({ params }: Props) => {
     const [newData, setNewData] = useState<any>({})
 
     const getItem = async (a: string, s: string,) => {
-
+        await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
         const result = await NoUserAuthen.getOneItem(a, s)
         if (result.success) {
             setNewData(result.data[0])
@@ -45,9 +46,15 @@ const Page = ({ params }: Props) => {
                                 <YouTubeIcon />
                             </div>
                         </div>
-                        <div className='image'>
-                            <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
-                            <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
+                        <div className='image_box'>
+                            <div className='image'>
+                                <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
+                                <PlayArrowIcon />
+                            </div>
+                            <div className='image'>
+                                <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
+                                <PlayArrowIcon />
+                            </div>
                         </div>
                     </div>
                     <div className='content_content' style={{ marginTop: "15px" }}>

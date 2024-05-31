@@ -1116,7 +1116,6 @@ div {
 .searchPage .detail .content .content_title .social_icon,
 .detailPage .detail .content .content_title .social_icon {
   width: max-content;
-  margin: 5px 5px 5px auto;
 }
 
 .searchPage .detail .content .content_title .social_icon svg,
@@ -1125,7 +1124,12 @@ div {
 .detailPage .detail .content .content_title .social_icon img {
   width: 25px;
   height: 25px;
-  margin: 10px 5px;
+  margin: 10px 5px 10px 0;
+}
+
+.searchPage .detail .content .content_title .social_icon svg:hover,
+.detailPage .detail .content .content_title .social_icon svg:hover {
+  color: inherit;
 }
 
 @media (min-width: 575px) {
@@ -1153,9 +1157,25 @@ div {
   .detailPage .detail .content {
     display: flex;
   }
-  .searchPage .detail .content .image,
-  .detailPage .detail .content .image {
+  .searchPage .detail .content .image_box,
+  .detailPage .detail .content .image_box {
     width: 50%;
+  }
+  .searchPage .detail .content .image_box .image,
+  .detailPage .detail .content .image_box .image {
+    width: 100%;
+    position: relative;
+  }
+  .searchPage .detail .content .image_box svg,
+  .detailPage .detail .content .image_box svg {
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 25%;
+    box-sizing: border-box;
+    backdrop-filter: brightness(0.9);
   }
   .searchPage .detail .content .content_title,
   .detailPage .detail .content .content_title {
