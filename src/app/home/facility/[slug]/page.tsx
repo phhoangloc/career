@@ -1,13 +1,12 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import Data from '@/data/data'
 import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
 import HomeIcon from '@mui/icons-material/Home';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import Button from '@/component/input/button'
+import { useRouter } from 'next/navigation';
 type Props = {
     params: { slug: string }
 }
@@ -28,6 +27,7 @@ const Page = ({ params }: Props) => {
         getItem("facility", params.slug)
     }, [])
 
+    const toPage = useRouter()
     return (
         newData ?
             <div className='detailPage facilityPage'>
@@ -77,6 +77,10 @@ const Page = ({ params }: Props) => {
                     <div style={{ display: "flex" }}><h4>休⽇休暇</h4><p>年間休⽇000⽇／完全週休2⽇制（⼟・⽇）</p></div>
                     <p className='button'>応募はこちらから</p>
                 </div>
+
+                <p style={{ width: "max-content", margin: "25px auto 0", padding: "10px 20px", borderRadius: "5px", background: "white", fontSize: "1.25rem", fontWeight: "bold", boxShadow: "1px 1px 5px", cursor: "pointer" }}
+                    onClick={() => toPage.push("/home")}>ホームページへ</p>
+
             </div > : null
     )
 }
