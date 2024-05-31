@@ -7,6 +7,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import Button from '@/component/input/button'
 type Props = {
     params: { slug: string }
 }
@@ -62,6 +63,19 @@ const Page = ({ params }: Props) => {
                         <div className='dangerousBox' dangerouslySetInnerHTML={{ __html: newData.content }} />
                     </div>
 
+                </div>
+                <div className='title_facility'>
+                    <p>募集要項</p>
+                </div>
+                <div className="detail apply">
+                    <div style={{ display: "flex" }}><h4>仕事内容</h4><p>・⼿話通訳業務<br></br>本文本文本文本文本文本文本文本文</p></div>
+                    <div style={{ display: "flex" }}><h4>応募資格</h4><p>本文本文本文本文本文本文本文本文<br></br>本文本文本文本文本文本文本文本文</p></div>
+                    <div style={{ display: "flex" }}><h4>雇⽤形態</h4><p>正社員</p></div>
+                    <div style={{ display: "flex" }}><h4>勤務地</h4><p><span>〒{newData.postno}</span> <br></br>{newData.address}</p></div>
+                    <div style={{ display: "flex" }}><h4>勤務時間</h4><p>00：00〜00：00（実働0時間）</p></div>
+                    <div style={{ display: "flex" }}><h4>給与</h4><p>⽉給00万円＋各種⼿当</p></div>
+                    <div style={{ display: "flex" }}><h4>休⽇休暇</h4><p>年間休⽇000⽇／完全週休2⽇制（⼟・⽇）</p></div>
+                    <p className='button'>応募はこちらから</p>
                 </div>
             </div > : null
     )

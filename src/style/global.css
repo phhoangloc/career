@@ -1183,13 +1183,32 @@ div {
   }
 }
 
+.searchPage .apply p,
+.detailPage .apply p {
+  margin: 0 5px;
+}
+
+.searchPage .apply .button,
+.detailPage .apply .button {
+  width: 375px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  background-color: var(--main);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px auto 0;
+  cursor: pointer;
+}
+
 .facilityPage {
   background-color: var(--second);
 }
 
 .facilityPage .title_facility {
   width: 90%;
-  margin: auto;
+  margin: 20px auto 0;
   max-width: 768px;
 }
 
