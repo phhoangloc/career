@@ -890,9 +890,7 @@ div {
 }
 
 .contain_V2 .div_items {
-  height: 130vh;
-  padding: 5% 0 0;
-  max-height: 700px;
+  padding: 5% 0;
 }
 
 .contain_V2 .div_items .title {
@@ -930,7 +928,6 @@ div {
 .contain_V2 .div_items .items .item {
   width: 100%;
   padding: 1% 1% 2%;
-  margin-bottom: 50px;
 }
 
 .contain_V2 .div_items .items .item .cover {
@@ -977,6 +974,7 @@ div {
 
 .contain_V2 .div_items_bg_blue {
   background-color: var(--second);
+  height: 700px;
 }
 
 @media (min-width: 768px) {
@@ -1086,6 +1084,11 @@ div {
   line-height: 1.5;
 }
 
+.searchPage .detail h1,
+.detailPage .detail h1 {
+  font-size: 1.25rem;
+}
+
 .searchPage .detail h2,
 .detailPage .detail h2 {
   font-size: 1.15rem;
@@ -1108,31 +1111,26 @@ div {
   color: var(--main);
 }
 
-.searchPage .detail .content .content_title,
-.detailPage .detail .content .content_title {
-  margin-bottom: 20px;
+.searchPage .detail .content,
+.detailPage .detail .content {
+  padding: 25px 5%;
 }
 
-.searchPage .detail .content .content_title .social_icon,
-.detailPage .detail .content .content_title .social_icon {
-  width: max-content;
+.searchPage .detail .content .text,
+.detailPage .detail .content .text {
+  padding-top: 25px;
 }
 
-.searchPage .detail .content .content_title .social_icon svg,
-.searchPage .detail .content .content_title .social_icon img,
-.detailPage .detail .content .content_title .social_icon svg,
-.detailPage .detail .content .content_title .social_icon img {
-  width: 25px;
-  height: 25px;
-  margin: 10px 5px 10px 0;
-}
-
-.searchPage .detail .content .content_title .social_icon svg:hover,
-.detailPage .detail .content .content_title .social_icon svg:hover {
-  color: inherit;
+.searchPage .detail .content .text div,
+.detailPage .detail .content .text div {
+  margin: 10px 0;
 }
 
 @media (min-width: 575px) {
+  .searchPage .detail h1,
+  .detailPage .detail h1 {
+    font-size: 1.5rem;
+  }
   .searchPage .detail h2,
   .detailPage .detail h2 {
     font-size: 1.25rem;
@@ -1152,34 +1150,6 @@ div {
   .searchPage .detail h4,
   .detailPage .detail h4 {
     font-size: 1rem;
-  }
-  .searchPage .detail .content,
-  .detailPage .detail .content {
-    display: flex;
-  }
-  .searchPage .detail .content .image_box,
-  .detailPage .detail .content .image_box {
-    width: 50%;
-  }
-  .searchPage .detail .content .image_box .image,
-  .detailPage .detail .content .image_box .image {
-    width: 100%;
-    position: relative;
-  }
-  .searchPage .detail .content .image_box svg,
-  .detailPage .detail .content .image_box svg {
-    top: 0;
-    left: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    padding: 25%;
-    box-sizing: border-box;
-    backdrop-filter: brightness(0.9);
-  }
-  .searchPage .detail .content .content_title,
-  .detailPage .detail .content .content_title {
-    width: 50%;
   }
 }
 
@@ -1230,6 +1200,104 @@ div {
   border-top-right-radius: 15px;
   font-weight: bold;
   letter-spacing: 1px;
+}
+
+.facilityPage .detail {
+  width: 90%;
+  max-width: 768px;
+  margin: auto;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 10px;
+  line-height: 1.5;
+}
+
+.facilityPage .detail h2 {
+  font-size: 1.15rem;
+}
+
+.facilityPage .detail h3 {
+  font-size: 0.9rem;
+  color: darkcyan;
+}
+
+.facilityPage .detail h3 span {
+  opacity: 0.75;
+}
+
+.facilityPage .detail h4 {
+  font-size: 1rem;
+  color: var(--main);
+}
+
+.facilityPage .detail .content .image_box {
+  width: 100%;
+}
+
+.facilityPage .detail .content .image_box .image {
+  width: 100%;
+  position: relative;
+}
+
+.facilityPage .detail .content .image_box svg {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 25%;
+  box-sizing: border-box;
+  backdrop-filter: brightness(0.9);
+}
+
+.facilityPage .detail .content .content_title {
+  margin-bottom: 20px;
+}
+
+.facilityPage .detail .content .content_title .social_icon {
+  width: max-content;
+}
+
+.facilityPage .detail .content .content_title .social_icon svg,
+.facilityPage .detail .content .content_title .social_icon img {
+  width: 25px;
+  height: 25px;
+  margin: 10px 5px 10px 0;
+}
+
+.facilityPage .detail .content .content_title .social_icon svg:hover {
+  color: inherit;
+}
+
+@media (min-width: 575px) {
+  .facilityPage .detail h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .facilityPage .detail h3 {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .facilityPage .detail {
+    padding: 50px;
+  }
+  .facilityPage .detail h4 {
+    font-size: 1rem;
+  }
+  .facilityPage .detail .content {
+    display: flex;
+    padding: 0;
+  }
+  .facilityPage .detail .content .image_box {
+    width: 50%;
+    padding-left: 5%;
+  }
+  .facilityPage .detail .content .image_box .content_title {
+    width: 50%;
+  }
 }
 
 .searchPage {

@@ -594,9 +594,7 @@ div {
     }
 
     .div_items {
-        height: 130vh;
-        padding: 5% 0 0;
-        max-height: 700px;
+        padding: 5% 0;
 
         .title {
             width: 90%;
@@ -633,7 +631,6 @@ div {
             .item {
                 width: 100%;
                 padding: 1% 1% 2%;
-                margin-bottom: 50px;
 
                 .cover {
                     width: 100%;
@@ -682,7 +679,8 @@ div {
     }
 
     .div_items_bg_blue {
-        background-color: var(--second)
+        background-color: var(--second);
+        height: 700px;
     }
 
     @media (min-width:768px) {
@@ -781,6 +779,7 @@ div {
         }
     }
 
+
     .detail {
         width: 90%;
         max-width: 768px;
@@ -790,6 +789,10 @@ div {
         overflow: hidden;
         padding: 10px;
         line-height: 1.5;
+
+        h1 {
+            font-size: 1.25rem;
+        }
 
         h2 {
             font-size: 1.15rem;
@@ -810,30 +813,23 @@ div {
         }
 
         .content {
+            padding: 25px 5%;
 
-            .content_title {
-                margin-bottom: 20px;
+            .text {
+                padding-top: 25px;
 
-                .social_icon {
-                    width: max-content;
-
-                    svg,
-                    img {
-                        width: 25px;
-                        height: 25px;
-                        margin: 10px 5px 10px 0;
-                    }
-
-                    svg:hover {
-                        color: inherit;
-                    }
+                div {
+                    margin: 10px 0;
                 }
+
             }
-
-
         }
 
         @media (min-width:575px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
             h2 {
                 font-size: 1.25rem;
                 margin-bottom: 10px;
@@ -851,38 +847,6 @@ div {
             h4 {
                 font-size: 1rem;
             }
-
-            .content {
-                display: flex;
-
-                .image_box {
-                    width: 50%;
-
-                    .image {
-                        width: 100%;
-                        position: relative;
-
-                    }
-
-                    svg {
-                        top: 0;
-                        left: 0;
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        padding: 25%;
-                        box-sizing: border-box;
-                        backdrop-filter: brightness(0.9);
-                    }
-
-                }
-
-                .content_title {
-                    width: 50%;
-                }
-            }
-
-            ;
         }
     }
 
@@ -931,6 +895,116 @@ div {
             border-top-right-radius: 15px;
             font-weight: bold;
             letter-spacing: 1px;
+        }
+    }
+
+    .detail {
+        width: 90%;
+        max-width: 768px;
+        margin: auto;
+        background-color: white;
+        border-radius: 5px;
+        overflow: hidden;
+        padding: 10px;
+        line-height: 1.5;
+
+        h2 {
+            font-size: 1.15rem;
+        }
+
+        h3 {
+            font-size: 0.9rem;
+            color: darkcyan;
+
+            span {
+                opacity: 0.75;
+            }
+        }
+
+        h4 {
+            font-size: 1rem;
+            color: var(--main);
+        }
+
+        .content {
+
+            .image_box {
+                width: 100%;
+
+                .image {
+                    width: 100%;
+                    position: relative;
+
+                }
+
+                svg {
+                    top: 0;
+                    left: 0;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    padding: 25%;
+                    box-sizing: border-box;
+                    backdrop-filter: brightness(0.9);
+                }
+
+            }
+
+            .content_title {
+                margin-bottom: 20px;
+
+                .social_icon {
+                    width: max-content;
+
+                    svg,
+                    img {
+                        width: 25px;
+                        height: 25px;
+                        margin: 10px 5px 10px 0;
+                    }
+
+                    svg:hover {
+                        color: inherit;
+                    }
+                }
+            }
+
+
+        }
+
+        @media (min-width:575px) {
+            h2 {
+                font-size: 1.25rem;
+                margin-bottom: 10px;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+        }
+
+        @media (min-width:768px) {
+
+            padding: 50px;
+
+            h4 {
+                font-size: 1rem;
+            }
+
+            .content {
+                display: flex;
+                padding: 0;
+
+                .image_box {
+                    width: 50%;
+                    padding-left: 5%;
+
+                    .content_title {
+                        width: 50%;
+                    }
+                }
+            }
+
         }
     }
 }
