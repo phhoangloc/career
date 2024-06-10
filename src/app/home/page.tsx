@@ -44,6 +44,19 @@ export default function Home() {
   }
   const sloganRef: any = useRef()
 
+  const doc = facility[0]?.content
+
+  function extractStringBetween(text: string, start: string, end: string) {
+    const startIndex = text?.indexOf(start) + start.length;
+    const endIndex = text?.indexOf(end, startIndex);
+
+    if (startIndex >= start.length && endIndex > startIndex) {
+      return text.substring(startIndex, endIndex);
+    } else {
+      return "";
+    }
+  }
+
   return (
     <div className="contain_V2 scrollbar">
       <div className="cover">
@@ -95,22 +108,37 @@ export default function Home() {
           <h1>施設紹介</h1>
         </div>
         <div className="items" >
-          {
-            facility ? facility.map((f, index) =>
 
-              <div className="item" key={index}>
-                <div className="cover"><Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
-                <div className="item_title">
-                  <h3>{f.contenttitle}</h3>
-                  <h4>{f.name}</h4>
-                  <div className="tag">
-                    <p>{f.worktype}</p>
-                    <p>{f.location}</p>
-                    <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + f.slug)} />
-                  </div>
-                </div>
+          {/* // facility ? facility.map((f, index) => */}
+
+          <div className="item" >
+            <div className="cover"><Image src={"/img/image001.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="item_title">
+              <h3>{facility[0]?.contenttitle}</h3>
+              <h4>{facility[0]?.name}</h4>
+              <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[0]?.content, "<h3>", "</h3>") }}></div>
+              <div className="tag">
+                <p>{facility[0]?.worktype}</p>
+                <p>{facility[0]?.location}</p>
+                <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[0]?.slug)} />
               </div>
-            ) : null}
+            </div>
+          </div>
+          <div className="item" >
+            <div className="cover"><Image src={"/img/image002.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="item_title">
+              <h3>{facility[1]?.contenttitle}</h3>
+              <h4>{facility[1]?.name}</h4>
+              <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[1]?.content, "<h3>", "</h3>") }}></div>
+              <div className="tag">
+                <p>{facility[1]?.worktype}</p>
+                <p>{facility[1]?.location}</p>
+                <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[1].slug)} />
+              </div>
+            </div>
+          </div>
+          {/* // ) : null */}
+
         </div>
       </div>
       <div className="div_items div_items_bg_none">
