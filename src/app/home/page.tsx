@@ -118,7 +118,7 @@ export default function Home() {
               <h4>{facility[0]?.name}</h4>
               <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[0]?.content, "<h3>", "</h3>") }}></div>
               <div className="tag">
-                <p>{facility[0]?.worktype}</p>
+                {/* <p>{facility[0]?.worktype}</p> */}
                 <p>{facility[0]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[0]?.slug)} />
               </div>
@@ -131,7 +131,7 @@ export default function Home() {
               <h4>{facility[1]?.name}</h4>
               <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[1]?.content, "<h3>", "</h3>") }}></div>
               <div className="tag">
-                <p>{facility[1]?.worktype}</p>
+                {/* <p>{facility[1]?.worktype}</p> */}
                 <p>{facility[1]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[1].slug)} />
               </div>
