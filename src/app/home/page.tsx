@@ -85,8 +85,10 @@ export default function Home() {
       </div>
       <div ref={sloganRef} className={`slogan`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
         <div className="slogan_box">
-          <h2>手話をつかって</h2>
-          <h2>働くということ。</h2>
+          <h2>手話を活かして
+            <br></br>働くということ</h2>
+          {/* <h2>手話をつかって</h2>
+          <h2>働くということ。</h2> */}
         </div>
       </div>
       <div className="about">
@@ -151,7 +153,8 @@ export default function Home() {
         </div>
         <div className="items">
           <div className="item">
-            <div className="cover"><Image src={process.env.FTP_URL + "upload/" + data[1]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            {/* <div className="cover"><Image src={process.env.FTP_URL + "upload/" + data[1]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
+            <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
               <h4>{data[1]?.name} / 2024年 採用 / {data[1]?.location}/{data[1]?.workplace}</h4>
