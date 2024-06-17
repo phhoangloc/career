@@ -86,7 +86,8 @@ export default function Home() {
       <div ref={sloganRef} className={`slogan`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
         <div className="slogan_box">
           <h2>手話を活かして
-            <br></br>働くということ</h2>
+            <br></br>働くということ。
+          </h2>
           {/* <h2>手話をつかって</h2>
           <h2>働くということ。</h2> */}
         </div>
