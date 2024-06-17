@@ -165,7 +165,8 @@ export default function Home() {
             </div>
           </div>
           <div className="item">
-            <div className="cover"><Image src={process.env.FTP_URL + "upload/" + data[0]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            {/* <div className="cover"><Image src={process.env.FTP_URL + "upload/" + data[0]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
+            <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
             <div className="item_title">
               <h3>{data[0]?.contenttitle}</h3>
               <h4>{data[0]?.name} / 2024年 採用 / {data[0]?.location}/{data[0]?.workplace}</h4>
