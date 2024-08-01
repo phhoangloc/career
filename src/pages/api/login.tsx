@@ -52,7 +52,7 @@ const login = async (
 
                     result = {
                         success: true,
-                        message: "login success!",
+                        message: "ログインに成功しました",
                         result: token,
                     }
 
@@ -72,7 +72,7 @@ const login = async (
     } else {
         res.json({
             success: false,
-            message: "your request method is not supply"
+            message: "リクエストメソッドは提供されていません"
         })
     }
 

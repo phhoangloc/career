@@ -1245,14 +1245,12 @@ div {
 }
 
 .facilityPage .detail .content .image_box svg {
-  top: 0;
-  left: 0;
+  top: calc(50% - 25px);
+  left: calc(50% - 25px);
   position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 25%;
-  box-sizing: border-box;
-  backdrop-filter: brightness(0.9);
+  width: 50px;
+  height: 50px;
+  backdrop-filter: brightness(1);
 }
 
 .facilityPage .detail .content .content_title {

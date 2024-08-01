@@ -30,8 +30,8 @@ const NaviLeft = ({ data, naviLeftWitdh }: Props) => {
                 <NaviData data={data} naviLeftWitdh={naviLeftWitdh} />
             </div> :
             <div>
-                <p className='width-max-content' style={{ margin: "auto" }} >you have to log in</p>
-                <div className='width-max-content' style={{ margin: "auto" }}><Button name='Login' onClick={() => toPage.push("login")} /></div>
+                <p className='width-max-content' style={{ margin: "auto" }} >こんにちは、</p>
+                <div className='width-max-content' style={{ margin: "auto" }}><Button name='ログイン' onClick={() => toPage.push("login")} /></div>
             </div>
 
     )

@@ -93,7 +93,7 @@ const ImageModal = ({ modalOpen, onCanel, onSubmit }: Props) => {
                                 boxShadow: selectImageId.toString() === item._id.toString() ? "0px 0px 10px #888" : "0px 0px 1px  #888",
                                 cursor: "pointer",
                             }}>
-                                <Image quality={100} src={process.env.FTP_URL + "upload/" + item.name} fill alt=""
+                                <Image quality={100} src={process.env.FTP_URL + "img/career/" + item.name} fill alt=""
                                     style={{
                                         objectFit: "cover",
                                         transition: "all 0.25s",

@@ -57,6 +57,7 @@ export default function Home() {
     }
   }
 
+
   return (
     <div className="contain_V2 scrollbar">
       <div className="cover">
@@ -75,12 +76,12 @@ export default function Home() {
         <div className={`cover_title ${hover && coverItem === 1 && "cover_title_hover_left"} `}
           onClick={() => toPage.push("/home/interview/" + data[0]?.slug)}>
           <h3>{data[0]?.contenttitle}</h3>
-          <h4>{data[0]?.name}/2024年 採用/{data[0]?.location}/{data[0]?.workplace}</h4>
+          <h4>{data[0]?.name ? data[0]?.name + "/2024年 採用/" + data[0]?.location + "/" + data[0]?.workplace : ""}</h4>
         </div>
         <div className={`cover_title cover_title_right ${hover && coverItem === 2 && "cover_title_hover"} `}
           onClick={() => toPage.push("/home/interview/" + data[1]?.slug)}>
           <h3>{data[1]?.contenttitle}</h3>
-          <h4>{data[1]?.name}/2024年 採用/{data[1]?.location}/{data[1]?.workplace}</h4>
+          <h4>{data[1]?.name ? data[0]?.name + "/2024年 採用/" + data[1]?.location + "/" + data[1]?.workplace : ""}</h4>
         </div>
       </div>
       <div ref={sloganRef} className={`slogan`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
@@ -115,7 +116,7 @@ export default function Home() {
           {/* // facility ? facility.map((f, index) => */}
 
           <div className="item" >
-            <div className="cover"><Image src={"/img/image001.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
             <div className="item_title">
               <h3>{facility[0]?.contenttitle}</h3>
               <h4>{facility[0]?.name}</h4>
@@ -128,7 +129,7 @@ export default function Home() {
             </div>
           </div>
           <div className="item" >
-            <div className="cover"><Image src={"/img/image002.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + facility[1]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
             <div className="item_title">
               <h3>{facility[1]?.contenttitle}</h3>
               <h4>{facility[1]?.name}</h4>
@@ -154,26 +155,26 @@ export default function Home() {
         </div>
         <div className="items">
           <div className="item">
-            {/* <div className="cover"><Image src={process.env.FTP_URL + "upload/" + data[1]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
-            <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + data[1]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
               <h4>{data[1]?.name} / 2024年 採用 / {data[1]?.location}/{data[1]?.workplace}</h4>
               <div className="tag">
                 <p>{data[1]?.location}</p>
-                <KeyboardArrowRightIcon />
+                <KeyboardArrowRightIcon onClick={() => toPage.push("/home/interview/" + data[1].slug)} />
               </div>
             </div>
           </div>
           <div className="item">
-            {/* <div className="cover"><Image src={process.env.FTP_URL + "upload/" + data[0]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
-            <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + data[0]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[0]?.contenttitle}</h3>
               <h4>{data[0]?.name} / 2024年 採用 / {data[0]?.location}/{data[0]?.workplace}</h4>
               <div className="tag">
                 <p>{data[0]?.location}</p>
-                <KeyboardArrowRightIcon />
+                <KeyboardArrowRightIcon onClick={() => toPage.push("/home/interview/" + data[0].slug)} />
               </div>
             </div>
           </div>

@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import { UserAuthen } from '@/api/UserAuthen';
 import store from '@/redux/store';
 import ImageModal from '@/component/tool/imageModal';
+import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
+import moment from 'moment';
 type Props = {
     params: { slug: string }
 }
@@ -26,7 +28,7 @@ const Page = ({ params }: Props) => {
 
     const [id, setId] = useState<string>("")
     const [name, setName] = useState<string>("")
-    const [slug, setSlug] = useState<string>("")
+    const [slug, setSlug] = useState<string>("interview_" + moment(new Date()).format("YYYY_MM_DD"))
     const [workplace, setWorkplace] = useState<string>("")
     const [worktype, setWorktype] = useState<string>("")
     const [location, setLocation] = useState<string>("")
@@ -35,6 +37,10 @@ const Page = ({ params }: Props) => {
     const [newdetail, setNewDetail] = useState<string>("")
     const [image, setImage] = useState<string>("")
     const [imagePreview, setImagePreview] = useState<string>("")
+
+    const [change, setChange] = useState<number>(0)
+    const [saving, setSaving] = useState<boolean>(false)
+    const [savable, setSavable] = useState<boolean>(false)
 
     const toPage = useRouter()
     const body = {
@@ -68,18 +74,30 @@ const Page = ({ params }: Props) => {
     }, [currentUser.position, params.slug])
 
     const createPost = async (slug: string, body: any) => {
+        setSaving(true)
         const result = await UserAuthen.createItem(currentUser.position, "interview", body)
         if (result.success) {
-            toPage.push("./" + body.slug)
+            setSaving(false)
+            toPage.push("/admin/interview")
         }
     }
     const UpdatePost = async (body: any) => {
+        setSaving(true)
+
         const result = await UserAuthen.updateItem(currentUser.position, "interview", id, body)
         if (result.success) {
-            toPage.push("./" + body.slug)
+            setSaving(true)
+            toPage.push("/admin/interview")
         }
     }
 
+    const UpdatePostDemo = async (body: any) => {
+        body.slug = body.slug + "_demo"
+        const result = await UserAuthen.updateItem(currentUser.position, "interview", "66457e7f739bd93453266ed4", body)
+        if (result) {
+            window.open('/home/interview/' + body.slug, '_blank');
+        }
+    }
     const GetPicturePreview = async (p: string, id: string) => {
         const result = await UserAuthen.getPicById(p, id)
         if (result.success) {
@@ -93,20 +111,26 @@ const Page = ({ params }: Props) => {
 
     const [openModal, setOpenModal] = useState<boolean>(false)
 
+    useEffect(() => {
+        change > 4 && setSavable(true)
+    }, [change])
+
 
     switch (params.slug) {
         case "new":
             return (
-                <div className='grid_box scrollNone'>
-                    <div className={`center xs12 md6 lg4 stickyBox`} style={{ height: "50vh", margin: "10px", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
-                        <UploadPicturePreview
-                            icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                            src={`${imagePreview ? process.env.FTP_URL + "upload/" + imagePreview : "/img/defaultImg.jpg"}`}
-                            size={30}
-                            func={() => setOpenModal(true)}
-                        />
+                <div className='grid_box scrollNone mw1200px-grid-reverse'>
+                    <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
+                        <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+                            <UploadPicturePreview
+                                icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                                src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                                size={30}
+                                func={() => setOpenModal(true)}
+                            />
+                        </div>
                     </div>
-                    <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
+                    <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
                         <Input name="名前" onChange={(e) => setName(e)} value={name} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
@@ -114,8 +138,11 @@ const Page = ({ params }: Props) => {
                         <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
                         <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                         <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                        <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail} />
-                        <Button name='create' onClick={() => createPost(params.slug, body)} />
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
+                        <div style={{ display: "flex", margin: "10px 0" }}>
+                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && image ? false : true} />}
+                            <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                        </div>
                     </div>
                     <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id) }} />
                 </div>
@@ -123,16 +150,18 @@ const Page = ({ params }: Props) => {
 
     }
     return (
-        <div className='grid_box scrollNone'>
-            <div className={`center xs12 md6 lg4 stickyBox`} style={{ height: "50vh", margin: "10px", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
-                <UploadPicturePreview
-                    icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                    src={`${imagePreview ? process.env.FTP_URL + "upload/" + imagePreview : "/img/defaultImg.jpg"}`}
-                    size={30}
-                    func={() => setOpenModal(true)}
-                />
+        <div className='grid_box scrollNone mw1200px-grid-reverse'>
+            <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
+                <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+                    <UploadPicturePreview
+                        icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                        src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                        size={30}
+                        func={() => setOpenModal(true)}
+                    />
+                </div>
             </div>
-            <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
+            <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="名前" onChange={(e) => setName(e)} value={name} />
                 <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
@@ -140,9 +169,8 @@ const Page = ({ params }: Props) => {
                 <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
                 <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                 <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                <TextAreaTool name='内容' onChange={(e) => setNewDetail(e)} value={detail} />
-                <Button name='save' onClick={() => UpdatePost(body)} />
-
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
+                <Button name='保存' onClick={() => UpdatePost(body)} />
             </div>
             <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id) }} />
         </div>

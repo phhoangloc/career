@@ -74,7 +74,7 @@ const Page = ({ params }: Props) => {
                                 <div className='image' style={{
                                     position: "relative",
                                 }}>
-                                    <Image src={process.env.FTP_URL + "upload/" + item.image.name} fill
+                                    <Image src={process.env.FTP_URL + "img/career/" + item.image.name} fill
                                         style={{
                                             objectFit: 'cover',
                                         }}

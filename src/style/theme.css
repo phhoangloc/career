@@ -25,3 +25,13 @@
     background-color: var(--dark);
     color: var(--light);
 }
+
+
+.light .bglv1 {
+    background-color: var(--background-light);
+}
+
+.dark .bglv1 {
+    background-color: var(--dark);
+    color: var(--light);
+}

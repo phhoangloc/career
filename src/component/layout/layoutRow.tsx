@@ -41,7 +41,7 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
                             icon1={<MenuOpenIcon onClick={() => setModalOpen(false)} style={{ width: "30px", height: "30px" }} />}
                             icon2={<MenuIcon onClick={() => setModalOpen(true)} style={{ width: "30px", height: "30px" }} />}
                             value={modalOpen} style={{ width: "40px", height: "40px", padding: "5px" }} />
-                        <h2 style={{ lineHeight: "50px" }}>Admin</h2>
+                        {/* <h2 style={{ lineHeight: "50px" }}>Admin</h2> */}
                         <IconToggle
                             icon1={<DarkModeIcon onClick={() => store.dispatch(setTheme(false))} style={{ width: "30px", height: "30px" }} />}
                             icon2={<LightModeIcon onClick={() => store.dispatch(setTheme(true))} style={{ width: "30px", height: "30px" }} />}

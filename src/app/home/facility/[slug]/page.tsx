@@ -29,7 +29,7 @@ const Page = ({ params }: Props) => {
 
     const toPage = useRouter()
     return (
-        newData ?
+        newData._id ?
             <div className='detailPage facilityPage'>
                 <div className='title_facility'>
                     <p>事業概要</p>
@@ -49,11 +49,11 @@ const Page = ({ params }: Props) => {
                         </div>
                         <div className='image_box'>
                             <div className='image'>
-                                <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
+                                <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                                 <PlayArrowIcon />
                             </div>
                             <div className='image'>
-                                <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
+                                <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                                 <PlayArrowIcon />
                             </div>
                         </div>
@@ -81,7 +81,7 @@ const Page = ({ params }: Props) => {
                 <p style={{ width: "max-content", margin: "25px auto 0", padding: "10px 20px", borderRadius: "5px", background: "white", fontSize: "1.25rem", fontWeight: "bold", boxShadow: "1px 1px 5px", cursor: "pointer" }}
                     onClick={() => toPage.push("/home")}>ホームページへ</p>
 
-            </div > : null
+            </div > : <div className='detailPage facilityPage'></div>
     )
 }
 

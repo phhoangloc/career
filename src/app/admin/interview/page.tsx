@@ -8,14 +8,17 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useRouter } from 'next/navigation';
 import Button from '@/component/input/button';
 import Pagination from '@/component/tool/pagination';
+import { AlertType, setAlert } from '@/redux/reducer/alertReducer';
 type Props = {}
 
 const Page = (props: Props) => {
 
     const [currentUser, setCurrentUser] = useState<any>(store.getState().user)
+    const [currentAlert, setCurrentAlert] = useState<AlertType>(store.getState().alert)
 
     const update = () => {
         store.subscribe(() => setCurrentUser(store.getState().user))
+        store.subscribe(() => setCurrentAlert(store.getState().alert))
     }
     useEffect(() => {
         update()
@@ -26,10 +29,12 @@ const Page = (props: Props) => {
     const [notice, setNotice] = useState<string>("")
 
     const toPage = useRouter()
+
+    const [id, setId] = useState<string>("")
     const [data, setData] = useState<any[]>([])
     const [search, setSearch] = useState<string>("")
     const [page, setPage] = useState<number>(0)
-    const [limit, setLimit] = useState<number>(10)
+    const [limit, setLimit] = useState<number>(20)
     const [end, setEnd] = useState<boolean>(false)
 
     const [selectId, setSelectId] = useState<string[]>([])
@@ -70,14 +75,24 @@ const Page = (props: Props) => {
         })
     }
 
+    useEffect(() => {
+        currentAlert.value && id && deletePost(id)
+        currentAlert.value && selectId.length && deleteAllPost(selectId)
+    }, [currentAlert.value])
+
+    useEffect(() => {
+        currentAlert.open === false && setId("")
+        currentAlert.open === false && setSelectId([])
+    }, [currentAlert.open])
+
     return (
-        <div style={{ height: "100vh", width: "100%", padding: "0 10px" }}>
+        <div style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px" }}>
             <div style={{ width: "max-content", margin: "0" }}>
                 <Button name='新規' onClick={() => toPage.push("interview/new")} />
             </div>
             <div className='flexbox' style={{ height: "40px" }}>
                 <div style={{ width: "40px" }}>{selectId.length ?
-                    <DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }} onClick={() => deleteAllPost(selectId)} /> : null}
+                    <DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }} onClick={() => store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false }))} /> : null}
                 </div>
                 <div style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>インタビューしたひと</div>
                 <div style={{ width: "40px" }}></div>
@@ -96,7 +111,7 @@ const Page = (props: Props) => {
                     </div>
                     <div style={{ width: "100%", height: "100%", lineHeight: "50px" }}><p onClick={() => toPage.push("interview/" + item.slug)}>{item.name}</p></div>
                     <div style={{ width: "50px" }}><DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
-                        onClick={() => deletePost(item._id)} /></div>
+                        onClick={() => (setId(item._id), store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false })))} /></div>
                 </div>) :
                 <div className='flexbox'>
                     <div style={{ width: "50px" }}></div>

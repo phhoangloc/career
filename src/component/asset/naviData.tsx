@@ -28,7 +28,7 @@ const NaviData = ({ data, naviLeftWitdh }: Props) => {
                 !item_first.position || item_first.position === currentUser.position ?
                     <div key={index_first}>
                         <div style={{ display: "flex" }}>
-                            <div className='text-ellipsis'
+                            <div className='text-ellipsis '
                                 style={{ width: `calc(${naviLeftWitdh} - 40px)`, height: "40px", lineHeight: "50px", fontWeight: "700", cursor: "pointer", opacity: 0.75 }}>
                                 {item_first.name}
                             </div>
@@ -42,7 +42,7 @@ const NaviData = ({ data, naviLeftWitdh }: Props) => {
                         <div className='overflow-hidden transition-all-05s' style={{ height: index === index_first + 1 ? `calc(${item_first.child.length} * 35px)` : "0px" }}>
                             {
                                 item_first.child ? item_first.child.map((item_second: any, index_second: number) =>
-                                    <div className='text-ellipsis hover-background-color-128-15p hover-boder-radius-5px '
+                                    <div className='text-ellipsis devide  '
                                         key={index_second}
                                         style={{ width: "100%", height: "35px", lineHeight: "30px", fontWeight: "400", cursor: "pointer", opacity: 0.75, fontSize: "0.9rem", padding: "5px" }}>
                                         {item_second.link ? <Link href={item_second.link} >

@@ -67,18 +67,20 @@ const image = async (
                     client.ftp.timeout = 60 * 1000
 
                     await client.access({
-                        host: "157.7.131.202",
-                        user: "locpham",
-                        password: "0310",
+                        host: "www57.onamae.ne.jp",
+                        user: "shift@sccj-86th.onamaeweb.jp",
+                        password: "_bNY9ABcR8inREh",
                         secure: false // True nếu sử dụng FTPS
                     });
 
-                    await client.uploadFrom(uploadFile[0].filepath, `/home/locpham/public_html/upload/${uploadFile[0].originalFilename}`);
+                    await client.uploadFrom(uploadFile[0].filepath, `/keiho-oc.com/img/career/${uploadFile[0].originalFilename}`);
 
                     const file = await ImageModel.create({ host: id, name: uploadFile[0].originalFilename })
 
                     res.json(file)
                 }
+
+
             })
             break
         case "DELETE":
@@ -90,13 +92,13 @@ const image = async (
                 const client = new ftp.Client();
 
                 await client.access({
-                    host: "157.7.131.202",
-                    user: "locpham",
-                    password: "0310",
+                    host: "www57.onamae.ne.jp",
+                    user: "shift@sccj-86th.onamaeweb.jp",
+                    password: "_bNY9ABcR8inREh",
                     secure: false // True nếu sử dụng FTPS
                 });
 
-                const result = await client.remove("/home/locpham/public_html/upload/" + image.name);
+                const result = await client.remove("/keiho-oc.com/img/career/" + image.name);
                 if (result) {
                     await ImageModel.deleteOne({ "_id": query.id })
                     res.json({ success: true })
@@ -104,6 +106,7 @@ const image = async (
                     res.json({ success: false })
                 }
                 break;
+
             } else {
                 res.json({
                     msg: "この画像はあなたの画像ではありません。",

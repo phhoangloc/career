@@ -28,7 +28,7 @@ const Page = ({ params }: Props) => {
             <div className='detailPage'>
                 <div className="detail">
                     <div className='image'>
-                        <Image src={process.env.FTP_URL + "upload/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
+                        <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                     </div>
                     <div className='content'>
                         <h2>{newData.title}</h2>

@@ -39,7 +39,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled }: Props) => {
         paddingBottom: "5px",
         border: "2px solid ",
         borderRadius: "5px",
-        borderColor: "#0073e6",
+        borderColor: "#666633",
         overflow: "hidden"
     }
     const pStyle: React.CSSProperties = {
@@ -66,6 +66,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled }: Props) => {
         color: "inherit",
         padding: "10px 10px 0",
         fontSize: "1rem",
+        textOverflow: "ellipsis"
     }
 
     return (

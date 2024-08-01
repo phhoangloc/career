@@ -10,6 +10,8 @@ import { UserAuthen } from '@/api/UserAuthen';
 import store from '@/redux/store';
 import ImageModal from '@/component/tool/imageModal';
 import Link from 'next/link';
+import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
+import moment from 'moment';
 type Props = {
     params: { slug: string }
 }
@@ -26,10 +28,11 @@ const Page = ({ params }: Props) => {
     })
 
     const [saving, setSaving] = useState<boolean>(false)
+    const [savable, setSavable] = useState<boolean>(false)
 
     const [id, setId] = useState<string>("")
     const [title, setTitle] = useState<string>("")
-    const [slug, setSlug] = useState<string>("")
+    const [slug, setSlug] = useState<string>("post_" + moment(new Date()).format("YYYY_MM_DD"))
     const [workplace, setWorkplace] = useState<string>("")
     const [worktype, setWorktype] = useState<string>("")
     const [workstatus, setWorkstatus] = useState<string>("")
@@ -39,6 +42,8 @@ const Page = ({ params }: Props) => {
     const [newdetail, setNewDetail] = useState<string>("")
     const [image, setImage] = useState<string>("")
     const [imagePreview, setImagePreview] = useState<string>("")
+    const [change, setChange] = useState<number>(0)
+
 
     const toPage = useRouter()
     const body = {
@@ -54,10 +59,7 @@ const Page = ({ params }: Props) => {
     }
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
-
-        console.log(result)
         if (result.success) {
-
             setId(result.data[0]._id)
             setTitle(result.data[0].title)
             setSlug(result.data[0].slug)
@@ -80,7 +82,7 @@ const Page = ({ params }: Props) => {
 
         if (result.success) {
             setSaving(false)
-            toPage.push("./" + body.slug)
+            toPage.push("/admin/post")
         }
     }
     const UpdatePost = async (body: any) => {
@@ -89,7 +91,7 @@ const Page = ({ params }: Props) => {
         if (result.success) {
             setTimeout(() => {
                 setSaving(false)
-                toPage.push("./" + body.slug)
+                toPage.push("/admin/post")
             }, 1000);
         }
     }
@@ -114,20 +116,25 @@ const Page = ({ params }: Props) => {
 
     const [openModal, setOpenModal] = useState<boolean>(false)
 
+    useEffect(() => {
+        change > 4 && setSavable(true)
+    }, [change])
 
     switch (params.slug) {
         case "new":
             return (
-                <div className='grid_box scrollNone'>
-                    <div className={`center xs12 md6 lg4 stickyBox`} style={{ height: "50vh", margin: "10px", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
-                        <UploadPicturePreview
-                            icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                            src={`${imagePreview ? process.env.FTP_URL + "upload/" + imagePreview : "/img/defaultImg.jpg"}`}
-                            size={30}
-                            func={() => setOpenModal(true)}
-                        />
+                <div className='grid_box scrollNone mw1200px-grid-reverse'>
+                    <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
+                        <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+                            <UploadPicturePreview
+                                icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                                src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                                size={30}
+                                func={() => setOpenModal(true)}
+                            />
+                        </div>
                     </div>
-                    <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
+                    <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                         <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
@@ -136,9 +143,9 @@ const Page = ({ params }: Props) => {
                         <Input name="雇用形態" onChange={(e) => setWorkstatus(e)} value={workstatus} />
                         <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
                         <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                        <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
+                        <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={detail} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
-                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(body)} />}
+                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -148,31 +155,33 @@ const Page = ({ params }: Props) => {
 
     }
     return (
-        <div className='grid_box scrollNone'>
-            <div className={`center xs12 md6 lg4 stickyBox`} style={{ height: "50vh", margin: "10px", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
-                <UploadPicturePreview
-                    icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                    src={`${imagePreview ? process.env.FTP_URL + "upload/" + imagePreview : "/img/defaultImg.jpg"}`}
-                    size={30}
-                    func={() => setOpenModal(true)}
-                />
+        <div className='grid_box scrollNone mw1200px-grid-reverse'>
+            <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
+                <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+                    <UploadPicturePreview
+                        icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                        src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                        size={30}
+                        func={() => setOpenModal(true)}
+                    />
+                </div>
             </div>
-            <div className={`detailBox xs12 md6 lg8 `} style={{ overflowX: "hidden", margin: "0 10px", }}>
+            <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
-                <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
-                <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
-                <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
-                <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
-                <Input name="雇用形態" onChange={(e) => setWorkstatus(e)} value={workstatus} />
-                <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
-                <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                <TextAreaTool name='仕事内容' onChange={(e) => setNewDetail(e)} value={detail || newdetail} />
+                <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
+                <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                <Input name="事業所" onChange={(e) => { setSavable(true); setWorkplace(e) }} value={workplace} />
+                <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
+                <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
+                <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
-                    {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' onClick={() => UpdatePost(body)} />}
+                    {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                 </div>
             </div>
-            <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id) }} />
+            <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id); setSavable(true) }} />
         </div>
     )
 }

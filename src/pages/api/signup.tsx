@@ -38,7 +38,7 @@ const createUser = async (
         const mainOptions = {
             from: 'astem (astem@gmail.com) <no-reply>',
             to: req.body.email,
-            subject: 'Active your Account',
+            subject: 'アカウントを有効にするように',
             html: `
         <p style="text-align:center">ご登録いただきありがとうございます！<p>
         <p style="text-align:center">アカウントを有効にするには<a style="font-weight:bold;color:green" href="${process.env.HOMEPAGE_URL}api/active?email=${req.body.email}">ここ</a>をクリックしてください<p>`
@@ -57,7 +57,7 @@ const createUser = async (
     } else {
         res.json({
             success: false,
-            message: "your request method is not supply"
+            message: "リクエストメソッドは提供されていません"
         })
     }
 }

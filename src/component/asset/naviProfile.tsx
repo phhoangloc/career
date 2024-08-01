@@ -41,11 +41,11 @@ const NaviProfile = () => {
                     style={{ height: "30px", margin: "5px 0" }} />
             </div>
             <div className='transition-all-05s overflow-hidden' style={{ height: userModal ? "60px" : "0px" }} >
-                <div className='text-ellipsis hover-color-second hover-background-color-dark-5p hover-boder-radius-5px' style={{ height: "30px", lineHeight: "30px", fontWeight: "400", cursor: "pointer", opacity: 0.75, fontSize: "0.9rem", padding: "5px" }}
+                <div className='text-ellipsis devide' style={{ height: "30px", lineHeight: "30px", fontWeight: "400", cursor: "pointer", opacity: 0.75, fontSize: "0.9rem", padding: "5px" }}
                     onClick={() => toPage.push("/admin/profile")}>
                     プロファイル
                 </div>
-                <div className='text-ellipsis hover-color-second hover-background-color-dark-5p hover-boder-radius-5px' style={{ height: "30px", lineHeight: "30px", fontWeight: "400", cursor: "pointer", opacity: 0.75, fontSize: "0.9rem", padding: "5px" }}
+                <div className='text-ellipsis devide' style={{ height: "30px", lineHeight: "30px", fontWeight: "400", cursor: "pointer", opacity: 0.75, fontSize: "0.9rem", padding: "5px" }}
                     onClick={() => { localStorage.clear(), window.location.reload() }}>
                     ログアウト
                 </div>
