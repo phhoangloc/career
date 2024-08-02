@@ -17,14 +17,27 @@ const postSchema = new Schema({
         type: String,
     },
     workplace: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "facility"
     },
     worktype: {
+        type: String,
+    },
+    requirement: {
         type: String,
     },
     workstatus: {
         type: String,
         default: "正社員"
+    },
+    worktime: {
+        type: String,
+    },
+    worksalary: {
+        type: String,
+    },
+    workbenefit: {
+        type: String,
     },
     location: {
         type: String,
@@ -39,18 +52,7 @@ const postSchema = new Schema({
     content: {
         type: String,
     },
-    likes: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "user"
-        },
-    ],
-    comments: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "comment"
-        }
-    ],
+
     createDate: {
         type: Date,
         default: Date.now,

@@ -17,6 +17,7 @@ type Props = {
 
 const Page = ({ params }: Props) => {
 
+
     const [currentUser, setCurrentUser] = useState<any>(store.getState().user)
 
     const update = () => {
@@ -32,7 +33,9 @@ const Page = ({ params }: Props) => {
     const [address, setAddress] = useState<string>("")
     const [postno, setPostno] = useState<string>("")
     const [location, setLocation] = useState<string>("")
-    const [wt, setWt] = useState<string>("")
+    const [phone, setPhone] = useState<string>("")
+    const [phoneWarn, setPhoneWarn] = useState<string>("")
+    const [phoneView, setPhoneView] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し事業内容をシェアしてください。")
     const [newdetail, setNewDetail] = useState<string>("")
@@ -50,7 +53,7 @@ const Page = ({ params }: Props) => {
         address,
         postno,
         location,
-        worktype: wt,
+        phone,
         contenttitle,
         image: image || null,
         content: newdetail || detail
@@ -59,14 +62,13 @@ const Page = ({ params }: Props) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
 
         if (result.success && result.data[0]._id) {
-
             setId(result.data[0]._id)
             setName(result.data[0].name)
             setSlug(result.data[0].slug)
             setAddress(result.data[0].address)
             setPostno(result.data[0].postno)
             setLocation(result.data[0].location)
-            setWt(result.data[0].worktype)
+            setPhone(result.data[0].phone)
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
@@ -94,7 +96,7 @@ const Page = ({ params }: Props) => {
     }
     const UpdatePostDemo = async (body: any) => {
         body.slug = body.slug + "_demo"
-        const result = await UserAuthen.updateItem(currentUser.position, "facility", "66ab460cb494bfd095780b38", body)
+        const result = await UserAuthen.updateItem(currentUser.position, "facility", "6641c5a295c99013049b7680", body)
         if (result) {
             window.open('/home/facility/' + body.slug, '_blank');
         }
@@ -118,13 +120,37 @@ const Page = ({ params }: Props) => {
         change > 4 && setSavable(true)
     }, [change])
 
-    console.log(change)
+
+    function formatPhoneNumber(input: string) {
+        if (input) {
+            const digits = input.replace(/\D/g, '');
+
+            if (digits.length === 10) {
+                setPhoneWarn("")
+                return digits.replace(/(\d{3})(\d{4})(\d{3})/, '$1-$2-$3');
+            } else if (digits.length === 11) {
+                setPhoneWarn("")
+                return digits.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+            } else {
+                setPhoneWarn("あなたの電話番号は適切ではありません")
+                return input;
+            }
+        } else {
+            setPhoneWarn("")
+            return ""
+        }
+    }
+
+    useEffect(() => {
+        setPhoneView(formatPhoneNumber(phone))
+    }, [phone])
+
     switch (params.slug) {
         case "new":
             return (
                 <div className='grid_box scrollNone mw1200px-grid-reverse'>
-                    <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
-                        <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+                    <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
+                        <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                                 src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
@@ -133,14 +159,14 @@ const Page = ({ params }: Props) => {
                             />
                         </div>
                     </div>
-                    <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                    <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
                         <Input name="名前" onChange={(e) => setName(e)} value={name} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
                         <Input name="〒" onChange={(e) => setPostno(e)} value={postno} />
                         <Input name="住所" onChange={(e) => setAddress(e)} value={address} />
-                        <Input name="職種" onChange={(e) => setWt(e)} value={wt} />
                         <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
+                        <Input name="電話番号" onChange={(e) => setPhone(e)} value={phoneView} warn={phoneWarn} />
                         <Input name="冒頭" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
                         <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={detail} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
@@ -155,8 +181,8 @@ const Page = ({ params }: Props) => {
     }
     return (
         <div className='grid_box scrollNone mw1200px-grid-reverse'>
-            <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
-                <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+            <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
+                <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
                     <UploadPicturePreview
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                         src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
@@ -165,14 +191,14 @@ const Page = ({ params }: Props) => {
                     />
                 </div>
             </div>
-            <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+            <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                 <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                 <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} />
                 <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} />
-                <Input name="職種" onChange={(e) => { setSavable(true); setWt(e) }} value={wt} />
                 <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name="電話番号" onChange={(e) => setPhone(e)} value={phoneView} warn={phoneWarn} />
                 <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0" }}>

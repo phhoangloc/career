@@ -30,16 +30,27 @@ export default function RootLayout({
           naviLef={
             <NaviLeft data={[
               {
-                name: "メディア",
+                position: "admin",
+                name: "ニュース",
                 child: [
-                  { name: "メディア一覧", link: "/admin/media", }
+                  { name: "ニュース一覧", link: "/admin/news" },
+                  { name: "新規ニュース", link: "/admin/news/news" },
+                  { name: "カテゴリー", link: "/admin/category" }
                 ]
               },
               {
-                name: "ポスト",
+                name: "求人情報",
                 child: [
-                  { name: "ポスト一覧", link: "/admin/post", },
-                  { name: "新規ポスト", link: "/admin/post/new", }
+                  { name: "求人情報一覧", link: "/admin/post", },
+                  { name: "新規求人情報", link: "/admin/post/new", }
+                ]
+              },
+              {
+                position: "admin",
+                name: "施設情報",
+                child: [
+                  { name: "施設情報一覧", link: "/admin/facility", },
+                  { name: "新規施設情報", link: "/admin/facility/new", }
                 ]
               },
               {
@@ -51,13 +62,13 @@ export default function RootLayout({
                 ]
               },
               {
-                position: "admin",
-                name: "施設",
+                name: "メディア",
                 child: [
-                  { name: "施設一覧", link: "/admin/facility", },
-                  { name: "新規施設", link: "/admin/facility/new", }
+                  { name: "メディア一覧", link: "/admin/media", }
                 ]
               },
+
+
             ]}
               naviLeftWitdh='200px' />
           }

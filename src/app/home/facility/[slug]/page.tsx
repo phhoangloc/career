@@ -28,9 +28,33 @@ const Page = ({ params }: Props) => {
     }, [])
 
     const toPage = useRouter()
+
+    console.log(newData)
     return (
         newData._id ?
             <div className='detailPage facilityPage'>
+                {newData.work.length ?
+                    <>
+                        <div className='title_facility'>
+                            <p>募集要項</p>
+                        </div>
+                        {
+                            newData.work.map((wo: any, index: number) =>
+                                <div className="detail apply" key={index}>
+                                    <div style={{ display: "flex" }}><h4>仕事内容</h4><p>{wo.worktype}<br></br>{wo.contenttitle}</p></div>
+                                    <div style={{ display: "flex" }}><h4>応募資格</h4><p>本文本文本文本文本文本文本文本文<br></br>本文本文本文本文本文本文本文本文</p></div>
+                                    <div style={{ display: "flex" }}><h4>雇⽤形態</h4><p>{wo.workstatus}</p></div>
+                                    <div style={{ display: "flex" }}><h4>勤務地</h4><p><span>〒{newData.postno}</span> <br></br>{newData.address}</p></div>
+                                    <div style={{ display: "flex" }}><h4>勤務時間</h4><p>{wo.worktime}</p></div>
+                                    <div style={{ display: "flex" }}><h4>給与</h4><p>{wo.worksalary}</p></div>
+                                    <div style={{ display: "flex" }}><h4>休⽇休暇</h4><p>{wo.workbenefit}</p></div>
+                                    <p className='button'>応募はこちらから</p>
+                                </div>
+                            )
+                        }
+                    </> : null
+                }
+
                 <div className='title_facility'>
                     <p>事業概要</p>
                 </div>
@@ -48,10 +72,10 @@ const Page = ({ params }: Props) => {
                             </div>
                         </div>
                         <div className='image_box'>
-                            <div className='image'>
+                            {/* <div className='image'>
                                 <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                                 <PlayArrowIcon />
-                            </div>
+                            </div> */}
                             <div className='image'>
                                 <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                                 <PlayArrowIcon />
@@ -64,24 +88,13 @@ const Page = ({ params }: Props) => {
                     </div>
 
                 </div>
-                <div className='title_facility'>
-                    <p>募集要項</p>
-                </div>
-                <div className="detail apply">
-                    <div style={{ display: "flex" }}><h4>仕事内容</h4><p>・⼿話通訳業務<br></br>本文本文本文本文本文本文本文本文</p></div>
-                    <div style={{ display: "flex" }}><h4>応募資格</h4><p>本文本文本文本文本文本文本文本文<br></br>本文本文本文本文本文本文本文本文</p></div>
-                    <div style={{ display: "flex" }}><h4>雇⽤形態</h4><p>正社員</p></div>
-                    <div style={{ display: "flex" }}><h4>勤務地</h4><p><span>〒{newData.postno}</span> <br></br>{newData.address}</p></div>
-                    <div style={{ display: "flex" }}><h4>勤務時間</h4><p>00：00〜00：00（実働0時間）</p></div>
-                    <div style={{ display: "flex" }}><h4>給与</h4><p>⽉給00万円＋各種⼿当</p></div>
-                    <div style={{ display: "flex" }}><h4>休⽇休暇</h4><p>年間休⽇000⽇／完全週休2⽇制（⼟・⽇）</p></div>
-                    <p className='button'>応募はこちらから</p>
-                </div>
+
 
                 <p style={{ width: "max-content", margin: "25px auto 0", padding: "10px 20px", borderRadius: "5px", background: "white", fontSize: "1.25rem", fontWeight: "bold", boxShadow: "1px 1px 5px", cursor: "pointer" }}
                     onClick={() => toPage.push("/home")}>ホームページへ</p>
 
-            </div > : <div className='detailPage facilityPage'></div>
+            </div > :
+            <div className='detailPage facilityPage'></div>
     )
 }
 

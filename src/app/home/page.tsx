@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Image from "next/image";
 import SearchTool from "@/component/searchTool";
+import '../../style/grid.css'
 export default function Home() {
 
   const [data, setdata] = useState<any[]>([])
@@ -56,7 +57,6 @@ export default function Home() {
       return "";
     }
   }
-
 
   return (
     <div className="contain_V2 scrollbar">

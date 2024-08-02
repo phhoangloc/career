@@ -144,7 +144,7 @@ const SearchTool = (props: Props) => {
                         )}
                     </select>
                 </div>
-                <div className='selectbox xs12 md8'>
+                <div className='selectbox xs12 md6 lg8 '>
                     {areaModal ?
                         <>
                             <select onClick={() => setAreaModal(false)}>

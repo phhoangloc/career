@@ -4,6 +4,7 @@ import { userModel } from "@/model/user.model"
 import connectMongoDB from "@/connect/database/mogoseDB"
 import { isDataType } from "@/type/resultType"
 import { postModel } from "@/model/post.model"
+import { facilityModel } from "@/model/facility.model"
 const jwt = require('jsonwebtoken')
 
 const Post =
@@ -23,9 +24,14 @@ const Post =
         const token = authorization && authorization.split(" ")[1]
         const id = await jwt.verify(token, 'secretToken').id
         const post = await postModel.findOne({ "_id": query.id })
+        const workplace = post?.workplace
+        const currentfacility = await facilityModel.findOne({ "_id": workplace })
+        const currentworks = currentfacility?.work
+        const facility = await facilityModel.findOne({ "_id": body.workplace })
+        const works = facility?.work
+
         const host = post && post.host && post.host._id
         if (id) {
-
             switch (method) {
                 case "GET":
                     await postModel.find()
@@ -56,9 +62,17 @@ const Post =
                             res.send(result)
                             throw error.message
                         }).then(async (data: any) => {
-                            result.success = true
-                            result.message = "ポストが作成出来ました。"
-                            res.json(result)
+                            await facilityModel.updateOne({ "_id": body.workplace }, { work: [...works, data._id] })
+                                .catch((error: Error) => {
+                                    result.success = false
+                                    result.message = error.message
+                                    res.send(result)
+                                    throw error.message
+                                }).then(async (data: any) => {
+                                    result.success = true
+                                    result.message = "ポストが作成出来ました。"
+                                    res.json(result)
+                                })
                         })
                     break;
                 case "PUT":
@@ -71,9 +85,18 @@ const Post =
                                 res.send(result)
                                 throw error.message
                             }).then(async (data: any) => {
-                                result.success = true
-                                result.message = "ポストが更新出来ました。"
-                                res.json(result)
+                                await facilityModel.updateOne({ "_id": workplace }, { work: [...currentworks.filter((w: any) => w != query.id)] })
+                                await facilityModel.updateOne({ "_id": body.workplace }, { work: [...works.filter((w: any) => w != query.id), query.id] })
+                                    .catch((error: Error) => {
+                                        result.success = false
+                                        result.message = error.message
+                                        res.send(result)
+                                        throw error.message
+                                    }).then(async (data: any) => {
+                                        result.success = true
+                                        result.message = "ポストが更新出来ました。"
+                                        res.json(result)
+                                    })
                             })
                     }
                     break;

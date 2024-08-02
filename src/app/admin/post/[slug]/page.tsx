@@ -8,10 +8,11 @@ import Button from '@/component/input/button';
 import { useRouter } from 'next/navigation';
 import { UserAuthen } from '@/api/UserAuthen';
 import store from '@/redux/store';
-import ImageModal from '@/component/tool/imageModal';
-import Link from 'next/link';
+// import ImageModal from '@/component/tool/imageModal';
+import ImageModal from '@/component/tool/imageModal_v2';
 import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
+
 type Props = {
     params: { slug: string }
 }
@@ -36,6 +37,9 @@ const Page = ({ params }: Props) => {
     const [workplace, setWorkplace] = useState<string>("")
     const [worktype, setWorktype] = useState<string>("")
     const [workstatus, setWorkstatus] = useState<string>("")
+    const [worktime, setWorkTime] = useState<string>("")
+    const [worksalary, setWorksalary] = useState<string>("")
+    const [workbenefit, setWorkbenefit] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し仕事内容をシェアしてください。")
@@ -44,8 +48,10 @@ const Page = ({ params }: Props) => {
     const [imagePreview, setImagePreview] = useState<string>("")
     const [change, setChange] = useState<number>(0)
 
+    const [facility, setFacility] = useState<any[]>([])
 
     const toPage = useRouter()
+
     const body = {
         title,
         slug,
@@ -55,10 +61,22 @@ const Page = ({ params }: Props) => {
         location,
         contenttitle,
         image,
-        content: newdetail || detail
+        content: newdetail || detail,
+        worktime,
+        worksalary,
+        workbenefit,
     }
+
+    const getFacility = async (p: string, a: string, s: string, skip: number | undefined, limit: number | undefined) => {
+        const result = await UserAuthen.getItem(p, a, s, skip, limit)
+        if (result.success) {
+            setFacility(result.data)
+        }
+    }
+
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
+        console.log(result)
         if (result.success) {
             setId(result.data[0]._id)
             setTitle(result.data[0].title)
@@ -70,6 +88,9 @@ const Page = ({ params }: Props) => {
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
+            setWorkTime(result.data[0].worktime)
+            setWorksalary(result.data[0].worksalary)
+            setWorkbenefit(result.data[0].workbenefit)
         }
     }
     useEffect(() => {
@@ -120,12 +141,16 @@ const Page = ({ params }: Props) => {
         change > 4 && setSavable(true)
     }, [change])
 
+    useEffect(() => {
+        getFacility(currentUser.position, "facility", "", undefined, undefined)
+    }, [])
+
     switch (params.slug) {
         case "new":
             return (
                 <div className='grid_box scrollNone mw1200px-grid-reverse'>
-                    <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
-                        <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+                    <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
+                        <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                                 src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
@@ -134,14 +159,31 @@ const Page = ({ params }: Props) => {
                             />
                         </div>
                     </div>
-                    <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                    <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                         <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
-                        <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} />
+                        {facility?.length ?
+                            <div>
+                                <h4>事業所</h4>
+                                <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                                    {
+                                        facility.map((item: any, index: number) =>
+                                            <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                                <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                                <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                            </div>
+                                        )}
+                                </div>
+                            </div> :
+                            null
+                        }
                         <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
                         <Input name="雇用形態" onChange={(e) => setWorkstatus(e)} value={workstatus} />
                         <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
+                        <Input name="勤務時間" onChange={(e) => setWorkTime(e)} value={worktime} />
+                        <Input name="給与" onChange={(e) => setWorksalary(e)} value={worksalary} />
+                        <Input name="休⽇休暇" onChange={(e) => setWorkbenefit(e)} value={workbenefit} />
                         <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
                         <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={detail} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
@@ -149,15 +191,15 @@ const Page = ({ params }: Props) => {
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
-                    <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id) }} />
+                    <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(arrId) => { setOpenModal(false), setImage(arrId[0].id) }} />
                 </div>
             )
 
     }
     return (
         <div className='grid_box scrollNone mw1200px-grid-reverse'>
-            <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
-                <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+            <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
+                <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
                     <UploadPicturePreview
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                         src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
@@ -166,14 +208,31 @@ const Page = ({ params }: Props) => {
                     />
                 </div>
             </div>
-            <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+            <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                 <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                 <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
-                <Input name="事業所" onChange={(e) => { setSavable(true); setWorkplace(e) }} value={workplace} />
+                {facility?.length ?
+                    <div>
+                        <h4>事業所</h4>
+                        <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                            {
+                                facility.map((item: any, index: number) =>
+                                    <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                        <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                        <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                    </div>
+                                )}
+                        </div>
+                    </div> :
+                    null
+                }
                 <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
                 <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
                 <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name="勤務時間" onChange={(e) => setWorkTime(e)} value={worktime} />
+                <Input name="給与" onChange={(e) => setWorksalary(e)} value={worksalary} />
+                <Input name="休⽇休暇" onChange={(e) => setWorkbenefit(e)} value={workbenefit} />
                 <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
@@ -181,7 +240,7 @@ const Page = ({ params }: Props) => {
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                 </div>
             </div>
-            <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onSubmit={(id) => { setOpenModal(false), setImage(id); setSavable(true) }} />
+            <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(arrId) => { setOpenModal(false), setImage(arrId[0].id); setSavable(true) }} />
         </div>
     )
 }

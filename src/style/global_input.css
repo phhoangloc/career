@@ -37,7 +37,7 @@ textarea {
 
 .bg-main {
     background-color: var(--main);
-    color: white;
+    color: white !important;
 }
 
 .bg-drop {

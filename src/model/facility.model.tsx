@@ -22,10 +22,10 @@ const facilitySchema = new Schema({
     address: {
         type: String,
     },
-    worktype: {
+    location: {
         type: String,
     },
-    location: {
+    phone: {
         type: String,
     },
     image: {
@@ -38,22 +38,14 @@ const facilitySchema = new Schema({
     content: {
         type: String,
     },
-    likes: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "user"
-        },
-    ],
-    comments: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "comment"
-        }
-    ],
     createDate: {
         type: Date,
         default: Date.now,
     },
+    work: [{
+        type: Schema.Types.ObjectId,
+        ref: "post"
+    }]
 })
 
 export const facilityModel = mongoose.models.facility || mongoose.model('facility', facilitySchema)

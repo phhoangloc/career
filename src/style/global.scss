@@ -6,8 +6,6 @@
     --title: #c26b4a;
 }
 
-@import './grid.scss';
-
 * {
     margin: 0;
 }
@@ -66,8 +64,9 @@ div {
         margin: 50px auto;
 
         .selectbox {
-            margin: 10px;
             position: relative;
+
+            padding: 5px;
 
             select {
                 width: 100%;
@@ -647,6 +646,7 @@ div {
 
                     .contentTitle {
                         margin: 20px 0;
+                        height: 75px;
                     }
 
                     .tag {
@@ -1036,6 +1036,5 @@ div {
 
     .searchPage_max {
         padding: 10px 0;
-        min-height: 100vh;
     }
 }

@@ -19,6 +19,7 @@ const interview = async (
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
         .populate("image")
+        .populate("work")
         .sort({ "createDate": -1 })
         .skip(query.skip)
         .sort(query.sort ? query.sort : {})

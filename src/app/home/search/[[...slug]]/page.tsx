@@ -5,8 +5,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import SearchTool from '@/component/searchTool'
 import SearchIcon from '@mui/icons-material/Search';
-import CloseIcon from '@mui/icons-material/Close';
-import Button from '@/component/input/button'
+import '../../../../style/grid.css'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
 type Props = {
     params: { slug: string[] }
@@ -38,8 +37,9 @@ const Page = ({ params }: Props) => {
     const [number, setNumber] = useState<number>(0)
     const getItem = async (a: string, s: string, wp: string, wt: string, ws: string, lo: string, skip: number, limit: number) => {
         const result = await NoUserAuthen.getItem(a, s, wp, wt, ws, lo, skip, limit)
+        console.log(result)
         if (result.success) {
-            setNewData(p => [...p, ...result.data])
+            setNewData(result.data)
         }
     }
 
@@ -54,6 +54,7 @@ const Page = ({ params }: Props) => {
     const [searchModal, setSearchModal] = useState<boolean>(false)
 
     const uniqueArray = Array.from(new Set(newData.map(obj => JSON.stringify(obj)))).map(str => JSON.parse(str));
+
 
     return (
         <div className='searchPage'>
@@ -82,11 +83,10 @@ const Page = ({ params }: Props) => {
                                 </div>
                                 <div className='content'>
                                     <h4>{item.title}・{item.location}</h4>
-                                    <li>{item.workplace}</li>
+                                    <li>{item.workplace.name}</li>
                                     <li>{item.worktype}</li>
                                     <li>{item.workstatus}</li>
                                     <li>{item.location}</li>
-                                    {/* <p>{item.contain[0].sort}</p> */}
                                 </div>
                             </div>
                         ) :

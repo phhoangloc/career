@@ -120,8 +120,8 @@ const Page = ({ params }: Props) => {
         case "new":
             return (
                 <div className='grid_box scrollNone mw1200px-grid-reverse'>
-                    <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
-                        <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+                    <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
+                        <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                                 src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
@@ -130,7 +130,7 @@ const Page = ({ params }: Props) => {
                             />
                         </div>
                     </div>
-                    <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                    <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
                         <Input name="名前" onChange={(e) => setName(e)} value={name} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
@@ -151,8 +151,8 @@ const Page = ({ params }: Props) => {
     }
     return (
         <div className='grid_box scrollNone mw1200px-grid-reverse'>
-            <div className={`xs12 xl4 `} style={{ padding: "10px" }} >
-                <div style={{ height: "50vh", borderRadius: "5px", top: "25%", textAlign: "center", overflow: "hidden", boxShadow: "0px 0px 10px #444" }}>
+            <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
+                <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
                     <UploadPicturePreview
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                         src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
@@ -161,7 +161,7 @@ const Page = ({ params }: Props) => {
                     />
                 </div>
             </div>
-            <div className={`detailBox xs12 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+            <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="名前" onChange={(e) => setName(e)} value={name} />
                 <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />

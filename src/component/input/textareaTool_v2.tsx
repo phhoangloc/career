@@ -193,7 +193,7 @@ const TextAreaTool_v2 = (props: Props) => {
         <div className='ta-left'>
             <div className='bglv1 ps-s top-0px bglv1 pd-5px'>
                 <div className='dp-flex h50px jc-space'>
-                    <BurstModeIcon className='svg40px' onClick={() => { setModalOpen(!modalOpen) }} />
+                    <AddPhotoAlternateIcon className='svg40px' onClick={() => { setModalOpen(!modalOpen) }} />
                     <div className='dp-flex'>
                         <GridViewIcon className={`svg40px br-5px ${isView ? "bg-main" : ""}`} onClick={() => setIsView(true)} />
                         <CodeIcon className={`svg40px br-5px ${isView ? "" : "bg-main"}`} onClick={() => setIsView(false)} />
@@ -215,7 +215,7 @@ const TextAreaTool_v2 = (props: Props) => {
                     <FormatUnderlinedIcon className={`svg40px br-5px ${newEditorState.getCurrentInlineStyle().has("UNDERLINE") ? "bor-1px bg-main" : ""}`} onClick={() => createInlineStyle(editorState, "UNDERLINE")} />
                     <AddLinkIcon className={`svg40px br-5px ${entity && entity.getType() === "LINK" ? "bg-main" : ""}`} onClick={() => { setIsInputLink(!isInputLink) }} />
                     <LinkOffIcon className={`svg40px br-5px `} onClick={() => removeLink()} />
-                    <AddPhotoAlternateIcon className={`svg40px br-5px `} onClick={() => setIsInputLinkImg(true)} />
+                    {/* <AddPhotoAlternateIcon className={`svg40px br-5px `} onClick={() => setIsInputLinkImg(true)} /> */}
                     {/* <PlaylistAddIcon className={`svg40px br-5px `} onClick={() => addId("123")} /> */}
                 </div>
                     <div className={`dp-flex mg-5px-0px trss-1-4 ps-ab ${isInputLink || isInputLinkImg ? "top-100px  zi--0 opa-1" : "top-0px zi--1 opa-0"}`}>
