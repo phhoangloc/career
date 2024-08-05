@@ -14,9 +14,9 @@ const interview = async (
 
     const query = req.query
     const result: isDataType = { success: false }
-    ImageModel.find()
-    postModel.find()
-    facilityModel.find()
+    await ImageModel.find()
+    await postModel.find()
+    await facilityModel.find()
         .find(query.id ? { "_id": query.id } : {})
         .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})

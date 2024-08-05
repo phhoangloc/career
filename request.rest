@@ -1,5 +1,5 @@
 
-GET http://localhost:3000/api/post?wt=エンジニア
+GET http://localhost:3000/api/facility
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjAyY2RkYmI3ODhkNzEyOWRjMDUwYyIsImlhdCI6MTcyMjgyMTkwNywiZXhwIjoxNzIyOTA4MzA3fQ.eN6gwWGYxp2kJTfuXrMvXBudcscAG9KN_QfEe3Pi8NI
 ###
 

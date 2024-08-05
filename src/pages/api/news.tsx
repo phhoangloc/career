@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import connectMongoDB from '@/connect/database/mogoseDB'
 import { NewModel } from '@/model/news.model'
+import { CategoryModel } from '@/model/category.model'
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
@@ -14,6 +15,7 @@ export default async function handler(
 
     switch (method) {
         case "GET":
+            await CategoryModel.find()
             await NewModel
                 .find(query.pre ? { "genre": query.pre } : {})
                 .find(query.slug ? { "slug": query.slug } : {})

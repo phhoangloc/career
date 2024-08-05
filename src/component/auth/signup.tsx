@@ -89,7 +89,7 @@ const Signup = ({ archive }: Props) => {
             <Input name='eメール' value={email} onChange={(data) => setEmail(data)} />
             <p style={{ fontSize: "0.6rem", color: "red" }}>{Error.email}</p>
             <div style={{ width: "max-content", margin: "25px auto 5px" }}>
-                <Button onClick={() => signup({ username, password, email })} name="Sign up" disable={isError} />
+                <Button onClick={() => signup({ username, password, email })} name="登録" disable={isError} />
             </div>
             <p style={{ cursor: "pointer", fontSize: "0.9rem" }} className='link' onClick={() => toPage.push("/login")}>ログイン</p>
         </div>
