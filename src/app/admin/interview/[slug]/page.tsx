@@ -138,23 +138,21 @@ const Page = ({ params }: Props) => {
                 <div className='grid_box scrollNone m'>
                     <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
-                        <Input name="名前" onChange={(e) => setName(e)} value={name} />
-                        <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
+                        <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                        <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <div style={{ height: "300px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                                 src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
                                 size={30}
-                                func={() => setOpenModal(true)}
+                                func={() => { setSavable(true); setOpenModal(true) }}
                             />
                         </div>
-                        {/* <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} /> */}
-                        <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
-                        {/* <Input name="エリア" onChange={(e) => setLocation(e)} value={location} /> */}
-                        <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
+                        <Input name="職種" onChange={(e) => { setSavable(true), setWorktype(e) }} value={worktype} />
+                        <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true), setcontenttilte(e) }} value={contenttitle} />
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
-                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && image ? false : true} />}
+                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && image && savable ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -167,17 +165,16 @@ const Page = ({ params }: Props) => {
         <div className='grid_box scrollNone mw1200px-grid-reverse'>
             <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
-                <Input name="名前" onChange={(e) => setName(e)} value={name} />
-                <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
+                <Input name="名前" onChange={(e) => { setSavable(true), setName(e) }} value={name} />
+                <Input name="スラグ" onChange={(e) => { setSavable(true), setSlug(e) }} value={slug} />
                 <div style={{ height: "300px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                     <UploadPicturePreview
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                         src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
                         size={30}
-                        func={() => setOpenModal(true)}
+                        func={() => { setOpenModal(true), setSavable(true) }}
                     />
                 </div>
-                {/* <Input name="事業所" onChange={(e) => setWorkplace(e)} value={workplace} /> */}
                 {facility?.length ?
                     <div>
                         <h4>事業所</h4>
@@ -193,12 +190,11 @@ const Page = ({ params }: Props) => {
                     </div> :
                     null
                 }
-                <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
-                {/* <Input name="エリア" onChange={(e) => setLocation(e)} value={location} /> */}
-                <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
+                <Input name="職種" onChange={(e) => { setSavable(true), setWorktype(e) }} value={worktype} />
+                <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
-                    {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' onClick={() => UpdatePost(body)} disable={name && slug && image ? false : true} />}
+                    {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                 </div>
             </div>

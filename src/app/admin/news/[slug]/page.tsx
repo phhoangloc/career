@@ -97,6 +97,9 @@ const Page = ({ params }: Props) => {
             window.open('/home/news/' + body.slug, '_blank');
         }
     }
+    useEffect(() => {
+        change > 4 && setSavable(true)
+    }, [change])
 
     switch (params.slug) {
         case "new":
@@ -104,13 +107,25 @@ const Page = ({ params }: Props) => {
                 <div className='grid_box scrollNone mw1200px-grid-reverse'>
                     <div className={`detailBox xs12 md8  scrollbar-none`} style={{ padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
-                        <Input name="タイトル" onChange={(e) => setName(e)} value={name} />
-                        <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
-                        {/* <Input name="カテゴリー" onChange={(e) => setCategory(e)} value={category} /> */}
-                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
+                        <Input name="タイトル" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                        <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        <div>
+                            <h4>カテゴリー</h4>
+                            <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                                {categories.length ?
+                                    categories.map((item: any, index: number) =>
+                                        <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                            <input type='checkbox' checked={category?.includes(item._id)} onChange={() => { category?.includes(item._id) ? setCategory(ca => ca.filter(c => c != item._id)) : setCategory(c => [...c, item._id]); setSavable(true) }} ></input>
+                                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                        </div>
+                                    ) :
+                                    <p>カテゴリーがない</p>}
+                            </div>
+                        </div>
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c = 1) }} value={detail} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
-                                <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug ? false : true} />}
+                                <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && savable ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -123,26 +138,24 @@ const Page = ({ params }: Props) => {
         <div className='grid_box scrollNone mw1200px-grid-reverse'>
             <div className={`detailBox xs12 md8  scrollbar-none`} style={{ padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
-                <Input name="タイトル" onChange={(e) => setName(e)} value={name} />
-                <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
-                {/* <Input name="カテゴリー" onChange={(e) => setCategory(e)} value={category} /> */}
+                <Input name="タイトル" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                 <div>
                     <h4>カテゴリー</h4>
                     <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                        {/* <div style={{ display: "flex", flexWrap: "wrap", }}> */}
                         {categories.length ?
                             categories.map((item: any, index: number) =>
                                 <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={category?.includes(item._id)} onChange={() => { category?.includes(item._id) ? setCategory(ca => ca.filter(c => c != item._id)) : setCategory(c => [...c, item._id]) }} ></input>
+                                    <input type='checkbox' checked={category?.includes(item._id)} onChange={() => { category?.includes(item._id) ? setCategory(ca => ca.filter(c => c != item._id)) : setCategory(c => [...c, item._id]); setSavable(true) }} ></input>
                                     <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                 </div>
                             ) :
                             <p>カテゴリーがない</p>}
                     </div>
                 </div>
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
-                    <Button name='保存' onClick={() => UpdatePost(body)} />
+                    <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                 </div>
             </div>

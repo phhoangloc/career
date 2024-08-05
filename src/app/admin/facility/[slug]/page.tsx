@@ -153,25 +153,25 @@ const Page = ({ params }: Props) => {
 
                     <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
-                        <Input name="名前" onChange={(e) => setName(e)} value={name} />
-                        <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
+                        <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                        <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                                 src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
                                 size={30}
-                                func={() => setOpenModal(true)}
+                                func={() => { setSavable(true); setOpenModal(true) }}
                             />
                         </div>
-                        <Input name="〒" onChange={(e) => setPostno(e)} value={postno} />
-                        <Input name="住所" onChange={(e) => setAddress(e)} value={address} />
-                        <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
+                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} />
+                        <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} />
+                        <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                         <Input name="電話番号" onChange={(e) => setPhone(e)} value={phoneView} warn={phoneWarn} />
-                        <Input name="冒頭" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
+                        <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                         <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={detail} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
-                                <Button name='作成' onClick={() => createPost(body)} disable={name && slug && image ? false : true} />}
+                                <Button name='作成' onClick={() => createPost(body)} disable={name && slug && image && !savable ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -192,7 +192,7 @@ const Page = ({ params }: Props) => {
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                         src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
                         size={30}
-                        func={() => setOpenModal(true)}
+                        func={() => { setSavable(true); setOpenModal(true) }}
                     />
                 </div>
                 <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} />

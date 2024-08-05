@@ -152,8 +152,8 @@ const Page = ({ params }: Props) => {
                 <div className='grid_box scrollNone'>
                     <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
-                        <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
-                        <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
+                        <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
+                        <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <div className="">
                             <h4>アイキャッチ</h4>
                             <div style={{ height: "300px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0 20px", boxShadow: "0px 0px 10px #444" }}>
@@ -161,14 +161,16 @@ const Page = ({ params }: Props) => {
                                     icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                                     src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
                                     size={30}
-                                    func={() => setOpenModal(true)}
+                                    func={() => { setOpenModal(true), setSavable(true) }}
                                 />
                             </div>
                         </div>
+
+
                         {facility?.length ?
                             <div>
                                 <h4>事業所</h4>
-                                <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                                <div style={{ height: "200px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
                                     {
                                         facility.map((item: any, index: number) =>
                                             <div className='dp-flex' key={index} style={{ height: "30px" }}>
@@ -180,16 +182,18 @@ const Page = ({ params }: Props) => {
                             </div> :
                             null
                         }
-                        <Input name="職種" onChange={(e) => setWorktype(e)} value={worktype} />
-                        <Input name="雇用形態" onChange={(e) => setWorkstatus(e)} value={workstatus} />
-                        <Input name="エリア" onChange={(e) => setLocation(e)} value={location} />
-                        <Input name="勤務時間" onChange={(e) => setWorkTime(e)} value={worktime} />
-                        <Input name="給与" onChange={(e) => setWorksalary(e)} value={worksalary} />
-                        <Input name="休⽇休暇" onChange={(e) => setWorkbenefit(e)} value={workbenefit} />
-                        <Input name="仕事内容タイトル" onChange={(e) => setcontenttilte(e)} value={contenttitle} />
-                        <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={detail} />
+                        <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
+                        <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
+                        <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                        <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
+                        <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
+                        <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
+                        <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={detail} />
+
                         <div style={{ display: "flex", margin: "10px 0" }}>
-                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image ? false : true} />}
+                            {saving ? <Button name='。。。' onClick={() => { }} /> :
+                                <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image && savable ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -211,7 +215,7 @@ const Page = ({ params }: Props) => {
                             icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
                             src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
                             size={30}
-                            func={() => setOpenModal(true)}
+                            func={() => { setOpenModal(true), setSavable(true) }}
                         />
                     </div>
                 </div>
@@ -235,11 +239,11 @@ const Page = ({ params }: Props) => {
                 <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
                 <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
                 <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
-                <Input name="勤務時間" onChange={(e) => setWorkTime(e)} value={worktime} />
-                <Input name="給与" onChange={(e) => setWorksalary(e)} value={worksalary} />
-                <Input name="休⽇休暇" onChange={(e) => setWorkbenefit(e)} value={workbenefit} />
+                <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
+                <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
+                <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
                 <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
