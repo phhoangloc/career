@@ -91,7 +91,7 @@ const Signup = ({ archive }: Props) => {
             <div style={{ width: "max-content", margin: "25px auto 5px" }}>
                 <Button onClick={() => signup({ username, password, email })} name="Sign up" disable={isError} />
             </div>
-            <p style={{ cursor: "pointer", fontSize: "0.9rem" }} className='link' onClick={() => toPage.push("/login")}>log in</p>
+            <p style={{ cursor: "pointer", fontSize: "0.9rem" }} className='link' onClick={() => toPage.push("/login")}>ログイン</p>
         </div>
     )
 }

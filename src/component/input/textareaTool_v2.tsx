@@ -141,20 +141,20 @@ const TextAreaTool_v2 = (props: Props) => {
     };
     const createImage = async (value: string) => {
 
-        const contentStateWithEntity = contentState.createEntity('LINK', 'MUTABLE', { url: value });
-        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-
-        const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
-        const contentWithImage = AtomicBlockUtils.insertAtomicBlock(
-            newEditorState,
-            entityKey,
-            ' '
-        );
-        const finalEditorState = EditorState.push(newEditorState, contentWithImage.getCurrentContent(), 'insert-fragment');
-        // const contentStateWithEntity = contentState.createEntity('IMAGE', 'MUTABLE', { src: value });
+        // const contentStateWithEntity = contentState.createEntity('LINK', 'MUTABLE', { url: value });
         // const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        // let newEditorState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
-        // setEditorState(newEditorState);
+
+        // const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+        // const contentWithImage = AtomicBlockUtils.insertAtomicBlock(
+        //     newEditorState,
+        //     entityKey,
+        //     ' '
+        // );
+        // const finalEditorState = EditorState.push(newEditorState, contentWithImage.getCurrentContent(), 'insert-fragment');
+        const contentStateWithEntity = contentState.createEntity('IMAGE', 'MUTABLE', { src: value });
+        const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+        let newEditorState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
+        setEditorState(newEditorState);
 
     }
     const addId = (id: string) => {
