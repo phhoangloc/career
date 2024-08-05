@@ -8,6 +8,8 @@ type Props = {}
 
 const SearchTool = (props: Props) => {
 
+
+
     const workplaces = [
         {
             name: "山田老人ホーム",
@@ -116,6 +118,7 @@ const SearchTool = (props: Props) => {
     const onSearch = (a: string, b: string, c: string, s: string) => {
         toPage.push(`/home/search/${a ? a : "a"}/${b ? b : "b"}/${s ? s : "s"}/${c ? c : "c"}`)
     }
+
     return (
         <div className='searchTool'>
             <div className='title'>

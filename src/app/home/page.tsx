@@ -17,8 +17,6 @@ export default function Home() {
 
 
   const getAllInterview = async (a: string) => {
-    await NoUserAuthen.getItem("post", "", "", "", "", "", undefined, undefined)
-    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
     if (result.success) {
       setdata(result.data)
@@ -27,8 +25,6 @@ export default function Home() {
     }
   }
   const getFacility = async (a: string) => {
-    await NoUserAuthen.getItem("post", "", "", "", "", "", undefined, undefined)
-    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
     if (result.success) {
       setFacility(result.data)

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import store from '../store'
 import { setUser } from '../reducer/UserReduce'
 import { UserAuthen } from '@/api/UserAuthen'
+import { NoUserAuthen } from '@/api/NoUserAuthen'
 type Props = {
     children: React.ReactNode
 }
@@ -20,6 +21,7 @@ const Provider = ({ children }: Props) => {
     })
 
     const checkLogin = async () => {
+
         const result = await UserAuthen.checkLogin()
         if (result.success) {
             store.dispatch(setUser(result.data))
@@ -29,7 +31,6 @@ const Provider = ({ children }: Props) => {
     }
 
     useEffect(() => {
-
         checkLogin()
     }, [currentRefresh])
 
