@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import store from '@/redux/store'
-import { NoUserAuthen } from '@/api/NoUserAuthen'
+
 const NoticeModal = () => {
   const [currentNotice, setCurrentNotice] = useState<any>(store.getState().notice)
   const update = () => {
@@ -10,14 +10,6 @@ const NoticeModal = () => {
   useEffect(() => {
     update()
   })
-
-  const getModel = async () => {
-    await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
-    await NoUserAuthen.getItem("post", "", "", "", "", "", undefined, undefined)
-  }
-  useEffect(() => {
-    getModel()
-  }, [])
 
   return (
     <div className={`ps-f w100p h100p dp-flex fd-col jc-center ta-center bg-drop zi-4 ${currentNotice.open ? 'trsf-scale-1' : 'trsf-scale-0'}`}>

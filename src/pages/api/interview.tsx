@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import connectMongoDB from '@/connect/database/mogoseDB'
 import { isDataType } from '@/type/resultType'
 import { interviewModel } from '@/model/interview.model'
+import { ImageModel } from '@/model/image.model'
 
 
 const interview = async (
@@ -13,12 +14,14 @@ const interview = async (
 
     const query = req.query
     const result: isDataType = { success: false }
+
+    ImageModel.find()
     interviewModel.find()
         .find(query.id ? { "_id": query.id } : {})
         .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
-        .find(query.wp ? { "workplace": query.wp } : {})
+        // .find(query.wp ? { "workplace": query.wp } : {})
         .find(query.wt ? { "worktype": query.wt } : {})
         .find(query.ws ? { "workstatus": query.ws } : {})
         .find(query.lo ? { "location": query.lo } : {})

@@ -74,12 +74,12 @@ export default function Home() {
         <div className={`cover_title ${hover && coverItem === 1 && "cover_title_hover_left"} `}
           onClick={() => toPage.push("/home/interview/" + data[0]?.slug)}>
           <h3>{data[0]?.contenttitle}</h3>
-          <h4>{data[0]?.name ? data[0]?.name + "/2024年 採用/" + data[0]?.location + "/" + data[0]?.workplace : ""}</h4>
+          <h4>{data[0]?.name ? data[0]?.name + "/2024年 採用/" + data[0]?.workplace?.location : ""}</h4>
         </div>
         <div className={`cover_title cover_title_right ${hover && coverItem === 2 && "cover_title_hover"} `}
           onClick={() => toPage.push("/home/interview/" + data[1]?.slug)}>
           <h3>{data[1]?.contenttitle}</h3>
-          <h4>{data[1]?.name ? data[0]?.name + "/2024年 採用/" + data[1]?.location + "/" + data[1]?.workplace : ""}</h4>
+          <h4>{data[1]?.name ? data[0]?.name + "/2024年 採用/" + data[1]?.workplace?.location : ""}</h4>
         </div>
       </div>
       <div ref={sloganRef} className={`slogan`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>

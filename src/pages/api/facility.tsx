@@ -2,7 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import connectMongoDB from '@/connect/database/mogoseDB'
 import { isDataType } from '@/type/resultType'
 import { facilityModel } from '@/model/facility.model'
-
+import { ImageModel } from '@/model/image.model'
+import { postModel } from '@/model/post.model'
 
 const interview = async (
     req: NextApiRequest,
@@ -13,6 +14,8 @@ const interview = async (
 
     const query = req.query
     const result: isDataType = { success: false }
+    ImageModel.find()
+    postModel.find()
     facilityModel.find()
         .find(query.id ? { "_id": query.id } : {})
         .find(query.archive ? { "archive": query.archive } : {})
