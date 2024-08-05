@@ -29,13 +29,14 @@ const NaviData = ({ data, naviLeftWitdh }: Props) => {
                     <div key={index_first}>
                         <div style={{ display: "flex" }}>
                             <div className='text-ellipsis '
+                                onClick={() => index_first + 1 != index ? setIndex(index_first + 1) : setIndex(0)}
                                 style={{ width: `calc(${naviLeftWitdh} - 40px)`, height: "40px", lineHeight: "50px", fontWeight: "700", cursor: "pointer", opacity: 0.75 }}>
                                 {item_first.name}
                             </div>
                             {item_first.child ?
                                 <IconToggle
-                                    icon1={<ArrowDropUpIcon style={{ width: "30px", height: "30px" }} onClick={() => setIndex(0)} />}
-                                    icon2={<ArrowDropDownIcon style={{ width: "30px", height: "30px" }} onClick={() => setIndex(index_first + 1)} />}
+                                    icon1={<ArrowDropUpIcon style={{ width: "30px", height: "30px" }} />}
+                                    icon2={<ArrowDropDownIcon style={{ width: "30px", height: "30px" }} />}
                                     value={index === index_first + 1}
                                     style={{ height: "30px", margin: "5px 0" }} /> : null}
                         </div>
