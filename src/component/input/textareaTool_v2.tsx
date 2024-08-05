@@ -18,6 +18,8 @@ import BurstModeIcon from '@mui/icons-material/BurstMode';
 import GridViewIcon from '@mui/icons-material/GridView';
 import CodeIcon from '@mui/icons-material/Code';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+import EditIcon from '@mui/icons-material/Edit';
+import HtmlIcon from '@mui/icons-material/Html';
 type Props = {
     onChange: (e: string) => void,
     value: string,
@@ -138,11 +140,21 @@ const TextAreaTool_v2 = (props: Props) => {
         }
     };
     const createImage = async (value: string) => {
-        const contentState = editorState.getCurrentContent();
-        const contentStateWithEntity = contentState.createEntity('IMAGE', 'MUTABLE', { src: value });
+
+        const contentStateWithEntity = contentState.createEntity('LINK', 'MUTABLE', { url: value });
         const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-        const newEditorState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
-        setEditorState(newEditorState);
+
+        const newEditorState = EditorState.set(editorState, { currentContent: contentStateWithEntity });
+        const contentWithImage = AtomicBlockUtils.insertAtomicBlock(
+            newEditorState,
+            entityKey,
+            ' '
+        );
+        const finalEditorState = EditorState.push(newEditorState, contentWithImage.getCurrentContent(), 'insert-fragment');
+        // const contentStateWithEntity = contentState.createEntity('IMAGE', 'MUTABLE', { src: value });
+        // const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+        // let newEditorState = AtomicBlockUtils.insertAtomicBlock(editorState, entityKey, ' ');
+        // setEditorState(newEditorState);
 
     }
     const addId = (id: string) => {
@@ -193,10 +205,11 @@ const TextAreaTool_v2 = (props: Props) => {
         <div className='ta-left'>
             <div className='bglv1 ps-s top-0px bglv1 pd-5px'>
                 <div className='dp-flex h50px jc-space'>
-                    <AddPhotoAlternateIcon className='svg40px' onClick={() => { setModalOpen(!modalOpen) }} />
+                    {/* <AddPhotoAlternateIcon className='svg40px' onClick={() => { setModalOpen(!modalOpen) }} /> */}
+                    <div></div>
                     <div className='dp-flex'>
-                        <GridViewIcon className={`svg40px br-5px ${isView ? "bg-main" : ""}`} onClick={() => setIsView(true)} />
-                        <CodeIcon className={`svg40px br-5px ${isView ? "" : "bg-main"}`} onClick={() => setIsView(false)} />
+                        <p className={`svg40px br-5px fontSize75p lh40px  ta-center ${isView ? "bg-main" : ""}`} onClick={() => setIsView(true)} >EDIT</p>
+                        <HtmlIcon className={`svg40px br-5px ${isView ? "" : "bg-main"}`} onClick={() => setIsView(false)} />
                     </div>
                 </div>
                 {isView && <> <div className='dp-flex flex-wrap'>
@@ -213,9 +226,9 @@ const TextAreaTool_v2 = (props: Props) => {
                     <FormatBoldIcon className={`svg40px br-5px ${newEditorState.getCurrentInlineStyle().has("BOLD") ? "bor-1px bg-main" : ""}`} onClick={() => createInlineStyle(editorState, "BOLD")} />
                     <FormatItalicIcon className={`svg40px br-5px ${newEditorState.getCurrentInlineStyle().has("ITALIC") ? "bor-1px bg-main" : ""}`} onClick={() => createInlineStyle(editorState, "ITALIC")} />
                     <FormatUnderlinedIcon className={`svg40px br-5px ${newEditorState.getCurrentInlineStyle().has("UNDERLINE") ? "bor-1px bg-main" : ""}`} onClick={() => createInlineStyle(editorState, "UNDERLINE")} />
+                    <AddPhotoAlternateIcon className={`svg40px br-5px `} onClick={() => setModalOpen(!modalOpen)} />
                     <AddLinkIcon className={`svg40px br-5px ${entity && entity.getType() === "LINK" ? "bg-main" : ""}`} onClick={() => { setIsInputLink(!isInputLink) }} />
                     <LinkOffIcon className={`svg40px br-5px `} onClick={() => removeLink()} />
-                    {/* <AddPhotoAlternateIcon className={`svg40px br-5px `} onClick={() => setIsInputLinkImg(true)} /> */}
                     {/* <PlaylistAddIcon className={`svg40px br-5px `} onClick={() => addId("123")} /> */}
                 </div>
                     <div className={`dp-flex mg-5px-0px trss-1-4 ps-ab ${isInputLink || isInputLinkImg ? "top-100px  zi--0 opa-1" : "top-0px zi--1 opa-0"}`}>

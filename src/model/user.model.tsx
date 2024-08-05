@@ -35,6 +35,16 @@ const userSchema = new Schema({
     position: {
         type: String,
         default: "user"
+    },
+    userNumber: {
+        type: String,
+        unique: false,
+        default: "usernumber"
+    },
+    nickname: {
+        type: String,
+        unique: false,
+        default: "nickname"
     }
 })
 

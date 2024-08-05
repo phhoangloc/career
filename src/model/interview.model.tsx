@@ -17,12 +17,10 @@ const interviewSchema = new Schema({
         type: String,
     },
     workplace: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "facility"
     },
     worktype: {
-        type: String,
-    },
-    location: {
         type: String,
     },
     image: {

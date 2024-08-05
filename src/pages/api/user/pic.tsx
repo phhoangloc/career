@@ -65,7 +65,6 @@ const image = async (
 
                     const client = new ftp.Client();
                     client.ftp.timeout = 60 * 1000
-
                     await client.access({
                         host: "www57.onamae.ne.jp",
                         user: "shift@sccj-86th.onamaeweb.jp",
@@ -73,14 +72,13 @@ const image = async (
                         secure: false // True nếu sử dụng FTPS
                     });
 
+
                     await client.uploadFrom(uploadFile[0].filepath, `/keiho-oc.com/img/career/${uploadFile[0].originalFilename}`);
 
                     const file = await ImageModel.create({ host: id, name: uploadFile[0].originalFilename })
 
                     res.json(file)
                 }
-
-
             })
             break
         case "DELETE":
@@ -106,7 +104,6 @@ const image = async (
                     res.json({ success: false })
                 }
                 break;
-
             } else {
                 res.json({
                     msg: "この画像はあなたの画像ではありません。",

@@ -28,6 +28,7 @@ const createUser = async (
         const mahoa_password = req.body.password && bcrypt.hashSync(req.body.password.toString(), salt);
         body.password = mahoa_password
         const result: isDataType = { success: false }
+
         await userModel.create(body)
             .catch((error: Error) => {
                 result.success = false
@@ -43,6 +44,7 @@ const createUser = async (
         <p style="text-align:center">ご登録いただきありがとうございます！<p>
         <p style="text-align:center">アカウントを有効にするには<a style="font-weight:bold;color:green" href="${process.env.HOMEPAGE_URL}api/active?email=${req.body.email}">ここ</a>をクリックしてください<p>`
         };
+
         await transporter.sendMail(mainOptions)
             .catch((error: Error) => {
                 result.success = false

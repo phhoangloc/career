@@ -23,6 +23,7 @@ const interview = async (
         .find(query.ws ? { "workstatus": query.ws } : {})
         .find(query.lo ? { "location": query.lo } : {})
         .populate("image")
+        .populate("workplace")
         .sort({ "createDate": -1 })
         .skip(query.skip)
         .sort(query.sort ? query.sort : {})

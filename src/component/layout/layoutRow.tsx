@@ -27,7 +27,7 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
         update()
     })
 
-    const [modalOpen, setModalOpen] = useState<boolean>(false)
+    const [modalOpen, setModalOpen] = useState<boolean>(true)
 
     return (
         <div className='overflow-hidden border-radius-5' style={{ margin: "0px", minHeight: "calc(100vh - 10px)" }}>
@@ -35,7 +35,7 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
                 <div className={"navi-left transition-all-05s height-100p overflow-hidden"} style={modalOpen ? { width: naviLeftWitdh } : { width: "0px" }}>
                     {naviLef}
                 </div>
-                <div className={`${currentTheme ? "light1" : "dark1"} navi-right transition-all-05s border-radius-5 box-shadow-0 `} style={{ height: "calc(100% - 10px)", margin: "5px", width: modalOpen ? window.innerWidth >= 992 ? `calc(100vw  - ${naviLeftWitdh} - 20px)` : "calc(100vw - 20px)" : "calc(100vw - 20px)" }} >
+                <div className={`${currentTheme ? "light1" : "dark1"} navi-right transition-all-05s border-radius-5 box-shadow-0 `} style={{ height: "calc(100% - 10px)", margin: "5px", width: modalOpen ? `calc(100vw  - ${naviLeftWitdh} - 20px)` : "calc(100vw - 20px)" }} >
                     <div style={{ height: "40px", display: "flex" }}>
                         <IconToggle
                             icon1={<MenuOpenIcon onClick={() => setModalOpen(false)} style={{ width: "30px", height: "30px" }} />}

@@ -99,7 +99,7 @@ const Page = (props: Props) => {
                 <div style={{ width: "40px" }}>{selectId.length ?
                     <DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }} onClick={() => store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false }))} /> : null}
                 </div>
-                <div style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>インタビューしたひと</div>
+                <div style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>施設一覧</div>
                 <div style={{ width: "40px" }}></div>
             </div>
 
@@ -120,7 +120,7 @@ const Page = (props: Props) => {
                 </div>) :
                 <div className='flexbox'>
                     <div style={{ width: "50px" }}></div>
-                    <div style={{ width: "100%", textAlign: "center" }}>{loading ? <p>少々お待ちください。</p> : <p>{notice ? notice : "インタビューしたひとがありません。"}</p>}</div>
+                    <div style={{ width: "100%", textAlign: "center" }}>{loading ? <p>少々お待ちください。</p> : <p>{notice ? notice : "施設一覧がありません。"}</p>}</div>
                     <div style={{ width: "50px" }}></div>
                 </div>
             }

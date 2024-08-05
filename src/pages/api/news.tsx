@@ -19,7 +19,7 @@ export default async function handler(
                 .find(query.slug ? { "slug": query.slug } : {})
                 .find(query.category ? { "category": query.category } : {})
                 .find(query.search ? { "title": { $regex: query.search } } : {})
-                // .populate("category")
+                .populate("category")
                 .sort(query.sort === "title" ? { "title": -1 } : {})
                 .sort(query.sort === "editDate" ? { "editeDate": -1 } : { "createDate": -1 })
                 .sort({ "editDate": -1 })

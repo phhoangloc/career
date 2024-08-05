@@ -13,7 +13,6 @@ const Page = ({ params }: Props) => {
     const demo = params.slug[1]
 
     const getItem = async (a: string, s: string,) => {
-
         const result = await NoUserAuthen.getOneItem(a, s)
         if (result.success) {
             setNewData(result.data[0])
@@ -21,26 +20,25 @@ const Page = ({ params }: Props) => {
     }
 
     useEffect(() => {
-        getItem("interview", params.slug)
+        getItem("news", params.slug)
     }, [])
 
+    console.log(newData)
     return (
-        newData._id ?
+        newData ?
             <div className='detailPage'>
                 <div className="detail">
-                    <div className='image'>
-                        <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
-                    </div>
                     <div className='content'>
-                        <h2>{newData.title}</h2>
-                        <li>{newData.workplace.name}</li>
-                        <li>{newData.workplace.location}</li>
-                        <li>{newData.worktype}</li>
+                        <h2>{newData.name}</h2>
+                        <div style={{ display: "flex" }}>
+                            {
+                                newData?.category ? newData.category?.map((item: any, index: number) => <p key={index} style={{ margin: "0px 5px 0px 0px" }}>{item.name}</p>) : null
+                            }
+                        </div>
                         <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: newData.content }} />
                     </div>
-
                 </div>
-            </div> : <div className='detailPage'></div>
+            </div> : null
     )
 }
 

@@ -24,7 +24,7 @@ const SearchTool = (props: Props) => {
             name: "手話通訳士",
         },
         {
-            name: "企業職",
+            name: "エンジニア",
         },
         {
             name: "企画・管理",
@@ -42,6 +42,9 @@ const SearchTool = (props: Props) => {
         },
         {
             name: "契約社員",
+        },
+        {
+            name: "フリーランス",
         },
     ]
     const locations = [

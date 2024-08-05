@@ -45,6 +45,13 @@
     text-decoration: underline;
 }
 
+@media (min-width:992px) {
+    .mw992px-grid-reverse {
+
+        flex-direction: row-reverse;
+    }
+}
+
 @media (min-width:1200px) {
     .mw1200px-grid-reverse {
 

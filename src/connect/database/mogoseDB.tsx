@@ -6,7 +6,7 @@ const connectMongoDB = async () => {
             throw error.message
         })
         .then(() => {
-            console.log("connect mongodb success! ")
+            // console.log("connect mongodb success! ")
         })
 
 }

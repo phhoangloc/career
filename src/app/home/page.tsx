@@ -17,6 +17,7 @@ export default function Home() {
 
 
   const getAllInterview = async (a: string) => {
+    await NoUserAuthen.getItem("post", "", "", "", "", "", undefined, undefined)
     await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
     if (result.success) {
@@ -26,6 +27,7 @@ export default function Home() {
     }
   }
   const getFacility = async (a: string) => {
+    await NoUserAuthen.getItem("post", "", "", "", "", "", undefined, undefined)
     await NoUserAuthen.getItem("image", "", "", "", "", "", undefined, undefined)
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
     if (result.success) {
@@ -89,8 +91,6 @@ export default function Home() {
           <h2>手話を活かして
             <br></br>働くということ。
           </h2>
-          {/* <h2>手話をつかって</h2>
-          <h2>働くということ。</h2> */}
         </div>
       </div>
       <div className="about">
@@ -159,9 +159,10 @@ export default function Home() {
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
-              <h4>{data[1]?.name} / 2024年 採用 / {data[1]?.location}/{data[1]?.workplace}</h4>
+              <h4>{data[1]?.name} / 2024年 採用 </h4>
+              <h4>{data[1]?.workplace?.name}</h4>
               <div className="tag">
-                <p>{data[1]?.location}</p>
+                <p>{data[1]?.workplace?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/interview/" + data[1].slug)} />
               </div>
             </div>
@@ -171,9 +172,11 @@ export default function Home() {
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[0]?.contenttitle}</h3>
-              <h4>{data[0]?.name} / 2024年 採用 / {data[0]?.location}/{data[0]?.workplace}</h4>
+              <h4>{data[0]?.name} / 2024年 採用 </h4>
+              <h4>{data[0]?.workplace?.name}</h4>
               <div className="tag">
-                <p>{data[0]?.location}</p>
+                <p>{data[0]?.workplace?.location}</p>
+
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/interview/" + data[0].slug)} />
               </div>
             </div>

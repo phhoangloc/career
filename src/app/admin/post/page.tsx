@@ -94,7 +94,7 @@ const Page = (props: Props) => {
                 <div style={{ width: "40px" }}>{selectId.length ?
                     <DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }} onClick={() => store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false }))} /> : null}
                 </div>
-                <div style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>タイトル</div>
+                <div style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>求人情報一覧</div>
                 <div style={{ width: "40px" }}></div>
             </div>
 
@@ -112,11 +112,11 @@ const Page = (props: Props) => {
                     <div style={{ width: "100%", height: "100%", lineHeight: "50px" }}><p onClick={() => toPage.push("post/" + item.slug)}>{item.title}</p></div>
                     <div style={{ width: "50px" }}>
                         <DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
-                            onClick={() => (setId(item._id), store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false })))} /></div>
+                            onClick={() => (setId(item._id), store.dispatch(setAlert({ open: true, msg: "この求人情報を削除してもよろしいですか?", value: false })))} /></div>
                 </div>) :
                 <div className='flexbox'>
                     <div style={{ width: "50px" }}></div>
-                    <div style={{ width: "100%", textAlign: "center" }}>{loading ? <p>少々お待ちください。</p> : <p>ポストがありません。</p>}</div>
+                    <div style={{ width: "100%", textAlign: "center" }}>{loading ? <p>少々お待ちください。</p> : <p>求人情報がありません。</p>}</div>
                     <div style={{ width: "50px" }}></div>
                 </div>
             }

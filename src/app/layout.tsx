@@ -4,10 +4,11 @@ import type { Metadata } from "next";
 import { Zen_Kaku_Gothic_New } from "next/font/google";
 import "../style/global.css"
 import '../style/global_copy.css'
+import '../style/global_input.css'
 import '../style/component.css'
 import '../style/theme.css'
-import Footer from "@/component/footer";
-
+import DecideModal from "@/component/modal/decide.modal";
+import NoticeModal from "@/component/modal/notice.modal";
 const inter = Zen_Kaku_Gothic_New({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
 
 export const metadata: Metadata = {
@@ -23,6 +24,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + " scrollbar"}>
+        <DecideModal />
+        <NoticeModal />
         {children}
       </body>
     </html>

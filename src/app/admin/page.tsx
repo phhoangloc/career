@@ -5,8 +5,8 @@ import Button from '@/component/input/button'
 import { useRouter } from 'next/navigation'
 const Page = () => {
     return (
-        <div>
-            <h1>Admin</h1>
+        <div className='dp-flex fd-col js-center ta-center'>
+            <h1>こんにちは！</h1>
         </div>
     )
 }

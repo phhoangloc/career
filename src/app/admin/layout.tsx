@@ -5,9 +5,7 @@ import Provider from "@/redux/component/provider";
 import LayoutRow from "@/component/layout/layoutRow";
 import NaviLeft from "@/component/asset/naviLeft";
 import Authen from "@/component/tool/Authen";
-import '../../style/global_input.css'
-import DecideModal from "@/component/modal/decide.modal";
-import NoticeModal from "@/component/modal/notice.modal";
+
 const inter = Noto_Sans_Javanese({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -23,8 +21,6 @@ export default function RootLayout({
   return (
     <div className={inter.className}>
       <Provider>
-        <DecideModal />
-        <NoticeModal />
         <LayoutRow
           naviLeftWitdh={"200px"}
           naviLef={

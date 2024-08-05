@@ -29,6 +29,7 @@ const Provider = ({ children }: Props) => {
     }
 
     useEffect(() => {
+
         checkLogin()
     }, [currentRefresh])
 

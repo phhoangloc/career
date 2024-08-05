@@ -12,6 +12,7 @@ import store from '@/redux/store';
 import ImageModal from '@/component/tool/imageModal_v2';
 import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
+import { NoUserAuthen } from '@/api/NoUserAuthen';
 
 type Props = {
     params: { slug: string }
@@ -67,8 +68,8 @@ const Page = ({ params }: Props) => {
         workbenefit,
     }
 
-    const getFacility = async (p: string, a: string, s: string, skip: number | undefined, limit: number | undefined) => {
-        const result = await UserAuthen.getItem(p, a, s, skip, limit)
+    const getFacility = async () => {
+        const result = await NoUserAuthen.getItem("facility", "", "", "", "", "", undefined, undefined)
         if (result.success) {
             setFacility(result.data)
         }
@@ -142,27 +143,28 @@ const Page = ({ params }: Props) => {
     }, [change])
 
     useEffect(() => {
-        getFacility(currentUser.position, "facility", "", undefined, undefined)
+        getFacility()
     }, [])
 
     switch (params.slug) {
         case "new":
             return (
-                <div className='grid_box scrollNone mw1200px-grid-reverse'>
-                    <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
-                        <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
-                            <UploadPicturePreview
-                                icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                                src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
-                                size={30}
-                                func={() => setOpenModal(true)}
-                            />
-                        </div>
-                    </div>
+                <div className='grid_box scrollNone'>
                     <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                         <Input name="タイトル" onChange={(e) => setTitle(e)} value={title} />
                         <Input name="スラグ" onChange={(e) => setSlug(e)} value={slug} />
+                        <div className="">
+                            <h4>アイキャッチ</h4>
+                            <div style={{ height: "300px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0 20px", boxShadow: "0px 0px 10px #444" }}>
+                                <UploadPicturePreview
+                                    icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                                    src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                                    size={30}
+                                    func={() => setOpenModal(true)}
+                                />
+                            </div>
+                        </div>
                         {facility?.length ?
                             <div>
                                 <h4>事業所</h4>
@@ -191,31 +193,34 @@ const Page = ({ params }: Props) => {
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
-                    <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(arrId) => { setOpenModal(false), setImage(arrId[0].id) }} />
+                    <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(arrId) => { setOpenModal(false), setImage(arrId[0].id), setSavable(true) }} />
                 </div>
             )
 
     }
     return (
-        <div className='grid_box scrollNone mw1200px-grid-reverse'>
-            <div className={`xs12 lg6 xl4 `} style={{ padding: "10px" }} >
-                <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "auto", boxShadow: "0px 0px 10px #444" }}>
-                    <UploadPicturePreview
-                        icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                        src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
-                        size={30}
-                        func={() => setOpenModal(true)}
-                    />
-                </div>
-            </div>
-            <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+        <div className='grid_box scrollNone'>
+            <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                 <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                 <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                <div className="">
+                    <h4>アイキャッチ</h4>
+                    <div style={{ height: "300px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0 20px", boxShadow: "0px 0px 10px #444" }}>
+                        <UploadPicturePreview
+                            icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                            src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                            size={30}
+                            func={() => setOpenModal(true)}
+                        />
+                    </div>
+                </div>
+
+
                 {facility?.length ?
                     <div>
                         <h4>事業所</h4>
-                        <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                        <div style={{ height: "200px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
                             {
                                 facility.map((item: any, index: number) =>
                                     <div className='dp-flex' key={index} style={{ height: "30px" }}>

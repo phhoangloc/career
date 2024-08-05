@@ -1,8 +1,9 @@
 
-GET http://localhost:3000/api/facility
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDFjNWEyOTVjOTkwMTMwNDliNzY4MCIsImlhdCI6MTcyMjU2MzMxMCwiZXhwIjoxNzIyNjQ5NzEwfQ.uWNCXs23NURsU7sh1P1PD7lR_bihm7zf6T46sayLuuA
-###\
-GET http://localhost:3000/api/image
+GET http://localhost:3000/api/post?wt=e
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjAyY2RkYmI3ODhkNzEyOWRjMDUwYyIsImlhdCI6MTcyMjgyMTkwNywiZXhwIjoxNzIyOTA4MzA3fQ.eN6gwWGYxp2kJTfuXrMvXBudcscAG9KN_QfEe3Pi8NI
+###
+
+GET http://localhost:3000/api/post
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDFjNWEyOTVjOTkwMTMwNDliNzY4MCIsImlhdCI6MTcyMjU2MzMxMCwiZXhwIjoxNzIyNjQ5NzEwfQ.uWNCXs23NURsU7sh1P1PD7lR_bihm7zf6T46sayLuuA
 
 ###
@@ -15,12 +16,13 @@ Authorization: "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDFjNWEy
 }
 
 ###
-post http://localhost:3000/api/login
+POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-    "username":"locpham",
+    "username":"hoangloc",
     "password":"123456"
+
 }
 
 ###

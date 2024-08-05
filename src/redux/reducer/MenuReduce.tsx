@@ -4,7 +4,7 @@ import { PayloadAction } from "@reduxjs/toolkit"
 
 const MenuReducer = createSlice({
     name: "Menu",
-    initialState: false,
+    initialState: true,
     reducers: {
         setMenu: {
             reducer: (state: boolean, action: PayloadAction<boolean>) => {

@@ -92,14 +92,11 @@ const Page = ({ params }: Props) => {
 
     const UpdatePostDemo = async (body: any) => {
         body.slug = body.slug + "_demo"
-        const result = await UserAuthen.updateItem(currentUser.position, "news", "66457e7f739bd93453266ed4", body)
+        const result = await UserAuthen.updateItem(currentUser.position, "news", "66b06560216acefccc080e48", body)
         if (result) {
             window.open('/home/news/' + body.slug, '_blank');
         }
     }
-
-
-    console.log(categories)
 
     switch (params.slug) {
         case "new":
@@ -112,7 +109,8 @@ const Page = ({ params }: Props) => {
                         {/* <Input name="カテゴリー" onChange={(e) => setCategory(e)} value={category} /> */}
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
-                            {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug ? false : true} />}
+                            {saving ? <Button name='。。。' onClick={() => { }} /> :
+                                <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -121,7 +119,6 @@ const Page = ({ params }: Props) => {
 
     }
 
-    console.log(category)
     return (
         <div className='grid_box scrollNone mw1200px-grid-reverse'>
             <div className={`detailBox xs12 md8  scrollbar-none`} style={{ padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
@@ -144,7 +141,10 @@ const Page = ({ params }: Props) => {
                     </div>
                 </div>
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange }} value={detail} />
-                <Button name='保存' onClick={() => UpdatePost(body)} />
+                <div style={{ display: "flex", margin: "10px 0" }}>
+                    <Button name='保存' onClick={() => UpdatePost(body)} />
+                    <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                </div>
             </div>
         </div>
     )

@@ -32,7 +32,6 @@ const Login = ({ archive }: Props) => {
 
     const login = async (data: { username: string, password: string }) => {
         const result = await NoUserAuthen.login(data)
-        console.log(result)
 
         if (result.success) {
             store.dispatch(setNotice({ success: result.success, msg: result.message, open: true }))
