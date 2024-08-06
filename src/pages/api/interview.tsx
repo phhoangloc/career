@@ -3,6 +3,7 @@ import connectMongoDB from '@/connect/database/mogoseDB'
 import { isDataType } from '@/type/resultType'
 import { interviewModel } from '@/model/interview.model'
 import { ImageModel } from '@/model/image.model'
+import { facilityModel } from '@/model/facility.model'
 
 
 const interview = async (
@@ -16,6 +17,7 @@ const interview = async (
     const result: isDataType = { success: false }
 
     ImageModel.find()
+    facilityModel.find()
     interviewModel.find()
         .find(query.id ? { "_id": query.id } : {})
         .find(query.archive ? { "archive": query.archive } : {})
