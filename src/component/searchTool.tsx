@@ -1,26 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import Button from './input/button';
+import { NoUserAuthen } from '@/api/NoUserAuthen';
 type Props = {}
 
 const SearchTool = (props: Props) => {
 
+    const [workplaces, setWorkplace] = useState<string[]>([])
+    const getWorkplace = async () => {
+        const result = await NoUserAuthen.getItem("facility", "", "", "", "", "", undefined, undefined)
+        if (result.success) {
+            setWorkplace(result.data)
+        }
+    }
+
+    useEffect(() => {
+        getWorkplace()
+    }, [])
 
 
-    const workplaces = [
-        {
-            name: "山田老人ホーム",
-        },
-        {
-            name: "トヨタ老人ホーム",
-        },
-        {
-            name: "池田老人ホーム",
-        },
-    ]
     const worktypes = [
         {
             name: "手話通訳士",
@@ -80,7 +81,7 @@ const SearchTool = (props: Props) => {
         {
             name: "関西",
             child: [
-                "京都市", "大阪市", "神戸市"
+                "京都府", "大阪府", "兵庫県"
             ],
 
         },
@@ -92,7 +93,7 @@ const SearchTool = (props: Props) => {
         {
             name: "九州・沖縄",
             child: [
-                "福岡", "沖縄"
+                "福岡県", "沖縄県"
             ],
 
         },
@@ -129,7 +130,7 @@ const SearchTool = (props: Props) => {
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setwp(e.target.value)}>
                         <option value={undefined}>施設</option>
-                        {workplaces.map((item, index) =>
+                        {workplaces.map((item: any, index: any) =>
                             <option key={index} value={item.name}>{item.name}</option>
                         )}
                     </select>

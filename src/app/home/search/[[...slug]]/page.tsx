@@ -23,7 +23,7 @@ const Page = ({ params }: Props) => {
 
     const [newData, setNewData] = useState<any[]>([])
     const filter = (a: string, b: string, s: string, c: string) => {
-        var resultA = a !== "a" ? Data.filter(item => item.workplaces === a) : Data
+        var resultA = a !== "a" ? Data.filter(item => item.workplaces.name === a) : Data
         var resultB = b !== "b" ? resultA.filter(item => item.worktypes === b) : resultA
         var resultS = s !== "s" ? resultA.filter(item => item.workstatus === s) : resultB
         var result = c !== "c" ? resultS.filter(item => c.split(',').includes(item.location)) : resultS
@@ -39,7 +39,7 @@ const Page = ({ params }: Props) => {
         const result = await NoUserAuthen.getItem(a, s, wp, wt, ws, lo, skip, limit)
         console.log(result)
         if (result.success) {
-            setNewData(result.data)
+            setNewData(data => [...data, ...result.data])
         }
     }
 
@@ -82,11 +82,11 @@ const Page = ({ params }: Props) => {
                                         alt="cover" />
                                 </div>
                                 <div className='content'>
-                                    <h4>{item.title}・{item.location}</h4>
+                                    <h4>{item.title}・{item.workplace.location}</h4>
                                     <li>{item.workplace.name}</li>
                                     <li>{item.worktype}</li>
                                     <li>{item.workstatus}</li>
-                                    <li>{item.location}</li>
+                                    <li>{item.workplace.location}</li>
                                 </div>
                             </div>
                         ) :
