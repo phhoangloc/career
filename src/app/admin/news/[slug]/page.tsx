@@ -13,6 +13,7 @@ import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
 import { NoUserAuthen } from '@/api/NoUserAuthen';
 import Accordion from '@/component/tool/accordion';
+import DOMPurify from 'dompurify';
 type Props = {
     params: { slug: string }
 }
@@ -122,7 +123,7 @@ const Page = ({ params }: Props) => {
                                     <p>カテゴリーがない</p>}
                             </div>
                         </div>
-                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c = 1) }} value={detail} />
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c = 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
                                 <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && savable ? false : true} />}
@@ -153,7 +154,7 @@ const Page = ({ params }: Props) => {
                             <p>カテゴリーがない</p>}
                     </div>
                 </div>
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
                     <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />

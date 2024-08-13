@@ -8,7 +8,7 @@ import Button from '@/component/input/button';
 import { useRouter } from 'next/navigation';
 import { UserAuthen } from '@/api/UserAuthen';
 import store from '@/redux/store';
-// import ImageModal from '@/component/tool/imageModal';
+import DOMPurify from 'dompurify';
 import ImageModal from '@/component/tool/imageModal_v2';
 import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
@@ -150,7 +150,7 @@ const Page = ({ params }: Props) => {
                         </div>
                         <Input name="職種" onChange={(e) => { setSavable(true), setWorktype(e) }} value={worktype} />
                         <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true), setcontenttilte(e) }} value={contenttitle} />
-                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && image && savable ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
@@ -192,7 +192,7 @@ const Page = ({ params }: Props) => {
                 }
                 <Input name="職種" onChange={(e) => { setSavable(true), setWorktype(e) }} value={worktype} />
                 <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />

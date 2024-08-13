@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Data from '@/data/data'
 import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
+import DOMPurify from 'dompurify'
 type Props = {
     params: { slug: string }
 }
@@ -35,7 +36,7 @@ const Page = ({ params }: Props) => {
                                 newData?.category ? newData.category?.map((item: any, index: number) => <p key={index} style={{ margin: "0px 5px 0px 0px" }}>{item.name}</p>) : null
                             }
                         </div>
-                        <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: newData.content }} />
+                        <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
                     </div>
                 </div>
             </div> : null

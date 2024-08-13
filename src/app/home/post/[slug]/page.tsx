@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import DOMPurify from 'dompurify';
 import Data from '@/data/data'
 import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
@@ -23,7 +24,6 @@ const Page = ({ params }: Props) => {
         getItem("post", params.slug)
     }, [])
 
-    console.log(newData)
     return (
         newData ?
             <div className='detailPage facilityPage'>
@@ -44,7 +44,7 @@ const Page = ({ params }: Props) => {
                     </div>
 
                     <div className='title_facility'> <p>詳細</p></div>
-                    <div className='w90p mw-768px mg-auto bor-1px br-5px pd-5p' style={{ borderColor: "#006699" }} dangerouslySetInnerHTML={{ __html: newData.content }} />
+                    <div className='w90p mw-768px mg-auto bor-1px br-5px pd-5p' style={{ borderColor: "#006699" }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
                 </div>
             </div> : null
     )

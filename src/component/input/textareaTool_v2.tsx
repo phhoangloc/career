@@ -20,6 +20,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import EditIcon from '@mui/icons-material/Edit';
 import HtmlIcon from '@mui/icons-material/Html';
+import DOMPurify from 'dompurify';
 type Props = {
     onChange: (e: string) => void,
     value: string,
@@ -174,7 +175,7 @@ const TextAreaTool_v2 = (props: Props) => {
     }, [newContent])
 
     useEffect(() => {
-        props.onChange && props.onChange(content)
+        props.onChange && props.onChange(DOMPurify.sanitize(content))
     }, [content])
 
     const onCheck = (link: string) => {

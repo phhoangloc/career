@@ -7,6 +7,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { useRouter } from 'next/navigation';
+import DOMPurify from 'dompurify';
 type Props = {
     params: { slug: string }
 }
@@ -84,7 +85,7 @@ const Page = ({ params }: Props) => {
                     </div>
                     <div className='content_content' style={{ marginTop: "15px" }}>
                         <h4>{newData.contenttitle}</h4>
-                        <div className='dangerousBox' dangerouslySetInnerHTML={{ __html: newData.content }} />
+                        <div className='dangerousBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
                     </div>
 
                 </div>

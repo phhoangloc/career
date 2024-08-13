@@ -29,7 +29,7 @@ const post = async (
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
         .find(facility_loId ? { "workplace": facility_loId } : {})
-        .find(facility ? { "workplace": facility } : {})
+        .find(facility ? { "workplace": facilityId } : {})
         .find(query.wt ? { "worktype": query.wt } : {})
         .find(query.ws ? { "workstatus": query.ws } : {})
         .populate("image")

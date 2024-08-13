@@ -13,7 +13,7 @@ import ImageModal from '@/component/tool/imageModal_v2';
 import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
 import { NoUserAuthen } from '@/api/NoUserAuthen';
-
+import DOMPurify from 'dompurify';
 type Props = {
     params: { slug: string }
 }
@@ -189,7 +189,7 @@ const Page = ({ params }: Props) => {
                         <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                         <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
                         <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={detail} />
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
 
                         <div style={{ display: "flex", margin: "10px 0" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
@@ -243,7 +243,7 @@ const Page = ({ params }: Props) => {
                 <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                 <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
                 <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={detail} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />

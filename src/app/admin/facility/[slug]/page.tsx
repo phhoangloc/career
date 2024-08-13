@@ -8,7 +8,7 @@ import Button from '@/component/input/button';
 import { useRouter } from 'next/navigation';
 import { UserAuthen } from '@/api/UserAuthen';
 import store from '@/redux/store';
-// import ImageModal from '@/component/tool/imageModal';
+import DOMPurify from 'dompurify';
 import ImageModal from '@/component/tool/imageModal_v2';
 import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
@@ -168,7 +168,7 @@ const Page = ({ params }: Props) => {
                         <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                         <Input name="電話番号" onChange={(e) => setPhone(e)} value={phoneView} warn={phoneWarn} />
                         <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                        <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={detail} />
+                        <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
                                 <Button name='作成' onClick={() => createPost(body)} disable={name && slug && image && !savable ? false : true} />}
@@ -200,7 +200,7 @@ const Page = ({ params }: Props) => {
                 <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                 <Input name="電話番号" onChange={(e) => setPhone(e)} value={phoneView} warn={phoneWarn} />
                 <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={detail} />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> :
                         <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}

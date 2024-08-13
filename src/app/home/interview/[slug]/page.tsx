@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Data from '@/data/data'
 import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
+import DOMPurify from 'dompurify'
 type Props = {
     params: { slug: string }
 }
@@ -36,7 +37,7 @@ const Page = ({ params }: Props) => {
                         <li>{newData.workplace.name}</li>
                         <li>{newData.workplace.location}</li>
                         <li>{newData.worktype}</li>
-                        <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: newData.content }} />
+                        <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
                     </div>
 
                 </div>
