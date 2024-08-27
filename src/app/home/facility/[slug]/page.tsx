@@ -8,6 +8,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { useRouter } from 'next/navigation';
 import DOMPurify from 'dompurify';
+import Link from 'next/link';
 type Props = {
     params: { slug: string }
 }
@@ -66,19 +67,17 @@ const Page = ({ params }: Props) => {
                             <h2>{newData.name}</h2>
                             <h3><span>〒{newData.postno}</span> <br></br>{newData.address}</h3>
                             <div className='social_icon'>
-                                <HomeIcon />
+                                <Link href={newData.homepage} target='_blank'><HomeIcon /></Link>
                                 <Image src={"/img/twitterx-50.png"} width={30} height={30} alt='x' />
                                 <InstagramIcon />
                                 <YouTubeIcon />
                             </div>
                         </div>
                         <div className='image_box'>
-                            {/* <div className='image'>
-                                <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
-                                <PlayArrowIcon />
-                            </div> */}
                             <div className='image'>
-                                <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
+                                {newData.image?.name ?
+                                    <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt="home" /> :
+                                    <Image src={"/img/home.jpg"} width={500} height={500} style={{ width: "100%", height: "auto" }} alt="home" />}
                                 <PlayArrowIcon />
                             </div>
                         </div>

@@ -17,23 +17,17 @@ const post = async (
     const result: isDataType = { success: false }
 
     const facility = query.wp ? await facilityModel.findOne({ "name": query.wp }, "_id") : undefined
-    const facility_lo = query.lo ? await facilityModel.findOne({ "location": query.lo }, "_id") : undefined
 
     const facilityId = facility?._id.toString()
-    const facility_loId = facility_lo?._id.toString()
 
-    // console.log(facilityId)
     await postModel.find()
         .find(query.id ? { "_id": query.id } : {})
         .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
-        .find(facility_loId ? { "workplace": facility_loId } : {})
-        .find(facility ? { "workplace": facilityId } : {})
-        .find(query.wt ? { "worktype": query.wt } : {})
-        .find(query.ws ? { "workstatus": query.ws } : {})
         .populate("image")
-        .populate("workplace")
+        .populate({ path: "workplace" })
+        // .find({ "workplace": null })
         .sort({ "createDate": -1 })
         .skip(query.skip)
         .sort(query.sort ? query.sort : {})
@@ -44,6 +38,10 @@ const post = async (
             res.json(result)
         })
         .then((data: any) => {
+            console.log(query.lo)
+            data = query.wp ? data.filter((d: any) => d.workplace?.name === query.wp) : data
+            data = query.lo ? data.filter((d: any) => d.workplace?.location === query.lo) : data
+            data = query.wt ? data.filter((d: any) => d.workplace?.worktype === query.wt) : data
             result.success = true
             result.data = data
             res.json(result)

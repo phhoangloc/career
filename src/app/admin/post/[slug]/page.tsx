@@ -77,7 +77,6 @@ const Page = ({ params }: Props) => {
 
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
-        console.log(result)
         if (result.success) {
             setId(result.data[0]._id)
             setTitle(result.data[0].title)

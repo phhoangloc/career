@@ -85,7 +85,7 @@ const Post =
                                 res.send(result)
                                 throw error.message
                             }).then(async (data: any) => {
-                                await facilityModel.updateOne({ "_id": workplace }, { work: [...currentworks.filter((w: any) => w != query.id)] })
+                                currentworks && await facilityModel.updateOne({ "_id": workplace }, { work: [...currentworks.filter((w: any) => w != query.id)] })
                                 await facilityModel.updateOne({ "_id": body.workplace }, { work: [...works.filter((w: any) => w != query.id), query.id] })
                                     .catch((error: Error) => {
                                         result.success = false
