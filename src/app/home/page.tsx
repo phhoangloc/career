@@ -115,7 +115,7 @@ export default function Home() {
             <div className="cover">
               {facility[0]?.image?.name ?
                 <Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
-                <Image src={"/img/home.jpg" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" />}</div>
+                <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}</div>
             <div className="item_title">
               <h3>{facility[0]?.contenttitle}</h3>
               <h4>{facility[0]?.name}</h4>
@@ -130,7 +130,7 @@ export default function Home() {
           <div className="item" >
             <div className="cover">
               {facility[1]?.image?.name ?
-                <Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
+                <Image src={process.env.FTP_URL + "img/career/" + facility[1]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
                 <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}
             </div>
             <div className="item_title">
