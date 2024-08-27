@@ -9,6 +9,8 @@ import '../style/component.css'
 import '../style/theme.css'
 import DecideModal from "@/component/modal/decide.modal";
 import NoticeModal from "@/component/modal/notice.modal";
+import Script from "next/script";
+
 const inter = Zen_Kaku_Gothic_New({ subsets: ["latin"], weight: ["300", "400", "500", "700", "900"] });
 
 export const metadata: Metadata = {
@@ -27,6 +29,7 @@ export default function RootLayout({
         <DecideModal />
         <NoticeModal />
         {children}
+
       </body>
     </html>
   );

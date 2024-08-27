@@ -30,12 +30,15 @@ const getPicById = async (id: string) => {
     const result = await axios.get("/api/image?id=" + id)
     return result.data
 }
-
+const getAddress = async (pNo: string) => {
+    const result = await axios.get("https://zipcloud.ibsnet.co.jp/api/search?zipcode=" + pNo)
+    return result.data
+}
 export const NoUserAuthen = {
     login,
     signup,
     getItem,
     getOneItem,
     getInterview,
-    getPicById
+    getPicById, getAddress
 }

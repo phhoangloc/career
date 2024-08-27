@@ -12,6 +12,9 @@ import DOMPurify from 'dompurify';
 import ImageModal from '@/component/tool/imageModal_v2';
 import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
+import Script from 'next/script';
+import { NoUserAuthen } from '@/api/NoUserAuthen';
+
 type Props = {
     params: { slug: string }
 }
@@ -30,13 +33,18 @@ const Page = ({ params }: Props) => {
 
     const [id, setId] = useState<string>("")
     const [name, setName] = useState<string>("")
-    const [slug, setSlug] = useState<string>("ficility_" + moment(new Date()).format("YYYY_MM_DD"))
+    const [worktype, setWorkType] = useState<string>("")
+    const [slug, setSlug] = useState<string>("ficility_" + moment(new Date()).format("YYYY_MM_DD_hh_mm_ss"))
     const [address, setAddress] = useState<string>("")
     const [postno, setPostno] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [phone, setPhone] = useState<string>("")
     const [phoneWarn, setPhoneWarn] = useState<string>("")
     const [phoneView, setPhoneView] = useState<string>("")
+    const [fax, setFax] = useState<string>("")
+    const [faxWarn, setFaxWarn] = useState<string>("")
+    const [faxView, setFaxView] = useState<string>("")
+    const [homepage, setHomepage] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し事業内容をシェアしてください。")
     const [newdetail, setNewDetail] = useState<string>("")
@@ -50,11 +58,14 @@ const Page = ({ params }: Props) => {
     const toPage = useRouter()
     const body = {
         name,
+        worktype,
         slug,
         address,
         postno,
         location,
         phone,
+        fax,
+        homepage,
         contenttitle,
         image: image || null,
         content: newdetail || detail
@@ -65,11 +76,14 @@ const Page = ({ params }: Props) => {
         if (result.success && result.data[0]._id) {
             setId(result.data[0]._id)
             setName(result.data[0].name)
+            setWorkType(result.data[0].worktype)
             setSlug(result.data[0].slug)
             setAddress(result.data[0].address)
             setPostno(result.data[0].postno)
             setLocation(result.data[0].location)
             setPhone(result.data[0].phone)
+            setFax(result.data[0].fax)
+            setHomepage(result.data[0].homepage)
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
@@ -142,19 +156,54 @@ const Page = ({ params }: Props) => {
         }
     }
 
+    function formatFaxNumber(input: string) {
+        if (input) {
+            const digits = input.replace(/\D/g, '');
+
+            if (digits.length === 10) {
+                setFaxWarn("")
+                return digits.replace(/(\d{3})(\d{4})(\d{3})/, '$1-$2-$3');
+            } else if (digits.length === 11) {
+                setFaxWarn("")
+                return digits.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+            } else {
+                setFaxWarn("あなたのファクスは適切ではありません")
+                return input;
+            }
+        } else {
+            setFaxWarn("")
+            return ""
+        }
+    }
+
     useEffect(() => {
         setPhoneView(formatPhoneNumber(phone))
     }, [phone])
 
+    useEffect(() => {
+        setFaxView(formatFaxNumber(fax))
+    }, [fax])
+
+    const getAddressFacility = async (pNo: string) => {
+        const result = await NoUserAuthen.getAddress(pNo)
+        if (result.results.length) {
+            setAddress(result.results[0].address1 + result.results[0].address2 + result.results[0].address3)
+            setLocation(result.results[0].address1)
+        }
+    }
+    useEffect(() => {
+        postno.length === 7 && getAddressFacility(postno)
+    }, [postno])
     switch (params.slug) {
         case "new":
             return (
                 <div className='grid_box scrollNone'>
-
                     <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
                         <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
-                        <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                        <Input name="種別" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} />
+                        <Input name="スラッグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -163,15 +212,16 @@ const Page = ({ params }: Props) => {
                                 func={() => { setSavable(true); setOpenModal(true) }}
                             />
                         </div>
-                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} />
-                        <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} />
-                        <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
-                        <Input name="電話番号" onChange={(e) => setPhone(e)} value={phoneView} warn={phoneWarn} />
-                        <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                        <TextAreaTool_v2 onChange={(e) => setNewDetail(e)} value={DOMPurify.sanitize(detail)} />
+                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} sx="p-postal-code" />
+                        <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
+                        <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                        <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
+                        <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
+                        <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
+                        <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
-                                <Button name='作成' onClick={() => createPost(body)} disable={name && slug && image && !savable ? false : true} />}
+                                <Button name='作成' onClick={() => createPost(body)} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -186,7 +236,9 @@ const Page = ({ params }: Props) => {
             <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
-                <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                <Input name="種別" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} />
+                <Input name="スラッグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                 <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                     <UploadPicturePreview
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -195,11 +247,12 @@ const Page = ({ params }: Props) => {
                         func={() => { setSavable(true); setOpenModal(true) }}
                     />
                 </div>
-                <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} />
-                <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} />
-                <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
-                <Input name="電話番号" onChange={(e) => setPhone(e)} value={phoneView} warn={phoneWarn} />
-                <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} sx="p-postal-code" />
+                <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
+                <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
+                <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
+                <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> :

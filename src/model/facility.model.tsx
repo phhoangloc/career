@@ -13,6 +13,9 @@ const facilitySchema = new Schema({
     name: {
         type: String,
     },
+    worktype: {
+        type: String,
+    },
     slug: {
         type: String,
     },
@@ -26,6 +29,12 @@ const facilitySchema = new Schema({
         type: String,
     },
     phone: {
+        type: String,
+    },
+    fax: {
+        type: String,
+    },
+    homepage: {
         type: String,
     },
     image: {

@@ -19,7 +19,7 @@ const Authen = ({ children }: Props) => {
 
     const toPage = useRouter()
 
-    if (currentUser._id) {
+    if (currentUser?._id) {
         return children
     }
 

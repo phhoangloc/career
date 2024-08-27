@@ -7,10 +7,11 @@ type Props = {
     type?: string,
     onfocus?: () => void,
     disabled?: boolean,
-    warn?: string
+    warn?: string,
+    sx?: string
 }
 
-const Input = ({ onChange, name, value, type, onfocus, disabled, warn }: Props) => {
+const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Props) => {
 
     const inputRef: any = useRef()
 

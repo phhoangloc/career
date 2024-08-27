@@ -17,7 +17,7 @@ export default function Home() {
 
 
   const getAllInterview = async (a: string) => {
-    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
+    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 2)
     if (result.success) {
       setdata(result.data)
     } else {
@@ -25,7 +25,7 @@ export default function Home() {
     }
   }
   const getFacility = async (a: string) => {
-    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined)
+    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 2)
     if (result.success) {
       setFacility(result.data)
     } else {
@@ -112,7 +112,10 @@ export default function Home() {
           {/* // facility ? facility.map((f, index) => */}
 
           <div className="item" >
-            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover">
+              {facility[0]?.image?.name ?
+                <Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
+                <Image src={"/img/home.jpg" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" />}</div>
             <div className="item_title">
               <h3>{facility[0]?.contenttitle}</h3>
               <h4>{facility[0]?.name}</h4>
@@ -125,7 +128,11 @@ export default function Home() {
             </div>
           </div>
           <div className="item" >
-            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + facility[1]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover">
+              {facility[0]?.image?.name ?
+                <Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
+                <Image src={"/img/home.jpg" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" />}
+            </div>
             <div className="item_title">
               <h3>{facility[1]?.contenttitle}</h3>
               <h4>{facility[1]?.name}</h4>
