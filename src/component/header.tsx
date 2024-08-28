@@ -33,11 +33,11 @@ const Header = () => {
                     {itemModal ? null : <p onClick={() => setItemModal(true)}>仕事を探す <KeyboardArrowDownIcon /></p>}
                     <div className={`children ${itemModal ? "children_on" : ""}`}>
                         <p onClick={() => setItemModal(false)} >仕事を探す<KeyboardArrowDownIcon /></p>
-                        <p>施設で探す</p>
-                        <p>職種で探す</p>
-                        <p>雇用形態で探す</p>
-                        <p>エリアで探す</p>
-                        <p>人気タグで探す</p>
+                        <p onClick={() => toPage.push("/home/search/a/b/c/d")}>施設で探す</p>
+                        <p onClick={() => toPage.push("/home/search/a/b/c/d")}>職種で探す</p>
+                        <p onClick={() => toPage.push("/home/search/a/b/c/d")}>雇用形態で探す</p>
+                        <p onClick={() => toPage.push("/home/search/a/b/c/d")}>エリアで探す</p>
+                        {/* <p>人気タグで探す</p> */}
                     </div>
                 </div>
                 <p>業界を知る <KeyboardArrowDownIcon /></p>

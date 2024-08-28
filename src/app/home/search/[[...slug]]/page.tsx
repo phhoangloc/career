@@ -65,9 +65,7 @@ const Page = ({ params }: Props) => {
                 <div className='result_div'>
                     <div className='title'>
                         <h1>検索結果</h1>
-                        <div className='button_Search'>
-                            <SearchIcon onClick={() => setSearchModal(true)} />
-                        </div>
+                        <p style={{ height: "30px" }}></p>
                     </div>
                     {newData.length ?
                         uniqueArray.map((item, index) =>

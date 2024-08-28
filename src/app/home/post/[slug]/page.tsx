@@ -36,7 +36,7 @@ const Page = ({ params }: Props) => {
                         <div style={{ display: "flex" }}><h4>仕事内容</h4><p>{newData.worktype}<br></br>{newData.contenttitle}</p></div>
                         <div style={{ display: "flex" }}><h4>応募資格</h4><p>本文本文本文本文本文本文本文本文<br></br>本文本文本文本文本文本文本文本文</p></div>
                         <div style={{ display: "flex" }}><h4>雇⽤形態</h4><p>{newData.workstatus}</p></div>
-                        <div style={{ display: "flex" }}><h4>勤務地</h4><p><span>〒{newData?.workplace?.postno}</span> <br></br>{newData?.workplace?.address}</p></div>
+                        <div style={{ display: "flex" }}><h4>勤務地</h4><p><span>{newData?.workplace?.name}</span><br></br><span>〒{newData?.workplace?.postno}</span> <br></br>{newData?.workplace?.address}</p></div>
                         <div style={{ display: "flex" }}><h4>勤務時間</h4><p>{newData.worktime}</p></div>
                         <div style={{ display: "flex" }}><h4>給与</h4><p>{newData.worksalary}</p></div>
                         <div style={{ display: "flex" }}><h4>休⽇休暇</h4><p>{newData.workbenefit}</p></div>

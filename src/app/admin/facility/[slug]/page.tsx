@@ -37,6 +37,9 @@ const Page = ({ params }: Props) => {
     const [slug, setSlug] = useState<string>("ficility_" + moment(new Date()).format("YYYY_MM_DD_hh_mm_ss"))
     const [address, setAddress] = useState<string>("")
     const [postno, setPostno] = useState<string>("")
+    const [postnoWarn, setPostnoWarn] = useState<string>("")
+
+    const [postnoView, setPostNoView] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [phone, setPhone] = useState<string>("")
     const [phoneWarn, setPhoneWarn] = useState<string>("")
@@ -135,19 +138,34 @@ const Page = ({ params }: Props) => {
         change > 4 && setSavable(true)
     }, [change])
 
+    function formatPostNo(input: string) {
+        if (input) {
+            const digits = input.replace(/\D/g, '');
 
+            if (digits.length === 7) {
+                setPostnoWarn("")
+                return digits.replace(/(\d{3})(\d{4})/, '$1-$2');
+            } else {
+                setPostnoWarn("入力した郵便番号は適切ではありません")
+                return input;
+            }
+        } else {
+            setPhoneWarn("")
+            return ""
+        }
+    }
     function formatPhoneNumber(input: string) {
         if (input) {
             const digits = input.replace(/\D/g, '');
 
             if (digits.length === 10) {
                 setPhoneWarn("")
-                return digits.replace(/(\d{3})(\d{4})(\d{3})/, '$1-$2-$3');
+                return digits.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
             } else if (digits.length === 11) {
                 setPhoneWarn("")
                 return digits.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
             } else {
-                setPhoneWarn("あなたの電話番号は適切ではありません")
+                setPhoneWarn("電話番号は適切ではありません")
                 return input;
             }
         } else {
@@ -162,12 +180,12 @@ const Page = ({ params }: Props) => {
 
             if (digits.length === 10) {
                 setFaxWarn("")
-                return digits.replace(/(\d{3})(\d{4})(\d{3})/, '$1-$2-$3');
+                return digits.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
             } else if (digits.length === 11) {
                 setFaxWarn("")
                 return digits.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
             } else {
-                setFaxWarn("あなたのファクスは適切ではありません")
+                setFaxWarn("ファクスは適切ではありません")
                 return input;
             }
         } else {
@@ -175,7 +193,8 @@ const Page = ({ params }: Props) => {
             return ""
         }
     }
-
+    useEffect(() => {
+    }, [fax])
     useEffect(() => {
         setPhoneView(formatPhoneNumber(phone))
     }, [phone])
@@ -186,13 +205,15 @@ const Page = ({ params }: Props) => {
 
     const getAddressFacility = async (pNo: string) => {
         const result = await NoUserAuthen.getAddress(pNo)
-        if (result.results.length) {
+        if (result.results?.length) {
             setAddress(result.results[0].address1 + result.results[0].address2 + result.results[0].address3)
             setLocation(result.results[0].address1)
         }
     }
+
     useEffect(() => {
         postno.length === 7 && getAddressFacility(postno)
+        setPostNoView(formatPostNo(postno))
     }, [postno])
     switch (params.slug) {
         case "new":
@@ -212,7 +233,7 @@ const Page = ({ params }: Props) => {
                                 func={() => { setSavable(true); setOpenModal(true) }}
                             />
                         </div>
-                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} sx="p-postal-code" />
+                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" />
                         <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                         <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                         <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
@@ -247,7 +268,7 @@ const Page = ({ params }: Props) => {
                         func={() => { setSavable(true); setOpenModal(true) }}
                     />
                 </div>
-                <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postno} sx="p-postal-code" />
+                <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} warn={postnoWarn} sx="p-postal-code" />
                 <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                 <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                 <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />

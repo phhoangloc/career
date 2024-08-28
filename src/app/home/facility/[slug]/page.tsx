@@ -12,7 +12,15 @@ import Link from 'next/link';
 type Props = {
     params: { slug: string }
 }
+export const formatPostNo = (input: string) => {
+    if (input) {
+        const digits = input.replace(/\D/g, '');
 
+        if (digits.length === 7) {
+            return digits.replace(/(\d{3})(\d{4})/, '$1-$2');
+        }
+    }
+}
 const Page = ({ params }: Props) => {
 
     const [newData, setNewData] = useState<any>({})
@@ -31,7 +39,8 @@ const Page = ({ params }: Props) => {
 
     const toPage = useRouter()
 
-    console.log(newData)
+
+
     return (
         newData._id ?
             <div className='detailPage facilityPage'>
@@ -65,7 +74,9 @@ const Page = ({ params }: Props) => {
                     <div className='content'>
                         <div className='content_title'>
                             <h2>{newData.name}</h2>
-                            <h3><span>〒{newData.postno}</span> <br></br>{newData.address}</h3>
+                            <h3><span>〒{formatPostNo(newData.postno)}</span> </h3>
+                            <h3>{newData.address.split("　")[0]}</h3>
+                            <h3>{newData.address.split("　")?.[1] ? newData.address.split("　")?.[1] : "---"}</h3>
                             <div className='social_icon'>
                                 <Link href={newData.homepage} target='_blank'><HomeIcon /></Link>
                                 <Image src={"/img/twitterx-50.png"} width={30} height={30} alt='x' />

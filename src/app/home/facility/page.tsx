@@ -6,7 +6,7 @@ import { NoUserAuthen } from '@/api/NoUserAuthen'
 import Image from 'next/image'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Pagination from '@/component/tool/pagination'
-import Input from '@/component/input/input'
+import { formatPostNo } from './[slug]/page'
 
 type Props = {}
 
@@ -62,18 +62,19 @@ const Page = (props: Props) => {
                         loading ? <p>Loading...</p> :
                             data?.length ? data?.map((d: any, index: number) =>
                                 <div key={index} className='item xs12 md6'>
-                                    <div className="item_frame">
+                                    <div className="item_frame " onClick={() => toPage.push("/home/facility/" + d?.slug)} >
                                         <div className="cover">
                                             {d?.image?.name ?
                                                 <Image src={process.env.FTP_URL + "img/career/" + d?.image?.name} width={500} height={500} style={{ width: "auto", height: "100%" }} alt="home" /> :
                                                 <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}</div>
                                         <div className="item_title">
                                             <h3>{d.name}</h3>
+                                            <p>〒{formatPostNo(d.postno)}</p>
                                             <p>{d.address.split("　")[0]}</p>
-                                            <p>{d.address.split("　")[1]}</p>
+                                            <p>{d.address.split("　")?.[1] ? d.address.split("　")?.[1] : "---"}</p>
                                             <div className="tag">
                                                 <p>{d?.location}</p>
-                                                <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + data[0]?.slug)} />
+                                                <KeyboardArrowRightIcon />
                                             </div>
                                         </div>
                                     </div>
