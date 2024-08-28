@@ -12,7 +12,7 @@ import Link from 'next/link';
 type Props = {
     params: { slug: string }
 }
-export const formatPostNo = (input: string) => {
+const formatPostNo = (input: string) => {
     if (input) {
         const digits = input.replace(/\D/g, '');
 

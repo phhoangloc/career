@@ -6,7 +6,16 @@ import { NoUserAuthen } from '@/api/NoUserAuthen'
 import Image from 'next/image'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Pagination from '@/component/tool/pagination'
-import { formatPostNo } from './[slug]/page'
+
+const formatPostNo = (input: string) => {
+    if (input) {
+        const digits = input.replace(/\D/g, '');
+
+        if (digits.length === 7) {
+            return digits.replace(/(\d{3})(\d{4})/, '$1-$2');
+        }
+    }
+}
 
 type Props = {}
 
