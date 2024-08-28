@@ -70,7 +70,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
         width: "100%",
         height: "100%",
         border: 0,
-        background: "none",
+        background: "inherit",
         color: "inherit",
         padding: "10px 10px 0",
         fontSize: "1rem",
@@ -84,7 +84,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
     }
 
     return (
-        <div className={`${focus || value ? currentTheme ? "background_light" : "background_dark" : null}`} style={focus || value ? warn?.length ? { ...boxStyleFocus, ...boxStyleFocusWarn } : { ...boxStyleFocus } : boxStyle}>
+        <div className={`${focus || value ? currentTheme ? "background_light" : "background_dark" : null} `} style={focus || value ? warn?.length ? { ...boxStyleFocus, ...boxStyleFocusWarn } : { ...boxStyleFocus } : boxStyle}>
             <p style={focus || value ? pStyleFocus : pStyle} onClick={() => inputRef.current.focus()}>{name}<span style={warnStyle}>{warn}</span></p>
             <input ref={inputRef}
                 className={`inputFocusOutlineNone `}

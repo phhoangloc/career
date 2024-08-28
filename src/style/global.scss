@@ -703,6 +703,42 @@ div {
                     padding: 2%;
                 }
 
+                .item_title {
+                    margin-top: 20px;
+
+                    h4 {
+                        opacity: 0.75;
+                    }
+
+                    .contentTitle {
+                        margin: 20px 0;
+                        height: 75px;
+                    }
+
+                    .tag {
+                        display: flex;
+                        margin-top: 15px;
+
+                        p {
+                            width: 75px;
+                            height: 30px;
+                            line-height: 30px;
+                            background-color: white;
+                            border-radius: 15px;
+                            padding: 0 15px;
+                            text-align: center;
+                            margin: 0 5px 0 0;
+                        }
+
+                        svg {
+                            border-radius: 50%;
+                            background-color: white;
+                            width: 30px;
+                            height: 30px;
+                            margin: 0 0 0 auto;
+                        }
+                    }
+                }
             }
         }
     }
@@ -731,6 +767,103 @@ div {
             font-size: 17px;
         }
 
+    }
+}
+
+.archivePage {
+    min-height: calc(100vh - 100px);
+
+    .div_items {
+        padding: 5% 0;
+
+        .title {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+
+            h2 {
+                color: #ee827d;
+            }
+
+            h1 {
+                color: #133b3a;
+                font-weight: 500;
+                padding: 0 5px;
+                border-left: 3px solid #ee827d;
+                height: 40px;
+                line-height: 40px;
+                margin: 5px 0;
+            }
+
+            .title_button {
+                width: max-content;
+                margin: 10px 0;
+            }
+
+        }
+
+        .items {
+            width: 90%;
+            margin: 50px auto 0;
+            max-width: 1200px;
+
+            .item {
+                padding: 1%;
+                margin: 25px auto;
+
+                .item_frame {
+                    height: 100%;
+                    position: relative;
+
+                    .cover {
+                        width: 100%;
+                        aspect-ratio: 1.5;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .item_title {
+                        margin-top: 20px;
+
+                        p {
+                            word-wrap: break-word;
+                        }
+
+                        .tag {
+                            display: flex;
+                            margin-top: 15px;
+
+
+                            p {
+                                width: 75px;
+                                height: 30px;
+                                line-height: 30px;
+                                background-color: white;
+                                border-radius: 15px;
+                                padding: 0 15px;
+                                text-align: center;
+                                margin: 0 5px 0 0;
+                            }
+
+                            svg {
+                                border-radius: 50%;
+                                background-color: white;
+                                width: 30px;
+                                height: 30px;
+                                margin: 0 0 0 auto;
+                            }
+
+                            svg:hover {
+                                color: white;
+                                background-color: var(--main);
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
     }
 }
 

@@ -25,6 +25,8 @@ const post = async (
         .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
+        .find(query.wt ? { "worktype": query.wt } : {})
+        .find(query.ws ? { "workstatus": query.ws } : {})
         .populate("image")
         .populate({ path: "workplace" })
         // .find({ "workplace": null })
@@ -38,10 +40,9 @@ const post = async (
             res.json(result)
         })
         .then((data: any) => {
-            console.log(query.lo)
             data = query.wp ? data.filter((d: any) => d.workplace?.name === query.wp) : data
             data = query.lo ? data.filter((d: any) => d.workplace?.location === query.lo) : data
-            data = query.wt ? data.filter((d: any) => d.workplace?.worktype === query.wt) : data
+            // data = query.wt ? data.filter((d: any) => d.workplace?.worktype === query.wt) : data
             result.success = true
             result.data = data
             res.json(result)

@@ -41,7 +41,7 @@ const Page = ({ params }: Props) => {
     const [worktime, setWorkTime] = useState<string>("")
     const [worksalary, setWorksalary] = useState<string>("")
     const [workbenefit, setWorkbenefit] = useState<string>("")
-    const [location, setLocation] = useState<string>("")
+    // const [location, setLocation] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し仕事内容をシェアしてください。")
     const [newdetail, setNewDetail] = useState<string>("")
@@ -84,7 +84,7 @@ const Page = ({ params }: Props) => {
             setWorkplace(result.data[0].workplace)
             setWorktype(result.data[0].worktype)
             setWorkstatus(result.data[0].workstatus)
-            setLocation(result.data[0].location)
+            // setLocation(result.data[0].location)
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
@@ -183,7 +183,7 @@ const Page = ({ params }: Props) => {
                         }
                         <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
                         <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
-                        <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                        {/* <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} /> */}
                         <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                         <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                         <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
@@ -237,7 +237,7 @@ const Page = ({ params }: Props) => {
                 }
                 <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
                 <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
-                <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                {/* <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} /> */}
                 <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                 <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                 <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />

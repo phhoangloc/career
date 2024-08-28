@@ -82,11 +82,11 @@ const Page = ({ params }: Props) => {
                                         alt="cover" />
                                 </div>
                                 <div className='content'>
-                                    <h4>{item.title}・{item.workplace.location}</h4>
-                                    <li>{item.workplace.name}</li>
+                                    <h4>{item.title}・{item.workplace?.location}</h4>
+                                    <li>{item.workplace?.name}</li>
                                     <li>{item.worktype}</li>
                                     <li>{item.workstatus}</li>
-                                    <li>{item.workplace.location}</li>
+                                    <li>{item.workplace?.location}</li>
                                 </div>
                             </div>
                         ) :

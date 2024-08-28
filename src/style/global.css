@@ -679,6 +679,37 @@ div {
     width: 50%;
     padding: 2%;
   }
+  .contain_V2 .div_items .items .item_title {
+    margin-top: 20px;
+  }
+  .contain_V2 .div_items .items .item_title h4 {
+    opacity: 0.75;
+  }
+  .contain_V2 .div_items .items .item_title .contentTitle {
+    margin: 20px 0;
+    height: 75px;
+  }
+  .contain_V2 .div_items .items .item_title .tag {
+    display: flex;
+    margin-top: 15px;
+  }
+  .contain_V2 .div_items .items .item_title .tag p {
+    width: 75px;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 0 15px;
+    text-align: center;
+    margin: 0 5px 0 0;
+  }
+  .contain_V2 .div_items .items .item_title .tag svg {
+    border-radius: 50%;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    margin: 0 0 0 auto;
+  }
 }
 
 .footer {
@@ -704,6 +735,100 @@ div {
     margin: 0 25px;
     font-size: 17px;
   }
+}
+
+.archivePage {
+  min-height: calc(100vh - 100px);
+}
+
+.archivePage .div_items {
+  padding: 5% 0;
+}
+
+.archivePage .div_items .title {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.archivePage .div_items .title h2 {
+  color: #ee827d;
+}
+
+.archivePage .div_items .title h1 {
+  color: #133b3a;
+  font-weight: 500;
+  padding: 0 5px;
+  border-left: 3px solid #ee827d;
+  height: 40px;
+  line-height: 40px;
+  margin: 5px 0;
+}
+
+.archivePage .div_items .title .title_button {
+  width: max-content;
+  margin: 10px 0;
+}
+
+.archivePage .div_items .items {
+  width: 90%;
+  margin: 50px auto 0;
+  max-width: 1200px;
+}
+
+.archivePage .div_items .items .item {
+  padding: 1%;
+  margin: 25px auto;
+}
+
+.archivePage .div_items .items .item .item_frame {
+  height: 100%;
+  position: relative;
+}
+
+.archivePage .div_items .items .item .item_frame .cover {
+  width: 100%;
+  aspect-ratio: 1.5;
+  position: relative;
+  overflow: hidden;
+}
+
+.archivePage .div_items .items .item .item_frame .item_title {
+  margin-top: 20px;
+}
+
+.archivePage .div_items .items .item .item_frame .item_title p {
+  word-wrap: break-word;
+}
+
+.archivePage .div_items .items .item .item_frame .item_title .tag {
+  display: flex;
+  margin-top: 15px;
+}
+
+.archivePage .div_items .items .item .item_frame .item_title .tag p {
+  width: 75px;
+  height: 30px;
+  line-height: 30px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 0 15px;
+  text-align: center;
+  margin: 0 5px 0 0;
+}
+
+.archivePage .div_items .items .item .item_frame .item_title .tag svg {
+  border-radius: 50%;
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  margin: 0 0 0 auto;
+}
+
+.archivePage .div_items .items .item .item_frame .item_title .tag svg:hover {
+  color: white;
+  background-color: var(--main);
 }
 
 .searchPage,
