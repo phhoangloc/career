@@ -107,7 +107,7 @@ export default function Home() {
           <h2> Facility introduction</h2>
           <h1>施設紹介</h1>
           <div className="title_button">
-            <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+            <ButtonWeb name="施設⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/facility")} />
           </div>
         </div>
