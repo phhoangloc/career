@@ -91,7 +91,7 @@ const Page = (props: Props) => {
     }, [currentAlert.open])
 
     return (
-        <div style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px" }}>
+        <div style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px", overflow: "auto" }}>
             <div style={{ width: "max-content", margin: "0" }}>
                 <Button name='新規' onClick={() => toPage.push("facility/new")} />
             </div>

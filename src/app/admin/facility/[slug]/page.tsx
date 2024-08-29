@@ -14,7 +14,7 @@ import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
 import Script from 'next/script';
 import { NoUserAuthen } from '@/api/NoUserAuthen';
-
+import { japanRegions } from '@/lib/area';
 type Props = {
     params: { slug: string }
 }
@@ -41,6 +41,7 @@ const Page = ({ params }: Props) => {
 
     const [postnoView, setPostNoView] = useState<string>("")
     const [location, setLocation] = useState<string>("")
+    const [area, setArea] = useState<string>("")
     const [phone, setPhone] = useState<string>("")
     const [phoneWarn, setPhoneWarn] = useState<string>("")
     const [phoneView, setPhoneView] = useState<string>("")
@@ -66,6 +67,7 @@ const Page = ({ params }: Props) => {
         address,
         postno,
         location,
+        area,
         phone,
         fax,
         homepage,
@@ -193,6 +195,18 @@ const Page = ({ params }: Props) => {
             return ""
         }
     }
+    function formatArea(input: string) {
+        if (input) {
+            // console.log(japanRegions.filter(r =>r.region === japanRegions.map(r.prefectures.filter(p => p.name === input))))
+            japanRegions.map(r => {
+                if (r.prefectures.filter(p => p.name === input).length) {
+                    setArea(r.region);  // Trả về tên khu vực nếu tìm thấy tỉnh
+                }
+            })
+        } else {
+            return ""
+        }
+    }
     useEffect(() => {
     }, [fax])
     useEffect(() => {
@@ -202,6 +216,10 @@ const Page = ({ params }: Props) => {
     useEffect(() => {
         setFaxView(formatFaxNumber(fax))
     }, [fax])
+
+    useEffect(() => {
+        formatArea(location)
+    }, [location])
 
     const getAddressFacility = async (pNo: string) => {
         const result = await NoUserAuthen.getAddress(pNo)
@@ -215,6 +233,7 @@ const Page = ({ params }: Props) => {
         postno.length === 7 && getAddressFacility(postno)
         setPostNoView(formatPostNo(postno))
     }, [postno])
+
     switch (params.slug) {
         case "new":
             return (
@@ -236,6 +255,7 @@ const Page = ({ params }: Props) => {
                         <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" />
                         <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                         <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                        <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
                         <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                         <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
                         <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
@@ -271,6 +291,7 @@ const Page = ({ params }: Props) => {
                 <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} warn={postnoWarn} sx="p-postal-code" />
                 <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                 <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
                 <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                 <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
                 <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />

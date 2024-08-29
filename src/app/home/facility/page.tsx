@@ -6,7 +6,7 @@ import { NoUserAuthen } from '@/api/NoUserAuthen'
 import Image from 'next/image'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Pagination from '@/component/tool/pagination'
-
+import { japanRegions } from '@/lib/area'
 const formatPostNo = (input: string) => {
     if (input) {
         const digits = input.replace(/\D/g, '');
@@ -27,16 +27,20 @@ const Page = (props: Props) => {
     const [id, setId] = useState<string>("")
 
     const toPage = useRouter()
+    const [allData, setAllData] = useState<any[]>([])
     const [data, setData] = useState<any[]>([])
     const [search, setSearch] = useState<string>("")
+    const [area, setArea] = useState<string>("")
+    const [location, setLocation] = useState<string>("")
     const [page, setPage] = useState<number>(0)
     const [limit, setLimit] = useState<number>(18)
     const [end, setEnd] = useState<boolean>(false)
+    const [endPlusOne, setEndPlusOne] = useState<boolean>(false)
 
     const [selectId, setSelectId] = useState<string[]>([])
 
-    const getPost = async (a: string, s: string, sk: number, li: number) => {
-        const result = await NoUserAuthen.getItem(a, s, "", "", "", "", sk, li)
+    const getPost = async (a: string, s: string, sk: number, li: number, area: string, lo: string) => {
+        const result = await NoUserAuthen.getItem(a, s, "", "", "", lo, sk, li, area)
         if (result.success) {
             setData(result.data)
             setLoading(false)
@@ -46,24 +50,67 @@ const Page = (props: Props) => {
             setLoading(false)
         }
     }
-    const getPost_v2 = async (a: string, s: string, sk: number, li: number) => {
-        const result = await NoUserAuthen.getItem(a, s, "", "", "", "", sk, li)
+    const getPost_v2 = async (a: string, s: string, sk: number, li: number, area: string, lo: string) => {
+        const result = await NoUserAuthen.getItem(a, s, "", "", "", lo, sk, li, area)
         if (result.success) {
             setEnd(result.data.length ? false : true)
         }
     }
-
+    const getPost_v3 = async (a: string, s: string, sk: number, li: number, area: string, lo: string) => {
+        const result = await NoUserAuthen.getItem(a, s, "", "", "", lo, sk, li, area)
+        if (result.success) {
+            setEndPlusOne(result.data.length ? false : true)
+        }
+    }
     useEffect(() => {
-        getPost("facility", search, page * limit, limit)
-        getPost_v2("facility", search, (page + 1) * limit, limit)
-    }, [refresh, search, page])
+        getPost("facility", search, page * limit, limit, area, location)
+        getPost_v2("facility", search, (page + 1) * limit, limit, area, location)
+        getPost_v3("facility", search, (page + 2) * limit, limit, area, location)
+    }, [refresh, search, page, area, location])
+
+
+    const getAllPost = async (a: string,) => {
+        const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, undefined,)
+        if (result.success) {
+            setAllData(result.data)
+        } else {
+            setAllData([])
+            setNotice(result.message)
+        }
+    }
+    useEffect(() => {
+        getAllPost("facility")
+    }, [])
+
+    const JapanRegionsReturn = ({ r, data }: any) => {
+
+        return (r.map(((r: any, index: number) => {
+            let number = 0
+            r.prefectures.map((p: any) => {
+                data.map(((d: any) => {
+                    p.name === d.location ? number = number + 1 : number
+                }))
+            })
+            return <div key={index} className={`region_title ${area === r.region ? "region_title_select" : ""}`} onClick={() => { setPage(0), setLocation(""), setArea(r.region) }}>{r.region + "(" + number + ")"}</div>
+
+        }))
+        )
+    }
+
 
     return (
         <div className='archivePage'>
-            <div className="div_items" id="f">
+            <div className="div_items">
                 <div className="title">
                     <h2> Facility introduction</h2>
                     <h1>施設紹介</h1>
+                </div>
+                <div className="title">
+                    {/* {japanRegions.map((r, index) => <h3 key={index}>{r.region}{`（${r.prefectures.map(p => p.name ===)}）`}</h3>)} */}
+                    <div className="region">
+                        <div className={`region_title ${area === "" ? "region_title_select" : ""}`} onClick={() => { setPage(0), setLocation(""), setArea("") }}>全国</div>
+                        <JapanRegionsReturn r={japanRegions} data={allData} />
+                    </div>
                 </div>
 
                 <div className="items grid_box" >
@@ -71,8 +118,8 @@ const Page = (props: Props) => {
                         loading ? <p>Loading...</p> :
                             data?.length ? data?.map((d: any, index: number) =>
                                 <div key={index} className='item xs12 md6'>
-                                    <div className="item_frame " onClick={() => toPage.push("/home/facility/" + d?.slug)} >
-                                        <div className="cover">
+                                    <div className="item_frame "  >
+                                        <div className="cover" onClick={() => toPage.push("/home/facility/" + d?.slug)}>
                                             {d?.image?.name ?
                                                 <Image src={process.env.FTP_URL + "img/career/" + d?.image?.name} width={500} height={500} style={{ width: "auto", height: "100%" }} alt="home" /> :
                                                 <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}</div>
@@ -82,8 +129,9 @@ const Page = (props: Props) => {
                                             <p>{d.address.split("　")[0]}</p>
                                             <p>{d.address.split("　")?.[1] ? d.address.split("　")?.[1] : "---"}</p>
                                             <div className="tag">
-                                                <p>{d?.location}</p>
-                                                <KeyboardArrowRightIcon />
+                                                {d?.area ? <p onClick={() => { setPage(0), setLocation(""); setArea(d?.area) }}>{d?.area}</p> : ""}
+                                                <p onClick={() => { setPage(0), setLocation(d?.location) }}>{d?.location}</p>
+                                                <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + d?.slug)} />
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +139,7 @@ const Page = (props: Props) => {
                     }
 
                 </div>
-                <Pagination page={page} next={() => { toPage.push("#"), setPage(p => p + 1) }} prev={() => { toPage.push("#"), setPage(p => p - 1) }} end={end} />
+                <Pagination page={page} next={() => { toPage.push("#"), setPage(p => p + 1) }} prev={() => { toPage.push("#"), setPage(p => p - 1) }} end={end} onClick={(p) => { toPage.push("#"), setPage(p) }} end2={endPlusOne} />
             </div>
         </div>
     )

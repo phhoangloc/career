@@ -28,6 +28,9 @@ const facilitySchema = new Schema({
     location: {
         type: String,
     },
+    area: {
+        type: String,
+    },
     phone: {
         type: String,
     },

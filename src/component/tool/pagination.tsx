@@ -2,20 +2,24 @@ import React from 'react'
 
 
 type Props = {
+
     page: number,
     next: () => void,
+    onClick?: (e: number) => void,
     prev: () => void,
-    end?: boolean
+    end?: boolean,
+    end2?: boolean,
+
 }
 
-const Pagination = ({ page, next, prev, end }: Props) => {
-
+const Pagination = ({ page, next, prev, end, end2, onClick }: Props) => {
     const boxStyle: React.CSSProperties = {
-        width: "60px",
+        minWidth: "30px",
         height: "30px",
-        lineHeight: "40px",
+        lineHeight: "30px",
         cursor: "pointer",
-        textAlign: "center"
+        textAlign: "center",
+        margin: "0px 15px"
     }
     return (
         <div style={{ display: "flex", width: "max-content", margin: "auto auto 0" }}>
@@ -24,9 +28,31 @@ const Pagination = ({ page, next, prev, end }: Props) => {
                 <div style={boxStyle} onClick={() => prev()}>
                     前に
                 </div>}
-            <div style={boxStyle}>
-                {page + 1}
-            </div>
+            {page >= 2 ?
+                <div style={boxStyle} onClick={() => onClick && onClick(page - 2)}>
+                    {page - 1}
+                </div> :
+                null
+            }
+            {page >= 1 ?
+                <div style={boxStyle} onClick={() => onClick && onClick(page - 1)}>
+                    {page}
+                </div> :
+                null
+            }
+            {
+                <div style={{ ...boxStyle, fontWeight: "bold", background: "white", borderRadius: "50%" }}>
+                    {page + 1}
+                </div>
+            }
+            {!end ?
+                <div style={boxStyle} onClick={() => onClick && onClick(page + 1)}>
+                    {page + 2}
+                </div> : null}
+            {!end2 ?
+                <div style={boxStyle} onClick={() => onClick && onClick(page + 2)}>
+                    {page + 3}
+                </div> : null}
             {end ? <div style={boxStyle} /> :
                 <div style={boxStyle} onClick={() => next()}>
                     つづき

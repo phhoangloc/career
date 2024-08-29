@@ -44,6 +44,13 @@ const Page = ({ params }: Props) => {
     return (
         newData._id ?
             <div className='detailPage facilityPage'>
+                <div className="detail">
+                    <div className='breadcum'>
+                        <h4 onClick={() => toPage.push("/home")}>home</h4>
+                        <h4>/</h4>
+                        <h4 onClick={() => toPage.push("/home/facility")}>facility</h4>
+                    </div>
+                </div>
                 {newData.work.length ?
                     <>
                         <div className='title_facility'>
@@ -67,42 +74,43 @@ const Page = ({ params }: Props) => {
                 }
 
                 <div className='title_facility'>
-                    <p>事業概要</p>
+                    <p>施設紹介</p>
                 </div>
                 <div className="detail">
 
                     <div className='content'>
                         <div className='content_title'>
-                            <h2>{newData.name}</h2>
+                            <h2>{newData.contenttitle}</h2>
+                            <h1>{newData.name}</h1>
+                            <div className='image_box'>
+                                <div className='image'>
+                                    {newData.image?.name ?
+                                        <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt="home" /> :
+                                        <div className='altImage'></div>
+                                    }
+                                </div>
+                            </div>
                             <h3><span>〒{formatPostNo(newData.postno)}</span> </h3>
-                            <h3>{newData.address.split("　")[0]}</h3>
-                            <h3>{newData.address.split("　")?.[1] ? newData.address.split("　")?.[1] : "---"}</h3>
+                            <h3>{newData.address}</h3>
+                            {/* <h3>{newData.address.split("　")?.[1] ? newData.address.split("　")?.[1] : "---"}</h3> */}
                             <div className='social_icon'>
                                 <Link href={newData.homepage} target='_blank'><HomeIcon /></Link>
-                                <Image src={"/img/twitterx-50.png"} width={30} height={30} alt='x' />
+                                {/* <Image src={"/img/twitterx-50.png"} width={30} height={30} alt='x' />
                                 <InstagramIcon />
-                                <YouTubeIcon />
+                                <YouTubeIcon /> */}
                             </div>
                         </div>
-                        <div className='image_box'>
-                            <div className='image'>
-                                {newData.image?.name ?
-                                    <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt="home" /> :
-                                    <Image src={"/img/home.jpg"} width={500} height={500} style={{ width: "100%", height: "auto" }} alt="home" />}
-                                <PlayArrowIcon />
-                            </div>
-                        </div>
+
                     </div>
-                    <div className='content_content' style={{ marginTop: "15px" }}>
-                        <h4>{newData.contenttitle}</h4>
+                    <div className='content'>
                         <div className='dangerousBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
                     </div>
-
+                    <div className="content">
+                        <div className='altImage'></div>
+                    </div>
                 </div>
 
 
-                <p style={{ width: "max-content", margin: "25px auto 0", padding: "10px 20px", borderRadius: "5px", background: "white", fontSize: "1.25rem", fontWeight: "bold", boxShadow: "1px 1px 5px", cursor: "pointer" }}
-                    onClick={() => toPage.push("/home")}>ホームページへ</p>
 
             </div > :
             <div className='detailPage facilityPage'></div>

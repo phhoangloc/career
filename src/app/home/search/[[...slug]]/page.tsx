@@ -7,6 +7,8 @@ import SearchTool from '@/component/searchTool'
 import SearchIcon from '@mui/icons-material/Search';
 import '../../../../style/grid.css'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
+import Button from '@/component/input/button'
+import Pagination from '@/component/tool/pagination'
 type Props = {
     params: { slug: string[] }
 }
@@ -61,39 +63,51 @@ const Page = ({ params }: Props) => {
             <div className="div_items div_items_bg_blue">
                 <SearchTool />
             </div>
-            <div className={`searchPage_max ${searchModal ? "searchPage_max_open" : ""}`}>
-                <div className='result_div'>
-                    <div className='title'>
-                        <h1>検索結果</h1>
-                        <p style={{ height: "30px" }}></p>
-                    </div>
-                    {newData.length ?
-                        uniqueArray.map((item, index) =>
-                            <div key={index} className='item flexbox' style={{ cursor: "pointer" }} onClick={() => toPage.push("/home/" + item.archive + "/" + item.slug)}>
-                                <div className='image' style={{
-                                    position: "relative",
-                                }}>
-                                    <Image src={process.env.FTP_URL + "img/career/" + item.image.name} fill
-                                        style={{
-                                            objectFit: 'cover',
-                                        }}
-                                        alt="cover" />
-                                </div>
-                                <div className='content'>
-                                    <h4>{item.title}・{item.workplace?.location}</h4>
-                                    <li>{item.workplace?.name}</li>
-                                    <li>{item.worktype}</li>
-                                    <li>{item.workstatus}</li>
-                                    <li>{item.workplace?.location}</li>
+            <div className='title'>
+                <h1>検索結果</h1>
+                <h2>--- {uniqueArray.length} ---</h2>
+                <p style={{ height: "30px" }}></p>
+            </div>
+
+            <div className={`content`}>
+                {newData.length ?
+                    uniqueArray.map((item, index) =>
+                        <div key={index} className='item'>
+                            <div className="item-col">
+                                <h2>{item.workplace?.name}</h2>
+                                <h4>〒{item.workplace?.postno}</h4>
+                                <h3>{item.workplace?.address.split("　")[0]}</h3>
+                                <h3>{item.workplace?.address.split("　")[1] ? item.workplace?.address.split("　")[1] : ""}</h3>
+                                <p>{item.workplace?.location}</p>
+                            </div>
+                            <div className="item-col item-img">
+                                {item.workplace?.image?.name ?
+                                    <Image src={process.env.FTP_URL + "img/career/" + item.workplace?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
+                                    <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}
+                            </div>
+                            <div className='item-content'>
+                                <h3 style={{ padding: "0px 10px" }}>{item.title}</h3>
+                                <p style={{ padding: "0px 10px" }}>{item.contenttitle}</p>
+                                <div style={{ padding: "10px", marginTop: "10px", borderTop: "1px solid #aaa" }}>
+                                    <h4>職種：<span>{item.worktype}</span></h4>
+                                    <h4>雇用形態：<span>{item.workstatus}</span></h4>
+                                    <h4>通勤時間：<span>{item.worktime}</span></h4>
+                                    <h4>有給休暇：<span>{item.workbenefit}</span></h4>
+                                    <h4>月給：<span>{item.worksalary}</span></h4>
                                 </div>
                             </div>
-                        ) :
-                        <div>
-                            <h2 style={{ textAlign: "center" }}>結果がありません。</h2>
-                        </div>}
-                </div>
+                            <div className='button'>
+                                <Button name='詳細を見る' onClick={() => toPage.push("/home/post/" + item.slug)} />
+                            </div>
+                        </div>
+                    ) :
+                    <div>
+                        <h2 style={{ textAlign: "center" }}>結果がありません。</h2>
+                    </div>}
             </div>
-        </div>
+
+            <Pagination page={page} next={() => setPage(p => p + 1)} prev={() => setPage(p => p - 1)} end={true} end2={true} />
+        </div >
     )
 }
 

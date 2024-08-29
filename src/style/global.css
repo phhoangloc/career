@@ -76,6 +76,10 @@ div {
   border: none;
   box-shadow: 1px 1px 5px 0px #888;
   border-radius: 5px;
+  padding: 0 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .searchTool .grid_box .selectbox select option {
@@ -601,7 +605,8 @@ div {
 }
 
 .contain_V2 .div_items .title .title_button {
-  width: max-content;
+  width: 90%;
+  max-width: 275px;
   margin: 10px 0;
 }
 
@@ -714,16 +719,21 @@ div {
 
 .footer {
   background-color: white;
-  padding: 10px;
+  padding: 2.5%;
 }
 
 .footer .column {
-  color: var(--main);
+  color: #666;
 }
 
-.footer .column li {
-  font-size: 0.9rem;
-  line-height: 1.5;
+.footer .column h2 {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer .column p {
+  margin-bottom: 5px;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {
@@ -771,6 +781,30 @@ div {
   margin: 10px 0;
 }
 
+.archivePage .div_items .title .region {
+  margin: 50px 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.archivePage .div_items .title .region .region_title {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px;
+  max-width: 200px;
+  text-align: center;
+  background-color: white;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.archivePage .div_items .title .region .region_title_select,
+.archivePage .div_items .title .region .region_title:hover {
+  background-color: var(--main);
+  color: white;
+}
+
 .archivePage .div_items .items {
   width: 90%;
   margin: 50px auto 0;
@@ -778,8 +812,8 @@ div {
 }
 
 .archivePage .div_items .items .item {
-  padding: 1%;
-  margin: 25px auto;
+  padding: 10px;
+  margin: 25px 0;
 }
 
 .archivePage .div_items .items .item .item_frame {
@@ -797,6 +831,11 @@ div {
 
 .archivePage .div_items .items .item .item_frame .cover img {
   transition: all 0.25s;
+}
+
+.archivePage .div_items .items .item .item_frame .cover:hover img {
+  transform: scale(1.05);
+  opacity: 0.5;
 }
 
 .archivePage .div_items .items .item .item_frame .item_title {
@@ -831,31 +870,23 @@ div {
   margin: 0 0 0 auto;
 }
 
-.archivePage .div_items .items .item .item_frame:hover .cover img {
-  transform: scale(1.05);
-  opacity: 0.5;
-}
-
-.archivePage .div_items .items .item .item_frame:hover .item_title .tag p,
-.archivePage .div_items .items .item .item_frame:hover .item_title .tag svg {
+.archivePage .div_items .items .item .item_frame .item_title .tag p:hover,
+.archivePage .div_items .items .item .item_frame .item_title .tag svg:hover {
   background-color: var(--main);
   color: white;
 }
 
-.searchPage,
 .detailPage {
   min-height: calc(100vh - 100px);
   padding: 50px 0;
 }
 
-.searchPage .title,
 .detailPage .title {
   text-align: center;
   line-height: 1;
   padding: 20px 0 0;
 }
 
-.searchPage .item,
 .detailPage .item {
   background-color: white;
   width: 90%;
@@ -865,12 +896,10 @@ div {
   box-shadow: 0px 1px 5px #333;
 }
 
-.searchPage .item .image,
 .detailPage .item .image {
   width: 30%;
 }
 
-.searchPage .item .content,
 .detailPage .item .content {
   width: 70%;
   font-size: 15px;
@@ -878,19 +907,16 @@ div {
   padding: 10px;
 }
 
-.searchPage .item .content h4,
 .detailPage .item .content h4 {
   font-size: 110%;
   margin-bottom: 5px;
 }
 
-.searchPage .item .content li,
 .detailPage .item .content li {
   font-size: 90%;
   opacity: 0.75;
 }
 
-.searchPage .item .content p,
 .detailPage .item .content p {
   margin-top: 5px;
   font-size: 90%;
@@ -899,7 +925,6 @@ div {
   text-overflow: ellipsis;
 }
 
-.searchPage .detail,
 .detailPage .detail {
   width: 90%;
   max-width: 768px;
@@ -911,87 +936,77 @@ div {
   line-height: 1.5;
 }
 
-.searchPage .detail h1,
 .detailPage .detail h1 {
   font-size: 1.25rem;
 }
 
-.searchPage .detail h2,
 .detailPage .detail h2 {
   font-size: 1.15rem;
 }
 
-.searchPage .detail h3,
 .detailPage .detail h3 {
   font-size: 0.9rem;
   color: darkcyan;
 }
 
-.searchPage .detail h3 span,
 .detailPage .detail h3 span {
   opacity: 0.75;
 }
 
-.searchPage .detail h4,
 .detailPage .detail h4 {
   font-size: 1rem;
   color: var(--main);
 }
 
-.searchPage .detail .content,
 .detailPage .detail .content {
-  padding: 25px 5%;
+  width: 90%;
+  padding: 25px 0;
+  margin: auto;
 }
 
-.searchPage .detail .content .text,
 .detailPage .detail .content .text {
   padding-top: 25px;
 }
 
-.searchPage .detail .content .text div,
 .detailPage .detail .content .text div {
   margin: 10px 0;
 }
 
+.detailPage .detail .content .dangerousBox {
+  min-height: 400px;
+}
+
 @media (min-width: 575px) {
-  .searchPage .detail h1,
   .detailPage .detail h1 {
     font-size: 1.5rem;
   }
-  .searchPage .detail h2,
   .detailPage .detail h2 {
     font-size: 1.25rem;
     margin-bottom: 10px;
   }
-  .searchPage .detail h3,
   .detailPage .detail h3 {
     font-size: 1rem;
   }
 }
 
 @media (min-width: 768px) {
-  .searchPage .detail,
   .detailPage .detail {
     padding: 50px;
   }
-  .searchPage .detail h4,
   .detailPage .detail h4 {
     font-size: 1rem;
   }
 }
 
-.searchPage .apply h4,
 .detailPage .apply h4 {
   width: 75px;
   line-height: 24px;
 }
 
-.searchPage .apply p,
 .detailPage .apply p {
   margin: 0 5px;
 }
 
-.searchPage .apply .button,
 .detailPage .apply .button {
   width: 250px;
   height: 40px;
@@ -1012,7 +1027,7 @@ div {
 .facilityPage .title_facility {
   width: 90%;
   margin: 20px auto 0;
-  max-width: 768px;
+  max-width: 992px;
 }
 
 .facilityPage .title_facility p {
@@ -1031,7 +1046,7 @@ div {
 
 .facilityPage .detail {
   width: 90%;
-  max-width: 768px;
+  max-width: 992px;
   margin: auto;
   background-color: white;
   border-radius: 5px;
@@ -1040,26 +1055,41 @@ div {
   line-height: 1.5;
 }
 
-.facilityPage .detail h2 {
-  font-size: 1.15rem;
+.facilityPage .detail .breadcum {
+  display: flex;
 }
 
-.facilityPage .detail h3 {
-  font-size: 0.9rem;
-  color: darkcyan;
+.facilityPage .detail .breadcum h4 {
+  margin: 0px 5px;
+  cursor: pointer;
 }
 
-.facilityPage .detail h3 span {
+.facilityPage .detail .breadcum h4:hover {
+  text-decoration: underline;
+}
+
+.facilityPage .detail .content h1 {
+  margin-bottom: 30px;
+  color: var(--main);
+}
+
+.facilityPage .detail .content h2 {
+  margin-bottom: 0px;
   opacity: 0.75;
 }
 
-.facilityPage .detail h4 {
-  font-size: 1rem;
-  color: var(--main);
+.facilityPage .detail .content h3 {
+  margin-bottom: 0px;
+  font-size: 1.25rem;
+}
+
+.facilityPage .detail .content .facility_name {
+  color: inherit;
 }
 
 .facilityPage .detail .content .image_box {
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .facilityPage .detail .content .image_box .image {
@@ -1095,60 +1125,104 @@ div {
   color: inherit;
 }
 
-@media (min-width: 575px) {
-  .facilityPage .detail h2 {
-    font-size: 1.25rem;
-    margin-bottom: 10px;
-  }
-  .facilityPage .detail h3 {
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .facilityPage .detail {
-    padding: 50px;
-  }
-  .facilityPage .detail h4 {
-    font-size: 1rem;
-  }
-  .facilityPage .detail .content {
-    display: flex;
-    padding: 0;
-  }
-  .facilityPage .detail .content .image_box {
-    width: 50%;
-    padding-left: 5%;
-  }
-  .facilityPage .detail .content .image_box .content_title {
-    width: 50%;
-  }
+.facilityPage .detail .content .altImage {
+  width: 100%;
+  aspect-ratio: 2.5;
+  background-color: #aaa;
+  border-radius: 5px;
 }
 
 .searchPage {
   background-color: var(--second);
-}
-
-.searchPage .div_items_bg_blue {
   padding: 50px 0;
 }
 
-.searchPage .div_items_bg_blue .title {
-  margin: 0;
+.searchPage .title {
+  width: 100%;
+  text-align: center;
+}
+
+.searchPage .content {
   width: 90%;
   margin: auto;
-  max-width: 1200px;
-  text-align: left;
 }
 
-.searchPage .div_items_bg_blue h2 {
-  color: #457cea !important;
+.searchPage .content .item {
+  background-color: white;
+  margin: 5% 0;
+  padding: 5%;
+  border-radius: 5px;
 }
 
-.searchPage .div_items_bg_blue h1 {
-  border-color: #457cea !important;
+.searchPage .content .item .item-col {
+  width: 100%;
+  padding: 10px;
+  position: relative;
 }
 
-.searchPage .searchPage_max {
-  padding: 10px 0;
+.searchPage .content .item .item-col h2 {
+  margin-bottom: 10px;
+  color: var(--main);
+}
+
+.searchPage .content .item .item-col h3 {
+  margin-bottom: 5px;
+}
+
+.searchPage .content .item .item-col h4 {
+  opacity: 0.5;
+}
+
+.searchPage .content .item .item-col p {
+  font-size: 0.9rem;
+  margin: 20px 0;
+  border-radius: 20px;
+  height: 20px;
+  line-height: 20px;
+  background-color: var(--main);
+  color: white;
+  width: max-content;
+  padding: 5px 20px;
+}
+
+.searchPage .content .item .item-img {
+  overflow: hidden;
+  aspect-ratio: 1.5;
+}
+
+.searchPage .content .item .item-content {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px;
+  margin-top: 30px;
+  border-radius: 5px;
+}
+
+.searchPage .content .item .item-content h3 {
+  margin-bottom: 5px;
+  color: var(--main);
+}
+
+.searchPage .content .item .item-content h4 {
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.searchPage .content .item .item-content h4 span {
+  font-weight: bold;
+}
+
+.searchPage .content .item .button {
+  width: max-content;
+  margin: 25px auto;
+}
+
+@media (min-width: 768px) {
+  .searchPage .content .item {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .searchPage .content .item .item-col {
+    width: 50%;
+  }
 }

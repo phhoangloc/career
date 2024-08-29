@@ -29,19 +29,19 @@ const Header = () => {
                     <CloseIcon style={{ position: "absolute", top: "5px", right: "5px" }} onClick={() => setMenu(false)} />
                 </div>
 
-                <div className='item'>
-                    {itemModal ? null : <p onClick={() => setItemModal(true)}>仕事を探す <KeyboardArrowDownIcon /></p>}
-                    <div className={`children ${itemModal ? "children_on" : ""}`}>
+                {/* <div className='item'> */}
+                <p onClick={() => toPage.push("/home/search/a/b/c/d")} >仕事を探す </p>
+                {/* <div className={`children ${itemModal ? "children_on" : ""}`}>
                         <p onClick={() => setItemModal(false)} >仕事を探す<KeyboardArrowDownIcon /></p>
                         <p onClick={() => toPage.push("/home/search/a/b/c/d")}>施設で探す</p>
                         <p onClick={() => toPage.push("/home/search/a/b/c/d")}>職種で探す</p>
                         <p onClick={() => toPage.push("/home/search/a/b/c/d")}>雇用形態で探す</p>
                         <p onClick={() => toPage.push("/home/search/a/b/c/d")}>エリアで探す</p>
-                        {/* <p>人気タグで探す</p> */}
-                    </div>
-                </div>
-                <p>業界を知る <KeyboardArrowDownIcon /></p>
-                <p onClick={() => toPage.push("/home/facility")}>施設の方へ</p>
+                        <p>人気タグで探す</p>
+                    </div> */}
+                {/* </div> */}
+                {/* <p>業界を知る <KeyboardArrowDownIcon /></p> */}
+                <p onClick={() => toPage.push("/home/facility")}>施設一覧</p>
                 <p>お知らせ</p>
                 <div className='header_input'><input value={search} onChange={(e) => setSearch(e.target.value)} /><SearchIcon /></div>
             </div>

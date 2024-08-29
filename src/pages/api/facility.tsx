@@ -21,6 +21,8 @@ const interview = async (
         .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
+        .find(query.area ? { "area": query.area } : {})
+        .find(query.lo ? { "location": query.lo } : {})
         .populate("image")
         .populate("work")
         .sort({ "createDate": -1 })

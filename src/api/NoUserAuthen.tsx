@@ -12,8 +12,8 @@ const signup = async (body: { username: string, password: string, email: string 
     return result.data
 }
 
-const getItem = async (archive: string, search: string, wp: string, wt: string, ws: string, lo: string, skip: number | undefined, limit: number | undefined) => {
-    const result = await axios.get("/api/" + archive + `?archive=${archive}&search=${search ? search : ""}&wp=${wp ? wp : ""}&wt=${wt ? wt : ""}&ws=${ws ? ws : ""}&lo=${lo ? lo : ""}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}`)
+const getItem = async (archive: string, search: string, wp: string, wt: string, ws: string, lo: string, skip: number | undefined, limit: number | undefined, area?: string) => {
+    const result = await axios.get("/api/" + archive + `?archive=${archive}&search=${search ? search : ""}&wp=${wp ? wp : ""}&wt=${wt ? wt : ""}&ws=${ws ? ws : ""}&lo=${lo ? lo : ""}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}&area=${area ? area : ""}`)
     return result.data
 }
 

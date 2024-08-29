@@ -106,11 +106,12 @@ export default function Home() {
         <div className="title">
           <h2> Facility introduction</h2>
           <h1>施設紹介</h1>
+          <div className="title_button">
+            <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+              onClick={() => toPage.push("/home/facility")} />
+          </div>
         </div>
         <div className="items" >
-
-          {/* // facility ? facility.map((f, index) => */}
-
           <div className="item" >
             <div className="cover">
               {facility[0]?.image?.name ?
@@ -121,7 +122,6 @@ export default function Home() {
               <h4>{facility[0]?.name}</h4>
               <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[0]?.content, "<h3>", "</h3>") }}></div>
               <div className="tag">
-                {/* <p>{facility[0]?.worktype}</p> */}
                 <p>{facility[0]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[0]?.slug)} />
               </div>
@@ -138,13 +138,11 @@ export default function Home() {
               <h4>{facility[1]?.name}</h4>
               <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[1]?.content, "<h3>", "</h3>") }}></div>
               <div className="tag">
-                {/* <p>{facility[1]?.worktype}</p> */}
                 <p>{facility[1]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[1].slug)} />
               </div>
             </div>
           </div>
-          {/* // ) : null */}
 
         </div>
       </div>
@@ -153,8 +151,9 @@ export default function Home() {
           <h2>Interview</h2>
           <h1>先輩たちの声 </h1>
           <div className="title_button">
-            <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px auto" }} />}
-              onClick={() => toPage.push("/home/interview")} /></div>
+            <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+              onClick={() => toPage.push("/home/interview")} />
+          </div>
         </div>
         <div className="items">
           <div className="item">

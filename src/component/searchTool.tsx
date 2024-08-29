@@ -5,6 +5,7 @@ import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlin
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import Button from './input/button';
 import { NoUserAuthen } from '@/api/NoUserAuthen';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 type Props = {}
 
 const SearchTool = (props: Props) => {
@@ -128,6 +129,7 @@ const SearchTool = (props: Props) => {
             </div>
             <div className='grid_box'>
                 <div className='selectbox xs12 md6 lg4'>
+                    <KeyboardArrowDownIcon style={{ position: "absolute", right: "20px", top: "25px" }} />
                     <select onChange={(e) => setwp(e.target.value)}>
                         <option value={undefined}>施設</option>
                         {workplaces.map((item: any, index: any) =>
@@ -136,6 +138,7 @@ const SearchTool = (props: Props) => {
                     </select>
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
+                    <KeyboardArrowDownIcon style={{ position: "absolute", right: "20px", top: "25px" }} />
                     <select onChange={(e) => setwt(e.target.value)}>
                         <option value={undefined}>職種</option>
                         {worktypes.map((item, index) =>
@@ -144,6 +147,7 @@ const SearchTool = (props: Props) => {
                     </select>
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
+                    <KeyboardArrowDownIcon style={{ position: "absolute", right: "20px", top: "25px" }} />
                     <select onChange={(e) => setstt(e.target.value)}>
                         <option value={undefined}>雇用形態</option>
                         {workstatus.map((item, index) =>
