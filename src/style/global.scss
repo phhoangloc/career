@@ -977,6 +977,11 @@ div {
         }
 
         h2 {
+            span {
+                font-size: 75%;
+                opacity: 0.75;
+            }
+
             font-size: 1.15rem;
         }
 
@@ -1039,54 +1044,58 @@ div {
     }
 
     .apply {
-        h4 {
-            width: 75px;
-            line-height: 24px
+
+        .apply_item {
+            margin-bottom: 10px;
+
+            h4 {
+                width: 75px;
+                line-height: 24px
+            }
+
+            p {
+                font-weight: 500;
+
+                span {
+                    font-weight: normal;
+                    font-size: 75%;
+                }
+            }
+
+            @media (min-width:575px) {
+                display: flex;
+            }
         }
 
-        p {
-            margin: 0 5px;
-        }
+    }
 
-        .button {
-            width: 250px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 5px;
-            background-color: var(--main);
-            color: white;
-            font-weight: bold;
-            text-align: center;
-            margin: 50px auto 0;
-            cursor: pointer;
-        }
+    .button {
+        width: 250px;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 5px;
+        background-color: var(--main);
+        color: white;
+        font-weight: bold;
+        text-align: center;
+        margin: 50px auto;
+        cursor: pointer;
+    }
+
+    .title_facility {
+        background-color: var(--main);
+        color: white;
+        width: max-content;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 5px 20px;
+        margin-left: calc(5% + 10px);
+
     }
 }
 
 .facilityPage {
     background-color: var(--second);
-
-    .title_facility {
-        width: 90%;
-        margin: 20px auto 0;
-        max-width: 992px;
-
-        p {
-            height: 40px;
-            width: 125px;
-            line-height: 40px;
-            margin: 0 10px;
-            background-color: var(--main);
-            color: white;
-            text-align: center;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-    }
-
-
 
     .detail {
         width: 90%;
@@ -1126,6 +1135,7 @@ div {
             h3 {
                 margin-bottom: 0px;
                 font-size: 1.25rem;
+                color: inherit;
             }
 
             .facility_name {
@@ -1135,8 +1145,6 @@ div {
             .image_box {
                 width: 100%;
                 margin-bottom: 20px;
-
-
 
                 ;
 
@@ -1181,6 +1189,11 @@ div {
                 aspect-ratio: 2.5;
                 background-color: #aaa;
                 border-radius: 5px;
+
+                h1 {
+                    color: white;
+                    margin: 0;
+                }
             }
         }
 
@@ -1237,6 +1250,36 @@ div {
                     width: max-content;
                     padding: 5px 20px;
                 }
+
+                .item-content {
+                    width: 100%;
+                    min-height: 100px;
+                    margin-top: 30px;
+                    // box-shadow: 0px 0px 1px #888;
+                    border-radius: 5px;
+
+                    h3 {
+                        margin-bottom: 5px;
+                        color: var(--main);
+                    }
+
+                    h4 {
+                        font-weight: normal;
+                        margin-bottom: 5px;
+
+                        span {
+                            font-weight: bold;
+                        }
+                    }
+
+                    p {
+                        background-color: inherit;
+                        color: inherit;
+                        padding: 0;
+                        margin: 0;
+                    }
+
+                }
             }
 
             .item-img {
@@ -1244,28 +1287,7 @@ div {
                 aspect-ratio: 1.5
             }
 
-            .item-content {
-                width: 100%;
-                min-height: 100px;
-                padding: 10px;
-                margin-top: 30px;
-                // box-shadow: 0px 0px 1px #888;
-                border-radius: 5px;
 
-                h3 {
-                    margin-bottom: 5px;
-                    color: var(--main);
-                }
-
-                h4 {
-                    font-weight: normal;
-                    margin-bottom: 5px;
-
-                    span {
-                        font-weight: bold;
-                    }
-                }
-            }
 
             .button {
                 width: max-content;

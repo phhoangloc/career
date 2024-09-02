@@ -4,7 +4,7 @@ import { isDataType } from '@/type/resultType'
 import { facilityModel } from '@/model/facility.model'
 import { ImageModel } from '@/model/image.model'
 import { postModel } from '@/model/post.model'
-
+import { japanRegions } from '@/lib/area'
 const interview = async (
     req: NextApiRequest,
     res: NextApiResponse
@@ -25,7 +25,6 @@ const interview = async (
         .find(query.lo ? { "location": query.lo } : {})
         .populate("image")
         .populate("work")
-        .sort({ "createDate": -1 })
         .skip(query.skip)
         .sort(query.sort ? query.sort : {})
         .limit(query.limit ? query.limit : {})

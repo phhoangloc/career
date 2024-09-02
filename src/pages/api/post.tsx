@@ -3,7 +3,7 @@ import connectMongoDB from '@/connect/database/mogoseDB'
 import { postModel } from '@/model/post.model'
 import { isDataType } from '@/type/resultType'
 import { facilityModel } from '@/model/facility.model'
-
+import { japanRegions } from '@/lib/area'
 
 const post = async (
     req: NextApiRequest,

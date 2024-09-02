@@ -79,23 +79,24 @@ const Page = ({ params }: Props) => {
                                 <h3>{item.workplace?.address.split("　")[0]}</h3>
                                 <h3>{item.workplace?.address.split("　")[1] ? item.workplace?.address.split("　")[1] : ""}</h3>
                                 <p>{item.workplace?.location}</p>
+                                <div className='item-content'>
+                                    <h3>{item.title}</h3>
+                                    <p>{item.contenttitle}</p>
+                                    <div style={{ paddingTop: "10px", margin: "10px 10px 0px 0px", borderTop: "1px solid #aaa" }}>
+                                        <h4>職種：<span>{item.worktype}</span></h4>
+                                        <h4>雇用形態：<span>{item.workstatus}</span></h4>
+                                        <h4>通勤時間：<span>{item.worktime}</span></h4>
+                                        <h4>有給休暇：<span>{item.workbenefit}</span></h4>
+                                        <h4>月給：<span>{item.worksalary}</span></h4>
+                                    </div>
+                                </div>
                             </div>
                             <div className="item-col item-img">
                                 {item.workplace?.image?.name ?
                                     <Image src={process.env.FTP_URL + "img/career/" + item.workplace?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
                                     <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}
                             </div>
-                            <div className='item-content'>
-                                <h3 style={{ padding: "0px 10px" }}>{item.title}</h3>
-                                <p style={{ padding: "0px 10px" }}>{item.contenttitle}</p>
-                                <div style={{ padding: "10px", marginTop: "10px", borderTop: "1px solid #aaa" }}>
-                                    <h4>職種：<span>{item.worktype}</span></h4>
-                                    <h4>雇用形態：<span>{item.workstatus}</span></h4>
-                                    <h4>通勤時間：<span>{item.worktime}</span></h4>
-                                    <h4>有給休暇：<span>{item.workbenefit}</span></h4>
-                                    <h4>月給：<span>{item.worksalary}</span></h4>
-                                </div>
-                            </div>
+
                             <div className='button'>
                                 <Button name='詳細を見る' onClick={() => toPage.push("/home/post/" + item.slug)} />
                             </div>

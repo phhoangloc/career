@@ -42,13 +42,10 @@ const SearchTool = (props: Props) => {
             name: "正社員",
         },
         {
-            name: "アルバイト・バイト",
-        },
-        {
             name: "契約社員",
         },
         {
-            name: "フリーランス",
+            name: "アルバイト・バイト",
         },
     ]
     const locations = [
