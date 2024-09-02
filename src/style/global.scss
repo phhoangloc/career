@@ -917,6 +917,21 @@ div {
     min-height: calc(100vh - 100px);
     padding: 50px 0;
 
+    .breadcum {
+        display: flex;
+        max-width: 992px;
+        margin: auto;
+
+        h4 {
+            margin: 0px 5px;
+            cursor: pointer;
+        }
+
+        h4:hover {
+            text-decoration: underline;
+        }
+    }
+
     .title {
         text-align: center;
         line-height: 1;
@@ -964,8 +979,8 @@ div {
 
     .detail {
         width: 90%;
-        max-width: 768px;
-        margin: auto;
+        max-width: 992px;
+        margin: 50px auto 0;
         background-color: white;
         border-radius: 5px;
         overflow: hidden;
@@ -999,9 +1014,14 @@ div {
             color: var(--main);
         }
 
-        .content {
+        .detail_apply {
             width: 90%;
-            padding: 25px 0;
+            max-width: 575px;
+            margin: 25px auto;
+        }
+
+        .content {
+            padding: 0;
             margin: auto;
 
             .text {
@@ -1089,7 +1109,7 @@ div {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         padding: 5px 20px;
-        margin-left: calc(5% + 10px);
+        margin-left: calc(5% + 25px);
 
     }
 }
@@ -1104,23 +1124,12 @@ div {
         background-color: white;
         border-radius: 5px;
         overflow: hidden;
-        padding: 10px;
+        padding: 5px;
         line-height: 1.5;
 
-        .breadcum {
-            display: flex;
-
-            h4 {
-                margin: 0px 5px;
-                cursor: pointer;
-            }
-
-            h4:hover {
-                text-decoration: underline;
-            }
-        }
 
         .content {
+            padding: calc(5% + 25px);
 
             h1 {
                 margin-bottom: 30px;

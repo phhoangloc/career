@@ -881,6 +881,21 @@ div {
   padding: 50px 0;
 }
 
+.detailPage .breadcum {
+  display: flex;
+  max-width: 992px;
+  margin: auto;
+}
+
+.detailPage .breadcum h4 {
+  margin: 0px 5px;
+  cursor: pointer;
+}
+
+.detailPage .breadcum h4:hover {
+  text-decoration: underline;
+}
+
 .detailPage .title {
   text-align: center;
   line-height: 1;
@@ -927,8 +942,8 @@ div {
 
 .detailPage .detail {
   width: 90%;
-  max-width: 768px;
-  margin: auto;
+  max-width: 992px;
+  margin: 50px auto 0;
   background-color: white;
   border-radius: 5px;
   overflow: hidden;
@@ -963,9 +978,14 @@ div {
   color: var(--main);
 }
 
-.detailPage .detail .content {
+.detailPage .detail .detail_apply {
   width: 90%;
-  padding: 25px 0;
+  max-width: 575px;
+  margin: 25px auto;
+}
+
+.detailPage .detail .content {
+  padding: 0;
   margin: auto;
 }
 
@@ -1047,7 +1067,7 @@ div {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 5px 20px;
-  margin-left: calc(5% + 10px);
+  margin-left: calc(5% + 25px);
 }
 
 .facilityPage {
@@ -1061,21 +1081,12 @@ div {
   background-color: white;
   border-radius: 5px;
   overflow: hidden;
-  padding: 10px;
+  padding: 5px;
   line-height: 1.5;
 }
 
-.facilityPage .detail .breadcum {
-  display: flex;
-}
-
-.facilityPage .detail .breadcum h4 {
-  margin: 0px 5px;
-  cursor: pointer;
-}
-
-.facilityPage .detail .breadcum h4:hover {
-  text-decoration: underline;
+.facilityPage .detail .content {
+  padding: calc(5% + 25px);
 }
 
 .facilityPage .detail .content h1 {

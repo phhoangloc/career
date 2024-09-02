@@ -44,13 +44,13 @@ const Page = ({ params }: Props) => {
     return (
         newData._id ?
             <div className='detailPage facilityPage'>
-                <div className="detail">
-                    <div className='breadcum'>
-                        <h4 onClick={() => toPage.push("/home")}>ホーム</h4>
-                        <h4>/</h4>
-                        <h4 onClick={() => toPage.push("/home/facility")}>施設一覧</h4>
-                    </div>
+                {/* <div className="detail"> */}
+                <div className='breadcum'>
+                    <h4 onClick={() => toPage.push("/home")}>ホーム</h4>
+                    <h4>/</h4>
+                    <h4 onClick={() => toPage.push("/home/facility")}>施設一覧</h4>
                 </div>
+                {/* </div> */}
 
                 <div style={{ maxWidth: "992px", margin: "50px auto 0" }}>
                     <div className='title_facility'>

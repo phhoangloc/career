@@ -4,6 +4,7 @@ import DOMPurify from 'dompurify';
 import Data from '@/data/data'
 import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
+import { useRouter } from 'next/navigation';
 type Props = {
     params: { slug: string }
 }
@@ -24,15 +25,21 @@ const Page = ({ params }: Props) => {
         getItem("post", params.slug)
     }, [])
 
+    const toPage = useRouter()
     return (
         newData ?
             <div className='detailPage '>
+                <div className='breadcum'>
+                    <h4 onClick={() => toPage.push("/home")}>ホーム</h4>
+                    <h4>/</h4>
+                    <h4 onClick={() => toPage.back()}>仕事を探す</h4>
+                </div>
                 <div className="detail">
                     <div className='image'>
                         <Image src={process.env.FTP_URL + "img/career/" + newData?.image?.name} width={500} height={500} style={{ width: "100%", height: "auto" }} alt='cover' />
                     </div>
                     <h2 className='ta-center mg-100px-auto'><span>{newData.contenttitle}</span><br></br>{newData.title}</h2>
-                    <div className="detail apply" >
+                    <div className="detail_apply apply" >
                         <div className='apply_item'><h4>職種</h4><p>{newData.worktype}</p></div>
                         <div className='apply_item'><h4>勤務地</h4><p>{newData?.workplace?.name}<br></br><span>〒{newData?.workplace?.postno}</span> <br></br><span>{newData?.workplace?.address}</span></p></div>
                         <div className='apply_item'><h4>勤務時間</h4><p>{newData.worktime}</p></div>
