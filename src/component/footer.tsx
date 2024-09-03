@@ -14,7 +14,7 @@ const Footer = (props: Props) => {
                 <p>インタビュー</p>
             </div>
             <div className='column'>
-                <h2 onClick={() => toPage.push("/home/search/a/b/s/c")}>仕事を探す</h2>
+                <h2 onClick={() => toPage.push("/home/search/n/a/b/s/c")}>仕事を探す</h2>
                 <p>施設で探す</p>
                 <p>職種で探す</p>
                 <p>雇用形態で探す</p>
@@ -24,7 +24,7 @@ const Footer = (props: Props) => {
                 <h2 onClick={() => toPage.push("/home/facility")}>施設一覧</h2>
             </div>
             <div className='column'>
-                <h2>お知らせ</h2>
+                <h2 onClick={() => toPage.push("/home/news")}>お知らせ</h2>
             </div>
         </div>
     )

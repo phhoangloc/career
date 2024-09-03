@@ -59,7 +59,7 @@ const Page = (props: Props) => {
     const getPost_v3 = async (a: string, s: string, sk: number, li: number, area: string, lo: string) => {
         const result = await NoUserAuthen.getItem(a, s, "", "", "", lo, sk, li, area)
         if (result.success) {
-            setEndPlusOne(result.data.length ? false : true)
+            setEndPlusOne(result.data.length ? true : false)
         }
     }
     useEffect(() => {

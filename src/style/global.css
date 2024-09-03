@@ -1001,6 +1001,38 @@ div {
   min-height: 400px;
 }
 
+.detailPage .detail .content_news {
+  text-align: center;
+}
+
+.detailPage .detail .content_news h2 {
+  margin-bottom: 5px;
+}
+
+.detailPage .detail .content_news .category {
+  width: max-content;
+  margin: auto;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.detailPage .detail .content_news .category p {
+  height: 30px;
+  line-height: 30px;
+  padding: 0px 10px;
+  border-radius: 15px;
+  margin: 0 5px;
+  background-color: var(--main);
+  color: white;
+}
+
+.detailPage .detail .content_news .text {
+  width: 90%;
+  max-width: 768px;
+  margin: auto;
+  text-align: justify;
+}
+
 @media (min-width: 575px) {
   .detailPage .detail h1 {
     font-size: 1.5rem;

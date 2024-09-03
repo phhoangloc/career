@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Data from '@/data/data'
 import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
-import DOMPurify from 'dompurify'
+import { useRouter } from 'next/navigation'
 type Props = {
     params: { slug: string }
 }
@@ -24,19 +24,24 @@ const Page = ({ params }: Props) => {
         getItem("news", params.slug)
     }, [])
 
-    console.log(newData)
+    const toPage = useRouter()
     return (
         newData ?
             <div className='detailPage'>
+                <div className='breadcum'>
+                    <h4 onClick={() => toPage.push("/home")}>ホーム</h4>
+                    <h4>/</h4>
+                    <h4 onClick={() => toPage.push("/home/news")}>ニュース</h4>
+                </div>
                 <div className="detail">
-                    <div className='content'>
+                    <div className='content_news'>
                         <h2>{newData.name}</h2>
-                        <div style={{ display: "flex" }}>
+                        <div className='category'>
                             {
                                 newData?.category ? newData.category?.map((item: any, index: number) => <p key={index} style={{ margin: "0px 5px 0px 0px" }}>{item.name}</p>) : null
                             }
                         </div>
-                        <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
+                        <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: newData.content }} />
                     </div>
                 </div>
             </div> : null

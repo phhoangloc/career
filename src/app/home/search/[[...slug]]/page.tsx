@@ -17,10 +17,11 @@ const Page = ({ params }: Props) => {
 
 
     const bodySearch = {
-        wp: decodeURIComponent(params.slug[0]) === "a" ? "" : decodeURIComponent(params.slug[0]),
-        wt: decodeURIComponent(params.slug[1]) === "b" ? "" : decodeURIComponent(params.slug[1]),
-        ws: decodeURIComponent(params.slug[2]) === "s" ? "" : decodeURIComponent(params.slug[2]),
-        lo: decodeURIComponent(params.slug[3]) === "c" ? [""] : decodeURIComponent(params.slug[3]).split(",")
+        s: decodeURIComponent(params.slug[0]) === "n" ? "" : decodeURIComponent(params.slug[0]),
+        wp: decodeURIComponent(params.slug[1]) === "a" ? "" : decodeURIComponent(params.slug[0]),
+        wt: decodeURIComponent(params.slug[2]) === "b" ? "" : decodeURIComponent(params.slug[1]),
+        ws: decodeURIComponent(params.slug[3]) === "s" ? "" : decodeURIComponent(params.slug[2]),
+        lo: decodeURIComponent(params.slug[4]) === "c" ? [""] : decodeURIComponent(params.slug[3]).split(",")
     }
 
     const [newData, setNewData] = useState<any[]>([])
@@ -47,13 +48,11 @@ const Page = ({ params }: Props) => {
 
     useEffect(() => {
         bodySearch.lo.forEach(l => {
-            getItem("post", "", bodySearch.wp, bodySearch.wt, bodySearch.ws, l, page * limit, limit)
+            getItem("post", bodySearch.s, bodySearch.wp, bodySearch.wt, bodySearch.ws, l, page * limit, limit)
         });
     }, [])
 
     const toPage = useRouter()
-
-    const [searchModal, setSearchModal] = useState<boolean>(false)
 
     const uniqueArray = Array.from(new Set(newData.map(obj => JSON.stringify(obj)))).map(str => JSON.parse(str));
 
@@ -107,7 +106,7 @@ const Page = ({ params }: Props) => {
                     </div>}
             </div>
 
-            <Pagination page={page} next={() => setPage(p => p + 1)} prev={() => setPage(p => p - 1)} end={true} end2={true} />
+            <Pagination page={page} next={() => setPage(p => p + 1)} prev={() => setPage(p => p - 1)} end={true} />
         </div >
     )
 }

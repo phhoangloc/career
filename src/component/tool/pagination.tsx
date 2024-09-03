@@ -22,9 +22,9 @@ const Pagination = ({ page, next, prev, end, end2, onClick }: Props) => {
         margin: "0px 15px"
     }
     return (
-        <div style={{ display: "flex", width: "max-content", margin: "auto auto 0" }}>
+        <div style={{ display: "flex", width: "max-content", margin: "50px auto 0" }}>
             {page === 0 ?
-                <div style={boxStyle} /> :
+                null :
                 <div style={boxStyle} onClick={() => prev()}>
                     前に
                 </div>}
@@ -45,15 +45,15 @@ const Pagination = ({ page, next, prev, end, end2, onClick }: Props) => {
                     {page + 1}
                 </div>
             }
-            {!end ?
+            {end ? null :
                 <div style={boxStyle} onClick={() => onClick && onClick(page + 1)}>
                     {page + 2}
-                </div> : null}
-            {!end2 ?
+                </div>}
+            {end2 ?
                 <div style={boxStyle} onClick={() => onClick && onClick(page + 2)}>
                     {page + 3}
                 </div> : null}
-            {end ? <div style={boxStyle} /> :
+            {end ? null :
                 <div style={boxStyle} onClick={() => next()}>
                     つづき
                 </div>}

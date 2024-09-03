@@ -115,7 +115,7 @@ const SearchTool = (props: Props) => {
     const toPage = useRouter()
 
     const onSearch = (a: string, b: string, c: string, s: string) => {
-        toPage.push(`/home/search/${a ? a : "a"}/${b ? b : "b"}/${s ? s : "s"}/${c ? c : "c"}`)
+        toPage.push(`/home/search/n/${a ? a : "a"}/${b ? b : "b"}/${s ? s : "s"}/${c ? c : "c"}`)
     }
 
     return (

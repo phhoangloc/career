@@ -17,7 +17,7 @@ export default async function handler(
         case "GET":
             await CategoryModel.find()
             await NewModel
-                .find(query.pre ? { "genre": query.pre } : {})
+                .find(query.archive ? { "archive": query.archive } : {})
                 .find(query.slug ? { "slug": query.slug } : {})
                 .find(query.category ? { "category": query.category } : {})
                 .find(query.search ? { "title": { $regex: query.search } } : {})
