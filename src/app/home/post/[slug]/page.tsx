@@ -48,11 +48,11 @@ const Page = ({ params }: Props) => {
                         <div className='apply_item'><h4>休⽇休暇</h4><p>{newData.workbenefit}</p></div>
                     </div>
 
-                    <p className='button'>応募はこちらから</p>
+                    <p className='button'><a href='mailto:ph.hoangloc@gmail.com'>応募はこちらから</a></p>
 
                     <div className='title_facility'> <p>詳細</p></div>
                     <div className='w90p mw-768px mg-auto bor-1px br-5px pd-5p' style={{ borderColor: "#006699" }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
-                    <p className='button'>応募はこちらから</p>
+                    <p className='button'><a href='mailto:ph.hoangloc@gmail.com'>応募はこちらから</a></p>
 
                 </div>
             </div > : null

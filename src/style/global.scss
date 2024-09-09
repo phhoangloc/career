@@ -251,6 +251,7 @@ div {
                 border-top-left-radius: 5px;
                 border-bottom-left-radius: 5px;
                 padding: 0 10px;
+                width: 200px;
             }
 
             input:focus {
@@ -753,6 +754,8 @@ div {
 .footer {
     background-color: white;
     padding: 2.5%;
+
+    justify-content: center;
 
     .column {
         color: #666;

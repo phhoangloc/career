@@ -246,6 +246,7 @@ div {
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   padding: 0 10px;
+  width: 200px;
 }
 
 .header .menu .header_input input:focus {
@@ -720,6 +721,7 @@ div {
 .footer {
   background-color: white;
   padding: 2.5%;
+  justify-content: center;
 }
 
 .footer .column {

@@ -115,7 +115,7 @@ export default function Home() {
           <div className="item" >
             <div className="cover">
               {facility[0]?.image?.name ?
-                <Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
+                <Image src={process.env.FTP_URL + "img/career/" + facility[0]?.image?.name} fill style={{ objectFit: "cover", cursor: "pointer" }} alt="home" onClick={() => toPage.push("/home/facility/" + facility[0].slug)} /> :
                 <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}</div>
             <div className="item_title">
               <h3>{facility[0]?.contenttitle}</h3>
@@ -130,7 +130,7 @@ export default function Home() {
           <div className="item" >
             <div className="cover">
               {facility[1]?.image?.name ?
-                <Image src={process.env.FTP_URL + "img/career/" + facility[1]?.image?.name} fill style={{ objectFit: "cover" }} alt="home" /> :
+                <Image src={process.env.FTP_URL + "img/career/" + facility[1]?.image?.name} fill style={{ objectFit: "cover", cursor: "pointer" }} alt="home" onClick={() => toPage.push("/home/facility/" + facility[1].slug)} /> :
                 <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}
             </div>
             <div className="item_title">
@@ -151,13 +151,13 @@ export default function Home() {
           <h2>Interview</h2>
           <h1>先輩たちの声 </h1>
           <div className="title_button">
-            <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
-              onClick={() => toPage.push("/home/interview")} />
+            {/* <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+              onClick={() => toPage.push("/home/interview")} /> */}
           </div>
         </div>
         <div className="items">
           <div className="item">
-            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + data[1]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + data[1]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} onClick={() => toPage.push("/home/interview/" + data[1].slug)} alt="home" /></div>
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
@@ -170,7 +170,7 @@ export default function Home() {
             </div>
           </div>
           <div className="item">
-            <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + data[0]?.image.name} fill style={{ objectFit: "cover" }} alt="home" /></div>
+            <div className="cover" ><Image src={process.env.FTP_URL + "img/career/" + data[0]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} alt="home" onClick={() => toPage.push("/home/interview/" + data[0].slug)} /></div>
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[0]?.contenttitle}</h3>

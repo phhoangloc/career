@@ -148,6 +148,21 @@ const Page = ({ params }: Props) => {
                                 func={() => { setSavable(true); setOpenModal(true) }}
                             />
                         </div>
+                        {facility?.length ?
+                            <div>
+                                <h4>事業所</h4>
+                                <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                                    {
+                                        facility.map((item: any, index: number) =>
+                                            <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                                <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                                <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                            </div>
+                                        )}
+                                </div>
+                            </div> :
+                            null
+                        }
                         <Input name="職種" onChange={(e) => { setSavable(true), setWorktype(e) }} value={worktype} />
                         <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true), setcontenttilte(e) }} value={contenttitle} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />

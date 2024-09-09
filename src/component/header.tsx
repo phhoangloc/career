@@ -10,7 +10,7 @@ const Header = () => {
     const [menu, setMenu] = useState<boolean>(false)
     const [itemModal, setItemModal] = useState<boolean>(false)
 
-    const [search, setSearch] = useState<string>("Search")
+    const [search, setSearch] = useState<string>("")
     const toPage = useRouter()
     return (
         <div className='header'>
@@ -43,7 +43,7 @@ const Header = () => {
                 {/* <p>業界を知る <KeyboardArrowDownIcon /></p> */}
                 <p onClick={() => toPage.push("/home/facility")}>施設一覧</p>
                 <p onClick={() => toPage.push("/home/news")}>お知らせ</p>
-                <div className='header_input'><input value={search} onChange={(e) => setSearch(e.target.value)} /><SearchIcon onClick={() => toPage.push('/home/search/' + search + "/a/b/s/c")} /></div>
+                <div className='header_input'><input placeholder='仕事をフリーワードで探す' value={search} onChange={(e) => setSearch(e.target.value)} /><SearchIcon onClick={() => toPage.push('/home/search/' + search + "/a/b/s/c")} /></div>
             </div>
         </div>
     )

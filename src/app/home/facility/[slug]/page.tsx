@@ -40,7 +40,6 @@ const Page = ({ params }: Props) => {
     const toPage = useRouter()
 
 
-    console.log(newData)
     return (
         newData._id ?
             <div className='detailPage facilityPage'>
