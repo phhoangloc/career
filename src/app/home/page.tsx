@@ -160,6 +160,7 @@ export default function Home() {
           <div className="item">
             <div className="cover"><Image src={process.env.FTP_URL + "img/career/" + data[1]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} onClick={() => toPage.push("/home/interview/" + data[1].slug)} alt="home" /></div>
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
+            {data[0]?.video ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[1]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> : null}
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
               <h4>{data[1]?.name} / 2024年 採用 </h4>
