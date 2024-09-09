@@ -56,6 +56,7 @@ export default function Home() {
     }
   }
 
+  console.log(data[0]?.video)
   return (
     <div className="contain_V2 scrollbar">
       <div className="cover">
@@ -170,7 +171,11 @@ export default function Home() {
             </div>
           </div>
           <div className="item">
-            <div className="cover" ><Image src={process.env.FTP_URL + "img/career/" + data[0]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} alt="home" onClick={() => toPage.push("/home/interview/" + data[0].slug)} /></div>
+            <div className="cover" >
+              {/* <Image src={process.env.FTP_URL + "img/career/" + data[0]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} alt="home" onClick={() => toPage.push("/home/interview/" + data[0].slug)} /> */}
+              {/* {data[0]?.video ? <iframe width="560" height="315" src={data[0]?.video}></iframe> : null} */}
+              {data[0]?.video ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[0]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> : null}
+            </div>
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[0]?.contenttitle}</h3>

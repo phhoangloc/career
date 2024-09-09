@@ -33,6 +33,9 @@ const interviewSchema = new Schema({
     content: {
         type: String,
     },
+    video: {
+        type: String,
+    },
     likes: [
         {
             type: Schema.Types.ObjectId,

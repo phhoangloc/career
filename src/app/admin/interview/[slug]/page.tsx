@@ -38,6 +38,7 @@ const Page = ({ params }: Props) => {
     const [detail, setDetail] = useState<string>("もう少し仕事内容をシェアしてください。")
     const [newdetail, setNewDetail] = useState<string>("")
     const [image, setImage] = useState<string>("")
+    const [video, setVideo] = useState<string>("")
     const [imagePreview, setImagePreview] = useState<string>("")
 
     const [change, setChange] = useState<number>(0)
@@ -56,6 +57,7 @@ const Page = ({ params }: Props) => {
         location,
         contenttitle,
         image,
+        video,
         content: newdetail || detail
     }
 
@@ -80,6 +82,7 @@ const Page = ({ params }: Props) => {
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
+            setVideo(result.data[0].video)
         }
     }
     useEffect(() => {
@@ -207,6 +210,7 @@ const Page = ({ params }: Props) => {
                 }
                 <Input name="職種" onChange={(e) => { setSavable(true), setWorktype(e) }} value={worktype} />
                 <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                <Input name="youtube url" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />}
