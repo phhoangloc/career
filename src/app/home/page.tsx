@@ -152,8 +152,8 @@ export default function Home() {
           <h2>Interview</h2>
           <h1>先輩たちの声 </h1>
           <div className="title_button">
-            {/* <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
-              onClick={() => toPage.push("/home/interview")} /> */}
+            <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+              onClick={() => toPage.push("/home/interview")} />
           </div>
         </div>
         <div className="items">
@@ -163,9 +163,9 @@ export default function Home() {
               </div> */}
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
 
-            {data[1]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[1]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
-              <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>}
-
+            {/* {data[1]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[1]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+              <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>} */}
+            <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
               <h4>{data[1]?.name} / 2024年 採用 </h4>
@@ -180,8 +180,9 @@ export default function Home() {
             <div className="cover" >
               {/* <Image src={process.env.FTP_URL + "img/career/" + data[0]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} alt="home" onClick={() => toPage.push("/home/interview/" + data[0].slug)} /> */}
               {/* {data[0]?.video ? <iframe width="560" height="315" src={data[0]?.video}></iframe> : null} */}
-              {data[0]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[0]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
-                <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>}
+              {/* {data[0]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[0]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+                <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>} */}
+              <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>
             </div>
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">

@@ -37,6 +37,9 @@ const facilitySchema = new Schema({
     fax: {
         type: String,
     },
+    email: {
+        type: String,
+    },
     homepage: {
         type: String,
     },

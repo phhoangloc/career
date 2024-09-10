@@ -26,6 +26,7 @@ const Page = ({ params }: Props) => {
     }, [])
 
     const toPage = useRouter()
+    console.log(newData)
     return (
         newData ?
             <div className='detailPage '>
@@ -48,11 +49,11 @@ const Page = ({ params }: Props) => {
                         <div className='apply_item'><h4>休⽇休暇</h4><p>{newData.workbenefit}</p></div>
                     </div>
 
-                    <p className='button'><a href='mailto:ph.hoangloc@gmail.com'>応募はこちらから</a></p>
+                    <p className='button'>{newData.workplace?.email ? <a href={`mailto:${newData.workplace.email}?subject=仕事に応募します。&body=この仕事を応募したいです。よろしくお願いいたします。`}>応募はこちらから</a> : "応募はこちらから"}</p>
 
                     <div className='title_facility'> <p>詳細</p></div>
                     <div className='w90p mw-768px mg-auto bor-1px br-5px pd-5p' style={{ borderColor: "#006699" }} dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
-                    <p className='button'><a href='mailto:ph.hoangloc@gmail.com'>応募はこちらから</a></p>
+                    <p className='button'>{newData.workplace?.email ? <a href={`mailto:${newData.workplace.email}?subject=仕事に応募します。&body=この仕事を応募したいです。よろしくお願いいたします。`}>応募はこちらから</a> : "応募はこちらから"}</p>
 
                 </div>
             </div > : null

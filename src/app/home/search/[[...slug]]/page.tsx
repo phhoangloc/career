@@ -18,10 +18,10 @@ const Page = ({ params }: Props) => {
 
     const bodySearch = {
         s: decodeURIComponent(params.slug[0]) === "n" ? "" : decodeURIComponent(params.slug[0]),
-        wp: decodeURIComponent(params.slug[1]) === "a" ? "" : decodeURIComponent(params.slug[0]),
-        wt: decodeURIComponent(params.slug[2]) === "b" ? "" : decodeURIComponent(params.slug[1]),
-        ws: decodeURIComponent(params.slug[3]) === "s" ? "" : decodeURIComponent(params.slug[2]),
-        lo: decodeURIComponent(params.slug[4]) === "c" ? [""] : decodeURIComponent(params.slug[3]).split(",")
+        wp: decodeURIComponent(params.slug[1]) === "a" ? "" : decodeURIComponent(params.slug[1]),
+        wt: decodeURIComponent(params.slug[2]) === "b" ? "" : decodeURIComponent(params.slug[2]),
+        ws: decodeURIComponent(params.slug[3]) === "s" ? "" : decodeURIComponent(params.slug[3]),
+        lo: decodeURIComponent(params.slug[4]) === "c" ? [""] : decodeURIComponent(params.slug[4]).split(",")
     }
 
     const [newData, setNewData] = useState<any[]>([])

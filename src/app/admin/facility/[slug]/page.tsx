@@ -48,6 +48,9 @@ const Page = ({ params }: Props) => {
     const [fax, setFax] = useState<string>("")
     const [faxWarn, setFaxWarn] = useState<string>("")
     const [faxView, setFaxView] = useState<string>("")
+    const [email, setEmail] = useState<string>("")
+    const [emailWarn, setEmailWarn] = useState<string>("")
+
     const [homepage, setHomepage] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し事業内容をシェアしてください。")
@@ -72,6 +75,7 @@ const Page = ({ params }: Props) => {
         fax,
         homepage,
         contenttitle,
+        email,
         image: image || null,
         content: newdetail || detail
     }
@@ -88,6 +92,7 @@ const Page = ({ params }: Props) => {
             setLocation(result.data[0].location)
             setPhone(result.data[0].phone)
             setFax(result.data[0].fax)
+            setEmail(result.data[0].email)
             setHomepage(result.data[0].homepage)
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
@@ -207,6 +212,13 @@ const Page = ({ params }: Props) => {
             return ""
         }
     }
+    function ValidateEmail(input: string) {
+        if (!/\S+@\S+\.\S+/.test(input) && input?.length) {
+            setEmailWarn('電子メールが無効です');
+        } else {
+            setEmailWarn("")
+        }
+    }
     useEffect(() => {
     }, [fax])
     useEffect(() => {
@@ -220,6 +232,9 @@ const Page = ({ params }: Props) => {
     useEffect(() => {
         formatArea(location)
     }, [location])
+    useEffect(() => {
+        ValidateEmail(email)
+    }, [email])
 
     const getAddressFacility = async (pNo: string) => {
         const result = await NoUserAuthen.getAddress(pNo)
@@ -258,6 +273,7 @@ const Page = ({ params }: Props) => {
                         <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
                         <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                         <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
+                        <Input name="eメール" onChange={(e) => { setSavable(true); setFax(e) }} value={email} warn={emailWarn} />
                         <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0" }}>
@@ -294,6 +310,7 @@ const Page = ({ params }: Props) => {
                 <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
                 <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                 <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
+                <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
                 <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0" }}>

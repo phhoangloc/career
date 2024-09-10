@@ -25,6 +25,8 @@ const post = async (
         .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})
         .find(query.search ? { "title": { $regex: query.search } } : {})
+        .find(query.search ? { "contenttitle": { $regex: query.search } } : {})
+        .find(query.search ? { "content": { $regex: query.search } } : {})
         .find(query.wt ? { "worktype": query.wt } : {})
         .find(query.ws ? { "workstatus": query.ws } : {})
         .populate("image")

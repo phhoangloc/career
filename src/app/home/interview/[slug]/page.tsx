@@ -59,7 +59,8 @@ const Page = ({ params }: Props) => {
                         <div style={{ color: "#444" }} className='text dangerousBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
                     </div>
                     <div className="content" style={{ maxWidth: "768px", margin: "50px auto", }}>
-                        <div style={{ height: "300px", background: "#888", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center" }}><h1>NO VIDEO</h1></div>
+                        {newData?.video?.length ? <iframe style={{ width: "100%", aspectRatio: "1.75" }} src={"https://www.youtube.com/embed/" + newData?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+                            <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>}
                     </div>
                 </div>
             </div> : <div className='detailPage'></div>
