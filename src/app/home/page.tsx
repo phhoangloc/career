@@ -158,17 +158,15 @@ export default function Home() {
         </div>
         <div className="items">
           <div className="item">
-            {/* <div className="cover">
-              <Image src={process.env.FTP_URL + "img/career/" + data[1]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} onClick={() => toPage.push("/home/interview/" + data[1].slug)} alt="home" />
-              </div> */}
-            {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
+            <div className="cover">
 
-            {/* {data[1]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[1]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
-              <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>} */}
-            <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>
+              {data[1]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[1]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+                <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>}
+            </div>
+
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
-              <h4>{data[1]?.name} </h4>
+              <h4>{data[1]?.name}</h4>
               <h4>{data[1]?.workplace?.name}</h4>
               <div className="tag">
                 <p>{data[1]?.workplace?.location}</p>
@@ -178,16 +176,12 @@ export default function Home() {
           </div>
           <div className="item">
             <div className="cover" >
-              {/* <Image src={process.env.FTP_URL + "img/career/" + data[0]?.image.name} fill style={{ objectFit: "cover", cursor: "pointer" }} alt="home" onClick={() => toPage.push("/home/interview/" + data[0].slug)} /> */}
-              {/* {data[0]?.video ? <iframe width="560" height="315" src={data[0]?.video}></iframe> : null} */}
-              {/* {data[0]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[0]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
-                <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>} */}
-              <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>
+              {data[0]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[0]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+                <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>}
             </div>
-            {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[0]?.contenttitle}</h3>
-              <h4>{data[0]?.name} </h4>
+              <h4>{data[0]?.name}</h4>
               <h4>{data[0]?.workplace?.name}</h4>
               <div className="tag">
                 <p>{data[0]?.workplace?.location}</p>
