@@ -1003,6 +1003,10 @@ div {
   min-height: 400px;
 }
 
+.detailPage .detail .content .dangerousBox p {
+  margin-bottom: 1em;
+}
+
 .detailPage .detail .content_news {
   text-align: center;
 }
