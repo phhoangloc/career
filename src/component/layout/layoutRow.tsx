@@ -30,8 +30,8 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
     const [modalOpen, setModalOpen] = useState<boolean>(true)
 
     return (
-        <div className='overflow-hidden border-radius-5' style={{ margin: "0px", minHeight: "calc(100vh - 10px)" }}>
-            <div className='display-flex position-relative width-max-content' >
+        <div className='overflow-hidden border-radius-5' style={{ minHeight: "calc(100vh - 10px)" }}>
+            <div className='display-flex position-relative width-max-content ' style={{ maxWidth: "1600px", margin: "auto", }} >
                 <div className={"navi-left transition-all-05s height-100p overflow-hidden"} style={modalOpen ? { width: naviLeftWitdh } : { width: "0px" }}>
                     {naviLef}
                 </div>

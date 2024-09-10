@@ -20,7 +20,7 @@ const interview = async (
         .find(query.id ? { "_id": query.id } : {})
         .find(query.archive ? { "archive": query.archive } : {})
         .find(query.slug ? { "slug": query.slug } : {})
-        .find(query.search ? { "title": { $regex: query.search } } : {})
+        .find(query.search ? { "name": { $regex: query.search } } : {})
         .find(query.area ? { "area": query.area } : {})
         .find(query.lo ? { "location": query.lo } : {})
         .populate("image")

@@ -14,6 +14,7 @@ import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
 import { NoUserAuthen } from '@/api/NoUserAuthen';
 import DOMPurify from 'dompurify';
+import { japanPrefectures, japanRegions } from '@/lib/area';
 type Props = {
     params: { slug: string }
 }
@@ -65,8 +66,12 @@ const Page = ({ params }: Props) => {
         workbenefit,
     }
 
+    const [search, setSearch] = useState<string>("")
+    const [area, setArea] = useState<string>("")
+    const [location, setLocation] = useState<string>("")
+
     const getFacility = async () => {
-        const result = await NoUserAuthen.getItem("facility", "", "", "", "", "", undefined, undefined)
+        const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
         if (result.success) {
             setFacility(result.data)
         }
@@ -139,56 +144,70 @@ const Page = ({ params }: Props) => {
 
     useEffect(() => {
         getFacility()
-    }, [])
+    }, [search, area, location])
 
 
-    console.log(workplace)
     switch (params.slug) {
         case "new":
             return (
                 <div className='grid_box scrollNone'>
-                    <div className={`detailBox xs12 lg6 xl8 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                    <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
+
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                         <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
+                        <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                         <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
-                        <div className="">
-                            <h4>アイキャッチ</h4>
-                            <div style={{ height: "300px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0 20px", boxShadow: "0px 0px 10px #444" }}>
-                                <UploadPicturePreview
-                                    icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                                    src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
-                                    size={30}
-                                    func={() => { setOpenModal(true), setSavable(true) }}
-                                />
+                        <div className="grid_box ">
+                            <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
+                                <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ</h4>
+                                <div style={{ height: "calc(100% - 40px) ", aspectRatio: 1, borderRadius: "5px", margin: "0px auto 20px", boxShadow: "0px 0px 10px #444", }}>
+                                    <UploadPicturePreview
+                                        icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                                        src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                                        size={30}
+                                        func={() => { setOpenModal(true), setSavable(true) }}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="xs12 lg7">
+                                <div style={{ width: "100%", height: "400px" }}>
+                                    <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所</h4><input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} /></div>
+                                    <div className='dp-flex'>
+                                        <select style={{ width: "100px", height: "30px", margin: "0 5px" }} onChange={(e) => setLocation(e.target.value)}>
+                                            <option value="">都道府県</option>
+                                            {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
+                                        </select>
+                                        <select style={{ height: "30px", margin: "0 5px" }} onChange={(e) => setArea(e.target.value)}>
+                                            <option value="">エリア</option>
+                                            {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
+                                        </select>
+                                    </div>
+                                    {facility?.length ?
+                                        <div className='scrollbar-none' style={{ height: "calc(100% - 80px)", overflow: "auto", background: "whitesmoke", padding: "0 5px", marginTop: "10px" }}>
+                                            {
+                                                facility.map((item: any, index: number) =>
+                                                    <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                                        <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                                        <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                                    </div>
+                                                )}
+                                        </div>
+                                        :
+                                        null
+                                    }
+                                </div>
                             </div>
                         </div>
-
-
-                        {facility?.length ?
-                            <div>
-                                <h4>事業所</h4>
-                                <div style={{ height: "200px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                                    {
-                                        facility.map((item: any, index: number) =>
-                                            <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                                <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
-                                                <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                            </div>
-                                        )}
-                                </div>
-                            </div> :
-                            null
-                        }
                         <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
                         <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
                         {/* <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} /> */}
                         <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                         <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                         <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
-                        <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
 
-                        <div style={{ display: "flex", margin: "10px 0" }}>
+                        <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
                                 <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image && savable ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
@@ -201,46 +220,61 @@ const Page = ({ params }: Props) => {
     }
     return (
         <div className='grid_box scrollNone'>
-            <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+            <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
+
                 <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                 <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
+                <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                 <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
-                <div className="">
-                    <h4>アイキャッチ</h4>
-                    <div style={{ height: "300px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0 20px", boxShadow: "0px 0px 10px #444" }}>
-                        <UploadPicturePreview
-                            icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
-                            src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
-                            size={30}
-                            func={() => { setOpenModal(true), setSavable(true) }}
-                        />
+                <div className="grid_box ">
+                    <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
+                        <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ</h4>
+                        <div style={{ height: "calc(100% - 40px) ", aspectRatio: 1, borderRadius: "5px", margin: "0px auto 20px", boxShadow: "0px 0px 10px #444", }}>
+                            <UploadPicturePreview
+                                icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
+                                src={`${imagePreview ? process.env.FTP_URL + "img/career/" + imagePreview : "/img/defaultImg.jpg"}`}
+                                size={30}
+                                func={() => { setOpenModal(true), setSavable(true) }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="xs12 lg7">
+                        <div style={{ width: "100%", height: "400px" }}>
+                            <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所</h4><input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} /></div>
+                            <div className='dp-flex'>
+                                <select style={{ width: "100px", height: "30px", margin: "0 5px" }} onChange={(e) => setLocation(e.target.value)}>
+                                    <option value="">都道府県</option>
+                                    {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
+                                </select>
+                                <select style={{ height: "30px", margin: "0 5px" }} onChange={(e) => setArea(e.target.value)}>
+                                    <option value="">エリア</option>
+                                    {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
+                                </select>
+                            </div>
+                            {facility?.length ?
+                                <div className='scrollbar-none' style={{ height: "calc(100% - 80px)", overflow: "auto", background: "whitesmoke", padding: "0 5px", marginTop: "10px" }}>
+                                    {
+                                        facility.map((item: any, index: number) =>
+                                            <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                                <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                                <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                            </div>
+                                        )}
+                                </div>
+                                :
+                                null
+                            }
+                        </div>
                     </div>
                 </div>
-
-
-                {facility?.length ?
-                    <div>
-                        <h4>事業所</h4>
-                        <div style={{ height: "200px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                            {
-                                facility.map((item: any, index: number) =>
-                                    <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                        <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
-                                        <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                    </div>
-                                )}
-                        </div>
-                    </div> :
-                    null
-                }
                 <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
                 <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
                 <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                 <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                 <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
-                <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
-                <div style={{ display: "flex", margin: "10px 0" }}>
+                <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                 </div>

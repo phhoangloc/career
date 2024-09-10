@@ -121,7 +121,7 @@ export default function Home() {
             <div className="item_title">
               <h3>{facility[0]?.contenttitle}</h3>
               <h4>{facility[0]?.name}</h4>
-              <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[0]?.content, "<h3>", "</h3>") }}></div>
+              <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[0]?.content, "<h3>", "</h3>") ? extractStringBetween(facility[0]?.content, "<h3>", "</h3>") : "---" }}></div>
               <div className="tag">
                 <p>{facility[0]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[0]?.slug)} />
@@ -135,9 +135,9 @@ export default function Home() {
                 <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}
             </div>
             <div className="item_title">
-              <h3>{facility[1]?.contenttitle}</h3>
+              <h3>{facility[1]?.contenttitle ? facility[1]?.contenttitle : "---"}</h3>
               <h4>{facility[1]?.name}</h4>
-              <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[1]?.content, "<h3>", "</h3>") }}></div>
+              <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[1]?.content, "<h3>", "</h3>") ? extractStringBetween(facility[0]?.content, "<h3>", "</h3>") : "---" }}></div>
               <div className="tag">
                 <p>{facility[1]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[1].slug)} />

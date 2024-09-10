@@ -109,6 +109,8 @@ textarea {
     background-repeat: repeat;
 }
 
+
+
 .themedark .bg-para {
     background: linear-gradient(rgba(17, 17, 9, 0.5), var(--dark), var(--dark));
     background-repeat: repeat;

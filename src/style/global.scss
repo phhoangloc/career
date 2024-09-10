@@ -456,14 +456,17 @@ div {
 
     .cover {
         display: flex;
+        width: 100%;
+
         height: calc(100vh - 100px);
         max-height: 700px;
         overflow: hidden;
         position: relative;
+        flex-direction: column;
 
         .cover_left {
             height: 100%;
-            width: 50%;
+            width: 100%;
             background: rgba($color: #000000, $alpha: 0.5) url("/img/cover3.jpg") no-repeat center;
             background-size: cover;
             cursor: pointer;
@@ -472,7 +475,7 @@ div {
 
         .cover_right {
             height: 100%;
-            width: 50%;
+            width: 100%;
             background: rgba($color: #000000, $alpha: 0.5) url("/img/cover2.jpg") no-repeat center;
             background-size: cover;
             cursor: pointer;
@@ -525,6 +528,10 @@ div {
             transform: translateY(0%);
             left: 0;
             right: auto;
+        }
+
+        @media (min-width:768px) {
+            flex-direction: row;
         }
     }
 

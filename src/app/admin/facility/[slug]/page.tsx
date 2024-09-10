@@ -268,17 +268,17 @@ const Page = ({ params }: Props) => {
                             />
                         </div>
                         <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" />
-                        <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
-                        <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                         <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
+                        <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                        <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                         <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                         <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
                         <Input name="eメール" onChange={(e) => { setSavable(true); setFax(e) }} value={email} warn={emailWarn} />
                         <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
-                        <div style={{ display: "flex", margin: "10px 0" }}>
+                        <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
-                                <Button name='作成' onClick={() => createPost(body)} />}
+                                <Button name='作成' disable={!savable} onClick={() => createPost(body)} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -305,15 +305,15 @@ const Page = ({ params }: Props) => {
                     />
                 </div>
                 <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} warn={postnoWarn} sx="p-postal-code" />
-                <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
-                <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                 <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
+                <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                 <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                 <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
                 <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
                 <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
-                <div style={{ display: "flex", margin: "10px 0" }}>
+                <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> :
                         <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />

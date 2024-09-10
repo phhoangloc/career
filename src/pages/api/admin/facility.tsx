@@ -36,6 +36,7 @@ const Post =
                             .find(query.id ? { "_id": query.id } : {})
                             .find(query.archive ? { "archive": query.archive } : {})
                             .find(query.slug ? { "slug": query.slug } : {})
+                            .find(query.search ? { "name": { $regex: query.search } } : {})
                             .skip(query.skip)
                             .sort(query.sort ? query.sort : {})
                             .limit(query.limit ? query.limit : {})

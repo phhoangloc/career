@@ -30,7 +30,7 @@
 }
 
 .hover-background-color-128-15p:hover {
-    background-color: rgba(128, 128, 128, 0.15);
+    background-color: rgba(128, 128, 128, 0.15) !important;
 }
 
 .hover-boder-radius-5px:hover {

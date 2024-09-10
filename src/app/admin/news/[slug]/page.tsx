@@ -105,8 +105,8 @@ const Page = ({ params }: Props) => {
     switch (params.slug) {
         case "new":
             return (
-                <div className='grid_box scrollNone mw1200px-grid-reverse'>
-                    <div className={`detailBox xs12 md8  scrollbar-none`} style={{ padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                <div className=' scrollNone mw1200px-grid-reverse'>
+                    <div className={`scrollbar-none`} style={{ maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
                         <Input name="タイトル" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                         <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
@@ -124,7 +124,7 @@ const Page = ({ params }: Props) => {
                             </div>
                         </div>
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c = 1) }} value={DOMPurify.sanitize(detail)} />
-                        <div style={{ display: "flex", margin: "10px 0" }}>
+                        <div style={{ display: "flex", margin: "10px 0", width: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
                                 <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && savable ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
@@ -136,8 +136,8 @@ const Page = ({ params }: Props) => {
     }
 
     return (
-        <div className='grid_box scrollNone mw1200px-grid-reverse'>
-            <div className={`detailBox xs12 md8  scrollbar-none`} style={{ padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
+        <div className=' scrollNone mw1200px-grid-reverse'>
+            <div className={`scrollbar-none`} style={{ maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="タイトル" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                 <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
@@ -155,7 +155,8 @@ const Page = ({ params }: Props) => {
                     </div>
                 </div>
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
-                <div style={{ display: "flex", margin: "10px 0" }}>
+                <div style={{ display: "flex", margin: "10px 0", width: "210px", justifyContent: "space-between" }}>
+
                     <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                 </div>

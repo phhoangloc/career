@@ -6,7 +6,7 @@ const newsSchema = new Schema({
         type: String,
         default: "news"
     },
-    title: {
+    name: {
         type: String,
     },
     slug: {

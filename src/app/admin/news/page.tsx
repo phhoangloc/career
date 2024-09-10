@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import Button from '@/component/input/button';
 import Pagination from '@/component/tool/pagination';
 import { AlertType, setAlert } from '@/redux/reducer/alertReducer';
+import AddIcon from '@mui/icons-material/Add';
+import Input from '@/component/input/input';
 type Props = {}
 
 const Page = (props: Props) => {
@@ -86,43 +88,53 @@ const Page = (props: Props) => {
     }, [currentAlert.open])
 
     return (
-        <div style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px" }}>
-            <div style={{ width: "max-content", margin: "0" }}>
-                <Button name='新規' onClick={() => toPage.push("news/new")} />
-            </div>
-            <div className='flexbox' style={{ height: "40px" }}>
-                <div style={{ width: "40px" }}>{selectId.length ?
-                    <DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }} onClick={() => store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false }))} /> : null}
+        <div className='scrollbar-none' style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px", overflow: "auto" }}>
+
+            <div style={{ height: "calc(100vh - 60px)", width: "100%", padding: "5% 10% 0" }}>
+
+                <div className='flexbox' style={{ height: "40px" }}>
+                    <h2 style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>ニュース一覧</h2>
+                    <div style={{ width: "40px" }}></div>
                 </div>
-                <div style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>ニュース一覧</div>
-                <div style={{ width: "40px" }}></div>
-            </div>
-
-
-            {data.length ? data.map((item, index) =>
-                <div key={index} className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1'
-                    style={{ cursor: "pointer", height: "40px" }}>
-                    <div style={{ width: "40px" }}>
-                        {selectId.includes(item._id) ?
-                            <CheckBoxOutlinedIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
-                                onClick={() => setSelectId(p => p.filter(i => i != item._id))} /> :
-                            <CheckBoxOutlineBlankIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
-                                onClick={() => setSelectId(p => [...p, item._id])} />}
+                <div style={{ width: "max-content", margin: "0", display: "flex" }}>
+                    {selectId.length ?
+                        <div style={{ display: "flex", height: "40px", width: "100px", background: "#006699", color: "white", borderRadius: "5px", cursor: "pointer", marginRight: "5px" }} onClick={() => store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false }))}>
+                            <DeleteIcon style={{ width: "40px", height: "40px", boxSizing: "border-box", padding: "7.5px" }} />
+                            <p style={{ height: "40px", lineHeight: "50px", textAlign: "center" }} >削除</p>
+                        </div> : null}
+                    <div style={{ display: "flex", height: "40px", width: "100px", background: "#006699", color: "white", borderRadius: "5px", cursor: "pointer" }} onClick={() => toPage.push("news/new")}>
+                        <AddIcon style={{ width: "40px", height: "40px", boxSizing: "border-box", padding: "7.5px" }} />
+                        <p style={{ height: "40px", lineHeight: "50px", textAlign: "center" }} >新規</p>
                     </div>
-                    <div style={{ width: "100%", height: "100%", lineHeight: "50px" }}><p onClick={() => toPage.push("news/" + item.slug)}>{item.name}</p></div>
-                    <div style={{ width: "50px" }}><DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
-                        onClick={() => (setId(item._id), store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false })))} /></div>
-                </div>) :
-                <div className='flexbox'>
-                    <div style={{ width: "50px" }}></div>
-                    <div style={{ width: "100%", textAlign: "center" }}>{loading ? <p>少々お待ちください。</p> : <p>{notice ? notice : "ニュースがありません。"}</p>}</div>
-                    <div style={{ width: "50px" }}></div>
                 </div>
-            }
+                <div className='dp-flex'>
+                    <Input name="search" onChange={(e) => setSearch(e)} value={search} />
+                </div>
+                {data.length ? data.map((item, index) =>
+                    <div key={index} className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1 bg-even'
+                        style={{ cursor: "pointer", height: "40px", margin: "5px 0", }}>
+                        <div style={{ width: "40px" }}>
+                            {selectId.includes(item._id) ?
+                                <CheckBoxOutlinedIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
+                                    onClick={() => setSelectId(p => p.filter(i => i != item._id))} /> :
+                                <CheckBoxOutlineBlankIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
+                                    onClick={() => setSelectId(p => [...p, item._id])} />}
+                        </div>
+                        <div style={{ width: "100%", height: "100%", lineHeight: "50px" }}><p onClick={() => toPage.push("news/" + item.slug)}>{item.name}</p></div>
+                        <div style={{ width: "50px" }}><DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
+                            onClick={() => (setId(item._id), store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false })))} /></div>
+                    </div>) :
+                    <div className='flexbox'>
+                        <div style={{ width: "50px" }}></div>
+                        <div style={{ width: "100%", textAlign: "center" }}>{loading ? <p>少々お待ちください。</p> : <p>{notice ? notice : "ニュースがありません。"}</p>}</div>
+                        <div style={{ width: "50px" }}></div>
+                    </div>
+                }
 
-            {
-                data.length ? <Pagination page={page} next={() => setPage(p => p + 1)} prev={() => setPage(p => p - 1)} end={end} /> : null
-            }
+                {
+                    data.length ? <Pagination page={page} next={() => setPage(p => p + 1)} prev={() => setPage(p => p - 1)} end={end} /> : null
+                }
+            </div >
         </div >
     )
 

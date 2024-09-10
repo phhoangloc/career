@@ -73,7 +73,7 @@ const Page = () => {
 
 
     return (
-        <div style={{ minHeight: "calc(100vh - 70px)", width: "100%", margin: "auto 10px" }}>
+        <div style={{ minHeight: "calc(100vh - 70px)", width: "100%", margin: "0px" }}>
             <div style={{ width: "max-content", margin: "0 10px" }}>
                 {loading ?
                     <UploadButton
@@ -88,7 +88,7 @@ const Page = () => {
             <div className='grid_box'>
                 {
                     data.map((item, index) =>
-                        <div key={index} className='xs6 sm4 md3 lg2 grid_child' >
+                        <div key={index} className='xs6 sm4 md3 lg2 grid_child' style={{ overflow: "hidden", padding: "5px" }} >
                             <div style={{ width: "100%", aspectRatio: 1, position: "relative", borderRadius: "5px", overflow: "hidden", opacity: loading ? "0.25" : 1 }}>
                                 <Image quality={100} src={process.env.FTP_URL + "img/career/" + item.name} fill alt="" style={{ objectFit: "cover" }} />
                                 <DeleteIcon
