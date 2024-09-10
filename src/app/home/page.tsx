@@ -168,7 +168,7 @@ export default function Home() {
             <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>
             <div className="item_title">
               <h3>{data[1]?.contenttitle}</h3>
-              <h4>{data[1]?.name} / 2024年 採用 </h4>
+              <h4>{data[1]?.name} </h4>
               <h4>{data[1]?.workplace?.name}</h4>
               <div className="tag">
                 <p>{data[1]?.workplace?.location}</p>
@@ -187,7 +187,7 @@ export default function Home() {
             {/* <div className="cover"><Image src={"/img/example.jpg"} fill style={{ objectFit: "cover" }} alt="home" /></div> */}
             <div className="item_title">
               <h3>{data[0]?.contenttitle}</h3>
-              <h4>{data[0]?.name} / 2024年 採用 </h4>
+              <h4>{data[0]?.name} </h4>
               <h4>{data[0]?.workplace?.name}</h4>
               <div className="tag">
                 <p>{data[0]?.workplace?.location}</p>
