@@ -71,7 +71,7 @@ const Page = ({ params }: Props) => {
     const [location, setLocation] = useState<string>("")
 
     const getFacility = async () => {
-        const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area, currentUser._id)
+        const result = await UserAuthen.getItem(currentUser.position, "facility", search, undefined, undefined, location, area)
         if (result.success) {
             setFacility(result.data)
         }

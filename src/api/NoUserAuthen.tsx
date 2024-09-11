@@ -3,7 +3,7 @@ const login = async (body: { username: string, password: string }) => {
     const result = await axios.post("/api/login", body)
     return result.data
 }
-const signup = async (body: { username: string, password: string, email: string }) => {
+const signup = async (body: { username: string, password: string, email: string, facilities: string[] }) => {
     const result = await axios.post("/api/signup", body, {
         headers: {
             'Content-Type': 'application/json',

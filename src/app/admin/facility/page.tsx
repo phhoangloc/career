@@ -12,7 +12,7 @@ import { AlertType } from '@/redux/reducer/alertReducer';
 import { setAlert } from '@/redux/reducer/alertReducer';
 import Input from '@/component/input/input';
 import AddIcon from '@mui/icons-material/Add';
-
+import LabelIcon from '@mui/icons-material/Label';
 type Props = {}
 
 const Page = (props: Props) => {
@@ -106,10 +106,10 @@ const Page = (props: Props) => {
                             <DeleteIcon style={{ width: "40px", height: "40px", boxSizing: "border-box", padding: "7.5px" }} />
                             <p style={{ height: "40px", lineHeight: "50px", textAlign: "center" }} >削除</p>
                         </div> : null}
-                    <div style={{ display: "flex", height: "40px", width: "100px", background: "#006699", color: "white", borderRadius: "5px", cursor: "pointer" }} onClick={() => toPage.push("facility/new")}>
+                    {currentUser.position === "admin" && <div style={{ display: "flex", height: "40px", width: "100px", background: "#006699", color: "white", borderRadius: "5px", cursor: "pointer" }} onClick={() => toPage.push("facility/new")}>
                         <AddIcon style={{ width: "40px", height: "40px", boxSizing: "border-box", padding: "7.5px" }} />
                         <p style={{ height: "40px", lineHeight: "50px", textAlign: "center" }} >新規</p>
-                    </div>
+                    </div>}
                 </div>
                 <div className='dp-flex'>
                     <Input name="search" onChange={(e) => setSearch(e)} value={search} />
@@ -120,15 +120,15 @@ const Page = (props: Props) => {
                     <div key={index} className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1 bg-even'
                         style={{ cursor: "pointer", height: "40px" }}>
                         <div style={{ width: "40px" }}>
-                            {selectId.includes(item._id) ?
+                            {currentUser.position === "admin" ? selectId.includes(item._id) ?
                                 <CheckBoxOutlinedIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
                                     onClick={() => setSelectId(p => p.filter(i => i != item._id))} /> :
                                 <CheckBoxOutlineBlankIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
-                                    onClick={() => setSelectId(p => [...p, item._id])} />}
+                                    onClick={() => setSelectId(p => [...p, item._id])} /> : <LabelIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }} />}
                         </div>
                         <div style={{ width: "100%", height: "100%", lineHeight: "50px" }}><p onClick={() => toPage.push("facility/" + item.slug)}>{item.name}</p></div>
-                        <div style={{ width: "50px" }}><DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
-                            onClick={() => (setId(item._id), store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false })))} /></div>
+                        <div style={{ width: "50px" }}>{currentUser.position === "admin" && <DeleteIcon style={{ width: "100%", height: "100%", boxSizing: "border-box", padding: "5px" }}
+                            onClick={() => (setId(item._id), store.dispatch(setAlert({ open: true, msg: "この投稿を削除してもよろしいですか?", value: false })))} />}</div>
                     </div>) :
                     <div className='flexbox'>
                         <div style={{ width: "50px" }}></div>

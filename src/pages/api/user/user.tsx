@@ -21,7 +21,7 @@ export default async function handler(
         switch (method) {
             case "GET":
                 await userModel
-                    .findOne({ "_id": id })
+                    .find({ "_id": id })
                     .catch((error: Error) => {
                         result.success = false
                         result.message = error.message
@@ -33,6 +33,19 @@ export default async function handler(
                         res.json(result)
                     })
                 break;
+            case "PUT":
+                await userModel
+                    .updateOne({ "_id": id }, body)
+                    .catch((error: Error) => {
+                        res.json(result)
+                        throw error.message
+                    })
+                    .then((data: any) => {
+                        result.success = true
+                        result.data = data
+                        res.json(result)
+                    })
+                break
         }
     } else {
         result.success = false

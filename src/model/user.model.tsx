@@ -32,6 +32,11 @@ const userSchema = new Schema({
         type: String,
         default: "user"
     },
+
+    facilities: [{
+        type: Schema.Types.ObjectId,
+        ref: "facility"
+    }],
 })
 
 export const userModel = mongoose.models.user || mongoose.model('user', userSchema)
