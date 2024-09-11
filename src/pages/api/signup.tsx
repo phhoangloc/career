@@ -22,6 +22,8 @@ const createUser = async (
     res: NextApiResponse
 ) => {
     connectMongoDB()
+    // await userModel.collection.dropIndex('userNumber_1');
+    // await userModel.collection.dropIndex('nickname_1');
     if (req.method === 'POST') {
         const body = req.body;
         const salt = bcrypt.genSaltSync(10);

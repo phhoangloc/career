@@ -24,10 +24,6 @@ const userSchema = new Schema({
             message: "Please enter a valid email"
         },
     },
-    posts: [{
-        type: Schema.Types.ObjectId,
-        ref: "post"
-    }],
     active: {
         type: Boolean,
         default: false
@@ -36,16 +32,6 @@ const userSchema = new Schema({
         type: String,
         default: "user"
     },
-    userNumber: {
-        type: String,
-        unique: false,
-        default: "usernumber"
-    },
-    nickname: {
-        type: String,
-        unique: false,
-        default: "nickname"
-    }
 })
 
 export const userModel = mongoose.models.user || mongoose.model('user', userSchema)

@@ -273,7 +273,7 @@ const Page = ({ params }: Props) => {
                         <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                         <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                         <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
-                        <Input name="eメール" onChange={(e) => { setSavable(true); setFax(e) }} value={email} warn={emailWarn} />
+                        <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
                         <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>

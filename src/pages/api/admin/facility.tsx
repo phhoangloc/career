@@ -27,12 +27,12 @@ const Post =
         const user = await userModel.findOne({ "_id": id })
         const position = user && user.position
         const host = facility && facility.host && facility.host._id
+
         if (id) {
             if (position === "admin") {
                 switch (method) {
                     case "GET":
                         await facilityModel.find()
-                            .find({ "host": id })
                             .find(query.id ? { "_id": query.id } : {})
                             .find(query.archive ? { "archive": query.archive } : {})
                             .find(query.slug ? { "slug": query.slug } : {})
@@ -66,20 +66,19 @@ const Post =
                             })
                         break;
                     case "PUT":
-                        if (host.toString() === id.toString()) {
-                            body.host = id
-                            await facilityModel.updateOne({ "_id": query.id }, body)
-                                .catch((error: Error) => {
-                                    result.success = false
-                                    result.message = error.message
-                                    res.send(result)
-                                    throw error.message
-                                }).then(async (data: any) => {
-                                    result.success = true
-                                    result.message = "ポストが更新出来ました。"
-                                    res.json(result)
-                                })
-                        }
+
+                        await facilityModel.updateOne({ "_id": query.id }, body)
+                            .catch((error: Error) => {
+                                result.success = false
+                                result.message = error.message
+                                res.send(result)
+                                throw error.message
+                            }).then(async (data: any) => {
+                                result.success = true
+                                result.message = "ポストが更新出来ました。"
+                                res.json(result)
+                            })
+
                         break;
                     case "DELETE":
                         if (host.toString() === id.toString()) {

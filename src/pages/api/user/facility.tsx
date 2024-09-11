@@ -28,31 +28,45 @@ const Post =
         const position = user && user.position
         const host = facility && facility.host && facility.host._id
         if (id) {
-            if (position === "admin") {
-                switch (method) {
-                    case "GET":
-                        await facilityModel.find()
-                            .find({ "host": id })
-                            .find(query.id ? { "_id": query.id } : {})
-                            .find(query.archive ? { "archive": query.archive } : {})
-                            .find(query.slug ? { "slug": query.slug } : {})
-                            .skip(query.skip)
-                            .sort(query.sort ? query.sort : {})
-                            .limit(query.limit ? query.limit : {})
-                            .catch((error: Error) => {
-                                result.success = false
-                                result.message = error.message
-                                res.send(result)
-                                throw error.message
-                            }).then(async (data: any) => {
-                                result.success = true
-                                result.data = data
-                                res.json(result)
-                            })
-                        break;
-                    case "POST":
+            switch (method) {
+                case "GET":
+                    await facilityModel.find()
+                        .find({ "host": id })
+                        .find(query.id ? { "_id": query.id } : {})
+                        .find(query.archive ? { "archive": query.archive } : {})
+                        .find(query.slug ? { "slug": query.slug } : {})
+                        .skip(query.skip)
+                        .sort(query.sort ? query.sort : {})
+                        .limit(query.limit ? query.limit : {})
+                        .catch((error: Error) => {
+                            result.success = false
+                            result.message = error.message
+                            res.send(result)
+                            throw error.message
+                        }).then(async (data: any) => {
+                            result.success = true
+                            result.data = data
+                            res.json(result)
+                        })
+                    break;
+                case "POST":
+                    body.host = id
+                    await facilityModel.create(body)
+                        .catch((error: Error) => {
+                            result.success = false
+                            result.message = error.message
+                            res.send(result)
+                            throw error.message
+                        }).then(async (data: any) => {
+                            result.success = true
+                            result.message = "ポストが作成出来ました。"
+                            res.json(result)
+                        })
+                    break;
+                case "PUT":
+                    if (host.toString() === id.toString()) {
                         body.host = id
-                        await facilityModel.create(body)
+                        await facilityModel.updateOne({ "_id": query.id }, body)
                             .catch((error: Error) => {
                                 result.success = false
                                 result.message = error.message
@@ -60,49 +74,30 @@ const Post =
                                 throw error.message
                             }).then(async (data: any) => {
                                 result.success = true
-                                result.message = "ポストが作成出来ました。"
+                                result.message = "ポストが更新出来ました。"
                                 res.json(result)
                             })
-                        break;
-                    case "PUT":
-                        if (host.toString() === id.toString()) {
-                            body.host = id
-                            await facilityModel.updateOne({ "_id": query.id }, body)
-                                .catch((error: Error) => {
-                                    result.success = false
-                                    result.message = error.message
-                                    res.send(result)
-                                    throw error.message
-                                }).then(async (data: any) => {
-                                    result.success = true
-                                    result.message = "ポストが更新出来ました。"
-                                    res.json(result)
-                                })
-                        }
-                        break;
-                    case "DELETE":
-                        if (host.toString() === id.toString()) {
-                            await facilityModel.deleteOne({ "_id": query.id })
-                                .catch((error: Error) => {
-                                    result.success = false
-                                    result.message = error.message
-                                    res.send(result)
-                                    throw error.message
-                                }).then(async (data: any) => {
-                                    result.success = true
-                                    result.message = "あなたのメソッドは無効です"
-                                    res.json(result)
-                                })
-                        }
-                        break;
-                    default:
-                        res.send("")
-                }
-            } else {
-                result.success = false
-                result.message = "アドミニストレーターではありません"
-                res.json(result)
+                    }
+                    break;
+                case "DELETE":
+                    if (host.toString() === id.toString()) {
+                        await facilityModel.deleteOne({ "_id": query.id })
+                            .catch((error: Error) => {
+                                result.success = false
+                                result.message = error.message
+                                res.send(result)
+                                throw error.message
+                            }).then(async (data: any) => {
+                                result.success = true
+                                result.message = "あなたのメソッドは無効です"
+                                res.json(result)
+                            })
+                    }
+                    break;
+                default:
+                    res.send("")
             }
+
         } else {
             result.success = false
             result.message = "ログインしていません"

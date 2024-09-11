@@ -25,7 +25,6 @@ const Post =
         const post = await postModel.findOne({ "_id": query.id })
         const host = post && post.host && post.host._id
         if (id) {
-
             switch (method) {
                 case "GET":
                     await postModel.find()

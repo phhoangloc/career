@@ -1,6 +1,6 @@
 
-GET  https://zipcloud.ibsnet.co.jp/api/search?zipcode=542006
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjAyY2RkYmI3ODhkNzEyOWRjMDUwYyIsImlhdCI6MTcyMjgyMTkwNywiZXhwIjoxNzIyOTA4MzA3fQ.eN6gwWGYxp2kJTfuXrMvXBudcscAG9KN_QfEe3Pi8NI
+GET  http://localhost:3000/api/admin/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDFjNWEyOTVjOTkwMTMwNDliNzY4MCIsImlhdCI6MTcyNjAzNDMwOSwiZXhwIjoxNzI2MTIwNzA5fQ.N_1oWNJ-OyhziGFmNonhsoyYkG7hK96oE_buAk1Cfe8
 ###
 
 GET http://localhost:3000/api/news
@@ -19,7 +19,7 @@ POST http://localhost:3000/api/login
 Content-Type: application/json
 
 {
-    "username":"hoangloc",
+    "username":"locpham",
     "password":"123456"
 
 }

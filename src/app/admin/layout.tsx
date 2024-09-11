@@ -42,7 +42,6 @@ export default function RootLayout({
                 ]
               },
               {
-                position: "admin",
                 name: "施設情報",
                 child: [
                   { name: "施設情報一覧", link: "/admin/facility", },
@@ -64,7 +63,14 @@ export default function RootLayout({
                 ]
               },
 
-
+              {
+                position: "admin",
+                name: "ユーザー",
+                child: [
+                  { name: "インタビュー一覧", link: "/admin/user", },
+                  // { name: "新規インタビュー", link: "/admin/interview/new", }
+                ]
+              },
             ]}
               naviLeftWitdh='200px' />
           }

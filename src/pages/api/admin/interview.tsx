@@ -65,20 +65,19 @@ const Post =
                             })
                         break;
                     case "PUT":
-                        if (host.toString() === id.toString()) {
-                            body.host = id
-                            await interviewModel.updateOne({ "_id": query.id }, body)
-                                .catch((error: Error) => {
-                                    result.success = false
-                                    result.message = error.message
-                                    res.send(result)
-                                    throw error.message
-                                }).then(async (data: any) => {
-                                    result.success = true
-                                    result.message = "ポストが更新出来ました。"
-                                    res.json(result)
-                                })
-                        }
+
+                        await interviewModel.updateOne({ "_id": query.id }, body)
+                            .catch((error: Error) => {
+                                result.success = false
+                                result.message = error.message
+                                res.send(result)
+                                throw error.message
+                            }).then(async (data: any) => {
+                                result.success = true
+                                result.message = "ポストが更新出来ました。"
+                                res.json(result)
+                            })
+
                         break;
                     case "DELETE":
                         if (host.toString() === id.toString()) {

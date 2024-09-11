@@ -80,7 +80,7 @@ export default async function handler(
         }
     } else {
         result.success = false
-        result.message = "you haven't logged in yet"
+        result.message = "ログインしていません"
         res.json(result)
     }
 }

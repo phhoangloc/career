@@ -71,7 +71,7 @@ const Page = ({ params }: Props) => {
     const [location, setLocation] = useState<string>("")
 
     const getFacility = async () => {
-        const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
+        const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area, currentUser._id)
         if (result.success) {
             setFacility(result.data)
         }
@@ -201,7 +201,6 @@ const Page = ({ params }: Props) => {
                         </div>
                         <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
                         <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
-                        {/* <Input name="エリア" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} /> */}
                         <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                         <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                         <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
