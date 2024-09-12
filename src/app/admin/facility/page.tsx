@@ -64,8 +64,8 @@ const Page = (props: Props) => {
     }
 
     useEffect(() => {
-        currentUser.position && getPost(currentUser.position, "facility", search, page * limit, limit)
-        currentUser.position && getPost_v2(currentUser.position, "facility", search, (page + 1) * limit, limit)
+        currentUser.position && getPost(currentUser.position, "facility", search, 0, 0)
+        // currentUser.position && getPost_v2(currentUser.position, "facility", search, (page + 1) * limit, limit)
     }, [refresh, currentUser.position, search, page])
 
     const deletePost = async (id: string) => {
@@ -92,6 +92,7 @@ const Page = (props: Props) => {
         currentAlert.open === false && setSelectId([])
     }, [currentAlert.open])
 
+
     return (
         <div className='scrollbar-none' style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px", overflow: "auto" }}>
 
@@ -116,7 +117,7 @@ const Page = (props: Props) => {
                 </div>
 
 
-                {data.length ? data.map((item, index) =>
+                {data.length ? data.slice(page * limit, (page * limit) + limit).map((item, index) =>
                     <div key={index} className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1 bg-even'
                         style={{ cursor: "pointer", height: "40px" }}>
                         <div style={{ width: "40px" }}>
@@ -138,7 +139,7 @@ const Page = (props: Props) => {
                 }
 
                 {
-                    data.length ? <Pagination page={page} next={() => setPage(p => p + 1)} prev={() => setPage(p => p - 1)} end={end} onClick={(p) => setPage(p)} /> : null
+                    data.length ? <Pagination page={page} next={() => setPage(p => p + 1)} prev={() => setPage(p => p - 1)} end={data[(page + 1) * limit]?._id ? false : true} onClick={(p) => setPage(p)} /> : null
                 }
             </div >
         </div >

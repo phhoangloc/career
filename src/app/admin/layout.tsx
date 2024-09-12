@@ -45,7 +45,7 @@ export default function RootLayout({
                 name: "施設情報",
                 child: [
                   { name: "施設情報一覧", link: "/admin/facility", },
-                  { name: "新規施設情報", link: "/admin/facility/new", }
+                  // { name: "新規施設情報", link: "/admin/facility/new", }
                 ]
               },
               {
@@ -68,7 +68,6 @@ export default function RootLayout({
                 name: "ユーザー",
                 child: [
                   { name: "インタビュー一覧", link: "/admin/user", },
-                  // { name: "新規インタビュー", link: "/admin/interview/new", }
                 ]
               },
             ]}

@@ -640,6 +640,12 @@ div {
   margin-top: 20px;
 }
 
+.contain_V2 .div_items .items .item .item_title h3 {
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+
 .contain_V2 .div_items .items .item .item_title h4 {
   opacity: 0.75;
 }

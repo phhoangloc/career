@@ -158,9 +158,9 @@ export default function Home() {
         </div>
         <div className="items">
           <div className="item">
-            <div className="cover">
+            <div className="cover" style={{ height: "inherit" }}>
 
-              {data[1]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[1]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+              {data[1]?.video?.length ? <iframe style={{ width: "100%", aspectRatio: 1.5 }} src={"https://www.youtube.com/embed/" + data[1]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
                 <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>}
             </div>
 
@@ -175,8 +175,8 @@ export default function Home() {
             </div>
           </div>
           <div className="item">
-            <div className="cover" >
-              {data[0]?.video?.length ? <iframe width="560" height="315" src={"https://www.youtube.com/embed/" + data[0]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+            <div className="cover" style={{ height: "inherit" }}>
+              {data[0]?.video?.length ? <iframe style={{ width: "100%", aspectRatio: 1.5 }} src={"https://www.youtube.com/embed/" + data[0]?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
                 <div style={{ width: "100%", height: "100%", background: "#444", color: "white", display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "center", maxHeight: "300px" }}> NO VIDEO</div>}
             </div>
             <div className="item_title">

@@ -34,6 +34,7 @@ const Post =
                     await facilityModel.find()
                         .find(query.id ? { "_id": query.id } : {})
                         .find(query.archive ? { "archive": query.archive } : {})
+                        .find(query.search ? { "name": { $regex: query.search } } : {})
                         .find(query.slug ? { "slug": query.slug } : {})
                         .find(query.area ? { "area": query.area } : {})
                         .find(query.lo ? { "location": query.lo } : {})
