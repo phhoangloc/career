@@ -73,7 +73,7 @@ const Page = ({ params }: Props) => {
                             <h3>{newData.address}</h3>
                             <h3>{newData.address.split("　")?.[1] ? newData.address.split("　")?.[1] : " "}</h3>
                             <div className='social_icon'>
-                                <Link href={newData.homepage} target='_blank'><HomeIcon /></Link>
+                                <Link style={{ display: "flex" }} href={newData.homepage} target='_blank'><HomeIcon /><p onMouseEnter={(e) => e.currentTarget.style.color = "#006699"} onMouseLeave={(e) => e.currentTarget.style.color = "inherit"} style={{ lineHeight: "45px" }}>{newData.homepage}</p></Link>
                                 {/* <Image src={"/img/twitterx-50.png"} width={30} height={30} alt='x' />
                                 <InstagramIcon />
                                 <YouTubeIcon /> */}

@@ -29,7 +29,7 @@ export const japanRegions = [
         ]
     },
     {
-        region: "中部",
+        region: "北信越",
         prefectures: [
             { name: "新潟県" },
             { name: "富山県" },

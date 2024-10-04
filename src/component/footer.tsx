@@ -25,6 +25,9 @@ const Footer = (props: Props) => {
             <div className='column'>
                 <h2 onClick={() => toPage.push("/home/news")}>お知らせ</h2>
             </div>
+            <div className='column'>
+                <h2 onClick={() => toPage.push("/home/contact")}>お問い合わせ</h2>
+            </div>
         </div>
     )
 }

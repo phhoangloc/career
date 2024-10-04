@@ -80,10 +80,15 @@ div {
                 appearance: none;
                 -webkit-appearance: none;
                 -moz-appearance: none;
+                cursor: pointer;
 
                 option {
                     z-index: 0;
                 }
+            }
+
+            select:hover {
+                background-color: #f0f0f0;
             }
 
             p {
@@ -133,17 +138,24 @@ div {
                     width: calc(100% - 100px);
                     padding: 0 5px;
 
-                    p {
+                    .area_title {
                         display: flex;
+                        flex-wrap: wrap;
+                        margin-top: 5px;
 
-                        svg {
-                            width: 20px;
-                            height: 20px;
-                            margin: 2.5px;
-                            position: inherit;
-                            opacity: 0.5;
+                        p {
+                            display: flex;
+
+                            svg {
+                                width: 20px;
+                                height: 20px;
+                                margin: 2.5px;
+                                position: inherit;
+                                opacity: 0.5;
+                            }
                         }
                     }
+
                 }
 
                 svg {
@@ -589,8 +601,38 @@ div {
         background-color: rgba($color: #fff, $alpha: 0.5);
         padding-bottom: 100px;
 
+        .title {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+
+            h2 {
+                color: #ee827d;
+            }
+
+            h1 {
+                color: #133b3a;
+                font-weight: 500;
+                padding: 0 5px;
+                border-left: 3px solid #ee827d;
+                height: 40px;
+                line-height: 40px;
+                margin: 5px 0;
+            }
+
+            .title_button {
+                width: 90%;
+                max-width: 275px;
+                margin: 10px 0;
+            }
+
+        }
+
+
         p {
             width: 90%;
+
             margin: auto;
             font-weight: normal;
             letter-spacing: 2px;
@@ -602,6 +644,48 @@ div {
             display: flex;
             max-width: 575px;
             margin: 100px auto 0;
+        }
+
+        .about_text {
+            padding: 50px 0;
+            max-width: 1200px;
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        .content_news {
+            text-align: center;
+
+            h2 {
+                margin-bottom: 5px;
+            }
+
+            .category {
+                width: max-content;
+                margin: auto;
+                margin-bottom: 20px;
+                display: flex;
+
+                p {
+                    height: 30px;
+                    line-height: 30px;
+                    padding: 0px 10px;
+                    border-radius: 15px;
+                    margin: 0 5px;
+                    background-color: var(--main);
+                    color: white;
+                }
+
+            }
+
+            .text {
+                padding: 50px 0;
+                width: 90%;
+                max-width: 992px;
+                margin: auto;
+                text-align: justify;
+            }
         }
     }
 
@@ -708,6 +792,18 @@ div {
     }
 
     @media (min-width:768px) {
+        .about {
+            .title {
+                .title_button {
+                    margin: -40px 10px auto auto;
+                }
+            }
+
+            .about_text {
+                font-size: 17px;
+            }
+        }
+
         .div_items {
             .title {
                 .title_button {
@@ -772,6 +868,7 @@ div {
 
     .column {
         color: #666;
+        font-size: 14px;
 
         h2 {
             margin-bottom: 10px;
@@ -787,11 +884,12 @@ div {
     @media (min-width:768px) {
 
         display: flex;
+        flex-wrap: wrap;
 
         .column {
-            width: 150px;
-            margin: 0 25px;
-            font-size: 17px;
+            width: 175px;
+            margin: 5px;
+            font-size: 16px;
         }
 
     }

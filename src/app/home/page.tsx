@@ -11,6 +11,7 @@ export default function Home() {
 
   const [data, setdata] = useState<any[]>([])
   const [facility, setFacility] = useState<any[]>([])
+  const [news, setNews] = useState<any>()
 
   const [hover, setHover] = useState<boolean>(false)
   const [coverItem, setCovetItem] = useState<number>(0)
@@ -32,9 +33,18 @@ export default function Home() {
       setFacility([])
     }
   }
+  const getNews = async (a: string) => {
+    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 1)
+    if (result.success) {
+      setNews(result.data[0])
+    } else {
+      setNews([])
+    }
+  }
   useEffect(() => {
     getAllInterview("interview")
     getFacility("facility")
+    getNews("news")
   }, [])
 
   const toPage = useRouter()
@@ -99,8 +109,48 @@ export default function Home() {
           しませんか?
         </p>
         <div className="buttons">
-          <ButtonWeb name="業界を知る" bg="#fdefcc" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
+          <ButtonWeb name="業界を知る" bg="#fdefcc" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#j")} />
           <ButtonWeb name="仕事を探す" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#i")} />
+        </div>
+      </div>
+      <div className="about" style={{ paddingTop: "10%", background: "#fceecc" }} id="j">
+        <div className="title">
+          <h2>News</h2>
+          <h1>ニュース</h1>
+          <div className="title_button">
+            <ButtonWeb name="施設⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+              onClick={() => toPage.push("/home/news")} />
+          </div>
+        </div>
+        <div className='content_news'>
+
+          <h2>{news?.name}</h2>
+          <div className='category'>
+            {
+              news?.category ? news.category?.map((item: any, index: number) => <p key={index} style={{ margin: "0px 5px 0px 0px" }}>{item.name}</p>) : null
+            }
+          </div>
+          <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: news?.content }} />
+        </div>
+
+        <div className="buttons">
+          <ButtonWeb name="施設を知る" bg="white" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
+          <ButtonWeb name="先輩たちの声" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#h")} />
+        </div>
+      </div>
+      <div className="about" style={{ background: "white", paddingTop: "10%" }} id="j">
+        <div className="title">
+          <h2>Industry  introduction</h2>
+          <h1>業界紹介</h1>
+        </div>
+        <p className="about_text">
+          手話を学んだ人が就職できる主な場所は、次のようなとおりです。<br></br>
+          自治体などの行政機関、福祉関連の施設、手話通訳派遣センター、聴覚障がい者団体、社会福祉協議会、聴覚障がい者情報提供施設、自治体などでの手話講師、手話通訳士は、聴覚障がい者のコミュニケーションを支える仕事なので、聴覚障がい者が誰かと話したり、誰かの話を聞いたりといった状況が発生するあらゆる場所で仕事をすることになります。<br></br>
+          手話通訳士として働くには、手話通訳士試験に合格し、社会福祉法人聴力障害者情報文化センターに登録する必要があります。受験資格は20歳以上で、3年程度の手話通訳経験を有することが受験の目安になっています。<br></br>
+          また、手話技能検定は就職（職業）のための資格ではないため、合格＝就職というわけではありませんが、ホテルやデパート、航空会社などのサービス業や、医療・福祉関係などでは手話を使ったサービスを行っている企業もあります。</p>
+        <div className="buttons">
+          <ButtonWeb name="施設を知る" bg="#fdefcc" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
+          <ButtonWeb name="先輩たちの声" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#h")} />
         </div>
       </div>
       <div className="div_items" id="f">
@@ -147,7 +197,7 @@ export default function Home() {
 
         </div>
       </div>
-      <div className="div_items div_items_bg_none">
+      <div className="div_items div_items_bg_none" id="h">
         <div className="title">
           <h2>Interview</h2>
           <h1>先輩たちの声 </h1>
