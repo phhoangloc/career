@@ -3,18 +3,20 @@ import React, { useState, useEffect } from 'react'
 import UploadPicturePreview from '@/component/input/uploadPicturePreview'
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import Input from '@/component/input/input';
-import TextAreaTool from '@/component/input/textareaTool';
 import Button from '@/component/input/button';
 import { useRouter } from 'next/navigation';
 import { UserAuthen } from '@/api/UserAuthen';
 import store from '@/redux/store';
-// import ImageModal from '@/component/tool/imageModal';
 import ImageModal from '@/component/tool/imageModal_v2';
 import TextAreaTool_v2 from '@/component/input/textareaTool_v2';
 import moment from 'moment';
 import { NoUserAuthen } from '@/api/NoUserAuthen';
 import DOMPurify from 'dompurify';
 import { japanPrefectures, japanRegions } from '@/lib/area';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
+import { workstatusList, statusList } from '@/data/workstatus';
 type Props = {
     params: { slug: string }
 }
@@ -32,15 +34,22 @@ const Page = ({ params }: Props) => {
 
     const [saving, setSaving] = useState<boolean>(false)
     const [savable, setSavable] = useState<boolean>(false)
+    const [isInput, setIsInput] = useState<boolean>(false)
 
     const [id, setId] = useState<string>("")
     const [title, setTitle] = useState<string>("")
     const [slug, setSlug] = useState<string>("post_" + moment(new Date()).format("YYYY_MM_DD"))
     const [workplace, setWorkplace] = useState<string>("")
+    const [_contract, set_contract] = useState<string>("")
+    const [_contractName, set_contractName] = useState<string>("")
     const [worktype, setWorktype] = useState<string>("")
+    const [newWorktype, setNewWorktype] = useState<string>("")
+    const [worktypeList, setWorktypeList] = useState<string[]>([])
     const [workstatus, setWorkstatus] = useState<string>("")
+    const [lisense, setLisense] = useState<string>("")
     const [worktime, setWorkTime] = useState<string>("")
     const [worksalary, setWorksalary] = useState<string>("")
+    const [_bonus, set_bonus] = useState<string>("")
     const [workbenefit, setWorkbenefit] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し仕事内容をシェアしてください。")
@@ -49,6 +58,10 @@ const Page = ({ params }: Props) => {
     const [imagePreview, setImagePreview] = useState<string>("")
     const [change, setChange] = useState<number>(0)
     const [facility, setFacility] = useState<any[]>([])
+
+    const [_startDay, set_startDay] = useState<Date>(new Date())
+    const [_endDay, set_endDay] = useState<Date>(new Date())
+    const [_i, set_i] = useState<number>(0)
 
     const toPage = useRouter()
 
@@ -64,6 +77,13 @@ const Page = ({ params }: Props) => {
         worktime,
         worksalary,
         workbenefit,
+        startDate: new Date(_startDay),
+        endDate: new Date(_endDay),
+        bonus: _bonus,
+        contact: _contract,
+        contactName: _contractName,
+        lisense,
+
     }
 
     const [search, setSearch] = useState<string>("")
@@ -79,6 +99,7 @@ const Page = ({ params }: Props) => {
 
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
+
         if (result.success) {
             setId(result.data[0]._id)
             setTitle(result.data[0].title)
@@ -92,6 +113,20 @@ const Page = ({ params }: Props) => {
             setWorkTime(result.data[0].worktime)
             setWorksalary(result.data[0].worksalary)
             setWorkbenefit(result.data[0].workbenefit)
+            set_bonus(result.data[0].bonus)
+            set_contract(result.data[0].contact)
+            set_contractName(result.data[0].contactName)
+            set_startDay(result.data[0].startDate)
+            set_endDay(result.data[0].endDate)
+            setLisense(result.data[0].lisense)
+        }
+    }
+
+    const getWorkType = async () => {
+        const result = await NoUserAuthen.getItem("worktype", "", "", "", "", "", undefined, undefined)
+
+        if (result.success) {
+            setWorktypeList(result.data)
         }
     }
     useEffect(() => {
@@ -146,6 +181,16 @@ const Page = ({ params }: Props) => {
         getFacility()
     }, [search, area, location])
 
+    useEffect(() => {
+        getWorkType()
+    }, [_i])
+
+    const addWorktype = async (body: any) => {
+        const result = await UserAuthen.createItem(currentUser.position, "worktype", body)
+        if (result.success) {
+            set_i(_i + 1)
+        }
+    }
 
     switch (params.slug) {
         case "new":
@@ -157,6 +202,8 @@ const Page = ({ params }: Props) => {
                         <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                         <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                         <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        <Input name="連絡先" onChange={(e) => { setSavable(true); set_contract(e) }} value={_contract} />
+                        <Input name="担当者の名前" onChange={(e) => { setSavable(true); set_contractName(e) }} value={_contractName} />
                         <div className="grid_box ">
                             <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
                                 <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ</h4>
@@ -199,16 +246,76 @@ const Page = ({ params }: Props) => {
                                 </div>
                             </div>
                         </div>
-                        <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
-                        <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
+                        <div>
+                            <div className='dp-flex' >
+                                <h3 style={{ height: "40px", lineHeight: "50px" }}>職種</h3>
+                                <AddIcon style={{ width: "40px", height: "40px", padding: "12px", boxSizing: "border-box" }} onClick={() => setIsInput(!isInput)} />
+                                <div style={{ display: isInput ? "flex" : "none", height: "40px" }}>
+                                    <input
+                                        style={{ height: "30px" }}
+                                        onChange={(e) => { setNewWorktype(e.target.value); }}
+                                        value={newWorktype}
+                                        onFocus={(e) => {
+                                            e.target.style.outline = 'none'
+                                        }}>
+                                    </input>
+                                    <CloseIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false) }} />
+                                    <CheckIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false), addWorktype({ name: newWorktype }) }} />
+                                </div>
+                            </div>
+                            <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                                {worktypeList.length ?
+                                    worktypeList.map((item: any, index: number) =>
+                                        <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                            <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(item.name)} ></input>
+                                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                        </div>
+                                    ) :
+                                    <p style={{ opacity: "0.5" }}>職種がない</p>}
+                            </div>
+                        </div>
+                        <div>
+                            <div className='dp-flex' >
+                                <h3 style={{ height: "40px", lineHeight: "50px" }}>雇用形態</h3>
+                            </div>
+                            <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                                {workstatusList.length ?
+                                    workstatusList.map((item: any, index: number) =>
+                                        <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(item.name)} ></input>
+                                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                        </div>
+                                    ) :
+                                    null}
+                            </div>
+                        </div>
+                        <div>
+                            <div className='dp-flex' >
+                                <h3 style={{ height: "40px", lineHeight: "50px" }}>資格の有無</h3>
+                            </div>
+                            <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                                {statusList.length ?
+                                    statusList.map((item: any, index: number) =>
+                                        <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(item.name)} ></input>
+                                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                        </div>
+                                    ) :
+                                    null
+                                }
+                            </div>
+                        </div>
                         <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                         <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
-                        <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
+                        <Input name="賞与" onChange={(e) => { setSavable(true), set_bonus(e) }} value={_bonus} />
+                        <Input name="福利厚生" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
+                        <Input name="掲載日" onChange={(e) => { setSavable(true), set_startDay(e) }} value={moment(_startDay).format("YYYY-MM-DD")} type='date' />
+                        <Input name="掲載終了日" onChange={(e) => { setSavable(true), set_endDay(e) }} value={moment(_endDay).format("YYYY-MM-DD")} type='date' />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
 
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
-                                <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image && savable ? false : true} />}
+                                <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image && savable && workplace && worktype && workstatus && lisense ? false : true} />}
                             <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
@@ -217,6 +324,7 @@ const Page = ({ params }: Props) => {
             )
 
     }
+
     return (
         <div className='grid_box scrollNone'>
             <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
@@ -225,6 +333,8 @@ const Page = ({ params }: Props) => {
                 <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                 <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                 <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                <Input name="連絡先" onChange={(e) => { setSavable(true); set_contract(e) }} value={_contract} />
+                <Input name="担当者の名前" onChange={(e) => { setSavable(true); set_contractName(e) }} value={_contractName} />
                 <div className="grid_box ">
                     <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
                         <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ</h4>
@@ -267,12 +377,72 @@ const Page = ({ params }: Props) => {
                         </div>
                     </div>
                 </div>
-                <Input name="職種" onChange={(e) => { setSavable(true); setWorktype(e) }} value={worktype} />
-                <Input name="雇用形態" onChange={(e) => { setSavable(true); setWorkstatus(e) }} value={workstatus} />
+                <div>
+                    <div className='dp-flex' >
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>職種</h3>
+                        <AddIcon style={{ width: "40px", height: "40px", padding: "12px", boxSizing: "border-box" }} onClick={() => setIsInput(!isInput)} />
+                        <div style={{ display: isInput ? "flex" : "none", height: "40px" }}>
+                            <input
+                                style={{ height: "30px" }}
+                                onChange={(e) => { setNewWorktype(e.target.value); }}
+                                value={newWorktype}
+                                onFocus={(e) => {
+                                    e.target.style.outline = 'none'
+                                }}>
+                            </input>
+                            <CloseIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false) }} />
+                            <CheckIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false), addWorktype({ name: newWorktype }) }} />
+                        </div>
+                    </div>
+                    <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                        {worktypeList.length ?
+                            worktypeList.map((item: any, index: number) =>
+                                <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                    <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(item.name)} ></input>
+                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                </div>
+                            ) :
+                            <p style={{ opacity: "0.5" }}>職種がない</p>}
+                    </div>
+                </div>
+                <div>
+                    <div className='dp-flex' >
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>雇用形態</h3>
+                    </div>
+                    <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                        {workstatusList.length ?
+                            workstatusList.map((item: any, index: number) =>
+                                <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                    <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(item.name)} ></input>
+                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                </div>
+                            ) :
+                            null}
+                    </div>
+                </div>
+                <div>
+                    <div className='dp-flex' >
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>資格の有無</h3>
+                    </div>
+                    <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
+                        {statusList.length ?
+                            statusList.map((item: any, index: number) =>
+                                <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                    <input type='checkbox' checked={lisense?.includes(item.name)} onChange={() => setLisense(item.name)} ></input>
+                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                </div>
+                            ) :
+                            null
+                        }
+                    </div>
+                </div>
                 <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                 <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
-                <Input name="休⽇休暇" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
-                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
+                <Input name="賞与" onChange={(e) => { setSavable(true), set_bonus(e) }} value={_bonus} />
+                <Input name="福利厚生" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
+                <Input name="掲載日" onChange={(e) => { setSavable(true), set_startDay(e) }} value={moment(_startDay).format("YYYY-MM-DD")} type='date' />
+                <Input name="掲載終了日" onChange={(e) => { setSavable(true), set_endDay(e) }} value={moment(_endDay).format("YYYY-MM-DD")} type='date' />
+                <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
                     <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />

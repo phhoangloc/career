@@ -13,6 +13,8 @@ import { setAlert } from '@/redux/reducer/alertReducer';
 import Input from '@/component/input/input';
 import AddIcon from '@mui/icons-material/Add';
 import LabelIcon from '@mui/icons-material/Label';
+import { japanPrefectures, japanRegions } from '@/lib/area';
+import SwapVertIcon from '@mui/icons-material/SwapVert';
 type Props = {}
 
 const Page = (props: Props) => {
@@ -45,8 +47,12 @@ const Page = (props: Props) => {
 
     const [selectId, setSelectId] = useState<string[]>([])
 
-    const getPost = async (p: string, a: string, s: string, sk: number, li: number) => {
-        const result = await UserAuthen.getItem(p, a, s, sk, li)
+    const [__location, set__location] = useState<string>("")
+    const [__area, set__area] = useState<string>("")
+    const [__sort, set__sort] = useState<number>(1)
+
+    const getPost = async (p: string, a: string, s: string, sk: number, li: number, lo: string, area: string, sort: number) => {
+        const result = await UserAuthen.getItem(p, a, s, sk, li, lo, area, sort)
         if (result.success) {
             setData(result.data)
             setLoading(false)
@@ -56,17 +62,17 @@ const Page = (props: Props) => {
             setLoading(false)
         }
     }
-    const getPost_v2 = async (p: string, a: string, s: string, sk: number, li: number) => {
-        const result = await UserAuthen.getItem(p, a, s, sk, li)
+    const getPost_v2 = async (p: string, a: string, s: string, sk: number, li: number, lo: string, area: string, sort: number) => {
+        const result = await UserAuthen.getItem(p, a, s, sk, li, lo, area, sort)
         if (result.success) {
             setEnd(result.data.length ? false : true)
         }
     }
 
     useEffect(() => {
-        currentUser.position && getPost(currentUser.position, "facility", search, 0, 0)
+        currentUser.position && getPost(currentUser.position, "facility", search, 0, 0, __location, __area, __sort)
         // currentUser.position && getPost_v2(currentUser.position, "facility", search, (page + 1) * limit, limit)
-    }, [refresh, currentUser.position, search, page])
+    }, [refresh, currentUser.position, search, page, __location, __area, __sort])
 
     const deletePost = async (id: string) => {
         const result = await UserAuthen.deleteItem(currentUser.position, "facility", id)
@@ -93,6 +99,7 @@ const Page = (props: Props) => {
     }, [currentAlert.open])
 
 
+
     return (
         <div className='scrollbar-none' style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px", overflow: "auto" }}>
 
@@ -111,12 +118,25 @@ const Page = (props: Props) => {
                         <AddIcon style={{ width: "40px", height: "40px", boxSizing: "border-box", padding: "7.5px" }} />
                         <p style={{ height: "40px", lineHeight: "50px", textAlign: "center" }} >新規</p>
                     </div>}
+                    <SwapVertIcon style={{ width: "40px", height: "40px", padding: "8px", boxSizing: "border-box", background: "#006699", color: "white", marginLeft: "5px", borderRadius: "5px" }} onClick={() => set__sort(__sort !== -1 ? -1 : 1)} />
+                    <div className="xs12 lg7">
+                        <div style={{ width: "100%", height: "max-content" }}>
+                            <div className='dp-flex'>
+                                <select style={{ width: "100px", height: "40px", margin: "0 5px" }} onChange={(e) => set__location(e.target.value)}>
+                                    <option value="">都道府県</option>
+                                    {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
+                                </select>
+                                <select style={{ height: "40px", margin: "0 5px" }} onChange={(e) => set__area(e.target.value)}>
+                                    <option value="">エリア</option>
+                                    {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className='dp-flex'>
-                    <Input name="search" onChange={(e) => setSearch(e)} value={search} />
+                    <Input name="施設の検索" onChange={(e) => setSearch(e)} value={search} />
                 </div>
-
-
                 {data.length ? data.slice(page * limit, (page * limit) + limit).map((item, index) =>
                     <div key={index} className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1 bg-even'
                         style={{ cursor: "pointer", height: "40px" }}>

@@ -7,9 +7,13 @@ import Button from './input/button';
 import { NoUserAuthen } from '@/api/NoUserAuthen';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { japanRegions } from '@/lib/area';
-type Props = {}
+import { workstatusList, statusList } from '@/data/workstatus';
+import RefreshIcon from '@mui/icons-material/Refresh';
+type Props = {
+    body?: any
+}
 
-const SearchTool = (props: Props) => {
+const SearchTool = ({ body }: Props) => {
 
     const [workplaces, setWorkplace] = useState<string[]>([])
     const getWorkplace = async () => {
@@ -22,47 +26,22 @@ const SearchTool = (props: Props) => {
     useEffect(() => {
         getWorkplace()
     }, [])
+    const [worktypes, setWorktypes] = useState<any[]>([])
+    const getWorkType = async () => {
+        const result = await NoUserAuthen.getItem("worktype", "", "", "", "", "", undefined, undefined)
+        if (result.success) {
+            setWorktypes(result.data)
+        }
+    }
 
+    useEffect(() => {
+        getWorkType()
+    }, [])
 
-    const worktypes = [
-        {
-            name: "手話通訳者",
-        },
-        {
-            name: "エンジニア",
-        },
-        {
-            name: "企画・管理",
-        },
-        {
-            name: "事務",
-        },
-    ]
-    const workstatus = [
-        {
-            name: "正社員",
-        },
-        {
-            name: "契約社員",
-        },
-        {
-            name: "アルバイト・バイト",
-        },
-    ]
-    const status = [
-        {
-            name: "手話通訳者",
-        },
-        {
-            name: "手話学習中",
-        },
-        {
-            name: "手話未経験",
-        },
-    ]
     const [wp, setwp] = useState<string>("")
     const [wt, setwt] = useState<string>("")
     const [stt, setstt] = useState<string>("")
+    const [lis, setLis] = useState<string>("")
     const [lo, setlo] = useState<string[]>([])
     const [area, setArea] = useState<number>(-1)
     const [areaModal, setAreaModal] = useState<boolean>(true)
@@ -71,15 +50,22 @@ const SearchTool = (props: Props) => {
 
     const toPage = useRouter()
 
-    const onSearch = (a: string, b: string, c: string, s: string) => {
-        toPage.push(`/home/search/n/${a ? a : "a"}/${b ? b : "b"}/${s ? s : "s"}/${c ? c : "c"}`)
+    const onSearch = (a: string, b: string, c: string, s: string, lis: string) => {
+        toPage.push(`/home/search/n/${a ? a : "a"}/${b ? b : "b"}/${s ? s : "s"}/${c ? c : "c"}/${lis ? lis : "lis"}`)
     }
+
+
+    useEffect(() => {
+        setlo(body?.lo[0].length ? body.lo : [])
+    }, [])
 
     return (
         <div className='searchTool'>
             <div className='title'>
                 <h2>Job Search</h2>
                 <h1>仕事を探す</h1>
+                <div style={{ height: "25px" }}></div>
+                <RefreshIcon onClick={() => toPage.push("/home/search//n/a/b/s/c/lis")} />
             </div>
             <div className='grid_box'>
                 <div className='selectbox xs12 md6 lg8  '>
@@ -90,6 +76,7 @@ const SearchTool = (props: Props) => {
                                 <option value={undefined}>エリア</option>
                             </select>
                             {lo.map((item, index) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "10px" }} key={index}>{item}</li>)}
+                            {/* {body.lo.map((item: any, index: number) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "10px" }} key={index}>{item}</li>)} */}
                         </>
                         : null}
                     <div className={`area ${areaModal ? "area_none" : ""}`}>
@@ -122,33 +109,34 @@ const SearchTool = (props: Props) => {
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setwt(e.target.value)}>
-                        <option value={undefined}>職種</option>
+                        <option value={undefined}>{"職種"}</option>
                         {worktypes.map((item, index) =>
-                            <option key={index} value={item.name}>{item.name}</option>
+                            <option key={index} value={item.name} selected={body?.wt === item.name ? true : false}>{item.name}</option>
                         )}
                     </select>
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setstt(e.target.value)}>
-                        <option value={undefined}>雇用形態</option>
-                        {workstatus.map((item, index) =>
-                            <option key={index} value={item.name}>{item.name}</option>
+                        <option value={undefined}>{"雇用形態"}</option>
+                        {workstatusList.map((item, index) =>
+                            <option key={index} value={item.name} selected={body?.ws === item.name ? true : false}>{item.name}</option>
                         )}
                     </select>
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
-                    <select  >
-                        <option value={undefined} >資格の有無 </option>
-                        {status.map((item: any, index: any) =>
-                            <option key={index} value={item.name}>{item.name}</option>
+                    <select onChange={(e) => setLis(e.target.value)}  >
+                        <option value={undefined}>{"資格の有無"}</option>
+
+                        {statusList.map((item: any, index: any) =>
+                            <option key={index} value={item.name} selected={body?.lis === item.name ? true : false}>{item.name}</option>
                         )}
                     </select>
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setwp(e.target.value)} >
-                        <option value={undefined} >施設 </option>
+                        <option value={undefined}>{"施設"}</option>
                         {workplaces.map((item: any, index: any) =>
-                            <option key={index} value={item.name}>{item.name}</option>
+                            <option key={index} value={item.name} selected={body?.wp === item.name ? true : false}>{item.name}</option>
                         )}
                     </select>
                 </div>
@@ -156,7 +144,7 @@ const SearchTool = (props: Props) => {
 
             </div>
             <div className='button_search xs12 md4 '>
-                <Button onClick={() => onSearch(wp, wt, loString, stt)} name='検索' />
+                <Button onClick={() => onSearch(wp || body?.wp, wt || body?.wt, loString, stt || body?.ws, lis || body?.lis)} name='検索' />
             </div>
         </div>
     )

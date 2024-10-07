@@ -33,12 +33,15 @@ const Post =
                 switch (method) {
                     case "GET":
                         await facilityModel.find()
+                            .collation({ locale: 'ja' })
                             .find(query.id ? { "_id": query.id } : {})
                             .find(query.archive ? { "archive": query.archive } : {})
                             .find(query.slug ? { "slug": query.slug } : {})
                             .find(query.search ? { "name": { $regex: query.search } } : {})
+                            .find(query.lo ? { "location": query.lo } : {})
+                            .find(query.area ? { "area": query.area } : {})
                             .skip(query.skip)
-                            .sort(query.sort ? query.sort : {})
+                            .sort(query.sort ? { "name": Number(query.sort) } : {})
                             .limit(query.limit ? query.limit : {})
                             .catch((error: Error) => {
                                 result.success = false

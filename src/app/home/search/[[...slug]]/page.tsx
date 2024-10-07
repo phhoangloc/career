@@ -9,6 +9,7 @@ import '../../../../style/grid.css'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
 import Button from '@/component/input/button'
 import Pagination from '@/component/tool/pagination'
+import moment from 'moment'
 type Props = {
     params: { slug: string[] }
 }
@@ -21,26 +22,19 @@ const Page = ({ params }: Props) => {
         wp: decodeURIComponent(params.slug[1]) === "a" ? "" : decodeURIComponent(params.slug[1]),
         wt: decodeURIComponent(params.slug[2]) === "b" ? "" : decodeURIComponent(params.slug[2]),
         ws: decodeURIComponent(params.slug[3]) === "s" ? "" : decodeURIComponent(params.slug[3]),
-        lo: decodeURIComponent(params.slug[4]) === "c" ? [""] : decodeURIComponent(params.slug[4]).split(",")
+        lo: decodeURIComponent(params.slug[4]) === "c" ? [""] : decodeURIComponent(params.slug[4]).split(","),
+        lis: decodeURIComponent(params.slug[5]) === "lis" ? "" : decodeURIComponent(params.slug[5]),
+
     }
 
     const [newData, setNewData] = useState<any[]>([])
-    const filter = (a: string, b: string, s: string, c: string) => {
-        var resultA = a !== "a" ? Data.filter(item => item.workplaces.name === a) : Data
-        var resultB = b !== "b" ? resultA.filter(item => item.worktypes === b) : resultA
-        var resultS = s !== "s" ? resultA.filter(item => item.workstatus === s) : resultB
-        var result = c !== "c" ? resultS.filter(item => c.split(',').includes(item.location)) : resultS
-        setNewData(result)
-
-    }
 
     const [page, setPage] = useState<number>(0)
     const [limit, setLimit] = useState<number>(10)
     const [end, setEnd] = useState<boolean>(false)
     const [number, setNumber] = useState<number>(0)
-    const getItem = async (a: string, s: string, wp: string, wt: string, ws: string, lo: string, skip: number, limit: number) => {
-        const result = await NoUserAuthen.getItem(a, s, wp, wt, ws, lo, skip, limit)
-        console.log(result)
+    const getItem = async (a: string, s: string, wp: string, wt: string, ws: string, lo: string, skip: number, limit: number, lis: string) => {
+        const result = await NoUserAuthen.getItem(a, s, wp, wt, ws, lo, skip, limit, undefined, undefined, lis)
         if (result.success) {
             setNewData(data => [...data, ...result.data])
         }
@@ -48,7 +42,7 @@ const Page = ({ params }: Props) => {
 
     useEffect(() => {
         bodySearch.lo.forEach(l => {
-            getItem("post", bodySearch.s, bodySearch.wp, bodySearch.wt, bodySearch.ws, l, page * limit, limit)
+            getItem("post", bodySearch.s, bodySearch.wp, bodySearch.wt, bodySearch.ws, l, page * limit, limit, bodySearch.lis)
         });
     }, [])
 
@@ -56,11 +50,10 @@ const Page = ({ params }: Props) => {
 
     const uniqueArray = Array.from(new Set(newData.map(obj => JSON.stringify(obj)))).map(str => JSON.parse(str));
 
-
     return (
         <div className='searchPage'>
             <div className="div_items div_items_bg_blue">
-                <SearchTool />
+                <SearchTool body={bodySearch} />
             </div>
             <div className='title'>
                 <h1>検索結果</h1>
@@ -73,6 +66,8 @@ const Page = ({ params }: Props) => {
                     uniqueArray.map((item, index) =>
                         <div key={index} className='item'>
                             <div className="item-col">
+                                <h3 style={{ fontSize: "90%", opacity: 1 }}><span style={{ fontSize: "75%", opacity: "0.5" }}>掲載日:</span>　{moment(item.startDate).format("YYYY年/MM月/DD日")}</h3>
+                                <h3 style={{ fontSize: "90%", opacity: 1 }}><span style={{ fontSize: "75%", opacity: "0.5" }}>掲載終了日:</span>　{moment(item.endDate).format("YYYY年/MM月/DD日")}</h3>
                                 <h2>{item.workplace?.name}</h2>
                                 <h4>〒{item.workplace?.postno}</h4>
                                 <h3>{item.workplace?.address.split("　")[0]}</h3>

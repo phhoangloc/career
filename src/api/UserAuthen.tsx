@@ -58,8 +58,8 @@ const deleteFile = async (p: string, genre: string, name: string, id: string) =>
 }
 
 //Item
-const getItem = async (p: string, a: string, search: string, skip: number | undefined, limit: number | undefined, lo?: string, area?: string) => {
-    const result = await axios.get(`/api/${p}/${a}?archive=${a}&search=${search}&lo=${lo ? lo : ""}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}&area=${area ? area : ""}`, {
+const getItem = async (p: string, a: string, search: string, skip: number | undefined, limit: number | undefined, lo?: string, area?: string, sort?: number, lis?: string) => {
+    const result = await axios.get(`/api/${p}/${a}?archive=${a}&search=${search}&lo=${lo ? lo : ""}&skip=${skip ? skip : ""}&limit=${limit ? limit : ""}&area=${area ? area : ""}&sort=${sort ? sort : ""}&lisense=${lis ? lis : ""}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage && localStorage.token

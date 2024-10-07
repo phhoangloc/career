@@ -20,6 +20,12 @@ const postSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "facility"
     },
+    contact: {
+        type: String,
+    },
+    contactName: {
+        type: String,
+    },
     worktype: {
         type: String,
     },
@@ -30,13 +36,22 @@ const postSchema = new Schema({
         type: String,
         default: "正社員"
     },
+    lisense: {
+        type: String,
+    },
     worktime: {
         type: String,
     },
     worksalary: {
         type: String,
     },
+    bonus: {
+        type: String,
+    },
     workbenefit: {
+        type: String,
+    },
+    dayoff: {
         type: String,
     },
     location: {
@@ -52,7 +67,12 @@ const postSchema = new Schema({
     content: {
         type: String,
     },
-
+    startDate: {
+        type: Date,
+    },
+    endDate: {
+        type: Date,
+    },
     createDate: {
         type: Date,
         default: Date.now,

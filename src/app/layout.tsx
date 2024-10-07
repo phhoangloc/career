@@ -28,7 +28,6 @@ export default function RootLayout({
         <DecideModal />
         <NoticeModal />
         {children}
-
       </body>
     </html>
   );

@@ -818,6 +818,7 @@ div {
 }
 
 .footer {
+  position: relative;
   background-color: white;
   padding: 2.5%;
   justify-content: center;
@@ -848,6 +849,29 @@ div {
     margin: 5px;
     font-size: 16px;
   }
+}
+
+.footer .top_button {
+  position: absolute;
+  top: -50px;
+  right: 50px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--main);
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+  opacity: 0.25;
+  cursor: pointer;
+}
+
+.footer .top_button:hover {
+  opacity: 0.75;
 }
 
 .archivePage {
@@ -1167,7 +1191,7 @@ div {
 }
 
 .detailPage .apply .apply_item h4 {
-  width: 75px;
+  width: 100px;
   line-height: 24px;
 }
 
@@ -1398,4 +1422,12 @@ div {
   .searchPage .content .item .item-col {
     width: 50%;
   }
+}
+
+.contact {
+  width: 90%;
+  margin: auto;
+  background-color: white;
+  padding: 5%;
+  max-width: 992px;
 }

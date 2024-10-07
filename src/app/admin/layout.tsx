@@ -38,7 +38,8 @@ export default function RootLayout({
                 name: "求人情報",
                 child: [
                   { name: "求人情報一覧", link: "/admin/post", },
-                  { name: "新規求人情報", link: "/admin/post/new", }
+                  { name: "新規求人情報", link: "/admin/post/new", },
+                  { name: "職種", link: "/admin/worktype", }
                 ]
               },
               {

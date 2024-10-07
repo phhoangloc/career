@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import store from '@/redux/store'
 type Props = {
-    onChange: (e: string) => void,
+    onChange: (e: any) => void,
     name: React.ReactNode,
-    value: string,
+    value: any,
     type?: string,
     onfocus?: () => void,
     disabled?: boolean,
@@ -72,9 +72,11 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
         border: 0,
         background: "inherit",
         color: "inherit",
-        padding: "10px 10px 0",
+        padding: "20px 10px 0",
         fontSize: "1rem",
-        textOverflow: "ellipsis"
+        textOverflow: "ellipsis",
+        boxSizing: "border-box",
+
     }
     const warnStyle: React.CSSProperties = {
         color: "red",
