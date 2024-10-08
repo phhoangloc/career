@@ -36,8 +36,9 @@ const Post =
                             .find(query.archive ? { "archive": query.archive } : {})
                             .find(query.slug ? { "slug": query.slug } : {})
                             .find(query.search ? { "name": { $regex: query.search } } : {})
+                            .populate("workplace")
+                            // .find({ "workplace.location": "兵庫県" })
                             .skip(query.skip)
-                            .sort(query.sort ? query.sort : {})
                             .limit(query.limit ? query.limit : {})
                             .catch((error: Error) => {
                                 result.success = false

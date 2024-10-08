@@ -1,8 +1,8 @@
 
-GET  http://localhost:3000/api/admin/post?id=6703567229914afdd383aa27
+GET  http://localhost:3000/api/post?startDate=3&&
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDFjNWEyOTVjOTkwMTMwNDliNzY4MCIsImlhdCI6MTcyODI2NzU0MCwiZXhwIjoxNzI4MzUzOTQwfQ.w-VkStXkIBTzFnIrlPku-mNsQ8VlOg1Z8HiC8tI92wc
 ###
-GET  http://localhost:3000/api/user/facility
+GET  http://localhost:3000/api/interview?softbyfa=-1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZTE1NjkwZDZhOTlkMDdlNDgxN2U4OCIsImlhdCI6MTcyNjA0MzgzMiwiZXhwIjoxNzI2MTMwMjMyfQ.XARcTSjejH73qiZb4lbqMzSMS_PKRUiN0mZE9q4qMlU
 ###
 GET http://localhost:3000/api/news

@@ -10,6 +10,7 @@ import { NoUserAuthen } from '@/api/NoUserAuthen'
 import Button from '@/component/input/button'
 import Pagination from '@/component/tool/pagination'
 import moment from 'moment'
+import { jpyFormatter } from '@/lib/currency'
 type Props = {
     params: { slug: string[] }
 }
@@ -28,27 +29,37 @@ const Page = ({ params }: Props) => {
     }
 
     const [newData, setNewData] = useState<any[]>([])
+    const [newDataByStartDate, setNewDataByStartDate] = useState<any[]>([])
 
     const [page, setPage] = useState<number>(0)
     const [limit, setLimit] = useState<number>(10)
     const [end, setEnd] = useState<boolean>(false)
     const [number, setNumber] = useState<number>(0)
-    const getItem = async (a: string, s: string, wp: string, wt: string, ws: string, lo: string, skip: number, limit: number, lis: string) => {
-        const result = await NoUserAuthen.getItem(a, s, wp, wt, ws, lo, skip, limit, undefined, undefined, lis)
+    const [_startDate, set_startDate] = useState<number>(0)
+    const [_salary, set_salary] = useState<number>(0)
+
+    const today = new Date()
+
+    const getItem = async (a: string, s: string, wp: string, wt: string, ws: string, lo: string, skip: number, limit: number, lis: string, _startDate: number, salary: number) => {
+        const result = await NoUserAuthen.getItem(a, s, wp, wt, ws, lo, skip, limit, undefined, undefined, lis, _startDate, 0, salary)
         if (result.success) {
             setNewData(data => [...data, ...result.data])
+            // result.data.map((r: any) => {
+            //     setNewData(data => [...data.filter(d => d._id !== r._id), r])
+            // })
+
         }
     }
 
     useEffect(() => {
         bodySearch.lo.forEach(l => {
-            getItem("post", bodySearch.s, bodySearch.wp, bodySearch.wt, bodySearch.ws, l, page * limit, limit, bodySearch.lis)
+            getItem("post", bodySearch.s, bodySearch.wp, bodySearch.wt, bodySearch.ws, l, page * limit, limit, bodySearch.lis, _startDate, _salary)
         });
-    }, [])
+    }, [_startDate, _salary])
 
     const toPage = useRouter()
 
-    const uniqueArray = Array.from(new Set(newData.map(obj => JSON.stringify(obj)))).map(str => JSON.parse(str));
+    const uniqueArray = Array.from(new Set(newData.map(obj => JSON.stringify(obj)))).map(str => JSON.parse(str))
 
     return (
         <div className='searchPage'>
@@ -62,7 +73,26 @@ const Page = ({ params }: Props) => {
             </div>
 
             <div className={`content`}>
-                {newData.length ?
+                <div style={{ display: "flex", gap: "4px" }}>
+
+                    <select onChange={(e) => { setNewData([]), set_startDate(Number(e.currentTarget.value)) }} style={{ width: "150px", height: "40px", borderRadius: "5px" }}>
+                        <option value={undefined}>{"掲載日"}</option>
+                        <option value={1}>{"24時間以内"}</option>
+                        <option value={3}>{"3日以内"}</option>
+                        <option value={7}>{"7日以内"}</option>
+                        <option value={14}>{"１４日以内"}</option>
+                    </select>
+                    <select onChange={(e) => { setNewData([]), set_salary(Number(e.currentTarget.value)) }} style={{ width: "150px", height: "40px", borderRadius: "5px" }}>
+                        <option value={undefined}>{"月給"}</option>
+                        <option value={10000}>{"10万~"}</option>
+                        <option value={20000}>{"20万~"}</option>
+                        <option value={30000}>{"30万~"}</option>
+                        <option value={50000}>{"50万~"}</option>
+                        <option value={100000}>{"100万~"}</option>
+                    </select>
+                </div>
+
+                {uniqueArray.length ?
                     uniqueArray.map((item, index) =>
                         <div key={index} className='item'>
                             <div className="item-col">
@@ -81,7 +111,7 @@ const Page = ({ params }: Props) => {
                                         <h4>雇用形態：<span>{item.workstatus}</span></h4>
                                         <h4>通勤時間：<span>{item.worktime}</span></h4>
                                         <h4>有給休暇：<span>{item.workbenefit}</span></h4>
-                                        <h4>月給：<span>{item.worksalary}</span></h4>
+                                        <h4>月給：<span>{jpyFormatter.format(item.worksalary)}</span></h4>
                                     </div>
                                 </div>
                             </div>

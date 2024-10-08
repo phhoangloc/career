@@ -4,6 +4,7 @@ import { postModel } from '@/model/post.model'
 import { isDataType } from '@/type/resultType'
 import { facilityModel } from '@/model/facility.model'
 import { japanRegions } from '@/lib/area'
+import moment from 'moment'
 
 const post = async (
     req: NextApiRequest,
@@ -20,6 +21,9 @@ const post = async (
 
     const facilityId = facility?._id.toString()
 
+    const today = new Date()
+
+
     await postModel.find()
         .find(query.id ? { "_id": query.id } : {})
         .find(query.archive ? { "archive": query.archive } : {})
@@ -30,6 +34,9 @@ const post = async (
         .find(query.wt ? { "worktype": query.wt } : {})
         .find(query.ws ? { "workstatus": query.ws } : {})
         .find(query.lisense ? { "lisense": query.lisense } : {})
+        .find(query.startDate ? { "startDate": { $gt: moment(today).subtract(Number(query.startDate), "days") } } : undefined)
+        .find(query.endDate ? { "endDate": { $lt: moment(today).subtract(0, "days") } } : undefined)
+        .find(query.salary ? { "worksalary": { $gt: query.salary } } : undefined)
         .populate("image")
         .populate({ path: "workplace" })
         .sort({ "createDate": -1 })
@@ -44,7 +51,6 @@ const post = async (
         .then((data: any) => {
             data = query.wp ? data.filter((d: any) => d.workplace?.name === query.wp) : data
             data = query.lo ? data.filter((d: any) => d.workplace?.location === query.lo) : data
-            // data = query.wt ? data.filter((d: any) => d.workplace?.worktype === query.wt) : data
             result.success = true
             result.data = data
             res.json(result)

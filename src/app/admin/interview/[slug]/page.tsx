@@ -193,6 +193,7 @@ const Page = ({ params }: Props) => {
                             </div>
                         </div>
                         <Input name="職種" onChange={(e) => { setSavable(true), setWorktype(e) }} value={worktype} />
+                        <Input name="youtube url" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='作成' onClick={() => createPost(params.slug, body)} disable={name && slug && image && savable ? false : true} />}

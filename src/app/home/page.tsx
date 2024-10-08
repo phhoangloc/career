@@ -65,8 +65,7 @@ export default function Home() {
       return "";
     }
   }
-
-  console.log(data[0]?.video)
+  console.log(data)
   return (
     <div className="contain_V2 scrollbar">
       <div className="cover">

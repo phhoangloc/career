@@ -43,10 +43,10 @@ const postSchema = new Schema({
         type: String,
     },
     worksalary: {
-        type: String,
+        type: Number,
     },
     bonus: {
-        type: String,
+        type: Number,
     },
     workbenefit: {
         type: String,

@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { NoUserAuthen } from '@/api/NoUserAuthen'
 import { useRouter } from 'next/navigation';
 import moment from 'moment';
+import { jpyFormatter } from '@/lib/currency';
 type Props = {
     params: { slug: string }
 }
@@ -46,7 +47,8 @@ const Page = ({ params }: Props) => {
                         <div className='apply_item'><h4>勤務地</h4><p>{newData?.workplace?.name}<br></br><span>〒{newData?.workplace?.postno}</span> <br></br><span>{newData?.workplace?.address}</span></p></div>
                         <div className='apply_item'><h4>勤務時間</h4><p>{newData.worktime}</p></div>
                         <div className='apply_item'><h4>雇⽤形態</h4><p>{newData.workstatus}</p></div>
-                        <div className='apply_item'><h4>給与</h4><p>{newData.worksalary}</p></div>
+                        <div className='apply_item'><h4>給与</h4><p>{jpyFormatter.format(newData.worksalary)}</p></div>
+                        <div className='apply_item'><h4>賞与</h4><p>{jpyFormatter.format(newData.bonus)}</p></div>
                         <div className='apply_item'><h4>休⽇休暇</h4><p>{newData.workbenefit}</p></div>
                         <div className='apply_item'><h4>掲載日</h4><p>{moment(newData.startDate).format("YYYY年/MM月/DD日")}</p></div>
                         <div className='apply_item'><h4>掲載終了日</h4><p>{moment(newData.endDate).format("YYYY年/MM月/DD日")}</p></div>

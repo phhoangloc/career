@@ -105,6 +105,7 @@ const Page = (props: Props) => {
                         <AddIcon style={{ width: "40px", height: "40px", boxSizing: "border-box", padding: "7.5px" }} />
                         <p style={{ height: "40px", lineHeight: "50px", textAlign: "center" }} >新規</p>
                     </div>
+
                 </div>
                 <div className='dp-flex'>
                     <Input name="search" onChange={(e) => setSearch(e)} value={search} />
