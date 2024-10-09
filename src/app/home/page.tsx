@@ -26,7 +26,7 @@ export default function Home() {
   const [_i, set_i] = useState<number>(-1)
   const [_location, set_location] = useState<string>("")
   const [_area, set_area] = useState<string>("")
-  const [_areaModel, set_areaModel] = useState<boolean>(false)
+  const [_areaModel, set_areaModel] = useState<boolean>(true)
 
   const getAllInterview = async (a: string) => {
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 2)
@@ -215,7 +215,7 @@ export default function Home() {
                         {item.name}</p>
                     )}
                   </div>
-                  <div style={{ position: "absolute", bottom: "5px", right: "5px", width: "max-content", height: "max-content" }}><Button name="検索" onClick={() => { set_areaModel(false), toPage.push(`/home/facility?area=${_area}&&location=${_location}`) }} /></div>
+                  <div style={{ position: "absolute", bottom: "5px", right: "5px", width: "max-content", height: "max-content" }}><Button name="検索" onClick={() => { set_areaModel(true), toPage.push(`/home/facility?area=${_area}&&location=${_location}`) }} /></div>
                 </div>
               </div>
             </div>
