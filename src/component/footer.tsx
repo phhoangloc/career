@@ -8,25 +8,25 @@ const Footer = (props: Props) => {
     return (
         <div className='footer'>
             <div className='column'>
-                <h2>業界を知る</h2>
-                {/* <p>施設紹介ー</p> */}
-                {/* <p>インタビュー</p> */}
+                <h4 onClick={() => toPage.push("#j")}>業界を知る</h4>
+                <p onClick={() => toPage.push("#f")}>施設紹介</p>
+                <p onClick={() => toPage.push("#h")}>先輩たちの声</p>
             </div>
             <div className='column'>
-                <h2 onClick={() => toPage.push("/home/search/n/a/b/s/c")}>仕事を探す</h2>
+                <h4 onClick={() => toPage.push("/home/search/n/a/b/s/c")}>仕事を探す</h4>
                 {/* <p>施設で探す</p> */}
                 {/* <p>職種で探す</p> */}
                 {/* <p>雇用形態で探す</p> */}
                 {/* <p>エリアで探す</p> */}
             </div>
             <div className='column'>
-                <h2 onClick={() => toPage.push("/home/facility")}>施設一覧</h2>
+                <h4 onClick={() => toPage.push("/home/facility")}>施設一覧</h4>
             </div>
             <div className='column'>
-                <h2 onClick={() => toPage.push("/home/news")}>お知らせ</h2>
+                <h4 onClick={() => toPage.push("/home/news")}>ニュース</h4>
             </div>
             <div className='column'>
-                <h2 onClick={() => toPage.push("/home/contact")}>お問い合わせ</h2>
+                <h4 onClick={() => toPage.push("/home/contact")}>お問い合わせ</h4>
             </div>
             <div className="top_button">
                 <a href="#">トップ<br></br>ページ</a>

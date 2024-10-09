@@ -1,12 +1,14 @@
 'use client'
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
+
 import { NoUserAuthen } from '@/api/NoUserAuthen'
 import Image from 'next/image'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Pagination from '@/component/tool/pagination'
 import { japanRegions } from '@/lib/area'
+
 const formatPostNo = (input: string) => {
     if (input) {
         const digits = input.replace(/\D/g, '');
@@ -17,9 +19,16 @@ const formatPostNo = (input: string) => {
     }
 }
 
+
 type Props = {}
 
-const Page = (props: Props) => {
+
+function Page(props: Props) {
+
+    const searchParams = useSearchParams()
+    const queryArea = searchParams?.get("area")
+    const queryLocation = searchParams?.get("location")
+
     const [refresh, setRefresh] = useState<number>(0)
     const [loading, setLoading] = useState<boolean>(true)
     const [notice, setNotice] = useState<string>("")
@@ -30,8 +39,8 @@ const Page = (props: Props) => {
     const [allData, setAllData] = useState<any[]>([])
     const [data, setData] = useState<any[]>([])
     const [search, setSearch] = useState<string>("")
-    const [area, setArea] = useState<string>("")
-    const [location, setLocation] = useState<string>("")
+    const [area, setArea] = useState<string>(queryArea ? queryArea : "")
+    const [location, setLocation] = useState<string>(queryLocation ? queryLocation : "")
     const [page, setPage] = useState<number>(0)
     const [limit, setLimit] = useState<number>(18)
     const [end, setEnd] = useState<boolean>(false)
@@ -96,7 +105,6 @@ const Page = (props: Props) => {
         }))
         )
     }
-
 
     return (
         <div className='archivePage'>

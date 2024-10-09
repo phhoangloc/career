@@ -43,7 +43,7 @@ const Header = () => {
                 {/* </div> */}
                 {/* <p>業界を知る <KeyboardArrowDownIcon /></p> */}
                 <p onClick={() => toPage.push("/home/facility")}>施設一覧</p>
-                <p onClick={() => toPage.push("/home/news")}>お知らせ</p>
+                <p onClick={() => toPage.push("/home/news")}>ニュース</p>
                 <p onClick={() => toPage.push("/home/contact")}>お問い合わせ</p>
                 <div className='header_input'><input placeholder='仕事をフリーワードで探す' value={search} onChange={(e) => setSearch(e.target.value)} /><SearchIcon onClick={() => toPage.push('/home/search/' + search + "/a/b/s/c")} /></div>
             </div>

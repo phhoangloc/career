@@ -27,7 +27,7 @@ const interview = async (
         .populate("image")
         .populate("work")
         .skip(query.skip)
-        .sort(query.sort ? query.sort : {})
+        .sort(query.ws ? { "createDate": -1 } : {})
         .limit(query.limit ? query.limit : {})
         .exec()
         .catch((error: Error) => {

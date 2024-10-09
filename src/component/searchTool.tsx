@@ -65,7 +65,6 @@ const SearchTool = ({ body }: Props) => {
                 <h2>Job Search</h2>
                 <h1>仕事を探す</h1>
                 <div style={{ height: "25px" }}></div>
-                <RefreshIcon onClick={() => toPage.push("/home/search//n/a/b/s/c/lis")} />
             </div>
             <div className='grid_box'>
                 <div className='selectbox xs12 md6 lg8  '>
@@ -145,6 +144,7 @@ const SearchTool = ({ body }: Props) => {
             </div>
             <div className='button_search xs12 md4 '>
                 <Button onClick={() => onSearch(wp || body?.wp, wt || body?.wt, loString, stt || body?.ws, lis || body?.lis)} name='検索' />
+                <RefreshIcon onClick={() => toPage.push("/home/search//n/a/b/s/c/lis")} />
             </div>
         </div>
     )

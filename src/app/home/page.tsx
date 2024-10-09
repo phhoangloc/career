@@ -7,15 +7,19 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Image from "next/image";
 import SearchTool from "@/component/searchTool";
 import '../../style/grid.css'
+import moment from "moment";
+import { japanPrefectures, japanRegions } from "@/lib/area";
 export default function Home() {
 
   const [data, setdata] = useState<any[]>([])
   const [facility, setFacility] = useState<any[]>([])
-  const [news, setNews] = useState<any>()
+  const [news, setNews] = useState<any[]>([])
 
   const [hover, setHover] = useState<boolean>(false)
   const [coverItem, setCovetItem] = useState<number>(0)
 
+  const [_location, set_location] = useState<string>("")
+  const [_area, set_area] = useState<string>("")
 
   const getAllInterview = async (a: string) => {
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 2)
@@ -26,7 +30,7 @@ export default function Home() {
     }
   }
   const getFacility = async (a: string) => {
-    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 2)
+    const result = await NoUserAuthen.getItem(a, "", "", "", "1", "", undefined, 2)
     if (result.success) {
       setFacility(result.data)
     } else {
@@ -34,9 +38,9 @@ export default function Home() {
     }
   }
   const getNews = async (a: string) => {
-    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 1)
+    const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 5)
     if (result.success) {
-      setNews(result.data[0])
+      setNews(result.data)
     } else {
       setNews([])
     }
@@ -65,7 +69,7 @@ export default function Home() {
       return "";
     }
   }
-  console.log(data)
+
   return (
     <div className="contain_V2 scrollbar">
       <div className="cover">
@@ -101,43 +105,43 @@ export default function Home() {
       </div>
       <div className="about">
         <p>
-          手話を通じてコミュニケーションの架け橋となる仲間を探しています。<br></br>
-
-          あなたの手話スキルを活かし、誰もが理解し合える環境づくりに貢献
-
-          しませんか?
+          手話を通じてコミュニケーションの架け橋となる仲間を探しています。
+          <br></br>
+          <br></br>
+          あなたの手話スキルを活かし、誰もが理解し合える環境づくりに貢献しませんか?
         </p>
         <div className="buttons">
-          <ButtonWeb name="業界を知る" bg="#fdefcc" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#j")} />
-          <ButtonWeb name="仕事を探す" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#i")} />
+          <ButtonWeb name="業界を知る" bg="#F6CA1C" color="#594a36" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#j")} />
+          <ButtonWeb name="仕事を探す" bg="#53B5E1" color="white" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box", color: "white" }} />} onClick={() => toPage.push("/home#i")} />
         </div>
       </div>
-      <div className="about" style={{ paddingTop: "10%", background: "#fceecc" }} id="j">
+      <div className="about" style={{ paddingTop: "10%", background: "white" }}>
         <div className="title">
           <h2>News</h2>
           <h1>ニュース</h1>
-          <div className="title_button">
-            <ButtonWeb name="施設⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+        </div>
+        <div className='content_news scrollbar-none'>
+          {news.length ? news.map((n, index) =>
+            <div key={index}>
+              <h3>{moment(n?.createDate).format("YYYY.MM.DD")}</h3>
+              <h3>{n?.name}</h3>
+              <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: n?.content }} />
+            </div>
+          ) : null}
+        </div>
+        <div style={{ width: "90%", margin: "auto", maxWidth: "1200px" }}>
+          <div style={{ width: "max-content", margin: "0 0 0 auto" }}>
+            <ButtonWeb name="ニュース⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/news")} />
           </div>
         </div>
-        <div className='content_news'>
 
-          <h2>{news?.name}</h2>
-          <div className='category'>
-            {
-              news?.category ? news.category?.map((item: any, index: number) => <p key={index} style={{ margin: "0px 5px 0px 0px" }}>{item.name}</p>) : null
-            }
-          </div>
-          <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: news?.content }} />
-        </div>
-
-        <div className="buttons">
+        {/* <div className="buttons">
           <ButtonWeb name="施設を知る" bg="white" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
           <ButtonWeb name="先輩たちの声" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#h")} />
-        </div>
+        </div> */}
       </div>
-      <div className="about" style={{ background: "white", paddingTop: "10%" }} id="j">
+      <div className="about" style={{ background: "#FFFDD6", paddingTop: "10%" }} id="j">
         <div className="title">
           <h2>Industry  introduction</h2>
           <h1>業界紹介</h1>
@@ -147,9 +151,9 @@ export default function Home() {
           自治体などの行政機関、福祉関連の施設、手話通訳派遣センター、聴覚障がい者団体、社会福祉協議会、聴覚障がい者情報提供施設、自治体などでの手話講師、手話通訳士は、聴覚障がい者のコミュニケーションを支える仕事なので、聴覚障がい者が誰かと話したり、誰かの話を聞いたりといった状況が発生するあらゆる場所で仕事をすることになります。<br></br>
           手話通訳士として働くには、手話通訳士試験に合格し、社会福祉法人聴力障害者情報文化センターに登録する必要があります。受験資格は20歳以上で、3年程度の手話通訳経験を有することが受験の目安になっています。<br></br>
           また、手話技能検定は就職（職業）のための資格ではないため、合格＝就職というわけではありませんが、ホテルやデパート、航空会社などのサービス業や、医療・福祉関係などでは手話を使ったサービスを行っている企業もあります。</p>
-        <div className="buttons">
-          <ButtonWeb name="施設を知る" bg="#fdefcc" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
-          <ButtonWeb name="先輩たちの声" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#h")} />
+        <div className="buttons" style={{ maxWidth: "768px" }}>
+          <ButtonWeb name="施設を探す" bg="#F6CA1C" color="#594a36" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
+          <ButtonWeb name="先輩たちの声を聞いてみる" bg="#e68a01" color="white" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#h")} />
         </div>
       </div>
       <div className="div_items" id="f">
@@ -159,6 +163,21 @@ export default function Home() {
           <div className="title_button">
             <ButtonWeb name="施設⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/facility")} />
+          </div>
+          <div className="xs12 lg7">
+            <div style={{ width: "100%", height: "max-content" }}>
+              <div className='dp-flex'>
+                <select style={{ width: "100px", height: "40px", margin: "0 5px" }} onChange={(e) => set_location(e.target.value)}>
+                  <option value="">都道府県</option>
+                  {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
+                </select>
+                <select style={{ width: "100px", height: "40px", margin: "0 5px" }} onChange={(e) => set_area(e.target.value)}>
+                  <option value="">エリア</option>
+                  {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
+                </select>
+                <button style={{ width: "100px", background: "white", cursor: "pointer" }} onClick={() => toPage.push(`/home/facility?area=${_area}&&location=${_location}`)}>検索</button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="items" >
@@ -196,7 +215,7 @@ export default function Home() {
 
         </div>
       </div>
-      <div className="div_items div_items_bg_none" id="h">
+      <div className="div_items" style={{ background: "#FFFDD6" }} id="h">
         <div className="title">
           <h2>Interview</h2>
           <h1>先輩たちの声 </h1>
