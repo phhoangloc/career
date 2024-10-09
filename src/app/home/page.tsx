@@ -9,6 +9,11 @@ import SearchTool from "@/component/searchTool";
 import '../../style/grid.css'
 import moment from "moment";
 import { japanPrefectures, japanRegions } from "@/lib/area";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
+import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
+import Button from "@/component/input/button";
 export default function Home() {
 
   const [data, setdata] = useState<any[]>([])
@@ -18,8 +23,10 @@ export default function Home() {
   const [hover, setHover] = useState<boolean>(false)
   const [coverItem, setCovetItem] = useState<number>(0)
 
+  const [_i, set_i] = useState<number>(-1)
   const [_location, set_location] = useState<string>("")
   const [_area, set_area] = useState<string>("")
+  const [_areaModel, set_areaModel] = useState<boolean>(false)
 
   const getAllInterview = async (a: string) => {
     const result = await NoUserAuthen.getItem(a, "", "", "", "", "", undefined, 2)
@@ -131,15 +138,10 @@ export default function Home() {
         </div>
         <div style={{ width: "90%", margin: "auto", maxWidth: "1200px" }}>
           <div style={{ width: "max-content", margin: "0 0 0 auto" }}>
-            <ButtonWeb name="ニュース⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
+            <ButtonWeb name="ニュース⼀覧" bg="#FFFDD6" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/news")} />
           </div>
         </div>
-
-        {/* <div className="buttons">
-          <ButtonWeb name="施設を知る" bg="white" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#f")} />
-          <ButtonWeb name="先輩たちの声" bg="#e6f7ff" icon={<KeyboardArrowRightIcon style={{ width: "40px", height: "40px", padding: "5px", boxSizing: "border-box" }} />} onClick={() => toPage.push("/home#h")} />
-        </div> */}
       </div>
       <div className="about" style={{ background: "#FFFDD6", paddingTop: "10%" }} id="j">
         <div className="title">
@@ -164,7 +166,7 @@ export default function Home() {
             <ButtonWeb name="施設⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/facility")} />
           </div>
-          <div className="xs12 lg7">
+          {/* <div className="xs12 lg7">
             <div style={{ width: "100%", height: "max-content" }}>
               <div className='dp-flex'>
                 <select style={{ width: "100px", height: "40px", margin: "0 5px" }} onChange={(e) => set_location(e.target.value)}>
@@ -176,6 +178,45 @@ export default function Home() {
                   {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
                 </select>
                 <button style={{ width: "100px", background: "white", cursor: "pointer" }} onClick={() => toPage.push(`/home/facility?area=${_area}&&location=${_location}`)}>検索</button>
+              </div>
+            </div>
+          </div> */}
+          <div className='selectbox xs12 md6 lg8  '>
+            <KeyboardArrowDownIcon style={{ position: "absolute", right: "20px", top: "25px" }} onClick={() => set_areaModel(false)} />
+            {_areaModel ?
+              <>
+                <select onClick={() => set_areaModel(false)}>
+                  <option value={undefined}>エリア</option>
+                </select>
+                {/* {lo.map((item, index) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "10px" }} key={index}>{item}</li>)} */}
+                {/* {body.lo.map((item: any, index: number) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "10px" }} key={index}>{item}</li>)} */}
+              </>
+              : null}
+            <div className={`area ${_areaModel ? "area_none" : ""}`}>
+              <div className='flexbox' style={{ background: "white", height: "60px" }}>
+                <h3 style={{ height: "100%", lineHeight: "70px", padding: "0 5px" }}>エリア</h3>
+                <CancelOutlinedIcon onClick={() => { set_areaModel(true) }} />
+              </div>
+              <div className='flexbox'>
+                <div className='area_titles'>
+                  {japanRegions.map((item, index) =>
+                    <div className={`area_title ${index === _i ? "area_title_select" : ""}`} key={index} onClick={() => { set_i(index), set_area(item.region) }}>
+                      {item.region}
+                    </div>
+                  )}
+                </div>
+                <div className='area_children'>
+                  <h4 style={{ textAlign: "center", height: "30px", lineHeight: "40px" }}>{japanRegions[_i]?.region}</h4>
+                  <div className='area_title' >
+                    {japanRegions[_i]?.prefectures.map((item, index) =>
+                      <p key={index}>{_location === item.name ?
+                        <CheckBoxOutlinedIcon onClick={() => set_location("")} /> :
+                        <CheckBoxOutlineBlankOutlinedIcon onClick={() => set_location(item.name)} />}
+                        {item.name}</p>
+                    )}
+                  </div>
+                  <div style={{ position: "absolute", bottom: "5px", right: "5px", width: "max-content", height: "max-content" }}><Button name="検索" onClick={() => { set_areaModel(false), toPage.push(`/home/facility?area=${_area}&&location=${_location}`) }} /></div>
+                </div>
               </div>
             </div>
           </div>
@@ -191,7 +232,7 @@ export default function Home() {
               <h4>{facility[0]?.name}</h4>
               <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[0]?.content, "<h3>", "</h3>") ? extractStringBetween(facility[0]?.content, "<h3>", "</h3>") : "---" }}></div>
               <div className="tag">
-                <p>{facility[0]?.location}</p>
+                <p style={{ backgroundColor: "#FFFDD6" }}>{facility[0]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[0]?.slug)} />
               </div>
             </div>
@@ -207,7 +248,7 @@ export default function Home() {
               <h4>{facility[1]?.name}</h4>
               <div className="contentTitle" dangerouslySetInnerHTML={{ __html: extractStringBetween(facility[1]?.content, "<h3>", "</h3>") ? extractStringBetween(facility[0]?.content, "<h3>", "</h3>") : "---" }}></div>
               <div className="tag">
-                <p>{facility[1]?.location}</p>
+                <p style={{ backgroundColor: "#FFFDD6" }}>{facility[1]?.location}</p>
                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + facility[1].slug)} />
               </div>
             </div>

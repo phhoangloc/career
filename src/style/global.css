@@ -725,6 +725,112 @@ div {
   margin: 10px 0;
 }
 
+.contain_V2 .div_items .title .selectbox {
+  position: relative;
+  padding: 5px;
+}
+
+.contain_V2 .div_items .title .selectbox select {
+  width: 100%;
+  height: 60px;
+  font-size: 1.1rem;
+  border: none;
+  box-shadow: 1px 1px 5px 0px #888;
+  border-radius: 5px;
+  padding: 0 20px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+}
+
+.contain_V2 .div_items .title .selectbox select option {
+  z-index: 0;
+}
+
+.contain_V2 .div_items .title .selectbox select:hover {
+  background-color: #f0f0f0;
+}
+
+.contain_V2 .div_items .title .selectbox p {
+  margin-right: 10px;
+}
+
+.contain_V2 .div_items .title .selectbox .area {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--second);
+  color: #133b3a;
+  width: 100%;
+  box-shadow: 0px 0px 5px #888;
+  border-radius: 5px;
+  padding: 1px;
+  z-index: 5;
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_titles {
+  width: 100px;
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_titles .area_title {
+  background-color: white;
+  margin: 1px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0px 2.5px;
+  cursor: pointer;
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_titles .area_title p {
+  height: 30px;
+  line-height: 40px;
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_titles .area_title_select {
+  border-right: 2px solid var(--main);
+  font-weight: 600;
+  color: var(--main);
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_children {
+  margin: 1px;
+  background-color: white;
+  width: calc(100% - 100px);
+  padding: 0 5px;
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_children .area_title {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_children .area_title p {
+  display: flex;
+}
+
+.contain_V2 .div_items .title .selectbox .area .area_children .area_title p svg {
+  width: 20px;
+  height: 20px;
+  margin: 2.5px;
+  position: inherit;
+  opacity: 0.5;
+}
+
+.contain_V2 .div_items .title .selectbox .area svg {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 15px;
+  right: 5px;
+}
+
+.contain_V2 .div_items .title .selectbox .area_none {
+  display: none;
+}
+
 .contain_V2 .div_items .items {
   width: 90%;
   margin: 50px auto 0;

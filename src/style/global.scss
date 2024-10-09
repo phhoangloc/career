@@ -748,6 +748,115 @@ div {
                 margin: 10px 0;
             }
 
+            .selectbox {
+                position: relative;
+
+                padding: 5px;
+
+
+                select {
+                    width: 100%;
+                    height: 60px;
+                    font-size: 1.1rem;
+                    border: none;
+                    box-shadow: 1px 1px 5px 0px #888;
+                    border-radius: 5px;
+                    padding: 0 20px;
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    cursor: pointer;
+
+                    option {
+                        z-index: 0;
+                    }
+                }
+
+                select:hover {
+                    background-color: #f0f0f0;
+                }
+
+                p {
+                    margin-right: 10px;
+                }
+
+                .area {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    background-color: var(--second);
+                    color: #133b3a;
+                    width: 100%;
+                    box-shadow: 0px 0px 5px #888;
+                    border-radius: 5px;
+                    padding: 1px;
+                    z-index: 5;
+
+                    .area_titles {
+                        width: 100px;
+
+                        .area_title {
+                            background-color: white;
+                            margin: 1px;
+                            height: 30px;
+                            line-height: 30px;
+                            padding: 0px 2.5px;
+                            cursor: pointer;
+
+                            p {
+                                height: 30px;
+                                line-height: 40px;
+                            }
+                        }
+
+                        .area_title_select {
+                            border-right: 2px solid var(--main);
+                            font-weight: 600;
+                            color: var(--main);
+                        }
+                    }
+
+                    .area_children {
+                        margin: 1px;
+                        background-color: white;
+                        width: calc(100% - 100px);
+                        padding: 0 5px;
+
+                        .area_title {
+                            display: flex;
+                            flex-wrap: wrap;
+                            margin-top: 5px;
+
+                            p {
+                                display: flex;
+
+                                svg {
+                                    width: 20px;
+                                    height: 20px;
+                                    margin: 2.5px;
+                                    position: inherit;
+                                    opacity: 0.5;
+                                }
+                            }
+                        }
+
+                    }
+
+                    svg {
+                        position: absolute;
+                        width: 30px;
+                        height: 30px;
+                        top: 15px;
+                        right: 5px;
+                    }
+                }
+
+                .area_none {
+                    display: none;
+                }
+            }
+
         }
 
         .items {
