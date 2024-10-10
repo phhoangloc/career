@@ -125,7 +125,7 @@ export default function Home() {
       <div className="about" style={{ paddingTop: "10%", background: "white" }}>
         <div className="title">
           <h2>News</h2>
-          <div className="grid_box"><h1>ニュース</h1> <Image src={"/icon/icon1.png"} width={40} height={40} alt="icon1" /></div>
+          <div className="grid_box"><h1>ニュース</h1> <Image style={{ marginTop: "5px" }} src={"/icon/icon1.png"} width={40} height={40} alt="icon1" /></div>
         </div>
         <div className='content_news scrollbar-none'>
           {news.length ? news.map((n, index) =>
@@ -146,7 +146,7 @@ export default function Home() {
       <div className="about" style={{ background: "#FFFDD6", paddingTop: "10%" }} id="j">
         <div className="title">
           <h2>Industry  introduction</h2>
-          <div className="grid_box"><h1>業界紹介</h1> <Image src={"/icon/icon6.png"} width={40} height={40} alt="icon6" /></div>
+          <div className="grid_box"><h1>業界紹介</h1> <Image style={{ marginTop: "5px" }} src={"/icon/icon6.png"} width={40} height={40} alt="icon6" /></div>
         </div>
         <p className="about_text">
           手話を学び、仕事にするということは聴覚に障害のある方々とのコミュニケーションをサポートするだけでなく、全ての人々が平等に情報やサービスにアクセスできる社会を築くために欠かせない存在です。<br></br>
@@ -169,7 +169,7 @@ export default function Home() {
       <div className="div_items" id="f">
         <div className="title">
           <h2> Facility Search</h2>
-          <div className="grid_box"><h1>施設を探す</h1> <Image src={"/icon/icon5.png"} width={40} height={40} alt="icon5" /></div>
+          <div className="grid_box"><h1>施設を探す</h1> <Image style={{ marginTop: "5px" }} src={"/icon/icon5.png"} width={40} height={40} alt="icon5" /></div>
           <div className="grid_box">
             <div className='selectbox xs12 md6 lg8  '>
               <KeyboardArrowDownIcon style={{ position: "absolute", right: "20px", top: "25px" }} onClick={() => set_areaModel(false)} />
@@ -213,7 +213,7 @@ export default function Home() {
         <div style={{ height: "100px " }}></div>
         <div className="title">
           <h2> Facility introduction</h2>
-          <div className="grid_box"><h1>施設紹介</h1> <Image src={"/icon/icon4.png"} width={40} height={40} alt="icon4" /></div>
+          <div className="grid_box"><h1>施設紹介</h1> <Image style={{ marginTop: "5px" }} src={"/icon/icon4.png"} width={40} height={40} alt="icon4" /></div>
           <div className="title_button">
             <ButtonWeb name="施設⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/facility")} />
@@ -221,7 +221,7 @@ export default function Home() {
 
         </div>
 
-        <div style={{ display: "flex", margin: "50px auto", width: "90%", maxWidth: "1200px" }}><Image src={"/icon/pickup.png"} width={60} height={60} alt="pickup" /><h1 style={{ lineHeight: "60px" }}>PICK UP</h1></div>
+        <div style={{ display: "flex", margin: "50px auto", width: "90%", maxWidth: "1200px" }}><Image style={{ marginTop: "5px" }} src={"/icon/pickup.png"} width={60} height={60} alt="pickup" /><h1 style={{ lineHeight: "60px" }}>PICK UP</h1></div>
         <div className="items" >
           <div className="item" >
             <div className="cover">
