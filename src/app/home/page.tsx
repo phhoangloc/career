@@ -260,7 +260,7 @@ export default function Home() {
       <div className="div_items" style={{ background: "#FFFDD6" }} id="h">
         <div className="title">
           <h2>Interview</h2>
-          <div className="grid_box"><h1>先輩たちの声</h1> <Image src={"/icon/icon3.png"} width={40} height={40} alt="icon3" /></div>
+          <div className="grid_box"><h1>先輩たちの声</h1> <Image style={{ marginTop: "5px" }} src={"/icon/icon3.png"} width={40} height={40} alt="icon3" /></div>
           <div className="title_button">
             <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/interview")} />

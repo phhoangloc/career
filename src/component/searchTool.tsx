@@ -64,7 +64,7 @@ const SearchTool = ({ body }: Props) => {
         <div className='searchTool'>
             <div className='title'>
                 <h2>Job Search</h2>
-                <div style={{ display: "flex" }}><h1>仕事を探す</h1> <Image src={"/icon/icon2.png"} width={40} height={40} alt="icon2" /></div>
+                <div style={{ display: "flex" }}><h1>仕事を探す</h1> <Image style={{ marginTop: "5px" }} src={"/icon/icon2.png"} width={40} height={40} alt="icon2" /></div>
             </div>
             <div className='grid_box'>
                 <div className='selectbox xs12 md6 lg8  '>
