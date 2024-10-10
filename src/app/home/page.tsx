@@ -13,7 +13,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import CheckBoxOutlineBlankOutlinedIcon from '@mui/icons-material/CheckBoxOutlineBlankOutlined';
 import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
-import Button from "@/component/input/button";
+
 export default function Home() {
 
   const [data, setdata] = useState<any[]>([])
@@ -125,7 +125,7 @@ export default function Home() {
       <div className="about" style={{ paddingTop: "10%", background: "white" }}>
         <div className="title">
           <h2>News</h2>
-          <h1>ニュース</h1>
+          <div className="grid_box"><h1>ニュース</h1> <Image src={"/icon/icon1.png"} width={40} height={40} alt="icon1" /></div>
         </div>
         <div className='content_news scrollbar-none'>
           {news.length ? news.map((n, index) =>
@@ -146,7 +146,7 @@ export default function Home() {
       <div className="about" style={{ background: "#FFFDD6", paddingTop: "10%" }} id="j">
         <div className="title">
           <h2>Industry  introduction</h2>
-          <h1>業界紹介</h1>
+          <div className="grid_box"><h1>業界紹介</h1> <Image src={"/icon/icon4.png"} width={40} height={40} alt="icon4" /></div>
         </div>
         <p className="about_text">
           手話を学び、仕事にするということは聴覚に障害のある方々とのコミュニケーションをサポートするだけでなく、全ての人々が平等に情報やサービスにアクセスできる社会を築くために欠かせない存在です。<br></br>
@@ -168,67 +168,59 @@ export default function Home() {
       </div>
       <div className="div_items" id="f">
         <div className="title">
+          <h2> Facility Search</h2>
+          <div className="grid_box"><h1>施設を探す</h1> <Image src={"/icon/icon5.png"} width={40} height={40} alt="icon5" /></div>
+          <div className="grid_box">
+            <div className='selectbox xs12 md6 lg8  '>
+              <KeyboardArrowDownIcon style={{ position: "absolute", right: "20px", top: "25px" }} onClick={() => set_areaModel(false)} />
+              {_areaModel ?
+                <>
+                  <select onClick={() => set_areaModel(false)}>
+                    <option value={undefined}>{_location || _area || "エリア"}</option>
+                  </select>
+                </>
+                : <div style={{ height: "60px" }}></div>}
+              <div className={`area ${_areaModel ? "area_none" : ""}`}>
+                <div className='flexbox' style={{ background: "white", height: "60px" }}>
+                  <h3 style={{ height: "100%", lineHeight: "70px", padding: "0 5px" }}>エリア</h3>
+                  <CancelOutlinedIcon onClick={() => { set_areaModel(true), set_location(""), set_area("") }} />
+                </div>
+                <div className='flexbox'>
+                  <div className='area_titles'>
+                    {japanRegions.map((item, index) =>
+                      <div className={`area_title ${index === _i ? "area_title_select" : ""}`} key={index} onClick={() => { set_i(index), set_area(item.region) }}>
+                        {item.region}
+                      </div>
+                    )}
+                  </div>
+                  <div className='area_children'>
+                    <h4 style={{ textAlign: "center", height: "30px", lineHeight: "40px" }}>{japanRegions[_i]?.region}</h4>
+                    <div className='area_title' >
+                      {japanRegions[_i]?.prefectures.map((item, index) =>
+                        <p key={index}>{_location === item.name ?
+                          <CheckBoxOutlinedIcon onClick={() => set_location("")} /> :
+                          <CheckBoxOutlineBlankOutlinedIcon onClick={() => { set_location(item.name), set_areaModel(true) }} />}
+                          {item.name}</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style={{ width: "100px", height: "60px", display: "flex", flexDirection: "column", justifyContent: "center", background: "#e68a01", borderRadius: "5px", color: "white", textAlign: "center", margin: "5px", fontWeight: "bold", cursor: "pointer" }} onClick={() => { set_areaModel(true), toPage.push(`/home/facility?area=${_area}&&location=${_location}`) }} >検索</div>
+          </div>
+        </div>
+        <div style={{ height: "100px " }}></div>
+        <div className="title">
           <h2> Facility introduction</h2>
-          <h1>施設紹介</h1>
+          <div className="grid_box"><h1>施設紹介</h1> <Image src={"/icon/icon6.png"} width={40} height={40} alt="icon6" /></div>
           <div className="title_button">
             <ButtonWeb name="施設⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/facility")} />
           </div>
-          {/* <div className="xs12 lg7">
-            <div style={{ width: "100%", height: "max-content" }}>
-              <div className='dp-flex'>
-                <select style={{ width: "100px", height: "40px", margin: "0 5px" }} onChange={(e) => set_location(e.target.value)}>
-                  <option value="">都道府県</option>
-                  {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
-                </select>
-                <select style={{ width: "100px", height: "40px", margin: "0 5px" }} onChange={(e) => set_area(e.target.value)}>
-                  <option value="">エリア</option>
-                  {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
-                </select>
-                <button style={{ width: "100px", background: "white", cursor: "pointer" }} onClick={() => toPage.push(`/home/facility?area=${_area}&&location=${_location}`)}>検索</button>
-              </div>
-            </div>
-          </div> */}
-          <div className='selectbox xs12 md6 lg8  '>
-            <KeyboardArrowDownIcon style={{ position: "absolute", right: "20px", top: "25px" }} onClick={() => set_areaModel(false)} />
-            {_areaModel ?
-              <>
-                <select onClick={() => set_areaModel(false)}>
-                  <option value={undefined}>エリア</option>
-                </select>
-                {/* {lo.map((item, index) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "10px" }} key={index}>{item}</li>)} */}
-                {/* {body.lo.map((item: any, index: number) => <li style={{ fontWeight: "normal", fontSize: "1rem", lineHeight: 1.5, marginTop: "10px" }} key={index}>{item}</li>)} */}
-              </>
-              : null}
-            <div className={`area ${_areaModel ? "area_none" : ""}`}>
-              <div className='flexbox' style={{ background: "white", height: "60px" }}>
-                <h3 style={{ height: "100%", lineHeight: "70px", padding: "0 5px" }}>エリア</h3>
-                <CancelOutlinedIcon onClick={() => { set_areaModel(true) }} />
-              </div>
-              <div className='flexbox'>
-                <div className='area_titles'>
-                  {japanRegions.map((item, index) =>
-                    <div className={`area_title ${index === _i ? "area_title_select" : ""}`} key={index} onClick={() => { set_i(index), set_area(item.region) }}>
-                      {item.region}
-                    </div>
-                  )}
-                </div>
-                <div className='area_children'>
-                  <h4 style={{ textAlign: "center", height: "30px", lineHeight: "40px" }}>{japanRegions[_i]?.region}</h4>
-                  <div className='area_title' >
-                    {japanRegions[_i]?.prefectures.map((item, index) =>
-                      <p key={index}>{_location === item.name ?
-                        <CheckBoxOutlinedIcon onClick={() => set_location("")} /> :
-                        <CheckBoxOutlineBlankOutlinedIcon onClick={() => set_location(item.name)} />}
-                        {item.name}</p>
-                    )}
-                  </div>
-                  <div style={{ position: "absolute", bottom: "5px", right: "5px", width: "max-content", height: "max-content" }}><Button name="検索" onClick={() => { set_areaModel(true), toPage.push(`/home/facility?area=${_area}&&location=${_location}`) }} /></div>
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
+
         <div className="items" >
           <div className="item" >
             <div className="cover">
@@ -267,7 +259,7 @@ export default function Home() {
       <div className="div_items" style={{ background: "#FFFDD6" }} id="h">
         <div className="title">
           <h2>Interview</h2>
-          <h1>先輩たちの声 </h1>
+          <div className="grid_box"><h1>先輩たちの声</h1> <Image src={"/icon/icon3.png"} width={40} height={40} alt="icon3" /></div>
           <div className="title_button">
             <ButtonWeb name="インタビュー ⼀覧" bg="white" icon={<KeyboardArrowRightIcon style={{ height: "30px", width: "30px", margin: "5px 5px 5px auto" }} />}
               onClick={() => toPage.push("/home/interview")} />

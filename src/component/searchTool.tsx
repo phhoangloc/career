@@ -9,6 +9,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { japanRegions } from '@/lib/area';
 import { workstatusList, statusList } from '@/data/workstatus';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import Image from 'next/image';
 type Props = {
     body?: any
 }
@@ -63,8 +64,7 @@ const SearchTool = ({ body }: Props) => {
         <div className='searchTool'>
             <div className='title'>
                 <h2>Job Search</h2>
-                <h1>仕事を探す</h1>
-                <div style={{ height: "25px" }}></div>
+                <div style={{ display: "flex" }}><h1>仕事を探す</h1> <Image src={"/icon/icon2.png"} width={40} height={40} alt="icon2" /></div>
             </div>
             <div className='grid_box'>
                 <div className='selectbox xs12 md6 lg8  '>
