@@ -56,7 +56,7 @@ const Login = ({ archive }: Props) => {
             <Input name="ユーザー" value={username} onChange={(e => setUsername(e))} />
             <Input name="パスワード" type='password' value={password} onChange={(e => setPassword(e))} />
             <div style={{ width: "max-content", margin: "25px auto 5px" }}><Button name="ログイン" onClick={() => login({ username, password })} /></div>
-            <p style={{ fontSize: "0.9rem", cursor: "pointer" }} className="link" onClick={() => toPage.push("signup")}>登録</p>
+            {/* <p style={{ fontSize: "0.9rem", cursor: "pointer" }} className="link" onClick={() => toPage.push("signup")}>登録</p> */}
 
         </div>
     )
