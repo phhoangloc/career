@@ -17,7 +17,7 @@ export const statusList = [
         name: "社会福祉士",
     },
     {
-        name: "護福祉士",
+        name: "介護福祉士",
     },
     {
         name: "ケアマネジャー",
