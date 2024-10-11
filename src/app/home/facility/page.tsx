@@ -131,6 +131,7 @@ function Page(props: Props) {
                                             {d?.image?.name ?
                                                 <Image src={process.env.FTP_URL + "img/career/" + d?.image?.name} width={500} height={500} style={{ width: "auto", height: "100%" }} alt="home" /> :
                                                 <Image src={"/img/home.jpg"} fill style={{ objectFit: "cover" }} alt="home" />}</div>
+
                                         <div className="item_title">
                                             <h3>{d.name}</h3>
                                             <p>〒{formatPostNo(d.postno)}</p>
