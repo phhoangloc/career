@@ -34,7 +34,7 @@ const postSchema = new Schema({
     },
     workstatus: {
         type: String,
-        default: "正社員"
+        default: "常勤"
     },
     lisense: {
         type: String,

@@ -297,7 +297,7 @@ const Page = ({ params }: Props) => {
                                 {statusList.length ?
                                     statusList.map((item: any, index: number) =>
                                         <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(item.name)} ></input>
+                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setLisense(item.name)} ></input>
                                             <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                         </div>
                                     ) :
@@ -413,7 +413,7 @@ const Page = ({ params }: Props) => {
                         {workstatusList.length ?
                             workstatusList.map((item: any, index: number) =>
                                 <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(item.name)} ></input>
+                                    <input type='checkbox' checked={workstatus === item.name} onChange={() => setWorkstatus(item.name)} ></input>
                                     <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                 </div>
                             ) :

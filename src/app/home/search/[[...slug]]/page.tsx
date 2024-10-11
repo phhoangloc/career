@@ -87,8 +87,7 @@ const Page = ({ params }: Props) => {
                         <option value={10000}>{"10万~"}</option>
                         <option value={20000}>{"20万~"}</option>
                         <option value={30000}>{"30万~"}</option>
-                        <option value={50000}>{"50万~"}</option>
-                        <option value={100000}>{"100万~"}</option>
+                        <option value={40000}>{"40万以上"}</option>
                     </select>
                 </div>
 
