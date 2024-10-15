@@ -52,6 +52,7 @@ const Page = ({ params }: Props) => {
     const [emailWarn, setEmailWarn] = useState<string>("")
 
     const [homepage, setHomepage] = useState<string>("")
+    const [map, setMap] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し事業内容をシェアしてください。")
     const [newdetail, setNewDetail] = useState<string>("")
@@ -74,6 +75,7 @@ const Page = ({ params }: Props) => {
         phone,
         fax,
         homepage,
+        map,
         contenttitle,
         email,
         image: image || null,
@@ -97,6 +99,7 @@ const Page = ({ params }: Props) => {
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
+            setMap(result.data[0].map)
         }
     }
     useEffect(() => {
@@ -275,6 +278,7 @@ const Page = ({ params }: Props) => {
                         <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
                         <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
                         <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
+                        <Input name="埋め込みマップ" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
@@ -312,6 +316,7 @@ const Page = ({ params }: Props) => {
                 <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
                 <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
                 <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
+                <Input name="埋め込みマップ" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> :

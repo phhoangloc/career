@@ -41,6 +41,10 @@
     width: 100%;
 }
 
+.dangerousBox iframe {
+    width: 100%;
+}
+
 .dangerousBox a {
     text-decoration: underline;
 }

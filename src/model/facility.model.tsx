@@ -43,6 +43,9 @@ const facilitySchema = new Schema({
     homepage: {
         type: String,
     },
+    map: {
+        type: String,
+    },
     image: {
         type: Schema.Types.ObjectId,
         ref: "image"

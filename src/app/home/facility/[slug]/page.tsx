@@ -78,6 +78,7 @@ const Page = ({ params }: Props) => {
                                 <InstagramIcon />
                                 <YouTubeIcon /> */}
                             </div>
+                            <div className='dangerousBox' dangerouslySetInnerHTML={{ __html: newData.map ? newData.map : null }} />
                         </div>
 
                     </div>
