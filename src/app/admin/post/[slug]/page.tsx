@@ -196,7 +196,7 @@ const Page = ({ params }: Props) => {
         case "new":
             return (
                 <div className='grid_box scrollNone'>
-                    <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                    <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto" }}>
 
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                         <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
@@ -327,7 +327,7 @@ const Page = ({ params }: Props) => {
 
     return (
         <div className='grid_box scrollNone'>
-            <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
+            <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto" }}>
 
                 <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                 <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />

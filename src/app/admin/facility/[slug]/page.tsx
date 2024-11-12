@@ -256,7 +256,7 @@ const Page = ({ params }: Props) => {
         case "new":
             return (
                 <div className='grid_box scrollNone'>
-                    <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                    <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
                         <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                         <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
@@ -294,7 +294,7 @@ const Page = ({ params }: Props) => {
     }
     return (
         <div className='grid_box scrollNone'>
-            <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", height: "calc(100vh - 60px)", overflow: "auto" }}>
+            <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                 <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
