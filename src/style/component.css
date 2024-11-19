@@ -49,6 +49,51 @@
     text-decoration: underline;
 }
 
+.dangerousBox h1 {
+    margin-bottom: 24px;
+    line-height: 1.75;
+}
+
+.dangerousBox h2 {
+    margin-bottom: 20px;
+    line-height: 1.75;
+}
+
+.dangerousBox h3 {
+    margin-bottom: 16px;
+    line-height: 1.75;
+}
+
+.dangerousBox h4 {
+    margin-bottom: 12px;
+    line-height: 1.75;
+}
+
+
+.dangerousBox p,
+.dangerousBox div,
+.dangerousBox li {
+    margin-bottom: 8px;
+    line-height: 1.75;
+}
+
+.dangerousBox figure img {
+    width: 100%;
+}
+
+.dangerousBox figure em {
+    opacity: 0.75;
+    font-size: 0.9rem;
+}
+
+.dangerousBox ul {
+    padding-left: 20px;
+}
+
+.dangerousBox ul li {
+    list-style: disc;
+}
+
 @media (min-width:992px) {
     .mw992px-grid-reverse {
 

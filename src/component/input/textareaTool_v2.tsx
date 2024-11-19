@@ -72,6 +72,7 @@ const decorator = new CompositeDecorator([
 const TextAreaTool_v2 = (props: Props) => {
 
     const [modalOpen, setModalOpen] = useState<boolean>(false)
+    const [editorFocus, setEditorFocus] = useState<boolean>(false)
 
     //content
     const [editorState, setEditorState] = useState(EditorState.createEmpty(decorator));
@@ -234,10 +235,10 @@ const TextAreaTool_v2 = (props: Props) => {
                         <CheckIcon className={`svg40px br-5px bg-main`} onClick={() => onCheck(link || linkImg)} />
                     </div></>}
             </div>
-            <div className={`mh300px pd-10px mg-5px br-5px bs-2px ${props.sx}`} style={{ border: content !== "<p><br></p>" ? "2px solid #666633" : "" }}>
+            <div className={`dangerousBox mh300px pd-10px mg-5px br-5px bs-2px ${props.sx}`} style={{ border: editorFocus || content !== "<p><br></p>" ? "2px solid #666633" : "" }}>
                 {isView ?
-                    <Editor editorState={editorState} onChange={(editorState) => setEditorState(editorState)} /> :
-                    <textarea className='mh300px bglv1 w100p bor-none' onChange={(e) => setNewContent(e.currentTarget.value)} defaultValue={content} onFocus={(e) => { e.target.style.outline = 'none' }}></textarea>
+                    <Editor editorState={editorState} onChange={(editorState) => setEditorState(editorState)} onFocus={() => setEditorFocus(true)} onBlur={() => setEditorFocus(false)} /> :
+                    <textarea className='mh300px bglv1 w100p bor-none' onChange={(e) => setNewContent(e.currentTarget.value)} defaultValue={content} onFocus={(e) => { e.target.style.outline = 'none', setEditorFocus(true) }} onBlur={() => setEditorFocus(false)}></textarea>
                 }
             </div>
             <ImageModal modalOpen={modalOpen} onCanel={() => setModalOpen(false)} onImages={(arr) => { setModalOpen(false), setImgArr(arr) }} />

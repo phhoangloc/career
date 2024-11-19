@@ -137,6 +137,14 @@ const Page = (props: Props) => {
                 <div className='dp-flex'>
                     <Input name="施設の検索" onChange={(e) => setSearch(e)} value={search} />
                 </div>
+                <div className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1'
+                    style={{ height: "40px", background: "#f0f0f0" }}>
+                    <div style={{ width: "40px" }}>
+                    </div>
+                    <div style={{ height: "100%", lineHeight: "50px", opacity: 0.5, fontSize: "90%", cursor: "pointer" }} onClick={() => { set__sort(__sort !== -1 ? -1 : 1) }}>
+                        施設
+                    </div>
+                </div>
                 {data.length ? data.slice(page * limit, (page * limit) + limit).map((item, index) =>
                     <div key={index} className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1 bg-even'
                         style={{ cursor: "pointer", height: "40px" }}>

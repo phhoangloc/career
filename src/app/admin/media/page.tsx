@@ -88,8 +88,8 @@ const Page = () => {
             <div className='grid_box'>
                 {
                     data.map((item, index) =>
-                        <div key={index} className='xs6 sm4 md3 lg2 grid_child' style={{ overflow: "hidden", padding: "5px" }} >
-                            <div style={{ width: "100%", aspectRatio: 1, position: "relative", borderRadius: "5px", overflow: "hidden", opacity: loading ? "0.25" : 1 }}>
+                        <div key={index} className='xs6  md4 lg2 grid_child' style={{ overflow: "hidden", padding: "5px" }} >
+                            <div style={{ width: "100%", aspectRatio: 1, position: "relative", borderRadius: "5px", overflow: "hidden", opacity: loading ? "0.25" : 1, boxShadow: "0px 0px 3px" }}>
                                 <Image quality={100} src={process.env.FTP_URL + "img/career/" + item.name} fill alt="" style={{ objectFit: "cover" }} />
                                 <DeleteIcon
                                     onClick={() => { setId(item._id); store.dispatch(setAlert({ open: true, msg: "この写真を削除してもよろしいですか?", value: false })) }}

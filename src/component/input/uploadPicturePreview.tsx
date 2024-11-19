@@ -19,7 +19,7 @@ const UploadPicturePreview = ({ size, src, icon, func, loading, imgstyle, iconSt
                 <Image src={src} alt='pic' fill style={{ objectFit: "cover" }} />
             </div>
             <div onClick={() => func && func()}
-                style={iconStyle || { width: size + "px", height: size + "px", zIndex: 1, color: "black", background: "white", position: "absolute", bottom: "5px", right: "5px", borderRadius: "5px" }}>
+                style={iconStyle || { width: size + "px", height: size + "px", zIndex: 1, color: "black", background: "white", position: "absolute", bottom: "5px", left: "5px", borderRadius: "5px" }}>
                 {loading ? <LoopIcon /> : icon}
             </div>
         </div>

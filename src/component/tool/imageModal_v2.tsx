@@ -64,53 +64,56 @@ const ImageModal = ({ modalOpen, onCanel, onImages }: Props) => {
     return (
         <div className='bg-drop of-auto ps-f h100h w100w zi-5 top-0px le-0px pd-5px fd-col jc-center'
             style={{ display: modalOpen ? "flex" : "none" }}>
-            <div className='bglv1 ps-re dp-flex jc-end'>
-                <CloseIcon className="svg30px" onClick={() => onCanel && onCanel()} />
-            </div>
-            <div className='grid_box bglv1 mh-500px of-auto scrollbar-none'>
-                {
-                    data.map((item, index) =>
-                        <div key={index} className='xs4 sm3 md2 xl1 grid_child pd-5px br-5px zi-3  ' >
-                            <div className='ps-re aspect-1 w100p of-hidden cs-p br-5px trss-1-4 bglv1' style={{
-                                opacity: loading ? "0.25" : selectImageIdArr.length ? selectImageIdArr.some(obj => obj.id === item._id) ? 1 : 0.5 : selectImageId.toString() === item._id.toString() ? 1 : 0.5,
-                                transform: selectImageIdArr.length ? selectImageIdArr.some(obj => obj.id === item._id) ? "scaleY(.95)" : "scaleY(1)" : selectImageId.toString() === item._id.toString() ? "scaleY(.95)" : "scaleY(1)",
-                            }}>
-                                <Image quality={100} src={process.env.FTP_URL + "img/career/" + item.name} fill alt=""
-                                    style={{
-                                        objectFit: "cover",
-                                        transition: "all 0.25s",
-                                    }}
-                                    onClick={(e) => {
-                                        const src = { id: item._id, src: e.currentTarget.src }
-                                        src && setSelectImageIdArr(arr => arr.some(obj => obj.id === item._id) ? arr.filter(a => a.id !== item._id) : [...arr, src])
-                                        setSelectImageId("")
-                                    }} />
+            <div style={{ maxWidth: "1200px", margin: "auto", width: "100%" }}>
+                <div className='bglv1 ps-re dp-flex jc-end'>
+                    <CloseIcon className="svg30px" onClick={() => onCanel && onCanel()} />
+                </div>
+                <div className='grid_box bglv1 mh-500px of-auto scrollbar-none'>
+                    {
+                        data.map((item, index) =>
+                            <div key={index} className='xs4 sm3 md2 grid_child pd-5px br-5px zi-3  ' >
+                                <div className='ps-re aspect-1 w100p of-hidden cs-p br-5px trss-1-4 bglv1' style={{
+                                    opacity: loading ? "0.25" : selectImageIdArr.length ? selectImageIdArr.some(obj => obj.id === item._id) ? 1 : 0.5 : selectImageId.toString() === item._id.toString() ? 1 : 0.5,
+                                    transform: selectImageIdArr.length ? selectImageIdArr.some(obj => obj.id === item._id) ? "scaleY(.95)" : "scaleY(1)" : selectImageId.toString() === item._id.toString() ? "scaleY(.95)" : "scaleY(1)",
+                                }}>
+                                    <Image quality={100} src={process.env.FTP_URL + "img/career/" + item.name} fill alt=""
+                                        style={{
+                                            objectFit: "cover",
+                                            transition: "all 0.25s",
+                                        }}
+                                        onClick={(e) => {
+                                            const src = { id: item._id, src: e.currentTarget.src }
+                                            // src && setSelectImageIdArr(arr => arr.some(obj => obj.id === item._id) ? arr.filter(a => a.id !== item._id) : [...arr, src])
+                                            src && setSelectImageIdArr([src])
+                                            setSelectImageId("")
+                                        }} />
+                                </div>
+                                <div className='h0px trss-1-2' style={{
+                                    borderBottom: "3px solid",
+                                    margin: "auto",
+                                    width:
+                                        selectImageIdArr.length ?
+                                            selectImageIdArr.some(obj => obj.id === item._id) ? "100%" : "0px"
+                                            : selectImageId.toString() === item._id.toString() ? "100%" : "0px"
+                                }}></div>
                             </div>
-                            <div className='h0px trss-1-2' style={{
-                                borderBottom: "3px solid",
-                                margin: "auto",
-                                width:
-                                    selectImageIdArr.length ?
-                                        selectImageIdArr.some(obj => obj.id === item._id) ? "100%" : "0px"
-                                        : selectImageId.toString() === item._id.toString() ? "100%" : "0px"
-                            }}></div>
-                        </div>
-                    )
-                }
-            </div>
-            <div className='bglv1 dp-flex jc-space' >
-                {loading ?
-                    <UploadButton
-                        icon={<PendingIcon className='svg30px' />}
-                        func={(e) => { }}
-                    />
-                    : <UploadButton
-                        icon={<AddPhotoAlternateIcon className='svg30px' />}
-                        func={(e) => getFile(e)}
-                    />}
-                {selectImageIdArr.length ?
-                    <CheckIcon className="svg30px" onClick={() => { onImages && onImages(selectImageIdArr); setSelectImageId(""), setSelectImageIdArr([]) }} /> : null
-                }
+                        )
+                    }
+                </div>
+                <div className='bglv1 dp-flex jc-space' >
+                    {loading ?
+                        <UploadButton
+                            icon={<PendingIcon className='svg30px' />}
+                            func={(e) => { }}
+                        />
+                        : <UploadButton
+                            icon={<AddPhotoAlternateIcon className='svg30px' />}
+                            func={(e) => getFile(e)}
+                        />}
+                    {selectImageIdArr.length ?
+                        <CheckIcon className="svg30px" onClick={() => { onImages && onImages(selectImageIdArr); setSelectImageId(""), setSelectImageIdArr([]) }} /> : null
+                    }
+                </div>
             </div>
         </div>
     )

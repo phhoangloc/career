@@ -18,10 +18,10 @@ const DecideModal = () => {
   return (
     <div className={`ps-f w100p h100p dp-flex fd-col jc-center ta-center bg-drop zi-4 ${currentAlert.open ? 'trsf-scale-1' : 'trsf-scale-0'}`}>
       <div className={`w100p h-mc mw-575px mg-auto br-5px pd-10px trss-1-2 trss-delay-1-4 ${currentAlert.open ? "" : "trsf-top--100p"} light1`}>
-        <p>{currentAlert.msg}</p>
-        <div className='w-mc dp-flex mg-auto'>
-          <Button name="yes" onClick={() => store.dispatch(setAlert({ value: true, open: false, msg: "" }))} />
-          <Button name="no" onClick={() => store.dispatch(setAlert({ value: false, open: false, msg: "" }))} />
+        <p style={{ marginBottom: "5px" }}>{currentAlert.msg}</p>
+        <div className='w-mc dp-flex mg-auto' style={{ gap: "2px" }}>
+          <Button name="はい" onClick={() => store.dispatch(setAlert({ value: true, open: false, msg: "" }))} />
+          <Button name="いいえ" onClick={() => store.dispatch(setAlert({ value: false, open: false, msg: "" }))} />
         </div>
       </div>
     </div>

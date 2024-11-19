@@ -111,7 +111,14 @@ const Page = (props: Props) => {
                     <Input name="search" onChange={(e) => setSearch(e)} value={search} />
                 </div>
 
-
+                <div className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1'
+                    style={{ height: "40px", background: "#f0f0f0" }}>
+                    <div style={{ width: "40px" }}>
+                    </div>
+                    <div style={{ height: "100%", lineHeight: "50px", opacity: 0.5, fontSize: "90%" }}>
+                        タイトル
+                    </div>
+                </div>
                 {data.length ? data.map((item, index) =>
                     <div key={index} className='flexbox hover-background-color-128-15p hover-boder-radius-5px hover-opacity-1 bg-even'
                         style={{ cursor: "pointer", height: "40px", margin: "5px 0", }}>

@@ -33,7 +33,8 @@ const Page = ({ params }: Props) => {
     const [id, setId] = useState<string>("")
     const [name, setName] = useState<string>("")
     const [slug, setSlug] = useState<string>("interview_" + moment(new Date()).format("YYYY_MM_DD"))
-    const [workplace, setWorkplace] = useState<string>("")
+    const [workplaceId, setWorkplaceId] = useState<string>("")
+    const [workplace, setWorkplace] = useState<any>()
     const [worktype, setWorktype] = useState<string>("")
     const [location, setLocation] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
@@ -54,7 +55,7 @@ const Page = ({ params }: Props) => {
     const body = {
         name,
         slug,
-        workplace,
+        workplace: workplaceId,
         worktype,
         location,
         contenttitle,
@@ -66,8 +67,9 @@ const Page = ({ params }: Props) => {
     const [area, setArea] = useState<string>("")
     const [locationFa, setLocationFa] = useState<string>("")
 
-    const getFacility = async () => {
-        const result = await NoUserAuthen.getItem("facility", "", "", "", "", "", undefined, undefined)
+    const getFacility = async (search: string, location: string, area: string) => {
+        const result = await UserAuthen.getItem(currentUser.position, "facility", search, undefined, undefined, location, area)
+        console.log(result)
         if (result.success) {
             setFacility(result.data)
         }
@@ -81,6 +83,7 @@ const Page = ({ params }: Props) => {
             setId(result.data[0]._id)
             setName(result.data[0].name)
             setSlug(result.data[0].slug)
+            setWorkplaceId(result.data[0].workplace?._id)
             setWorkplace(result.data[0].workplace)
             setWorktype(result.data[0].worktype)
             setLocation(result.data[0].location)
@@ -138,8 +141,9 @@ const Page = ({ params }: Props) => {
 
 
     useEffect(() => {
-        getFacility()
+        getFacility(search, locationFa, area)
     }, [search, area, locationFa])
+
     switch (params.slug) {
         case "new":
             return (
@@ -244,7 +248,7 @@ const Page = ({ params }: Props) => {
                                     {
                                         facility.map((item: any, index: number) =>
                                             <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                                <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                                <input type='checkbox' checked={workplaceId === item._id} onChange={() => { workplaceId === item._id ? setWorkplaceId("") : setWorkplaceId(item._id); setSavable(true) }} ></input>
                                                 <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                             </div>
                                         )}
