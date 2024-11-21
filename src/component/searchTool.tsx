@@ -108,7 +108,7 @@ const SearchTool = ({ body }: Props) => {
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setwt(e.target.value)}>
-                        <option value={undefined}>{"職種"}</option>
+                        <option value={"b"}>{"職種"}</option>
                         {worktypes.map((item, index) =>
                             <option key={index} value={item.name} selected={body?.wt === item.name ? true : false}>{item.name}</option>
                         )}
@@ -116,7 +116,7 @@ const SearchTool = ({ body }: Props) => {
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setstt(e.target.value)}>
-                        <option value={undefined}>{"雇用形態"}</option>
+                        <option value={"s"}>{"雇用形態"}</option>
                         {workstatusList.map((item, index) =>
                             <option key={index} value={item.name} selected={body?.ws === item.name ? true : false}>{item.name}</option>
                         )}
@@ -124,7 +124,7 @@ const SearchTool = ({ body }: Props) => {
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setLis(e.target.value)}  >
-                        <option value={undefined}>{"資格の有無"}</option>
+                        <option value={"lis"}>{"資格の有無"}</option>
 
                         {statusList.map((item: any, index: any) =>
                             <option key={index} value={item.name} selected={body?.lis === item.name ? true : false}>{item.name}</option>
@@ -133,7 +133,7 @@ const SearchTool = ({ body }: Props) => {
                 </div>
                 <div className='selectbox xs12 md6 lg4'>
                     <select onChange={(e) => setwp(e.target.value)} >
-                        <option value={undefined}>{"施設"}</option>
+                        <option value={"a"}>{"施設"}</option>
                         {workplaces.map((item: any, index: any) =>
                             <option key={index} value={item.name} selected={body?.wp === item.name ? true : false}>{item.name}</option>
                         )}
