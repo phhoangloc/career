@@ -77,7 +77,7 @@ const Page = ({ params }: Props) => {
         image,
         content: newdetail || detail,
         worktime,
-        worksalary: Number(worksalary.replace(/[￥,]/g, '')),
+        worksalary: Number(worksalary.replace(/[￥円,]/g, '')),
         workbenefit,
         startDate: new Date(_startDay),
         endDate: new Date(_endDay),
@@ -94,7 +94,6 @@ const Page = ({ params }: Props) => {
 
     const getFacility = async () => {
         const result = await UserAuthen.getItem(currentUser.position, "facility", search, undefined, undefined, location, area)
-        console.log(result)
         if (result.success) {
             setFacility(result.data)
         }
@@ -114,7 +113,7 @@ const Page = ({ params }: Props) => {
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
             setWorkTime(result.data[0].worktime)
-            setWorksalary(result.data[0].worksalary ? jpyFormatter.format(result.data[0].worksalary) : "")
+            setWorksalary(result.data[0].worksalary ? jpyFormatter.format(result.data[0].worksalary).replace(/[￥]/g, '') + "円" : "")
             setWorkbenefit(result.data[0].workbenefit)
             set_bonus(result.data[0].bonus === 1 ? "あり" : "なし")
             set_contract(result.data[0].contact)
@@ -310,7 +309,7 @@ const Page = ({ params }: Props) => {
                             </div>
                         </div>
                         <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} placeholder='10:00 - 19:00' />
-                        <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
+                        <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} placeholder='500.000円' />
                         <div>
                             <div className='dp-flex' >
                                 <h3 style={{ height: "40px", lineHeight: "50px" }}>賞与</h3>
