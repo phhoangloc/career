@@ -5,6 +5,7 @@ import { UserAuthen } from '@/api/UserAuthen'
 import { useRouter } from 'next/navigation'
 import Button from '@/component/input/button'
 import Input from '@/component/input/input'
+import { setRefresh } from '@/redux/reducer/RefreshReduce'
 type Props = {
     params: { id: string }
 }
@@ -27,9 +28,10 @@ const Page = ({ params }: Props) => {
     const [password, setPassword] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [active, setAtive] = useState<boolean>(false)
+    const [position, setPosition] = useState<boolean>(false)
 
     const body = {
-        username, email, active
+        username, email, active, position
     }
 
     const getOnePost = async (p: string, a: string, id: string) => {
@@ -41,6 +43,7 @@ const Page = ({ params }: Props) => {
             setPassword(result.data[0].password)
             setEmail(result.data[0].email)
             setAtive(result.data[0].active)
+            setPosition(result.data[0].position)
         }
     }
 
@@ -56,7 +59,8 @@ const Page = ({ params }: Props) => {
         const result = await UserAuthen.updateItem(currentUser.position, "user", params.id, body)
         if (result.success) {
             setSaving(true)
-            toPage.push("/admin/user")
+            toPage.push("/admin")
+            store.dispatch(setRefresh())
         }
     }
     return (
@@ -70,9 +74,22 @@ const Page = ({ params }: Props) => {
                     <p>active</p>
                     <input type='checkbox' checked={active} style={{ margin: "0 10px" }} onChange={() => { setSavable(true), setAtive(!active) }}></input>
                 </div>
-
+                <div>
+                    <div className='dp-flex' >
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>資格の有無</h3>
+                    </div>
+                    <div style={{ display: "flex", gap: "12px" }}>
+                        {
+                            [{ name: "投稿者", position: "user" }, { name: "管理者", position: "admin" }].map((item: any, index: number) =>
+                                <div className='dp-flex' key={index} style={{ height: "30px" }}>
+                                    <input type='radio' checked={(item.position === position)} onChange={() => { setPosition(item.position), setSavable(true) }} ></input>
+                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
                 <div style={{ display: "flex", margin: "10px 0", width: "210px", justifyContent: "space-between" }}>
-
                     <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />
                     {/* <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} /> */}
                 </div>

@@ -31,7 +31,7 @@ const NaviLeft = ({ data, naviLeftWitdh }: Props) => {
             </div> :
             <div>
                 <p className='width-max-content' style={{ margin: "auto" }} >こんにちは、</p>
-                <div className='width-max-content' style={{ margin: "auto" }}><Button name='ログイン' onClick={() => toPage.push("login")} /></div>
+                <div className='width-max-content' style={{ margin: "auto" }}><Button name='ログイン' onClick={() => toPage.push("/login")} /></div>
             </div>
 
     )

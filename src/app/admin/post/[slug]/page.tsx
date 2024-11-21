@@ -17,6 +17,8 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import { workstatusList, statusList } from '@/data/workstatus';
+import { jpyFormatter } from '@/lib/currency';
+jpyFormatter
 type Props = {
     params: { slug: string }
 }
@@ -42,14 +44,14 @@ const Page = ({ params }: Props) => {
     const [workplace, setWorkplace] = useState<string>("")
     const [_contract, set_contract] = useState<string>("")
     const [_contractName, set_contractName] = useState<string>("")
-    const [worktype, setWorktype] = useState<string>("")
+    const [worktype, setWorktype] = useState<string[]>([])
     const [newWorktype, setNewWorktype] = useState<string>("")
     const [worktypeList, setWorktypeList] = useState<string[]>([])
-    const [workstatus, setWorkstatus] = useState<string>("")
-    const [lisense, setLisense] = useState<string>("")
+    const [workstatus, setWorkstatus] = useState<string[]>([])
+    const [lisense, setLisense] = useState<string[]>([])
     const [worktime, setWorkTime] = useState<string>("")
-    const [worksalary, setWorksalary] = useState<number>(0)
-    const [_bonus, set_bonus] = useState<number>(0)
+    const [worksalary, setWorksalary] = useState<string>("")
+    const [_bonus, set_bonus] = useState<string>("")
     const [workbenefit, setWorkbenefit] = useState<string>("")
     const [contenttitle, setcontenttilte] = useState<string>("")
     const [detail, setDetail] = useState<string>("もう少し仕事内容をシェアしてください。")
@@ -69,20 +71,20 @@ const Page = ({ params }: Props) => {
         title,
         slug,
         workplace,
-        worktype,
-        workstatus,
+        worktype: worktype.join(","),
+        workstatus: workstatus.join(","),
         contenttitle,
         image,
         content: newdetail || detail,
         worktime,
-        worksalary,
+        worksalary: Number(worksalary.replace(/[￥,]/g, '')),
         workbenefit,
         startDate: new Date(_startDay),
         endDate: new Date(_endDay),
-        bonus: _bonus,
+        bonus: _bonus === "あり" ? 1 : 0,
         contact: _contract,
         contactName: _contractName,
-        lisense,
+        lisense: lisense.join(","),
 
     }
 
@@ -92,6 +94,7 @@ const Page = ({ params }: Props) => {
 
     const getFacility = async () => {
         const result = await UserAuthen.getItem(currentUser.position, "facility", search, undefined, undefined, location, area)
+        console.log(result)
         if (result.success) {
             setFacility(result.data)
         }
@@ -105,20 +108,20 @@ const Page = ({ params }: Props) => {
             setTitle(result.data[0].title)
             setSlug(result.data[0].slug)
             setWorkplace(result.data[0].workplace)
-            setWorktype(result.data[0].worktype)
-            setWorkstatus(result.data[0].workstatus)
+            setWorktype(result.data[0].worktype.split(','))
+            setWorkstatus(result.data[0].workstatus.split(','))
             setcontenttilte(result.data[0].contenttitle)
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
             setWorkTime(result.data[0].worktime)
-            setWorksalary(result.data[0].worksalary)
+            setWorksalary(result.data[0].worksalary ? jpyFormatter.format(result.data[0].worksalary) : "")
             setWorkbenefit(result.data[0].workbenefit)
-            set_bonus(result.data[0].bonus)
+            set_bonus(result.data[0].bonus === 1 ? "あり" : "なし")
             set_contract(result.data[0].contact)
             set_contractName(result.data[0].contactName)
             set_startDay(result.data[0].startDate)
             set_endDay(result.data[0].endDate)
-            setLisense(result.data[0].lisense)
+            setLisense(result.data[0].lisense.split(','))
         }
     }
 
@@ -235,7 +238,7 @@ const Page = ({ params }: Props) => {
                                             {
                                                 facility.map((item: any, index: number) =>
                                                     <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                                        <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                                        <input type='radio' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
                                                         <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                                     </div>
                                                 )}
@@ -267,7 +270,7 @@ const Page = ({ params }: Props) => {
                                 {worktypeList.length ?
                                     worktypeList.map((item: any, index: number) =>
                                         <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                            <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(item.name)} ></input>
+                                            <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(wt => wt.includes(item.name) ? wt.filter(w => w !== item.name) : [...wt, item.name])} ></input>
                                             <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                         </div>
                                     ) :
@@ -282,7 +285,7 @@ const Page = ({ params }: Props) => {
                                 {workstatusList.length ?
                                     workstatusList.map((item: any, index: number) =>
                                         <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(item.name)} ></input>
+                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(ws => ws.includes(item.name) ? ws.filter(w => w !== item.name) : [...ws, item.name])} ></input>
                                             <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                         </div>
                                     ) :
@@ -297,7 +300,7 @@ const Page = ({ params }: Props) => {
                                 {statusList.length ?
                                     statusList.map((item: any, index: number) =>
                                         <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setLisense(item.name)} ></input>
+                                            <input type='checkbox' checked={lisense?.includes(item.name)} onChange={() => setLisense(ls => ls.includes(item.name) ? ls.filter(l => l !== item.name) : [...ls, item.name])} ></input>
                                             <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                         </div>
                                     ) :
@@ -307,8 +310,22 @@ const Page = ({ params }: Props) => {
                         </div>
                         <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
                         <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
-                        <Input name="賞与" onChange={(e) => { setSavable(true), set_bonus(e) }} value={_bonus} />
-                        <Input name="福利厚生" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
+                        <div>
+                            <div className='dp-flex' >
+                                <h3 style={{ height: "40px", lineHeight: "50px" }}>賞与</h3>
+                            </div>
+                            <div className='display-flex' style={{ gap: "4px" }}>
+                                <div className='dp-flex' style={{ height: "30px" }}>
+                                    <input type='radio' checked={_bonus === "あり"} onChange={() => set_bonus("あり")} ></input>
+                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{"あり"}</p>
+                                </div>
+                                <div className='dp-flex' style={{ height: "30px" }}>
+                                    <input type='radio' checked={_bonus !== "あり"} onChange={() => set_bonus("なし")} ></input>
+                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{"なし"}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <Input name="福利厚生" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit || "資格手当など"} />
                         <Input name="掲載日" onChange={(e) => { setSavable(true), set_startDay(e) }} value={moment(_startDay).format("YYYY-MM-DD")} type='date' />
                         <Input name="掲載終了日" onChange={(e) => { setSavable(true), set_endDay(e) }} value={moment(_endDay).format("YYYY-MM-DD")} type='date' />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
@@ -366,7 +383,7 @@ const Page = ({ params }: Props) => {
                                     {
                                         facility.map((item: any, index: number) =>
                                             <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                                <input type='checkbox' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
+                                                <input type='radio' checked={workplace === item._id} onChange={() => { workplace === item._id ? setWorkplace("") : setWorkplace(item._id); setSavable(true) }} ></input>
                                                 <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                             </div>
                                         )}
@@ -398,7 +415,7 @@ const Page = ({ params }: Props) => {
                         {worktypeList.length ?
                             worktypeList.map((item: any, index: number) =>
                                 <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(item.name)} ></input>
+                                    <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(wt => wt.includes(item.name) ? wt.filter(w => w !== item.name) : [...wt, item.name])} ></input>
                                     <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                 </div>
                             ) :
@@ -413,7 +430,7 @@ const Page = ({ params }: Props) => {
                         {workstatusList.length ?
                             workstatusList.map((item: any, index: number) =>
                                 <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={workstatus === item.name} onChange={() => setWorkstatus(item.name)} ></input>
+                                    <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(ws => ws.includes(item.name) ? ws.filter(w => w !== item.name) : [...ws, item.name])} ></input>
                                     <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                 </div>
                             ) :
@@ -428,7 +445,7 @@ const Page = ({ params }: Props) => {
                         {statusList.length ?
                             statusList.map((item: any, index: number) =>
                                 <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={lisense?.includes(item.name)} onChange={() => setLisense(item.name)} ></input>
+                                    <input type='checkbox' checked={lisense?.includes(item.name)} onChange={() => setLisense(ls => ls.includes(item.name) ? ls.filter(l => l !== item.name) : [...ls, item.name])} ></input>
                                     <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
                                 </div>
                             ) :
@@ -437,9 +454,23 @@ const Page = ({ params }: Props) => {
                     </div>
                 </div>
                 <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} />
-                <Input name="給与" type='number' onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
-                <Input name="賞与" type="number" onChange={(e) => { setSavable(true), set_bonus(e) }} value={_bonus} />
-                <Input name="福利厚生" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit} />
+                <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
+                <div>
+                    <div className='dp-flex' >
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>賞与</h3>
+                    </div>
+                    <div className='display-flex' style={{ gap: "4px" }}>
+                        <div className='dp-flex' style={{ height: "30px" }}>
+                            <input type='radio' checked={_bonus === "あり"} onChange={() => set_bonus("あり")} ></input>
+                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{"あり"}</p>
+                        </div>
+                        <div className='dp-flex' style={{ height: "30px" }}>
+                            <input type='radio' checked={_bonus !== "あり"} onChange={() => set_bonus("なし")} ></input>
+                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{"なし"}</p>
+                        </div>
+                    </div>
+                </div>
+                <Input name="福利厚生" onChange={(e) => { setSavable(true), setWorkbenefit(e) }} value={workbenefit || "資格手当など"} />
                 <Input name="掲載日" onChange={(e) => { setSavable(true), set_startDay(e) }} value={moment(_startDay).format("YYYY-MM-DD")} type='date' />
                 <Input name="掲載終了日" onChange={(e) => { setSavable(true), set_endDay(e) }} value={moment(_endDay).format("YYYY-MM-DD")} type='date' />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={detail} />

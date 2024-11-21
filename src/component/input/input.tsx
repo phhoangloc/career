@@ -55,6 +55,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
         position: "absolute",
         top: "20px",
         padding: "0 10px",
+        opacity: 0.8,
         transition: "all 0.5s"
     }
     const pStyleFocus: React.CSSProperties = {
@@ -63,8 +64,8 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
         padding: "0 10px",
         transition: "all 0.5s",
         top: 0,
-        opacity: 0.5,
-        fontSize: "0.9rem"
+        opacity: 0.25,
+        fontSize: "0.8rem"
     }
     const inputStyle: React.CSSProperties = {
         width: "100%",
@@ -76,8 +77,13 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
         fontSize: "1rem",
         textOverflow: "ellipsis",
         boxSizing: "border-box",
+        opacity: 0.5,
 
     }
+    const inputStyleFocus: React.CSSProperties = {
+        opacity: 1
+    }
+
     const warnStyle: React.CSSProperties = {
         color: "red",
         margin: "0 5px",
@@ -90,7 +96,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
             <p style={focus || value ? pStyleFocus : pStyle} onClick={() => inputRef.current.focus()}>{name}<span style={warnStyle}>{warn}</span></p>
             <input ref={inputRef}
                 className={`inputFocusOutlineNone `}
-                style={inputStyle}
+                style={focus ? { ...inputStyle, ...inputStyleFocus } : inputStyle}
                 disabled={disabled ? disabled : false}
                 value={value}
                 onChange={(e) => onChange(e.target.value)}

@@ -31,7 +31,7 @@ const Header = () => {
 
                 {/* <div className='item'> */}
                 <p onClick={() => toPage.push("/")} >ホーム </p>
-                <p onClick={() => toPage.push("/home/search/n/a/b/s/c")} >仕事を探す </p>
+                <p onClick={() => toPage.push("/home/search/n/a/b/s/c/lis")} >仕事を探す </p>
                 {/* <div className={`children ${itemModal ? "children_on" : ""}`}>
                         <p onClick={() => setItemModal(false)} >仕事を探す<KeyboardArrowDownIcon /></p>
                         <p onClick={() => toPage.push("/home/search/a/b/c/d")}>施設で探す</p>

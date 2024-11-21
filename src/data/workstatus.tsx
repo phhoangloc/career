@@ -1,6 +1,6 @@
 export const workstatusList = [
     {
-        name: "常勤",
+        name: " 常勤",
     },
     {
         name: "非常勤",
@@ -21,5 +21,13 @@ export const statusList = [
     },
     {
         name: "ケアマネジャー",
+    },
+]
+export const bonusList = [
+    {
+        name: "あり",
+    },
+    {
+        name: "なし",
     },
 ]

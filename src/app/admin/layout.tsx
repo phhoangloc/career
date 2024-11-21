@@ -43,6 +43,7 @@ export default function RootLayout({
                 ]
               },
               {
+                position: "admin",
                 name: "施設情報",
                 child: [
                   { name: "施設情報一覧", link: "/admin/facility", },

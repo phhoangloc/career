@@ -17,7 +17,6 @@ type Props = {
 
 const Page = ({ params }: Props) => {
 
-
     const bodySearch = {
         s: decodeURIComponent(params.slug[0]) === "n" ? "" : decodeURIComponent(params.slug[0]),
         wp: decodeURIComponent(params.slug[1]) === "a" ? "" : decodeURIComponent(params.slug[1]),
@@ -106,8 +105,8 @@ const Page = ({ params }: Props) => {
                                     <h3>{item.title}</h3>
                                     <p>{item.contenttitle}</p>
                                     <div style={{ paddingTop: "10px", margin: "10px 10px 0px 0px", borderTop: "1px solid #aaa" }}>
-                                        <h4>職種：<span>{item.worktype}</span></h4>
-                                        <h4>雇用形態：<span>{item.workstatus}</span></h4>
+                                        <h4>職種：{item.worktype.split(",").map((wt: string, index: string) => <span style={{ display: "block", paddingLeft: "12px" }} key={index}>{wt}</span>)}</h4>
+                                        <h4>雇用形態：{item.workstatus.split(",").map((wt: string, index: string) => <span style={{ display: "block", paddingLeft: "12px" }} key={index}>{wt}</span>)}</h4>
                                         <h4>通勤時間：<span>{item.worktime}</span></h4>
                                         <h4>有給休暇：<span>{item.workbenefit}</span></h4>
                                         <h4>月給：<span>{jpyFormatter.format(item.worksalary)}</span></h4>
