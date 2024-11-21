@@ -77,7 +77,7 @@ const Page = ({ params }: Props) => {
         image,
         content: newdetail || detail,
         worktime,
-        worksalary: Number(worksalary.replace(/[￥円,]/g, '')),
+        worksalary,
         workbenefit,
         startDate: new Date(_startDay),
         endDate: new Date(_endDay),
@@ -113,7 +113,7 @@ const Page = ({ params }: Props) => {
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
             setWorkTime(result.data[0].worktime)
-            setWorksalary(result.data[0].worksalary ? jpyFormatter.format(result.data[0].worksalary).replace(/[￥]/g, '') + "円" : "")
+            setWorksalary(result.data[0].worksalary)
             setWorkbenefit(result.data[0].workbenefit)
             set_bonus(result.data[0].bonus === 1 ? "あり" : "なし")
             set_contract(result.data[0].contact)
@@ -333,7 +333,7 @@ const Page = ({ params }: Props) => {
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
                                 <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image && savable && workplace && worktype && workstatus && lisense ? false : true} />}
-                            <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                            <Button name="プレビュー" disable={!savable} onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
                     <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(arrId) => { setOpenModal(false), setImage(arrId[0].id), setSavable(true) }} />
@@ -477,7 +477,7 @@ const Page = ({ params }: Props) => {
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e), setChange(c => c + 1) }} value={detail} />
                 <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> : <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
-                    <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                    <Button name="プレビュー" disable={!savable} onClick={() => UpdatePostDemo(body)} />
                 </div>
             </div>
             <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(arrId) => { setOpenModal(false), setImage(arrId[0].id); setSavable(true) }} />

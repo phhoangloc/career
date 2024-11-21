@@ -48,7 +48,7 @@ const Page = ({ params }: Props) => {
                         <div className='apply_item'><h4>勤務時間</h4><p>{newData.worktime}</p></div>
                         <div className='apply_item'><h4>雇⽤形態</h4><div>{newData.workstatus?.split(",").map((wt: string, index: string) => <p key={index}>{wt}</p>)}</div></div>
                         <div className='apply_item'><h4>給与</h4><p>{jpyFormatter.format(newData.worksalary)}</p></div>
-                        <div className='apply_item'><h4>賞与</h4><p>{newData.bonus === 1 ? "あり" : "なし"}</p></div>
+                        {newData.bonus === 1 ? <div className='apply_item'><h4>賞与</h4><p>あり</p></div> : null}
                         {newData.workbenefit ? <div className='apply_item'><h4>福利厚生</h4><p>{newData.workbenefit}</p></div> : null}
                         <div className='apply_item'><h4>掲載日</h4><p>{moment(newData.startDate).format("YYYY年/MM月/DD日")}</p></div>
                         <div className='apply_item'><h4>掲載終了日</h4><p>{moment(newData.endDate).format("YYYY年/MM月/DD日")}</p></div>

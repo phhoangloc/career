@@ -78,7 +78,6 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, placehold
         fontSize: "1rem",
         textOverflow: "ellipsis",
         boxSizing: "border-box",
-        opacity: 0.5,
 
     }
     const inputStyleFocus: React.CSSProperties = {
