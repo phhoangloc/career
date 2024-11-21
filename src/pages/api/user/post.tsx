@@ -61,36 +61,17 @@ const Post =
                         })
                     break;
                 case "PUT":
-                    if (host) {
-                        if (host.toString() === id.toString()) {
-                            await postModel.updateOne({ "_id": query.id }, body)
-                                .catch((error: Error) => {
-                                    result.success = false
-                                    result.message = error.message
-                                    res.send(result)
-                                    throw error.message
-                                }).then(async (data: any) => {
-                                    result.success = true
-                                    result.message = "ポストが更新出来ました。"
-                                    res.json(result)
-                                })
-                        } else {
+                    await postModel.updateOne({ "_id": query.id }, body)
+                        .catch((error: Error) => {
                             result.success = false
-                            result.message = "ポストが更新出来ない。"
-                        }
-                    } else {
-                        await postModel.updateOne({ "_id": "664eb0c390ea82cc9da49e9f" }, body)
-                            .catch((error: Error) => {
-                                result.success = false
-                                result.message = error.message
-                                res.send(result)
-                                throw error.message
-                            }).then(async (data: any) => {
-                                result.success = true
-                                result.message = "ポストが更新出来ました。"
-                                res.json(result)
-                            })
-                    }
+                            result.message = error.message
+                            res.send(result)
+                            throw error.message
+                        }).then(async (data: any) => {
+                            result.success = true
+                            result.message = "ポストが更新出来ました。"
+                            res.json(result)
+                        })
 
                     break;
                 case "DELETE":

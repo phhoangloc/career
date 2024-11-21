@@ -155,10 +155,10 @@ const Page = ({ params }: Props) => {
         }
     }
     const UpdatePostDemo = async (body: any) => {
-        body.slug = body.slug + "_demo"
+        body.slug = undefined
         const result = await UserAuthen.updateItem(currentUser.position, "post", "664eb0c390ea82cc9da49e9f", body)
         if (result) {
-            window.open('/home/post/' + body.slug, '_blank');
+            window.open('/home/post/post_2024_11_21_demo', '_blank');
         }
     }
 

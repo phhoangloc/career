@@ -57,7 +57,6 @@ const Post =
                             })
                         break;
                     case "POST":
-                        body.host = id
                         await postModel.create(body)
                             .catch((error: Error) => {
                                 result.success = false
@@ -102,19 +101,17 @@ const Post =
 
                         break;
                     case "DELETE":
-                        if (host.toString() === id.toString()) {
-                            await postModel.deleteOne({ "_id": query.id })
-                                .catch((error: Error) => {
-                                    result.success = false
-                                    result.message = error.message
-                                    res.send(result)
-                                    throw error.message
-                                }).then(async (data: any) => {
-                                    result.success = true
-                                    result.message = "あなたのメソッドは無効です"
-                                    res.json(result)
-                                })
-                        }
+                        await postModel.deleteOne({ "_id": query.id })
+                            .catch((error: Error) => {
+                                result.success = false
+                                result.message = error.message
+                                res.send(result)
+                                throw error.message
+                            }).then(async (data: any) => {
+                                result.success = true
+                                result.message = "あなたのメソッドは無効です"
+                                res.json(result)
+                            })
                         break;
                     default:
                         res.send("")
