@@ -36,7 +36,7 @@ const image = async (
     switch (method) {
         case "GET":
             await ImageModel
-                // .find({ "host": id })
+                .find({ "host": id })
                 .find(query.id ? { "_id": query.id } : {})
                 .find(query.search ? { "name": { $regex: query.search } } : {})
                 .sort({ "createDate": -1 })

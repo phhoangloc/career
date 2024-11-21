@@ -8,10 +8,11 @@ type Props = {
     onfocus?: () => void,
     disabled?: boolean,
     warn?: string,
-    sx?: string
+    sx?: string,
+    placeholder?: string,
 }
 
-const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Props) => {
+const Input = ({ onChange, name, value, type, onfocus, disabled, warn, placeholder }: Props) => {
 
     const inputRef: any = useRef()
 
@@ -93,7 +94,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
 
     return (
         <div className={`${focus || value ? currentTheme ? "background_light" : "background_dark" : null} `} style={focus || value ? warn?.length ? { ...boxStyleFocus, ...boxStyleFocusWarn } : { ...boxStyleFocus } : boxStyle}>
-            <p style={focus || value ? pStyleFocus : pStyle} onClick={() => inputRef.current.focus()}>{name}<span style={warnStyle}>{warn}</span></p>
+            <p style={placeholder || focus || value ? pStyleFocus : pStyle} onClick={() => inputRef.current.focus()}>{name}<span style={warnStyle}>{warn}</span></p>
             <input ref={inputRef}
                 className={`inputFocusOutlineNone `}
                 style={focus ? { ...inputStyle, ...inputStyleFocus } : inputStyle}
@@ -103,6 +104,7 @@ const Input = ({ onChange, name, value, type, onfocus, disabled, warn, sx }: Pro
                 onFocus={() => { setFocus(true); onfocus && onfocus() }}
                 onBlur={() => setFocus(false)}
                 type={type}
+                placeholder={placeholder}
             ></input>
         </div >
     )
