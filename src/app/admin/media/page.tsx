@@ -91,9 +91,13 @@ const Page = () => {
                         <div key={index} className='xs6  md4 lg2 grid_child' style={{ overflow: "hidden", padding: "5px" }} >
                             <div style={{ width: "100%", aspectRatio: 1, position: "relative", borderRadius: "5px", overflow: "hidden", opacity: loading ? "0.25" : 1, boxShadow: "0px 0px 3px" }}>
                                 <Image quality={100} src={process.env.FTP_URL + "img/career/" + item.name} fill alt="" style={{ objectFit: "cover" }} />
-                                <DeleteIcon
-                                    onClick={() => { setId(item._id); store.dispatch(setAlert({ open: true, msg: "この写真を削除してもよろしいですか?", value: false })) }}
-                                    style={{ position: "absolute", zIndex: 1, background: "white", borderRadius: "5px", top: "5px", left: "5px", padding: "1px", color: "#006699" }} />
+                                {
+                                    item.host._id === currentUser._id ?
+                                        <DeleteIcon
+                                            onClick={() => { setId(item._id); store.dispatch(setAlert({ open: true, msg: "この写真を削除してもよろしいですか?", value: false })) }}
+                                            style={{ position: "absolute", zIndex: 1, background: "white", borderRadius: "5px", top: "5px", left: "5px", padding: "1px", color: "#006699" }} />
+                                        : null
+                                }
                             </div>
                             <div style={{ display: "flex", fontSize: "0.8rem", padding: "10px 5px" }}>
                                 {copy && i === index ? <CheckIcon /> :

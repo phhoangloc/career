@@ -35,11 +35,10 @@ const Post =
         const host = post && post.host && post.host._id
         if (id) {
             if (position === "admin") {
-
                 switch (method) {
                     case "GET":
                         await postModel.find()
-                            .find({ "host": id })
+                            // .find({ "host": id })
                             .find(query.id ? { "_id": query.id } : {})
                             .find(query.archive ? { "archive": query.archive } : {})
                             .find(query.slug ? { "slug": query.slug } : {})

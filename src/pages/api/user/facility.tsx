@@ -32,14 +32,41 @@ const Post =
             switch (method) {
                 case "GET":
                     await facilityModel.find()
+                //     .find(query.id ? { "_id": query.id } : {})
+                //     .find(query.archive ? { "archive": query.archive } : {})
+                //     .find(query.search ? { "name": { $regex: query.search } } : {})
+                //     .find(query.slug ? { "slug": query.slug } : {})
+                //     .find(query.area ? { "area": query.area } : {})
+                //     .find(query.lo ? { "location": query.lo } : {})
+                //     .skip(query.skip)
+                //     .sort(query.sort ? query.sort : {})
+                //     .limit(query.limit ? query.limit : {})
+                //     .catch((error: Error) => {
+                //         result.success = false
+                //         result.message = error.message
+                //         res.send(result)
+                //         throw error.message
+                //     }).then(async (data: any) => {
+                //         var array: any[] = []
+                //         facilites.map((f: any) => data.map((d: any) => {
+                //             if (d._id.toString() === f.toString()) { array = [...array, d] }
+                //         }))
+                //         result.success = true
+                //         result.data = array
+                //         res.json(result)
+                //     })
+                // break;
+                case "GET":
+                    await facilityModel.find()
+                        .collation({ locale: 'ja' })
                         .find(query.id ? { "_id": query.id } : {})
                         .find(query.archive ? { "archive": query.archive } : {})
-                        .find(query.search ? { "name": { $regex: query.search } } : {})
                         .find(query.slug ? { "slug": query.slug } : {})
-                        .find(query.area ? { "area": query.area } : {})
+                        .find(query.search ? { "name": { $regex: query.search } } : {})
                         .find(query.lo ? { "location": query.lo } : {})
+                        .find(query.area ? { "area": query.area } : {})
                         .skip(query.skip)
-                        .sort(query.sort ? query.sort : {})
+                        .sort(query.sort ? { "name": Number(query.sort) } : {})
                         .limit(query.limit ? query.limit : {})
                         .catch((error: Error) => {
                             result.success = false
@@ -47,12 +74,8 @@ const Post =
                             res.send(result)
                             throw error.message
                         }).then(async (data: any) => {
-                            var array: any[] = []
-                            facilites.map((f: any) => data.map((d: any) => {
-                                if (d._id.toString() === f.toString()) { array = [...array, d] }
-                            }))
                             result.success = true
-                            result.data = array
+                            result.data = data
                             res.json(result)
                         })
                     break;

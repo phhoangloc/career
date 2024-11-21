@@ -224,14 +224,15 @@ const Page = ({ params }: Props) => {
                                 <div style={{ width: "100%", height: "400px" }}>
                                     <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所</h4><input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} /></div>
                                     <div className='dp-flex'>
-                                        <select style={{ width: "100px", height: "30px", margin: "0 5px" }} onChange={(e) => setLocation(e.target.value)}>
-                                            <option value="">都道府県</option>
-                                            {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
-                                        </select>
                                         <select style={{ height: "30px", margin: "0 5px" }} onChange={(e) => setArea(e.target.value)}>
                                             <option value="">エリア</option>
                                             {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
                                         </select>
+                                        <select style={{ width: "100px", height: "30px", margin: "0 5px" }} onChange={(e) => setLocation(e.target.value)}>
+                                            <option value="">都道府県</option>
+                                            {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
+                                        </select>
+
                                     </div>
                                     {facility?.length ?
                                         <div className='scrollbar-none' style={{ height: "calc(100% - 80px)", overflow: "auto", background: "whitesmoke", padding: "0 5px", marginTop: "10px" }}>
@@ -369,14 +370,15 @@ const Page = ({ params }: Props) => {
                         <div style={{ width: "100%", height: "400px" }}>
                             <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所</h4><input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} /></div>
                             <div className='dp-flex'>
-                                <select style={{ width: "100px", height: "30px", margin: "0 5px" }} onChange={(e) => setLocation(e.target.value)}>
-                                    <option value="">都道府県</option>
-                                    {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
-                                </select>
                                 <select style={{ height: "30px", margin: "0 5px" }} onChange={(e) => setArea(e.target.value)}>
                                     <option value="">エリア</option>
                                     {japanRegions.map((r, index) => <option key={index}>{r.region}</option>)}
                                 </select>
+                                <select style={{ width: "100px", height: "30px", margin: "0 5px" }} onChange={(e) => setLocation(e.target.value)}>
+                                    <option value="">都道府県</option>
+                                    {japanPrefectures.map((p, index) => <option key={index}>{p.name}</option>)}
+                                </select>
+
                             </div>
                             {facility?.length ?
                                 <div className='scrollbar-none' style={{ height: "calc(100% - 80px)", overflow: "auto", background: "whitesmoke", padding: "0 5px", marginTop: "10px" }}>
