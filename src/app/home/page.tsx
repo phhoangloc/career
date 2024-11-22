@@ -100,7 +100,7 @@ export default function Home() {
         <div className={`cover_title cover_title_right ${hover && coverItem === 2 && "cover_title_hover"} `}
           onClick={() => toPage.push("/home/interview/" + data[1]?.slug)}>
           <h3>{data[1]?.contenttitle}</h3>
-          <h4>{data[1]?.name ? data[0]?.name + "/2024年 採用/" + data[1]?.workplace?.location : ""}</h4>
+          <h4>{data[1]?.name ? data[1]?.name + "/2024年 採用/" + data[1]?.workplace?.location : ""}</h4>
         </div>
       </div>
       <div ref={sloganRef} className={`slogan`} onClick={() => { onHandleHover() }} onMouseEnter={() => { onHandleHover() }}>
@@ -127,7 +127,7 @@ export default function Home() {
           <h2>News</h2>
           <div className="grid_box"><h1>ニュース</h1> <Image style={{ marginTop: "5px" }} src={"/icon/icon1.png"} width={40} height={40} alt="icon1" /></div>
         </div>
-        <div className='content_news scrollbar-none'>
+        <div className='content_news scrollbar-none' style={{ borderRadius: "4px" }}>
           {news.length ? news.map((n, index) =>
             <div key={index}>
               <h3>{moment(n?.createDate).format("YYYY.MM.DD")}</h3>

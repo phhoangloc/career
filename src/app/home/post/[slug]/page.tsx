@@ -58,7 +58,7 @@ const Page = ({ params }: Props) => {
                     <p className='button'><a href={`mailto:${newData.contact}?subject=仕事に応募します。&body=この仕事を応募したいです。よろしくお願いいたします。`}>応募はこちらから</a></p>
 
                     <div className='title_facility'> <p>詳細</p></div>
-                    <div className='w90p mw-768px mg-auto bor-1px br-5px pd-5p' style={{ borderColor: "#006699" }} dangerouslySetInnerHTML={{ __html: newData.content }} />
+                    <div className='w90p mw-768px mg-auto bor-1px br-5px pd-5p dangerousBox' style={{ borderColor: "#006699" }} dangerouslySetInnerHTML={{ __html: newData.content }} />
                     <p className='button'><a href={`mailto:${newData.contact}?subject=仕事に応募します。&body=この仕事を応募したいです。よろしくお願いいたします。`}>応募はこちらから</a></p>
 
                 </div>

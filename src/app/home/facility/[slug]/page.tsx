@@ -86,7 +86,8 @@ const Page = ({ params }: Props) => {
                         <div className='dangerousBox' dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(newData.content) }} />
                     </div>
                     <div className="content">
-                        <div className='altImage dp-flex fd-col jc-center ta-center'><h1>NO VIDEO</h1></div>
+                        {newData?.video?.length ? <iframe style={{ width: "100%", aspectRatio: "1.75" }} src={"https://www.youtube.com/embed/" + newData?.video} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> :
+                            <div className='altImage dp-flex fd-col jc-center ta-center'><h1>NO VIDEO</h1></div>}
                     </div>
                 </div>
 

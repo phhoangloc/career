@@ -61,19 +61,40 @@ const Post =
                         })
                     break;
                 case "PUT":
-                    await postModel.updateOne({ "_id": query.id }, body)
-                        .catch((error: Error) => {
-                            result.success = false
-                            result.message = error.message
-                            res.send(result)
-                            throw error.message
-                        }).then(async (data: any) => {
+                    if (query.id === "664eb0c390ea82cc9da49e9f") {
+                        await postModel.updateOne({ "_id": query.id }, body)
+                            .catch((error: Error) => {
+                                result.success = false
+                                result.message = error.message
+                                res.send(result)
+                                throw error.message
+                            }).then(async (data: any) => {
+                                result.success = true
+                                result.message = "ポストが更新出来ました。"
+                                res.json(result)
+                            })
+                    } else {
+                        if (host === id) {
+                            await postModel.updateOne({ "_id": query.id }, body)
+                                .catch((error: Error) => {
+                                    result.success = false
+                                    result.message = error.message
+                                    res.send(result)
+                                    throw error.message
+                                }).then(async (data: any) => {
+                                    result.success = true
+                                    result.message = "ポストが更新出来ました。"
+                                    res.json(result)
+                                })
+                        } else {
                             result.success = true
-                            result.message = "ポストが更新出来ました。"
+                            result.message = id
                             res.json(result)
-                        })
+                        }
 
+                    }
                     break;
+
                 case "DELETE":
                     if (host.toString() === id.toString()) {
                         await postModel.deleteOne({ "_id": query.id })

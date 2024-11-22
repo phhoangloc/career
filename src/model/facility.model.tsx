@@ -60,6 +60,9 @@ const facilitySchema = new Schema({
         type: Date,
         default: Date.now,
     },
+    video: {
+        type: String,
+    },
     work: [{
         type: Schema.Types.ObjectId,
         ref: "post"

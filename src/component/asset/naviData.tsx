@@ -35,8 +35,8 @@ const NaviData = ({ data, naviLeftWitdh }: Props) => {
                             </div>
                             {item_first.child ?
                                 <IconToggle
-                                    icon1={<ArrowDropUpIcon style={{ width: "30px", height: "30px" }} />}
-                                    icon2={<ArrowDropDownIcon style={{ width: "30px", height: "30px" }} />}
+                                    icon1={<ArrowDropUpIcon style={{ width: "30px", height: "30px" }} onClick={() => index_first + 1 != index ? setIndex(index_first + 1) : setIndex(0)} />}
+                                    icon2={<ArrowDropDownIcon style={{ width: "30px", height: "30px" }} onClick={() => index_first + 1 != index ? setIndex(index_first + 1) : setIndex(0)} />}
                                     value={index === index_first + 1}
                                     style={{ height: "30px", margin: "5px 0" }} /> : null}
                         </div>

@@ -59,6 +59,8 @@ const Page = ({ params }: Props) => {
     const [image, setImage] = useState<string>("")
     const [imagePreview, setImagePreview] = useState<string>("")
 
+    const [video, setVideo] = useState<string>("")
+
     const [change, setChange] = useState<number>(0)
     const [saving, setSaving] = useState<boolean>(false)
     const [savable, setSavable] = useState<boolean>(false)
@@ -79,7 +81,8 @@ const Page = ({ params }: Props) => {
         contenttitle,
         email,
         image: image || null,
-        content: newdetail || detail
+        content: newdetail || detail,
+        video,
     }
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
@@ -100,6 +103,7 @@ const Page = ({ params }: Props) => {
             setDetail(result.data[0].content)
             setImage(result.data[0].image)
             setMap(result.data[0].map)
+            setVideo(result.data[0].video)
         }
     }
     useEffect(() => {
@@ -123,7 +127,7 @@ const Page = ({ params }: Props) => {
         }
     }
     const UpdatePostDemo = async (body: any) => {
-        body.slug = body.slug + "_demo"
+        body.slug = "ficility_2024_08_27_05_03_54_demo"
         const result = await UserAuthen.updateItem(currentUser.position, "facility", "66ab460cb494bfd095780b38", body)
         if (result) {
             window.open('/home/facility/' + body.slug, '_blank');
@@ -279,6 +283,7 @@ const Page = ({ params }: Props) => {
                         <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
                         <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                         <Input name="埋め込みマップ" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
+                        <Input name="youtube url" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
@@ -317,6 +322,7 @@ const Page = ({ params }: Props) => {
                 <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
                 <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
                 <Input name="埋め込みマップ" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
+                <Input name="youtube url" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> :

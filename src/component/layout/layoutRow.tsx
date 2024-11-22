@@ -10,6 +10,7 @@ import store from '@/redux/store';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import { setTheme } from '@/redux/reducer/ThemeReduce';
 import Link from 'next/link';
+import HomeIcon from '@mui/icons-material/Home';
 useEffect
 type Props = {
     children: React.ReactNode,
@@ -41,7 +42,7 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
                             icon1={<MenuOpenIcon onClick={() => setModalOpen(false)} style={{ width: "30px", height: "30px" }} />}
                             icon2={<MenuIcon onClick={() => setModalOpen(true)} style={{ width: "30px", height: "30px" }} />}
                             value={modalOpen} style={{ width: "40px", height: "40px", padding: "5px" }} />
-                        {/* <h2 style={{ lineHeight: "50px" }}>Admin</h2> */}
+                        <Link href="/home" target='_blank'><HomeIcon style={{ width: "30px", height: "30px", padding: "5px", margin: "auto" }} /></Link>
                         <IconToggle
                             icon1={<DarkModeIcon onClick={() => store.dispatch(setTheme(false))} style={{ width: "30px", height: "30px" }} />}
                             icon2={<LightModeIcon onClick={() => store.dispatch(setTheme(true))} style={{ width: "30px", height: "30px" }} />}
