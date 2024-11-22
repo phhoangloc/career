@@ -5,6 +5,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import HomeIcon from '@mui/icons-material/Home';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 const Header = () => {
 
     const [menu, setMenu] = useState<boolean>(false)
@@ -14,11 +15,11 @@ const Header = () => {
     const toPage = useRouter()
     return (
         <div className='header'>
-            <div style={{ height: "60px" }}>
-                {/* <div className='title' onClick={() => toPage.push("/home")}>
-                    <h1>仕事を探す</h1>
-                </div> */}
+            {/* <div style={{ height: "60px" }}> */}
+            <div onClick={() => toPage.push("/home")} style={{ height: "100%", padding: "15px" }}>
+                <Image src="/img/ロゴ仮.png" width={500} height={500} alt="logo" style={{ height: "100%", width: "auto", }} />
             </div>
+            {/* </div> */}
 
             <div className='buttonOff'>
                 <MenuIcon style={{ position: "absolute", top: "75px", right: "5px" }} onClick={() => setMenu(true)} />
