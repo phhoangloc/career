@@ -15,11 +15,11 @@ const Header = () => {
     const toPage = useRouter()
     return (
         <div className='header'>
-            {/* <div style={{ height: "60px" }}> */}
-            <div onClick={() => toPage.push("/home")} style={{ height: "100%", padding: "15px" }}>
-                <Image src="/img/ロゴ仮.png" width={500} height={500} alt="logo" style={{ height: "100%", width: "auto", }} />
+            <div style={{ height: "60px", position: "relative" }}>
+                <div onClick={() => toPage.push("/home")} style={{ height: "150%", padding: "15px", position: "absolute" }}>
+                    <Image src="/img/ロゴ仮.png" width={500} height={500} alt="logo" style={{ height: "100%", width: "auto", }} />
+                </div>
             </div>
-            {/* </div> */}
 
             <div className='buttonOff'>
                 <MenuIcon style={{ position: "absolute", top: "75px", right: "5px" }} onClick={() => setMenu(true)} />

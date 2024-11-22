@@ -195,16 +195,6 @@ div {
   background-color: rgba(255, 255, 255, 0.75);
 }
 
-.header .title {
-  width: max-content;
-  border-bottom: 1px solid;
-  padding: 15px 15px 0 15px;
-  margin: 0 5px;
-  line-height: 1.25;
-  cursor: pointer;
-  color: var(--main);
-}
-
 .header .menu {
   position: fixed;
   width: 100vw;
@@ -301,7 +291,7 @@ div {
   width: max-content;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .header .menu {
     width: max-content;
     height: max-content;
