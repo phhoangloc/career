@@ -16,7 +16,7 @@ const Header = () => {
     return (
         <div className='header'>
             <div style={{ height: "60px", position: "relative" }}>
-                <div onClick={() => toPage.push("/home")} style={{ height: "150%", padding: "15px", position: "absolute" }}>
+                <div onClick={() => toPage.push("/home")} style={{ height: "150%", padding: "15px", position: "absolute", cursor: "pointer" }}>
                     <Image src="/img/ロゴ仮.png" width={500} height={500} alt="logo" style={{ height: "100%", width: "auto", }} />
                 </div>
             </div>
