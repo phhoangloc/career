@@ -51,12 +51,12 @@ const Page = ({ }: Props) => {
                     <h1>ニュース</h1>
                 </div>
                 <div className="items" >
-
                     {
                         newData?.length ? newData.map((n, index) =>
                             <div key={index} style={{ padding: "20px 5px", borderBottom: "1px dashed #aaa", cursor: "pointer" }} onClick={() => toPage.push('/home/news/' + n.slug)}>
                                 <h2>{n.name}</h2>
                                 <p>{moment(n.createDate).format("YYYY/MM/DD")}</p>
+                                <div className='text dangerousBox' dangerouslySetInnerHTML={{ __html: n.content.split("。")[0] + "。" + n.content.split("。")[1] + "..." }} style={{ marginTop: "15px" }} />
                             </div>) : null
                     }
                 </div >

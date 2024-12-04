@@ -8,9 +8,9 @@ const Footer = (props: Props) => {
     return (
         <div className='footer'>
             <div className='column'>
-                <h4 onClick={() => toPage.push("#j")}>業界を知る</h4>
-                <p onClick={() => toPage.push("#f")}>施設紹介</p>
-                <p onClick={() => toPage.push("#h")}>先輩たちの声</p>
+                <h4 onClick={() => toPage.push("/home#j")}>業界を知る</h4>
+                <p onClick={() => toPage.push("/home#f")}>施設紹介</p>
+                <p onClick={() => toPage.push("/home#h")}>先輩たちの声</p>
             </div>
             <div className='column'>
                 <h4 onClick={() => toPage.push("/home/search/n/a/b/s/c")}>仕事を探す</h4>
@@ -29,7 +29,7 @@ const Footer = (props: Props) => {
                 <h4 onClick={() => toPage.push("/home/contact")}>お問い合わせ</h4>
             </div>
             <div className="top_button">
-                <a href="#">トップ<br></br>ページ</a>
+                <a href="#">トップ<br></br>へ</a>
             </div>
         </div>
     )
