@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import connectMongoDB from '@/connect/database/mogoseDB'
 import { userModel } from '@/model/user.model'
 import { isDataType } from '@/type/resultType'
+import { facilityModel } from '@/model/facility.model'
 const jwt = require('jsonwebtoken')
 export default async function handler(
     req: NextApiRequest,
@@ -22,8 +23,10 @@ export default async function handler(
         if (position === "admin") {
             switch (method) {
                 case "GET":
+                    await facilityModel.find()
                     await userModel
                         .find(query.id ? { "_id": query.id } : {})
+                        .populate("facilities")
                         .catch((error: Error) => {
                             result.success = false
                             result.message = error.message

@@ -64,7 +64,7 @@ const Post =
                                 throw error.message
                             }).then(async (data: any) => {
                                 result.success = true
-                                result.message = "ポストが作成出来ました。"
+                                result.message = "施設が作成出来ました。"
                                 res.json(result)
                             })
                         break;
@@ -78,7 +78,7 @@ const Post =
                                 throw error.message
                             }).then(async (data: any) => {
                                 result.success = true
-                                result.message = "ポストが更新出来ました。"
+                                result.message = "施設が更新出来ました。"
                                 res.json(result)
                             })
 

@@ -32,7 +32,10 @@ const userSchema = new Schema({
         type: String,
         default: "user"
     },
-
+    plan: {
+        type: Number,
+        default: 1
+    },
     facilities: [{
         type: Schema.Types.ObjectId,
         ref: "facility"

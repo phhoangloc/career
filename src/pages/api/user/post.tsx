@@ -4,6 +4,7 @@ import { userModel } from "@/model/user.model"
 import connectMongoDB from "@/connect/database/mogoseDB"
 import { isDataType } from "@/type/resultType"
 import { postModel } from "@/model/post.model"
+import { facilityModel } from "@/model/facility.model"
 const jwt = require('jsonwebtoken')
 
 const Post =
@@ -74,7 +75,7 @@ const Post =
                                 res.json(result)
                             })
                     } else {
-                        if (host === id) {
+                        if (host.toString() === id.toString()) {
                             await postModel.updateOne({ "_id": query.id }, body)
                                 .catch((error: Error) => {
                                     result.success = false
@@ -87,8 +88,8 @@ const Post =
                                     res.json(result)
                                 })
                         } else {
-                            result.success = true
-                            result.message = id
+                            result.success = false
+                            result.message = "この投稿はあなたのではないです"
                             res.json(result)
                         }
 

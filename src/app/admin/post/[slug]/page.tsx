@@ -93,15 +93,19 @@ const Page = ({ params }: Props) => {
     const [location, setLocation] = useState<string>("")
 
     const getFacility = async () => {
-        const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
-        if (result.success) {
-            setFacility(result.data)
+        if (currentUser.position === "admin") {
+            const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
+            if (result.success) {
+            }
+        } else {
+            setFacility(currentUser.facilities)
+            // const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
         }
     }
 
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
-
+        console.log(result)
         if (result.success) {
             setId(result.data[0]._id)
             setTitle(result.data[0].title)
@@ -150,7 +154,6 @@ const Page = ({ params }: Props) => {
         if (result.success) {
             setTimeout(() => {
                 setSaving(false)
-                toPage.push("/admin/post")
             }, 1000);
         }
     }
@@ -193,6 +196,7 @@ const Page = ({ params }: Props) => {
             set_i(_i + 1)
         }
     }
+
 
     switch (params.slug) {
         case "new":
