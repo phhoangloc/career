@@ -96,6 +96,7 @@ const Page = ({ params }: Props) => {
         if (currentUser.position === "admin") {
             const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
             if (result.success) {
+                setFacility(result.data)
             }
         } else {
             setFacility(currentUser.facilities)
@@ -105,7 +106,6 @@ const Page = ({ params }: Props) => {
 
     const getOnePost = async (p: string, a: string, s: string) => {
         const result = await UserAuthen.getOneItembySlug(p, a, s)
-        console.log(result)
         if (result.success) {
             setId(result.data[0]._id)
             setTitle(result.data[0].title)
@@ -196,7 +196,6 @@ const Page = ({ params }: Props) => {
             set_i(_i + 1)
         }
     }
-
 
     switch (params.slug) {
         case "new":
