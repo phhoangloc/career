@@ -57,7 +57,8 @@ const Post =
                 //     })
                 // break;
                 case "GET":
-                    await facilityModel.find()
+                    await facilityModel
+                        .find({ "host": id })
                         .collation({ locale: 'ja' })
                         .find(query.id ? { "_id": query.id } : {})
                         .find(query.archive ? { "archive": query.archive } : {})
