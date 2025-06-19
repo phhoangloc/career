@@ -35,19 +35,19 @@ export default function RootLayout({
                 ]
               },
               {
-                name: "求人情報",
-                child: [
-                  { name: "求人情報一覧", link: "/admin/post", },
-                  { name: "新規求人情報", link: "/admin/post/new", },
-                  { name: "職種", link: "/admin/worktype", }
-                ]
-              },
-              {
-                position: "admin",
+                // position: "admin",
                 name: "施設情報",
                 child: [
                   { name: "施設情報一覧", link: "/admin/facility", },
                   // { name: "新規施設情報", link: "/admin/facility/new", }
+                ]
+              },
+              {
+                name: "求人情報",
+                child: [
+                  { name: "求人情報一覧", link: "/admin/post", },
+                  { name: "新規求人登録", link: "/admin/post/new", },
+                  // { name: "職種", link: "/admin/worktype", }
                 ]
               },
               {
@@ -66,7 +66,7 @@ export default function RootLayout({
               },
 
               {
-                position: "admin",
+                // position: "admin",
                 name: "ユーザー",
                 child: [
                   { name: "インタビュー一覧", link: "/admin/user", },

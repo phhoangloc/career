@@ -29,6 +29,7 @@ const Page = ({ params }: Props) => {
 
     const [username, setUsername] = useState<string>("")
     const [password, setPassword] = useState<string>("")
+    const [newPassword, setnewPassword] = useState<string>("")
     const [email, setEmail] = useState<string>("")
     const [active, setAtive] = useState<boolean>(false)
     const [position, setPosition] = useState<boolean>(false)
@@ -36,7 +37,9 @@ const Page = ({ params }: Props) => {
     const [facilitiesId, setFacilitiesId] = useState<string[]>([])
 
     const body = {
-        username, email, active, position, plan, facilities: facilitiesId
+        username, email, active, position, plan,
+        facilities: facilitiesId,
+        password: newPassword ? newPassword : password
     }
 
     const getOnePost = async (p: string, a: string, id: string) => {
@@ -75,16 +78,6 @@ const Page = ({ params }: Props) => {
     const [area, setArea] = useState<string>("")
     const [location, setLocation] = useState<string>("")
 
-    const getFacility = async () => {
-        const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
-        if (result.success) {
-            setFacility(result.data)
-        }
-    }
-    useEffect(() => {
-        getFacility()
-    }, [search, area, location])
-
     useEffect(() => {
         if (facilitiesId.length === 0) {
             setPlan(0)
@@ -102,12 +95,13 @@ const Page = ({ params }: Props) => {
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="ユーザーネーム" onChange={(e) => { setSavable(true); setUsername(e) }} value={username} />
                 <Input type='password' name="パスワード" onChange={(e) => { setSavable(true); setPassword(e) }} value={password} disabled={true} />
+                <Input type='password' name="パスワードを更新" onChange={(e) => { setSavable(true); setnewPassword(e) }} value={newPassword} />
                 <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} />
                 <div className='dp-flex' style={{ height: "40px", lineHeight: "50px" }}>
                     <p>active</p>
                     <input type='checkbox' checked={active} style={{ margin: "0 10px" }} onChange={() => { setSavable(true), setAtive(!active) }}></input>
                 </div>
-                <div>
+                {/* <div>
                     <div className='dp-flex' >
                         <h3 style={{ height: "40px", lineHeight: "50px" }}>資格の有無</h3>
                     </div>
@@ -180,7 +174,7 @@ const Page = ({ params }: Props) => {
                                 null
                         }
                     </div>
-                </div>
+                </div> */}
                 <div style={{ display: "flex", margin: "10px 0", width: "210px", justifyContent: "space-between" }}>
                     <Button name='保存' onClick={() => UpdatePost(body)} disable={!savable} />
                     {/* <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} /> */}

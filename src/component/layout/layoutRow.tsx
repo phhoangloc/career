@@ -42,11 +42,11 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
                             icon1={<MenuOpenIcon onClick={() => setModalOpen(false)} style={{ width: "30px", height: "30px" }} />}
                             icon2={<MenuIcon onClick={() => setModalOpen(true)} style={{ width: "30px", height: "30px" }} />}
                             value={modalOpen} style={{ width: "40px", height: "40px", padding: "5px" }} />
-                        <Link href="/home" target='_blank' style={{ margin: "auto" }}><HomeIcon style={{ width: "30px", height: "30px", padding: "5px", margin: "auto" }} /></Link>
-                        <IconToggle
+                        <Link href="/home" target='_blank' style={{ margin: "auto" }}>就活サイトTOPへ</Link>
+                        {/* <IconToggle
                             icon1={<DarkModeIcon onClick={() => store.dispatch(setTheme(false))} style={{ width: "30px", height: "30px" }} />}
                             icon2={<LightModeIcon onClick={() => store.dispatch(setTheme(true))} style={{ width: "30px", height: "30px" }} />}
-                            value={currentTheme} style={{ width: "40px", height: "40px", padding: "5px", position: 'absolute', right: "10px" }} />
+                            value={currentTheme} style={{ width: "40px", height: "40px", padding: "5px", position: 'fixed', top: "0px", left: 0 }} /> */}
                     </div>
                     <div className='navi-right display-flex flex-direction-column justify-content-center' style={{ minHeight: "calc(100% - 40px)" }}>
                         {children}

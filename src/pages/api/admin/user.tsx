@@ -4,6 +4,8 @@ import { userModel } from '@/model/user.model'
 import { isDataType } from '@/type/resultType'
 import { facilityModel } from '@/model/facility.model'
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
@@ -39,6 +41,9 @@ export default async function handler(
                         })
                     break;
                 case "PUT":
+                    const salt = bcrypt.genSaltSync(10);
+                    const mahoa_password = req.body.password && bcrypt.hashSync(req.body.password.toString(), salt);
+                    body.password = mahoa_password
                     await userModel
                         .updateOne({ "_id": query.id }, body)
                         .catch((error: Error) => {
