@@ -80,6 +80,20 @@ const Post =
                             res.json(result)
                         })
                     break;
+                case "POST":
+                    body.host = id
+                    await facilityModel.create(body)
+                        .catch((error: Error) => {
+                            result.success = false
+                            result.message = error.message
+                            res.send(result)
+                            throw error.message
+                        }).then(async (data: any) => {
+                            result.success = true
+                            result.message = "施設が作成出来ました。"
+                            res.json(result)
+                        })
+                    break;
                 case "PUT":
                     body.host = id
                     await facilityModel.updateOne({ "_id": query.id }, body)
