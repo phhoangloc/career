@@ -18,7 +18,6 @@ const login = async (
         let result: isStringType
         const body = req.body
 
-        console.log(body)
         const username = body.username
         const password = body.password
 

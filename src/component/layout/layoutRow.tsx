@@ -37,12 +37,12 @@ const LayoutRow = ({ children, naviLef, naviLeftWitdh }: Props) => {
                     {naviLef}
                 </div>
                 <div className={`${currentTheme ? "light1" : "dark1"} navi-right transition-all-05s border-radius-5 box-shadow-0 `} style={{ height: "calc(100% - 10px)", margin: "5px", width: modalOpen ? `calc(100vw  - ${naviLeftWitdh} - 20px)` : "calc(100vw - 20px)" }} >
-                    <div style={{ height: "40px", display: "flex" }}>
+                    <div style={{ height: "40px", display: "flex", justifyContent: "space-betweennpm" }}>
                         <IconToggle
                             icon1={<MenuOpenIcon onClick={() => setModalOpen(false)} style={{ width: "30px", height: "30px" }} />}
                             icon2={<MenuIcon onClick={() => setModalOpen(true)} style={{ width: "30px", height: "30px" }} />}
                             value={modalOpen} style={{ width: "40px", height: "40px", padding: "5px" }} />
-                        <Link href="/home" target='_blank' style={{ margin: "auto" }}>就活サイトTOPへ</Link>
+                        <Link href="/home" target='_blank' style={{ margin: "auto 8px" }}>就活サイトTOPへ</Link>
                         {/* <IconToggle
                             icon1={<DarkModeIcon onClick={() => store.dispatch(setTheme(false))} style={{ width: "30px", height: "30px" }} />}
                             icon2={<LightModeIcon onClick={() => store.dispatch(setTheme(true))} style={{ width: "30px", height: "30px" }} />}
