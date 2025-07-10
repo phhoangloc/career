@@ -95,7 +95,6 @@ const Post =
 
                     }
                     break;
-
                 case "DELETE":
                     if (host.toString() === id.toString()) {
                         await postModel.deleteOne({ "_id": query.id })

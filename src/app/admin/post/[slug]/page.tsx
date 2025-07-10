@@ -206,7 +206,7 @@ const Page = ({ params }: Props) => {
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
                         <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                         {/* <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} /> */}
-                        <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <Input name="担当者連絡先（メールアドレス）" onChange={(e) => { setSavable(true); set_contract(e) }} value={_contract} />
                         <Input name="担当者名" onChange={(e) => { setSavable(true); set_contractName(e) }} value={_contractName} />
                         <div className="grid_box ">

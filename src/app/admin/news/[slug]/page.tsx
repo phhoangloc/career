@@ -140,7 +140,7 @@ const Page = ({ params }: Props) => {
             <div className={`scrollbar-none`} style={{ maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
                 <Input name="タイトル" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
-                <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                 <div>
                     <h4>カテゴリー</h4>
                     <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
