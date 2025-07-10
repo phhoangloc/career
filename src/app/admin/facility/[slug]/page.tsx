@@ -265,7 +265,7 @@ const Page = ({ params }: Props) => {
                         <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                         <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                         <Input name="種別" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} />
-                        <Input name="ID" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}

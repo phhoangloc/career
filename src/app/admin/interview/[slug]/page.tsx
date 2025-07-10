@@ -153,7 +153,9 @@ const Page = ({ params }: Props) => {
                         <Button name="戻る" onClick={() => toPage.back()} />
                         <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                         <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true), setcontenttilte(e) }} value={contenttitle} />
-                        <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        {/* <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} /> */}
+
                         <div className="grid_box ">
                             <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
                                 <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ</h4>
