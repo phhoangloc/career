@@ -40,7 +40,7 @@ const Page = ({ params }: Props) => {
 
     const [id, setId] = useState<string>("")
     const [title, setTitle] = useState<string>("")
-    const [slug, setSlug] = useState<string>("post_" + moment(new Date()).format("YYYY_MM_DD"))
+    const [slug, setSlug] = useState<string>("post_" + moment(new Date()).format("YYYY_MM_DD_hh_mm_ss"))
     const [workplace, setWorkplace] = useState<string>("")
     const [_contract, set_contract] = useState<string>("")
     const [_contractName, set_contractName] = useState<string>("")
@@ -93,15 +93,15 @@ const Page = ({ params }: Props) => {
     const [location, setLocation] = useState<string>("")
 
     const getFacility = async () => {
-        if (currentUser.position === "admin") {
-            const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
-            if (result.success) {
-                setFacility(result.data)
-            }
-        } else {
-            setFacility(currentUser.facilities)
-            // const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
+        // if (currentUser.position === "admin") {
+        const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
+        if (result.success) {
+            setFacility(result.data)
         }
+        // } else {
+        // setFacility(currentUser.facilities)
+        // const result = await NoUserAuthen.getItem("facility", search, "", "", "", location, undefined, undefined, area)
+        // }
     }
 
     const getOnePost = async (p: string, a: string, s: string) => {
@@ -157,9 +157,12 @@ const Page = ({ params }: Props) => {
             }, 1000);
         }
     }
+
+
     const UpdatePostDemo = async (body: any) => {
-        body.slug = undefined
-        const result = await UserAuthen.updateItem(currentUser.position, "post", "664eb0c390ea82cc9da49e9f", body)
+        const newBody = { ...body };
+        newBody.slug = undefined
+        const result = await UserAuthen.updateItem(currentUser.position, "post", "664eb0c390ea82cc9da49e9f", newBody)
         if (result) {
             window.open('/home/post/post_2024_11_21_demo', '_blank');
         }
