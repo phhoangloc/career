@@ -207,14 +207,14 @@ const Page = ({ params }: Props) => {
                     <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto" }}>
 
                         <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
-                        <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
+                        <Input name={<p>タイトル　<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                         {/* <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} /> */}
                         <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <Input name="担当者連絡先（メールアドレス）" onChange={(e) => { setSavable(true); set_contract(e) }} value={_contract} />
                         <Input name="担当者名" onChange={(e) => { setSavable(true); set_contractName(e) }} value={_contractName} />
                         <div className="grid_box ">
                             <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
-                                <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ</h4>
+                                <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ <span style={{ color: "red", fontSize: "small" }}>必須</span></h4>
                                 <div style={{ height: "calc(100% - 40px) ", aspectRatio: 1, borderRadius: "5px", margin: "0px auto 20px", boxShadow: "0px 0px 10px #444", }}>
                                     <UploadPicturePreview
                                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -227,7 +227,9 @@ const Page = ({ params }: Props) => {
 
                             <div className="xs12 lg7">
                                 <div style={{ width: "100%", height: "400px" }}>
-                                    <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所</h4><input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} /></div>
+                                    <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所 <span style={{ color: "red", fontSize: "small" }}>必須</span></h4>
+                                        <input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} />
+                                    </div>
                                     <div className='dp-flex'>
                                         <select style={{ height: "30px", margin: "0 5px" }} onChange={(e) => setArea(e.target.value)}>
                                             <option value="">エリア</option>
@@ -339,7 +341,7 @@ const Page = ({ params }: Props) => {
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
                                 <Button name='作成' onClick={() => createPost(body)} disable={title && slug && image && savable && workplace && worktype && workstatus && lisense ? false : true} />}
-                            <Button name="プレビュー" disable={!savable} onClick={() => UpdatePostDemo(body)} />
+                            <Button name="プレビュー" disable={title && image && workplace ? false : true} onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
                     <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(arrId) => { setOpenModal(false), setImage(arrId[0].id), setSavable(true) }} />
@@ -353,14 +355,14 @@ const Page = ({ params }: Props) => {
             <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto" }}>
 
                 <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
-                <Input name="タイトル" onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
+                <Input name={<p>タイトル　<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                 {/* <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} /> */}
                 <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                 <Input name="担当者連絡先（メールアドレス）" onChange={(e) => { setSavable(true); set_contract(e) }} value={_contract} />
                 <Input name="担当者名" onChange={(e) => { setSavable(true); set_contractName(e) }} value={_contractName} />
                 <div className="grid_box ">
                     <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
-                        <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ</h4>
+                        <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ </h4>
                         <div style={{ height: "calc(100% - 40px) ", aspectRatio: 1, borderRadius: "5px", margin: "0px auto 20px", boxShadow: "0px 0px 10px #444", }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -373,7 +375,9 @@ const Page = ({ params }: Props) => {
 
                     <div className="xs12 lg7">
                         <div style={{ width: "100%", height: "400px" }}>
-                            <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所</h4><input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} /></div>
+                            <div className='dp-flex'><h4 style={{ height: "40px", lineHeight: "50px" }}>事業所 <span style={{ color: "red", fontSize: "small" }}>必須</span></h4>
+                                <input placeholder='施設で検索' style={{ height: "20px", margin: " auto 5px" }} onChange={(e) => setSearch(e.target.value)} />
+                            </div>
                             <div className='dp-flex'>
                                 <select style={{ height: "30px", margin: "0 5px" }} onChange={(e) => setArea(e.target.value)}>
                                     <option value="">エリア</option>
