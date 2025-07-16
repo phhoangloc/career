@@ -29,11 +29,11 @@ const NaviProfile = () => {
     const toPage = useRouter()
     return (
         <>
-            <div className='display-flex'>
+            <div style={{ display: "flex", width: "calc(100% - 10px)", justifyContent: "space-between" }}>
                 {currentUser.avata?.name ?
                     <Image src={currentUser.avata?.name} width={40} height={40} alt='avata' /> :
                     <PersonIcon style={{ width: "40px", height: "40px", margin: "0px" }} />}
-                <h4 style={{ lineHeight: "50px" }}>{currentUser.username}</h4>
+                <h4 style={{ height: "50px", display: 'flex', flexDirection: "column", justifyContent: "center" }}>{currentUser.username}</h4>
                 <IconToggle
                     icon1={<ArrowDropUpIcon style={{ width: "30px", height: "30px" }} onClick={() => setUserModal(false)} />}
                     icon2={<ArrowDropDownIcon style={{ width: "30px", height: "30px" }} onClick={() => setUserModal(true)} />}
