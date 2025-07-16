@@ -37,7 +37,7 @@ const Page = ({ params }: Props) => {
     const [slug, setSlug] = useState<string>("ficility_" + moment(new Date()).format("YYYY_MM_DD_hh_mm_ss"))
     const [address, setAddress] = useState<string>("")
     const [postno, setPostno] = useState<string>("")
-    const [postnoWarn, setPostnoWarn] = useState<string>("")
+    const [postnoWarn, setPostnoWarn] = useState<string>("必須")
 
     const [postnoView, setPostNoView] = useState<string>("")
     const [location, setLocation] = useState<string>("")
@@ -160,9 +160,13 @@ const Page = ({ params }: Props) => {
                 setPostnoWarn("")
                 return digits.replace(/(\d{3})(\d{4})/, '$1-$2');
             } else {
+                if (digits.length === 0) {
+                    setPostnoWarn("必須")
+                }
                 setPostnoWarn("入力した郵便番号は適切ではありません")
                 return input;
             }
+
         } else {
             setPhoneWarn("")
             return ""
@@ -247,6 +251,8 @@ const Page = ({ params }: Props) => {
         if (result.results?.length) {
             setAddress(result.results[0].address1 + result.results[0].address2 + result.results[0].address3)
             setLocation(result.results[0].address1)
+        } else {
+            setPostnoWarn("入力した郵便番号がありません")
         }
     }
 
@@ -274,7 +280,7 @@ const Page = ({ params }: Props) => {
                             />
                         </div>
 
-                        <Input name={<p>〒 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
+                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
                         <p style={{ fontSize: "12px", lineHeight: 0.5, opacity: 0.5 }}>{"ハイフンを入れずに入力してください。"}</p>
 
                         <Input name={<p>地方 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
@@ -315,7 +321,7 @@ const Page = ({ params }: Props) => {
                         func={() => { setSavable(true); setOpenModal(true) }}
                     />
                 </div>
-                <Input name={<p>〒 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
+                <Input name={<p>〒 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={""} />
                 <p style={{ fontSize: "12px", lineHeight: 0.5, opacity: 0.5 }}>{"ハイフンを入れずに入力してください。"}</p>
                 <Input name={<p>地方 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
                 <Input name={<p>都道府県 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
