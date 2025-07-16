@@ -226,8 +226,7 @@ const Page = ({ params }: Props) => {
             setEmailWarn("")
         }
     }
-    useEffect(() => {
-    }, [fax])
+
     useEffect(() => {
         setPhoneView(formatPhoneNumber(phone))
     }, [phone])
@@ -262,10 +261,10 @@ const Page = ({ params }: Props) => {
                 <div className='grid_box scrollNone'>
                     <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px" }}>
                         <Button name="戻る" onClick={() => toPage.back()} />
-                        <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                        <Input name={<p>施設名<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                         <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                         <Input name="種別" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} />
-                        <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                        <Input name={<p>ID（このIDがURLの末尾になります。）<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                         <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -274,7 +273,10 @@ const Page = ({ params }: Props) => {
                                 func={() => { setSavable(true); setOpenModal(true) }}
                             />
                         </div>
-                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" />
+
+                        <Input name={<p>〒<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
+                        <p style={{ fontSize: "12px", lineHeight: 0.5, opacity: 0.5 }}>{"ハイフンを入れずに入力してください。"}</p>
+
                         <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
                         <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
                         <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
@@ -287,8 +289,8 @@ const Page = ({ params }: Props) => {
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
-                                <Button name='作成' disable={!savable} onClick={() => createPost(body)} />}
-                            <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                                <Button name='作成' disable={!savable || !name || !area || !location || !address || !postno} onClick={() => createPost(body)} />}
+                            <Button name="プレビュー" disable={!savable || !name || !area || !location || !address || !postno} onClick={() => UpdatePostDemo(body)} />
                         </div>
                     </div>
                     <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(ArrId) => { setOpenModal(false), setImage(ArrId[0].id), setSavable(true) }} />
@@ -301,10 +303,10 @@ const Page = ({ params }: Props) => {
         <div className='grid_box scrollNone'>
             <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px" }}>
                 <Button name="戻る" onClick={() => toPage.back()} />
-                <Input name="名前" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                <Input name={<p>施設名<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setName(e) }} value={name} />
                 <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
                 <Input name="種別" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} />
-                <Input name="スラッグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                <Input name={<p>ID（このIDがURLの末尾になります。）<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                 <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                     <UploadPicturePreview
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -313,10 +315,11 @@ const Page = ({ params }: Props) => {
                         func={() => { setSavable(true); setOpenModal(true) }}
                     />
                 </div>
-                <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} warn={postnoWarn} sx="p-postal-code" />
-                <Input name="地方 " onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
-                <Input name="都道府県" onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
-                <Input name="住所" onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
+                <Input name={<p>〒<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
+                <p style={{ fontSize: "12px", lineHeight: 0.5, opacity: 0.5 }}>{"ハイフンを入れずに入力してください。"}</p>
+                <Input name={<p>地方<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
+                <Input name={<p>都道府県<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name={<p>住所<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
                 <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                 <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
                 <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
@@ -326,8 +329,8 @@ const Page = ({ params }: Props) => {
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> :
-                        <Button name='保存' disable={!savable} onClick={() => UpdatePost(body)} />}
-                    <Button name="プレビュー" onClick={() => UpdatePostDemo(body)} />
+                        <Button name='保存' disable={!savable || !name || !area || !location || !address || !postno} onClick={() => UpdatePost(body)} />}
+                    <Button name="プレビュー" disable={!savable || !name || !area || !location || !address || !postno} onClick={() => UpdatePostDemo(body)} />
                 </div>
             </div>
             <ImageModal modalOpen={openModal} onCanel={() => setOpenModal(false)} onImages={(ArrId) => { setOpenModal(false), setImage(ArrId[0].id), setSavable(true) }} />
