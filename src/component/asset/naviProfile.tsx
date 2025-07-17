@@ -34,17 +34,6 @@ const NaviProfile = () => {
                     <Image src={currentUser.avata?.name} width={40} height={40} alt='avata' /> :
                     <PersonIcon style={{ width: "40px", height: "40px", margin: "0px" }} />}
                 <h4 style={{ height: "50px", display: 'flex', flexDirection: "column", justifyContent: "center" }}>{currentUser.username}</h4>
-                <IconToggle
-                    icon1={<ArrowDropUpIcon style={{ width: "30px", height: "30px" }} onClick={() => setUserModal(false)} />}
-                    icon2={<ArrowDropDownIcon style={{ width: "30px", height: "30px" }} onClick={() => setUserModal(true)} />}
-                    value={userModal}
-                    style={{ height: "30px", margin: "5px 0" }} />
-            </div>
-            <div className='transition-all-05s overflow-hidden' style={{ height: userModal ? "60px" : "0px" }} >
-                <div className='text-ellipsis devide' style={{ height: "30px", lineHeight: "30px", fontWeight: "400", cursor: "pointer", opacity: 0.75, fontSize: "0.9rem", padding: "5px" }}
-                    onClick={() => { localStorage.clear(), window.location.reload() }}>
-                    ログアウト
-                </div>
             </div>
         </>
     )

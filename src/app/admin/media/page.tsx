@@ -74,6 +74,10 @@ const Page = () => {
 
     return (
         <div style={{ minHeight: "calc(100vh - 70px)", width: "100%", margin: "0px" }}>
+            <div className='flexbox' style={{ height: "40px" }}>
+                <h2 style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>投稿した画像</h2>
+                <div style={{ width: "40px" }}></div>
+            </div>
             <div style={{ width: "max-content", margin: "0 10px" }}>
                 {loading ?
                     <UploadButton

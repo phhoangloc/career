@@ -195,14 +195,14 @@ const TextAreaTool_v2 = (props: Props) => {
     return (
         <div className='ta-left'>
             <div className='bglv1 ps-s top-0px bglv1 pd-5px'>
-                <div className='dp-flex h50px jc-space'>
-                    {/* <AddPhotoAlternateIcon className='svg40px' onClick={() => { setModalOpen(!modalOpen) }} /> */}
-                    <div></div>
+                {/* <div className='dp-flex h50px jc-space'> */}
+                {/* <AddPhotoAlternateIcon className='svg40px' onClick={() => { setModalOpen(!modalOpen) }} /> */}
+                {/* <div></div>
                     <div className='dp-flex'>
                         <p className={`svg40px br-5px fontSize75p lh40px  ta-center ${isView ? "bg-main" : ""}`} onClick={() => setIsView(true)} >EDIT</p>
                         <HtmlIcon className={`svg40px br-5px ${isView ? "" : "bg-main"}`} onClick={() => setIsView(false)} />
                     </div>
-                </div>
+                </div> */}
                 {isView && <> <div className='dp-flex flex-wrap'>
                     <Accordion title={title} width='100px' data={[
                         { name: "h1", func: () => createBlockStyle(editorState, "header-one") },

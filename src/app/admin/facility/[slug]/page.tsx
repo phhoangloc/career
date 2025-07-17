@@ -34,7 +34,7 @@ const Page = ({ params }: Props) => {
     const [id, setId] = useState<string>("")
     const [name, setName] = useState<string>("")
     const [worktype, setWorkType] = useState<string>("")
-    const [slug, setSlug] = useState<string>("ficility_" + moment(new Date()).format("YYYY_MM_DD_hh_mm_ss"))
+    const [slug, setSlug] = useState<string>("facility_" + moment(new Date()).format("YYYY_MM_DD_hh_mm_ss"))
     const [address, setAddress] = useState<string>("")
     const [postno, setPostno] = useState<string>("")
     const [postnoWarn, setPostnoWarn] = useState<string>("必須")
@@ -265,12 +265,19 @@ const Page = ({ params }: Props) => {
         case "new":
             return (
                 <div className='grid_box scrollNone'>
-                    <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px" }}>
-                        <Button name="戻る" onClick={() => toPage.back()} />
-                        <Input name={<p>施設名 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setName(e) }} value={name} />
-                        <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                        <Input name="種別" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} />
-                        <Input name={<p>ID（このIDがURLの末尾になります。）<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+                    <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", maxWidth: "768px", margin: "auto" }}>
+                        <div className='flexbox' style={{ height: "40px" }}>
+                            <h2 style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>新規施設登録</h2>
+                            <div style={{ width: "40px" }}></div>
+                        </div>
+                        <div style={{ display: "flex", justifyContent: "space-between" }} >
+                            <Button name="新規" onClick={() => toPage.push("/admin/facility/new")} />
+                            <button style={{ width: "100px", height: "40px", cursor: "pointer" }} onClick={() => toPage.back()} >戻る</button>
+                        </div>
+                        <Input name="施設名" onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                        <Input name="キャッチコピー（自由にご記入ください）" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                        {/* <Input name="施設の種別・分類" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} /> */}
+                        <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ画像</h4>
                         <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                             <UploadPicturePreview
                                 icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -280,18 +287,20 @@ const Page = ({ params }: Props) => {
                             />
                         </div>
 
-                        <Input name="〒" onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
+                        <Input name={<span>郵便番号</span>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
                         <p style={{ fontSize: "12px", lineHeight: 0.5, opacity: 0.5 }}>{"ハイフンを入れずに入力してください。"}</p>
 
-                        <Input name={<p>地方 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
-                        <Input name={<p>都道府県 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
-                        <Input name={<p>住所 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
-                        <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
+                        <Input name={<p>地域（自動で入力されます）</p>} onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
+                        <Input name={<p>都道府県（自動で入力されます）</p>} onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                        <Input name={<p>住所 必須（番地・建物名をご記入ください） </p>} onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
+                        <Input name={<>電話番号 <span style={{ color: "red", fontSize: "small" }}>必須</span></>} onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                         <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
-                        <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
-                        <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
-                        <Input name="埋め込みマップ" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
-                        <Input name="youtube url" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
+                        <Input name="EMAIL" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
+                        <Input name="ウェブサイト" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
+                        <Input name="紹介動画 YouTube URL" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
+                        <Input name="Google MapsのURL" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
+                        <Input name={<p>ID（このIDがURLの末尾になります。）</p>} onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+
                         <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                         <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                             {saving ? <Button name='。。。' onClick={() => { }} /> :
@@ -307,12 +316,20 @@ const Page = ({ params }: Props) => {
     }
     return (
         <div className='grid_box scrollNone'>
-            <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px" }}>
-                <Button name="戻る" onClick={() => toPage.back()} />
-                <Input name={<p>施設名 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setName(e) }} value={name} />
-                <Input name="冒頭" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
-                <Input name="種別" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} />
-                <Input name={<p>ID（このIDがURLの末尾になります。）<span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
+            <div className={`detailBox xs12 scrollbar-none`} style={{ padding: "0 10px", maxWidth: "768px", margin: "auto" }}>
+                <div className='flexbox' style={{ height: "40px" }}>
+                    <h2 style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>施設更新</h2>
+                    <div style={{ width: "40px" }}></div>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }} >
+                    <Button name="新規" onClick={() => toPage.push("post/new")} />
+                    <button style={{ width: "100px", height: "40px", cursor: "pointer" }} onClick={() => toPage.back()} >戻る</button>
+                </div>
+                <Input name={<p>施設名</p>} onChange={(e) => { setSavable(true); setName(e) }} value={name} />
+                <Input name="施設の説明文・キャッチコピー" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} />
+                {/* <Input name="施設の種別・分類" onChange={(e) => { setSavable(true); setWorkType(e) }} value={worktype} /> */}
+                <h4 style={{ height: "40px", lineHeight: "50px" }}>アイキャッチ画像</h4>
+
                 <div style={{ height: "400px", aspectRatio: 1, borderRadius: "5px", margin: "0px 0px 20px", boxShadow: "0px 0px 10px #444" }}>
                     <UploadPicturePreview
                         icon={<AddPhotoAlternateIcon style={{ width: "100%", height: "100%" }} />}
@@ -321,17 +338,19 @@ const Page = ({ params }: Props) => {
                         func={() => { setSavable(true); setOpenModal(true) }}
                     />
                 </div>
-                <Input name={<p>〒 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={""} />
+                <Input name={<span>郵便番号</span>} onChange={(e) => { setSavable(true); setPostno(e) }} value={postnoView} sx="p-postal-code" warn={postnoWarn} />
                 <p style={{ fontSize: "12px", lineHeight: 0.5, opacity: 0.5 }}>{"ハイフンを入れずに入力してください。"}</p>
-                <Input name={<p>地方 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
-                <Input name={<p>都道府県 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
-                <Input name={<p>住所 <span style={{ color: "red", fontSize: "small" }}>必須</span></p>} onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
-                <Input name="電話番号" onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
+
+                <Input name={<p>地域（自動で入力されます）</p>} onChange={(e) => { setSavable(true); setArea(e) }} value={area} />
+                <Input name={<p>都道府県（自動で入力されます）</p>} onChange={(e) => { setSavable(true); setLocation(e) }} value={location} />
+                <Input name={<p>住所 必須（番地・建物名をご記入ください） </p>} onChange={(e) => { setSavable(true); setAddress(e) }} value={address} sx="p-region p-locality p-street-address p-extended-address" />
+                <Input name={<>電話番号 <span style={{ color: "red", fontSize: "small" }}>必須</span></>} onChange={(e) => { setSavable(true); setPhone(e) }} value={phoneView} warn={phoneWarn} />
                 <Input name="FAX" onChange={(e) => { setSavable(true); setFax(e) }} value={faxView} warn={faxWarn} />
-                <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
-                <Input name="ホームページ" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
-                <Input name="埋め込みマップ" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
-                <Input name="youtube url" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
+                <Input name="EMAIL" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} warn={emailWarn} />
+                <Input name="ウェブサイト" onChange={(e) => { setSavable(true); setHomepage(e) }} value={homepage} />
+                <Input name="紹介動画 YouTube URL" onChange={(e) => { setSavable(true); setVideo(e) }} value={video} />
+                <Input name="Google MapsのURL" onChange={(e) => { setSavable(true); setMap(e) }} value={map} />
+                <Input name={<p>施設URLを変更できます（英数字でご記入ください）</p>} onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} />
                 <TextAreaTool_v2 onChange={(e) => { setNewDetail(e); setChange(c => c + 1) }} value={DOMPurify.sanitize(detail)} />
                 <div style={{ display: "flex", margin: "10px 0", maxWidth: "210px", justifyContent: "space-between" }}>
                     {saving ? <Button name='。。。' onClick={() => { }} /> :

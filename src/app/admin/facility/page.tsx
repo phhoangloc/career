@@ -101,12 +101,16 @@ const Page = (props: Props) => {
 
 
     return (
-        <div className='scrollbar-none' style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px", overflow: "auto" }}>
+        <div className='scrollbar-none' style={{ height: "calc(100vh - 60px)", width: "100%", padding: "0 10px", margin: "auto", overflow: "hidden" }}>
 
-            <div style={{ height: "calc(100vh - 60px)", width: "100%", padding: "5% 10% 0" }}>
+            <div style={{ height: "calc(100vh - 60px)", width: "100%", maxWidth: "768px", margin: "auto" }}>
                 <div className='flexbox' style={{ height: "40px" }}>
                     <h2 style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>施設一覧</h2>
                     <div style={{ width: "40px" }}></div>
+                </div>
+                <div style={{ display: "flex", height: "40px", width: "100px", background: "#006699", color: "white", borderRadius: "5px", cursor: "pointer", margin: "10px 0" }} onClick={() => toPage.push("facility/new")}>
+                    <AddIcon style={{ width: "40px", height: "40px", boxSizing: "border-box", padding: "7.5px" }} />
+                    <p style={{ height: "40px", lineHeight: "50px", textAlign: "center" }} >新規</p>
                 </div>
                 <div style={{ width: "max-content", margin: "0", display: "flex" }}>
                     {selectId.length ?

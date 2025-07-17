@@ -57,6 +57,10 @@ const NaviData = ({ data, naviLeftWitdh }: Props) => {
                     </div> :
                     null
             )}
+            <div className='text-ellipsis' style={{ width: `calc(${naviLeftWitdh} - 40px)`, height: "40px", lineHeight: "50px", fontWeight: "700", cursor: "pointer", opacity: 0.75 }} onClick={() => { localStorage.clear(), window.location.reload() }}>
+                ログアウト
+            </div>
+
         </div>
 
     )

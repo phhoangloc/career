@@ -59,17 +59,17 @@ export default function RootLayout({
                 ]
               },
               {
-                name: "メディア",
+                name: "投稿した画像",
                 child: [
-                  { name: "メディア一覧", link: "/admin/media", }
+                  { name: "投稿した画像一覧", link: "/admin/media", }
                 ]
               },
 
               {
                 // position: "admin",
-                name: "ユーザー",
+                name: "アカウント",
                 child: [
-                  { name: "ユーザー一覧", link: "/admin/user", },
+                  { name: "アカウント一覧", link: "/admin/user", },
                 ]
               },
             ]}

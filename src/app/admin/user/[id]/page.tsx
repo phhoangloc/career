@@ -91,9 +91,15 @@ const Page = ({ params }: Props) => {
     }, [facilitiesId])
     return (
         <div className=' scrollNone mw1200px-grid-reverse'>
-            <div className={`scrollbar-none`} style={{ maxWidth: "992px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
-                <Button name="戻る" onClick={() => toPage.back()} />
-                <Input name="ユーザーネーム" onChange={(e) => { setSavable(true); setUsername(e) }} value={username} />
+            <div className={`scrollbar-none`} style={{ maxWidth: "768px", padding: "0 10px", margin: "auto", height: "calc(100vh - 60px)", overflow: "auto" }}>
+                <div className='flexbox' style={{ height: "40px" }}>
+                    <h2 style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>アカウント更新</h2>
+                    <div style={{ width: "40px" }}></div>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }} >
+                    <div></div>
+                    <button style={{ width: "100px", height: "40px", cursor: "pointer" }} onClick={() => toPage.back()} >戻る</button>
+                </div>                <Input name="ユーザーネーム" onChange={(e) => { setSavable(true); setUsername(e) }} value={username} />
                 <Input type='password' name="パスワード" onChange={(e) => { setSavable(true); setPassword(e) }} value={password} disabled={true} />
                 <Input type='password' name="パスワードを更新" onChange={(e) => { setSavable(true); setnewPassword(e) }} value={newPassword} />
                 <Input name="eメール" onChange={(e) => { setSavable(true); setEmail(e) }} value={email} />
