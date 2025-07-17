@@ -138,7 +138,7 @@ function Page(props: Props) {
                                             <p>{d.address.split("　")[0]}</p>
                                             <p>{d.address.split("　")?.[1] ? d.address.split("　")?.[1] : "---"}</p>
                                             <div className="tag">
-                                                {d?.area ? <p onClick={() => { setPage(0), setLocation(""); setArea(d?.area) }}>{d?.area}</p> : ""}
+                                                {/* {d?.area ? <p onClick={() => { setPage(0), setLocation(""); setArea(d?.area) }}>{d?.area}</p> : ""} */}
                                                 <p onClick={() => { setPage(0), setLocation(d?.location) }}>{d?.location}</p>
                                                 <KeyboardArrowRightIcon onClick={() => toPage.push("/home/facility/" + d?.slug)} />
                                             </div>
