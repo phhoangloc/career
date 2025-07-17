@@ -211,8 +211,6 @@ const Page = ({ params }: Props) => {
                             <button style={{ width: "100px", height: "40px", cursor: "pointer" }} onClick={() => toPage.back()} >戻る</button>
                         </div>
                         <Input name={<>タイトル <span style={{ color: "red", fontSize: "small" }}>必須</span></>} onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
-                        {/* <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} /> */}
-                        {/* <Input name="ID（このIDがURLの末尾になります。）" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} /> */}
 
                         <div className="grid_box ">
                             <div className="xs12 lg5 of-hidden" style={{ marginBottom: "10px", maxHeight: "400px" }}>
@@ -261,70 +259,17 @@ const Page = ({ params }: Props) => {
                         </div>
                         <Input name="担当者名" onChange={(e) => { setSavable(true); set_contractName(e) }} value={_contractName} />
                         <Input name="担当者Email" onChange={(e) => { setSavable(true); set_contract(e) }} value={_contract} />
-                        <div>
-                            {/* <div className='dp-flex' > */}
-                            <h3 style={{ height: "40px", lineHeight: "50px" }}>職種</h3>
-                            <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setWorktype(e.target.value)} />
-                            {/* <AddIcon style={{ width: "40px", height: "40px", padding: "12px", boxSizing: "border-box" }} onClick={() => setIsInput(!isInput)} />
-                                <div style={{ display: isInput ? "flex" : "none", height: "40px" }}>
-                                    <input
-                                        style={{ height: "30px" }}
-                                        onChange={(e) => { setNewWorktype(e.target.value); }}
-                                        value={newWorktype}
-                                        onFocus={(e) => {
-                                            e.target.style.outline = 'none'
-                                        }}>
-                                    </input>
-                                    <CloseIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false) }} />
-                                    <CheckIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false), addWorktype({ name: newWorktype }) }} />
-                                </div> */}
-                            {/* </div> */}
-                            {/* <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                                {worktypeList.length ?
-                                    worktypeList.map((item: any, index: number) =>
-                                        <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                            <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(wt => wt.includes(item.name) ? wt.filter(w => w !== item.name) : [...wt, item.name])} ></input>
-                                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                        </div>
-                                    ) :
-                                    <p style={{ opacity: "0.5" }}>職種がない</p>}
-                            </div> */}
-                        </div>
-                        <div>
-                            {/* <div className='dp-flex' > */}
-                            <h3 style={{ height: "40px", lineHeight: "50px" }}>雇用形態</h3>
-                            <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setWorkstatus(e.target.value)} />
 
-                            {/* </div>
-                            <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                                {workstatusList.length ?
-                                    workstatusList.map((item: any, index: number) =>
-                                        <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                            <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(ws => ws.includes(item.name) ? ws.filter(w => w !== item.name) : [...ws, item.name])} ></input>
-                                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                        </div>
-                                    ) :
-                                    null}
-                            </div> */}
-                        </div>
-                        <div>
-                            {/* <div className='dp-flex' > */}
-                            <h3 style={{ height: "40px", lineHeight: "50px" }}>資格の有無</h3>
-                            <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setLisense(e.target.value)} />
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>職種</h3>
+                        <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setWorktype(e.target.value)} />
 
-                            {/* </div>
-                            <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                                {statusList.length ?
-                                    statusList.map((item: any, index: number) =>
-                                        <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                            <input type='checkbox' checked={lisense?.includes(item.name)} onChange={() => setLisense(ls => ls.includes(item.name) ? ls.filter(l => l !== item.name) : [...ls, item.name])} ></input>
-                                            <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                        </div>
-                                    ) :
-                                    null
-                                }
-                            </div> */}
-                        </div>
+
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>雇用形態</h3>
+                        <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setWorkstatus(e.target.value)} />
+
+
+                        <h3 style={{ height: "40px", lineHeight: "50px" }}>資格の有無</h3>
+                        <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setLisense(e.target.value)} />
                         <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} placeholder='10:00 - 19:00' />
                         <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} placeholder='500.000円' />
                         <div>
@@ -367,8 +312,14 @@ const Page = ({ params }: Props) => {
     return (
         <div className='grid_box scrollNone'>
             <div className={`scrollbar-none`} style={{ width: "100%", maxWidth: "992px", padding: "0 10px", margin: "auto" }}>
-
-                <Button name="戻る" onClick={() => toPage.push("/admin/post")} />
+                <div className='flexbox' style={{ height: "40px" }}>
+                    <h2 style={{ textAlign: "center", width: "calc(100% - 100px)", height: "100%", lineHeight: "50px", fontWeight: "bold" }}>新規求人更新</h2>
+                    <div style={{ width: "40px" }}></div>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }} >
+                    <Button name="新規" onClick={() => toPage.push("/admin/post/new")} />
+                    <button style={{ width: "100px", height: "40px", cursor: "pointer" }} onClick={() => toPage.back()} >戻る</button>
+                </div>
                 <Input name={<>タイトル <span style={{ color: "red", fontSize: "small" }}>必須</span></>} onChange={(e) => { setSavable(true); setTitle(e) }} value={title} />
                 {/* <Input name="仕事内容タイトル" onChange={(e) => { setSavable(true); setcontenttilte(e) }} value={contenttitle} /> */}
                 {/* <Input name="スラグ" onChange={(e) => { setSavable(true); setSlug(e) }} value={slug} /> */}
@@ -420,68 +371,17 @@ const Page = ({ params }: Props) => {
                 </div>
                 <Input name="担当者名" onChange={(e) => { setSavable(true); set_contractName(e) }} value={_contractName} />
                 <Input name="担当者連絡先（メールアドレス）" onChange={(e) => { setSavable(true); set_contract(e) }} value={_contract} />
-                {/* <div> */}
-                {/* <div className='dp-flex' > */}
+
                 <h3 style={{ height: "40px", lineHeight: "50px" }}>職種</h3>
                 <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setWorktype(e.target.value)} value={worktype} />
-                {/* <AddIcon style={{ width: "40px", height: "40px", padding: "12px", boxSizing: "border-box" }} onClick={() => setIsInput(!isInput)} />
-                        <div style={{ display: isInput ? "flex" : "none", height: "40px" }}>
-                            <input
-                                style={{ height: "30px" }}
-                                onChange={(e) => { setNewWorktype(e.target.value); }}
-                                value={newWorktype}
-                                onFocus={(e) => {
-                                    e.target.style.outline = 'none'
-                                }}>
-                            </input>
-                            <CloseIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false) }} />
-                            <CheckIcon className={`svg30px br-5px bg-main`} style={{ margin: "auto 5px" }} onClick={() => { setIsInput(false), addWorktype({ name: newWorktype }) }} />
-                        </div> */}
-                {/* </div> */}
-                {/* <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                        {worktypeList.length ?
-                            worktypeList.map((item: any, index: number) =>
-                                <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={worktype?.includes(item.name)} onChange={() => setWorktype(wt => wt.includes(item.name) ? wt.filter(w => w !== item.name) : [...wt, item.name])} ></input>
-                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                </div>
-                            ) :
-                            <p style={{ opacity: "0.5" }}>職種がない</p>}
-                    </div> */}
-                {/* </div> */}
-                {/* <div> */}
+
                 {/* <div className='dp-flex' > */}
                 <h3 style={{ height: "40px", lineHeight: "50px" }}>雇用形態</h3>
                 <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setWorkstatus(e.target.value)} value={workstatus} />
-                {/* </div>
-                    <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                        {workstatusList.length ?
-                            workstatusList.map((item: any, index: number) =>
-                                <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={workstatus?.includes(item.name)} onChange={() => setWorkstatus(ws => ws.includes(item.name) ? ws.filter(w => w !== item.name) : [...ws, item.name])} ></input>
-                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                </div>
-                            ) :
-                            null}
-                    </div> */}
-                {/* </div> */}
-                {/* <div> */}
-                {/* <div className='dp-flex' > */}
+
                 <h3 style={{ height: "40px", lineHeight: "50px" }}>資格の有無</h3>
                 <textarea style={{ width: "100%", boxSizing: "border-box", height: "60px", fontFamily: "inherit", fontSize: "inherit", padding: "0 8px" }} onChange={(e) => setLisense(e.target.value)} value={lisense} />
-                {/* </div>
-                    <div style={{ height: "150px", overflow: "auto", background: "whitesmoke", padding: "0 5px" }}>
-                        {statusList.length ?
-                            statusList.map((item: any, index: number) =>
-                                <div className='dp-flex' key={index} style={{ height: "30px" }}>
-                                    <input type='checkbox' checked={lisense?.includes(item.name)} onChange={() => setLisense(ls => ls.includes(item.name) ? ls.filter(l => l !== item.name) : [...ls, item.name])} ></input>
-                                    <p className='mg-0px-5px' style={{ lineHeight: "40px" }}>{item.name}</p>
-                                </div>
-                            ) :
-                            null
-                        }
-                    </div> */}
-                {/* </div> */}
+
                 <Input name="勤務時間" onChange={(e) => { setSavable(true); setWorkTime(e) }} value={worktime} placeholder='10:00 - 19:00' />
                 <Input name="給与" onChange={(e) => { setSavable(true), setWorksalary(e) }} value={worksalary} />
                 <div>
